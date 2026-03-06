@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Research · Minje Park</title>
+    <meta
+      name="description"
+      content="Research projects by Minje Park in astro-particle physics and machine learning."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #151a2b;
+        --bg-softer: #1d2336;
+        --fg: #f7f7ff;
+        --fg-muted: #c1c4d6;
+        --accent: #8d9bff;
+        --accent-soft: rgba(141, 155, 255, 0.18);
+        --border-subtle: #262b3f;
+        --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+        --radius-lg: 18px;
+        --radius-pill: 999px;
+        --nav-height: 64px;
+        --content-width: 960px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background-image: linear-gradient(
+            135deg,
+            rgba(3, 7, 18, 0.92),
+            rgba(15, 23, 42, 0.96)
+          ),
+          url("png/from_line_moma.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page-inner {
+        width: 100%;
+        max-width: var(--content-width);
+        margin: 0 auto;
+        padding: 24px 20px 40px;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: linear-gradient(
+          to bottom,
+          rgba(5, 7, 18, 0.9),
+          rgba(5, 7, 18, 0.6),
+          transparent
+        );
+      }
+
+      .navbar-inner {
+        height: var(--nav-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 20%, #f7f7ff, #8d9bff);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
+          0 10px 24px rgba(0, 0, 0, 0.7);
+      }
+
+      .brand-text-main {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-text-sub {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--fg-muted);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 14px;
+      }
+
+      .nav-link {
+        padding: 6px 12px;
+        border-radius: 999px;
+        color: var(--fg-muted);
+        text-decoration: none;
+        transition: background 0.16s ease, color 0.16s ease;
+      }
+
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--fg);
+        text-decoration: none;
+      }
+
+      .nav-link-active {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.96),
+          rgba(8, 12, 28, 0.98)
+        );
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-soft);
+        padding: 22px 22px 20px;
+        margin-top: 24px;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .card-subtitle {
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .tab-button {
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(143, 148, 183, 0.6);
+        padding: 6px 12px;
+        font-size: 12px;
+        background: rgba(8, 12, 28, 0.9);
+        color: var(--fg-muted);
+        cursor: pointer;
+        transition: background 0.15s ease, border-color 0.15s ease,
+          color 0.15s ease;
+      }
+
+      .tab-button-active {
+        background: var(--accent-soft);
+        border-color: rgba(141, 155, 255, 0.9);
+        color: var(--accent);
+      }
+
+      .tab-panel {
+        display: none;
+      }
+
+      .tab-panel-active {
+        display: block;
+      }
+
+      .section-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .section-item {
+        padding: 8px 0;
+        border-top: 1px solid rgba(37, 42, 70, 0.9);
+      }
+
+      .section-item:first-child {
+        border-top: none;
+      }
+
+      .pub-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      .pub-meta {
+        font-size: 12px;
+        color: var(--fg-muted);
+        margin-bottom: 4px;
+      }
+
+      .pub-links {
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+
+      .footer {
+        margin-top: auto;
+        padding: 20px;
+        border-top: 1px solid rgba(24, 30, 46, 0.9);
+        color: #7a7f98;
+        font-size: 12px;
+      }
+
+      .footer-inner {
+        max-width: var(--content-width);
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="navbar">
+        <div class="page-inner navbar-inner">
+          <div class="brand">
+            <div class="brand-avatar" aria-hidden="true"></div>
+            <div>
+              <div class="brand-text-main">Minje&nbsp;Park</div>
+              <div class="brand-text-sub">Research</div>
+            </div>
+          </div>
+          <nav class="nav-links" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">about</a>
+            <a class="nav-link nav-link-active" href="research.html">research</a>
+            <a class="nav-link" href="publications.html">publications</a>
+            <a class="nav-link" href="index.html#blog">blog</a>
+            <a class="nav-link" href="index.html#contact">contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="page-inner">
+        <section class="card" aria-labelledby="research-heading">
+          <div class="card-header">
+            <h1 id="research-heading" class="card-title">Research</h1>
+            <span class="card-subtitle">
+              Machine learning for astro-particle physics experiments
+            </span>
+          </div>
+          <p class="pub-meta" style="margin-bottom: 14px;">
+            I work on applying modern machine learning methods &mdash; including
+            diffusion models, flow matching, CNNs, and transformers &mdash; to
+            large-scale detector arrays such as IceCube, HAWC, and SWGO.
+          </p>
+
+          <div class="tabs" role="tablist" aria-label="Research projects">
+            <button
+              class="tab-button tab-button-active"
+              data-tab="utah"
+              role="tab"
+              aria-selected="true"
+            >
+              IceCube · University of Utah
+            </button>
+            <button
+              class="tab-button"
+              data-tab="skku"
+              role="tab"
+              aria-selected="false"
+            >
+              IceCube · SKKU
+            </button>
+            <button
+              class="tab-button"
+              data-tab="uos"
+              role="tab"
+              aria-selected="false"
+            >
+              SWGO · University of Seoul
+            </button>
+          </div>
+
+          <div
+            id="tab-utah"
+            class="tab-panel tab-panel-active"
+            role="tabpanel"
+            aria-label="IceCube research at University of Utah"
+          >
+            <div class="pub-title">
+              IceCube Upgrade Camera System &mdash; University of Utah
+            </div>
+            <div class="pub-meta">
+              Undergraduate Researcher · Prof. Carsten Rott · Aug 2023 &ndash;
+              Feb 2025
+            </div>
+            <ul class="section-list">
+              <li class="section-item">
+                Developed CNN and Vision Transformer pipelines for sensor
+                calibration and optical property estimation in the IceCube
+                Upgrade camera system.
+              </li>
+              <li class="section-item">
+                Contributed to performance studies of the camera system for
+                characterizing Antarctic ice optical properties.
+              </li>
+            </ul>
+            <p class="pub-links">
+              Related work:
+              <a
+                href="https://arxiv.org/abs/2507.18525"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Performance Study of the IceCube Upgrade Camera System</a
+              >
+              (ICRC 2025).
+            </p>
+          </div>
+
+          <div
+            id="tab-skku"
+            class="tab-panel"
+            role="tabpanel"
+            aria-label="IceCube research at SKKU"
+          >
+            <div class="pub-title">
+              Generative Models for IceCube Signals &mdash; SKKU
+            </div>
+            <div class="pub-meta">
+              Undergraduate Researcher · Prof. Chang Dong Rho · May 2024
+              &ndash; Present
+            </div>
+            <ul class="section-list">
+              <li class="section-item">
+                Developing score-based generative models for synthesizing PMT
+                charge and timing signals in IceCube.
+              </li>
+              <li class="section-item">
+                Building flow-matching models to generate detector signals
+                conditioned on neutrino characteristics.
+              </li>
+            </ul>
+          </div>
+
+          <div
+            id="tab-uos"
+            class="tab-panel"
+            role="tabpanel"
+            aria-label="SWGO and large-array detectors at University of Seoul"
+          >
+            <div class="pub-title">
+              SWGO and Large-Array Detectors &mdash; University of Seoul
+            </div>
+            <div class="pub-meta">
+              Undergraduate Researcher · Dr. Ian Watson · Jun 2024 &ndash;
+              Present
+            </div>
+            <ul class="section-list">
+              <li class="section-item">
+                Contributing transformer-based models for inferring primary
+                particle properties from large-array detector time-series data.
+              </li>
+              <li class="section-item">
+                Developing diffusion and flow-matching models to improve signal
+                synthesis and reconstruction accuracy on SWGO simulation data.
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <span>
+            © <span id="year"></span> Minje Park. All rights reserved.
+          </span>
+          <span>Built with a simple static site &amp; custom CSS.</span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent =
+        new Date().getFullYear().toString();
+
+      const buttons = document.querySelectorAll(".tab-button");
+      const panels = document.querySelectorAll(".tab-panel");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tab = btn.getAttribute("data-tab");
+
+          buttons.forEach((b) => {
+            b.classList.toggle("tab-button-active", b === btn);
+            b.setAttribute(
+              "aria-selected",
+              b === btn ? "true" : "false"
+            );
+          });
+
+          panels.forEach((panel) => {
+            panel.classList.toggle(
+              "tab-panel-active",
+              panel.id === `tab-${tab}`
+            );
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+
