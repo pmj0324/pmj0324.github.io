@@ -15,6 +15,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="shared-theme.css" />
+    <link rel="stylesheet" href="shared-transition.css" />
+    <script defer src="shared-transition.js"></script>
     <style>
       :root {
         --bg: #0b1020;
@@ -42,8 +45,8 @@
           "Segoe UI", sans-serif;
         background-image: linear-gradient(
             135deg,
-            rgba(3, 7, 18, 0.8),
-            rgba(15, 23, 42, 0.88)
+            rgba(3, 7, 18, var(--bg-overlay-start)),
+            rgba(15, 23, 42, var(--bg-overlay-end))
           ),
           url("png/mountain.png");
         background-size: cover;
@@ -213,6 +216,13 @@
         display: block;
       }
 
+      .about-profile {
+        background: rgba(8, 12, 26, 0.6);
+        border: 1px solid rgba(143, 148, 183, 0.26);
+        border-radius: 14px;
+        padding: 16px;
+      }
+
       .about-name {
         font-size: 22px;
         font-weight: 600;
@@ -228,7 +238,17 @@
       .about-meta {
         font-size: 13px;
         color: var(--fg-muted);
-        margin-bottom: 4px;
+        margin-bottom: 6px;
+        line-height: 1.5;
+      }
+
+      .about-meta-label {
+        display: inline-block;
+        min-width: 44px;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #9ea4c6;
       }
 
       .about-section-title {
@@ -250,6 +270,19 @@
         padding-left: 18px;
         font-size: 13px;
         color: var(--fg-muted);
+      }
+
+      .cv-viewer-wrap {
+        margin-top: 22px;
+      }
+
+      .cv-viewer-frame {
+        width: 100%;
+        height: min(78vh, 980px);
+        min-height: 560px;
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        background: #0e1426;
       }
 
       .footer {
@@ -301,7 +334,7 @@
           </div>
 
           <div class="about-layout">
-            <div>
+            <div class="about-profile">
               <div class="profile-photo">
                 <!-- Replace the placeholder below with your own photo, for example:
                      <img src="png/your_photo.png" alt="Portrait of Minje Park" />
@@ -311,21 +344,36 @@
               <div class="about-role">
                 Undergraduate student, Sungkyunkwan University
               </div>
-              <div class="about-meta">Seoul, South Korea</div>
               <div class="about-meta">
-                Email:
+                <span class="about-meta-label">Location</span>Seoul, South Korea
+              </div>
+              <div class="about-meta">
+                <span class="about-meta-label">Email</span>
                 <a href="mailto:pmj0324@g.skku.edu">pmj0324@g.skku.edu</a>
+              </div>
+              <div class="about-meta">
+                <span class="about-meta-label">CV</span>
+                <a
+                  href="Minje_Park_CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View PDF</a
+                >
+                ·
+                <a href="Minje_Park_CV.pdf" download="Minje_Park_CV.pdf"
+                  >Download PDF</a
+                >
               </div>
             </div>
 
             <div>
               <div class="about-section-title">Short bio</div>
               <p class="about-text">
-                I am an undergraduate student researching the application of
-                machine learning to astrophysics and cosmology. My work focuses
-                on large-scale detector arrays such as IceCube, HAWC, and SWGO,
-                using generative models and transformers to simulate detector
-                signals and reconstruct neutrino events.
+                I am an undergraduate researcher applying machine learning to
+                scientific sensor arrays in IceCube, HAWC, and SWGO.
+                I develop generative models for detector signal synthesis and
+                transformer-based models for parameter estimation and event
+                reconstruction.
               </p>
 
               <div class="about-section-title" style="margin-top: 18px;">
@@ -348,6 +396,29 @@
                 Cosmology, Astrophysics, Machine Learning, Generative AI
               </p>
             </div>
+          </div>
+
+          <div class="cv-viewer-wrap">
+            <div class="about-section-title">Curriculum Vitae</div>
+            <object
+              class="cv-viewer-frame"
+              data="Minje_Park_CV.pdf#view=FitH"
+              type="application/pdf"
+            >
+              <p class="about-text">
+                Your browser cannot display embedded PDFs.
+                <a
+                  href="Minje_Park_CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Open CV in a new tab</a
+                >
+                or
+                <a href="Minje_Park_CV.pdf" download="Minje_Park_CV.pdf"
+                  >download it</a
+                >.
+              </p>
+            </object>
           </div>
         </section>
       </main>
