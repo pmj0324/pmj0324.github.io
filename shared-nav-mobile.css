@@ -1,0 +1,31 @@
+@media (max-width: 880px) {
+  .navbar-inner {
+    height: auto !important;
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .nav-links {
+    display: flex !important;
+    width: 100%;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
