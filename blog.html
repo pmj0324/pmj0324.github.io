@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="shared-theme.css" />
     <style>
       :root {
         --bg: #0b1020;
@@ -42,8 +43,8 @@
           "Segoe UI", sans-serif;
         background-image: linear-gradient(
             135deg,
-            rgba(3, 7, 18, 0.8),
-            rgba(15, 23, 42, 0.88)
+            rgba(3, 7, 18, var(--bg-overlay-start)),
+            rgba(15, 23, 42, var(--bg-overlay-end))
           ),
           url("png/mountain.png");
         background-size: cover;

@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="shared-theme.css" />
     <style>
       :root {
         --bg: #0b1020;
@@ -42,8 +43,8 @@
           "Segoe UI", sans-serif;
         background-image: linear-gradient(
             135deg,
-            rgba(3, 7, 18, 0.8),
-            rgba(15, 23, 42, 0.88)
+            rgba(3, 7, 18, var(--bg-overlay-start)),
+            rgba(15, 23, 42, var(--bg-overlay-end))
           ),
           url("png/mountain.png");
         background-size: cover;
@@ -227,6 +228,36 @@
         margin-right: 6px;
       }
 
+      .talk-details {
+        border: 1px solid rgba(143, 148, 183, 0.35);
+        border-radius: 12px;
+        background: rgba(12, 17, 32, 0.55);
+        padding: 10px 12px;
+      }
+
+      .talk-summary {
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .talk-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .talk-content {
+        margin-top: 10px;
+      }
+
+      .talk-placeholder {
+        display: inline-block;
+        margin-top: 4px;
+        padding: 2px 8px;
+        border-radius: var(--radius-pill);
+        border: 1px dashed rgba(143, 148, 183, 0.65);
+        font-size: 11px;
+        color: var(--fg-muted);
+      }
+
       .footer {
         margin-top: auto;
         padding: 20px;
@@ -277,7 +308,7 @@
             <span class="card-subtitle">Selected work</span>
           </div>
           <p class="pub-meta" style="margin-bottom: 12px;">
-            A selection of publications and presentations.
+            A selection of publications.
           </p>
           <ul class="section-list">
             <li class="section-item">
@@ -303,35 +334,53 @@
                 · <span>Conference proceedings (ICRC 2025)</span>
               </div>
             </li>
-            <li class="section-item">
-              <div class="pub-title">
-                Diffusion and Flow Matching Model for IceCube Neutrino Event
-                Simulation and Reconstruction
-              </div>
-              <div class="pub-meta">
-                <span class="tag">K-Neutrino 2025</span>
-                Best Presentation Award &mdash; K-Neutrino Symposium
-              </div>
-              <div class="pub-links">
-                <span>Poster presentation</span>
-              </div>
-            </li>
           </ul>
         </section>
 
         <section class="card" aria-labelledby="talks-heading">
           <div class="card-header">
             <h2 id="talks-heading" class="card-title">Conference talks</h2>
+            <span class="card-subtitle">Click to expand details</span>
           </div>
           <ul class="section-list">
             <li class="section-item">
-              <div class="pub-title">
-                Generative AI for IceCube Observatory
-              </div>
-              <div class="pub-meta">
-                Spring Meeting of the Korean Physical Society &mdash; April 2026
-                (scheduled)
-              </div>
+              <details class="talk-details">
+                <summary class="talk-summary">
+                  <div class="pub-title">Generative AI for IceCube Observatory</div>
+                  <div class="pub-meta">
+                    Spring Meeting of the Korean Physical Society &mdash; April
+                    2026 (scheduled)
+                  </div>
+                </summary>
+                <div class="talk-content">
+                  <div class="pub-links">
+                    Planned conference presentation on generative modeling
+                    approaches for IceCube event simulation and reconstruction.
+                  </div>
+                  <div class="talk-placeholder">Materials coming soon</div>
+                </div>
+              </details>
+            </li>
+            <li class="section-item">
+              <details class="talk-details">
+                <summary class="talk-summary">
+                  <div class="pub-title">
+                    Diffusion and Flow Matching Model for IceCube Neutrino Event
+                    Simulation and Reconstruction
+                  </div>
+                  <div class="pub-meta">
+                    K-Neutrino Symposium 2025 &mdash; Best Presentation Award
+                  </div>
+                </summary>
+                <div class="talk-content">
+                  <div class="pub-links">
+                    Poster and talk on diffusion and flow-matching models for
+                    realistic detector signal generation and event-level
+                    reconstruction.
+                  </div>
+                  <div class="talk-placeholder">Materials coming soon</div>
+                </div>
+              </details>
             </li>
           </ul>
         </section>
