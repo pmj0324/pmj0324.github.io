@@ -6,10 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Publications · Minje Park</title>
+    <title>Blog · Minje Park</title>
     <meta
       name="description"
-      content="Publications and selected presentations by Minje Park."
+      content="Blog posts and notes by Minje Park."
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
@@ -198,33 +198,28 @@
         border-top: none;
       }
 
-      .pub-title {
-        font-size: 14px;
+      .post-row {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        font-size: 13px;
+        color: var(--fg-muted);
+      }
+
+      .post-date {
+        min-width: 100px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .post-title {
+        color: var(--fg);
         font-weight: 500;
-        margin-bottom: 4px;
       }
 
-      .pub-meta {
-        font-size: 12px;
+      .post-excerpt {
+        font-size: 13px;
         color: var(--fg-muted);
-        margin-bottom: 4px;
-      }
-
-      .pub-links {
-        font-size: 11px;
-        color: var(--fg-muted);
-      }
-
-      .tag {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: var(--radius-pill);
-        border: 1px solid rgba(143, 148, 183, 0.6);
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--fg-muted);
-        margin-right: 6px;
+        margin-top: 4px;
       }
 
       .footer {
@@ -254,85 +249,51 @@
             <div class="brand-avatar" aria-hidden="true"></div>
             <div>
               <div class="brand-text-main">Minje&nbsp;Park</div>
-              <div class="brand-text-sub">Publications</div>
+              <div class="brand-text-sub">Blog</div>
             </div>
           </div>
           <nav class="nav-links" aria-label="Main navigation">
             <a class="nav-link" href="index.html">home</a>
             <a class="nav-link" href="about.html">about</a>
             <a class="nav-link" href="research.html">research</a>
-            <a class="nav-link nav-link-active" href="publications.html"
-              >publications</a
-            >
-            <a class="nav-link" href="blog.html">blog</a>
+            <a class="nav-link" href="publications.html">publications</a>
+            <a class="nav-link nav-link-active" href="blog.html">blog</a>
             <a class="nav-link" href="index.html#contact">contact</a>
           </nav>
         </div>
       </header>
 
       <main class="page-inner">
-        <section class="card" aria-labelledby="pub-main-heading">
+        <section class="card" aria-labelledby="blog-heading">
           <div class="card-header">
-            <h1 id="pub-main-heading" class="card-title">Publications</h1>
-            <span class="card-subtitle">Selected work</span>
-          </div>
-          <p class="pub-meta" style="margin-bottom: 12px;">
-            A selection of publications and presentations related to
-            astro-particle physics, IceCube, and generative models for detector
-            signals.
-          </p>
-          <ul class="section-list">
-            <li class="section-item">
-              <div class="pub-title">
-                Performance Study of the IceCube Upgrade Camera System
-              </div>
-              <div class="pub-meta">
-                <span class="tag">ICRC 2025</span>
-                C. Rott, M. Park, M. Jansson, G. Iverson, S. Choi (for the
-                IceCube Collaboration)
-              </div>
-              <div class="pub-meta">
-                arXiv:2507.18525 &mdash; Instrumentation and Methods for
-                Astrophysics
-              </div>
-              <div class="pub-links">
-                <a
-                  href="https://arxiv.org/abs/2507.18525"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >View on arXiv</a
-                >
-                · <span>Conference proceedings (ICRC 2025)</span>
-              </div>
-            </li>
-            <li class="section-item">
-              <div class="pub-title">
-                Diffusion and Flow Matching Model for IceCube Neutrino Event
-                Simulation and Reconstruction
-              </div>
-              <div class="pub-meta">
-                <span class="tag">K-Neutrino 2025</span>
-                Best Presentation Award &mdash; K-Neutrino Symposium
-              </div>
-              <div class="pub-links">
-                <span>Poster presentation</span>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        <section class="card" aria-labelledby="talks-heading">
-          <div class="card-header">
-            <h2 id="talks-heading" class="card-title">Conference talks</h2>
+            <h1 id="blog-heading" class="card-title">Blog</h1>
+            <span class="card-subtitle">Notes and updates</span>
           </div>
           <ul class="section-list">
             <li class="section-item">
-              <div class="pub-title">
-                Generative AI for IceCube Observatory
+              <div class="post-row">
+                <div class="post-date">Feb 15, 2026</div>
+                <div>
+                  <div class="post-title">A first example blog post</div>
+                  <div class="post-excerpt">
+                    Short placeholder text for your first post. You can replace
+                    this with notes on your research, learning, or anything you
+                    want to write about.
+                  </div>
+                </div>
               </div>
-              <div class="pub-meta">
-                Spring Meeting of the Korean Physical Society &mdash; April 2026
-                (scheduled)
+            </li>
+            <li class="section-item">
+              <div class="post-row">
+                <div class="post-date">Jan 03, 2026</div>
+                <div>
+                  <div class="post-title">Thoughts on learning and research</div>
+                  <div class="post-excerpt">
+                    Another placeholder entry that you can turn into a real
+                    article later. For now, it just shows how multiple posts
+                    will look on this page.
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
