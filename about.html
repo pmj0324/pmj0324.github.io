@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>About · Minje Park</title>
+    <meta
+      name="description"
+      content="About page for Minje Park, including education and background."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #151a2b;
+        --bg-softer: #1d2336;
+        --fg: #f7f7ff;
+        --fg-muted: #c1c4d6;
+        --accent: #8d9bff;
+        --accent-soft: rgba(141, 155, 255, 0.18);
+        --border-subtle: #262b3f;
+        --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+        --radius-lg: 18px;
+        --radius-pill: 999px;
+        --nav-height: 64px;
+        --content-width: 960px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background-image: linear-gradient(
+            135deg,
+            rgba(3, 7, 18, 0.8),
+            rgba(15, 23, 42, 0.88)
+          ),
+          url("png/mountain.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page-inner {
+        width: 100%;
+        max-width: var(--content-width);
+        margin: 0 auto;
+        padding: 24px 20px 40px;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: linear-gradient(
+          to bottom,
+          rgba(5, 7, 18, 0.9),
+          rgba(5, 7, 18, 0.6),
+          transparent
+        );
+      }
+
+      .navbar-inner {
+        height: var(--nav-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 20%, #f7f7ff, #8d9bff);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
+          0 10px 24px rgba(0, 0, 0, 0.7);
+      }
+
+      .brand-text-main {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-text-sub {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--fg-muted);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 14px;
+      }
+
+      .nav-link {
+        padding: 6px 12px;
+        border-radius: 999px;
+        color: var(--fg-muted);
+        text-decoration: none;
+        transition: background 0.16s ease, color 0.16s ease;
+      }
+
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--fg);
+        text-decoration: none;
+      }
+
+      .nav-link-active {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.96),
+          rgba(8, 12, 28, 0.98)
+        );
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-soft);
+        padding: 24px 24px 22px;
+        margin-top: 24px;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .card-subtitle {
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+
+      .about-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
+        gap: 24px;
+      }
+
+      @media (max-width: 880px) {
+        .about-layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .profile-photo {
+        width: 140px;
+        height: 140px;
+        border-radius: 32px;
+        background: radial-gradient(circle at 20% 10%, #f4f4ff, #8d9bff);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.22);
+        margin-bottom: 16px;
+        overflow: hidden;
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .about-name {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .about-role {
+        font-size: 14px;
+        color: var(--fg-muted);
+        margin-bottom: 10px;
+      }
+
+      .about-meta {
+        font-size: 13px;
+        color: var(--fg-muted);
+        margin-bottom: 4px;
+      }
+
+      .about-section-title {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+      }
+
+      .about-text {
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--fg-muted);
+      }
+
+      .list-compact {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 13px;
+        color: var(--fg-muted);
+      }
+
+      .footer {
+        margin-top: auto;
+        padding: 20px;
+        border-top: 1px solid rgba(24, 30, 46, 0.9);
+        color: #7a7f98;
+        font-size: 12px;
+      }
+
+      .footer-inner {
+        max-width: var(--content-width);
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="navbar">
+        <div class="page-inner navbar-inner">
+          <div class="brand">
+            <div class="brand-avatar" aria-hidden="true"></div>
+            <div>
+              <div class="brand-text-main">Minje&nbsp;Park</div>
+              <div class="brand-text-sub">About</div>
+            </div>
+          </div>
+          <nav class="nav-links" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">home</a>
+            <a class="nav-link nav-link-active" href="about.html">about</a>
+            <a class="nav-link" href="research.html">research</a>
+            <a class="nav-link" href="publications.html">publications</a>
+            <a class="nav-link" href="blog.html">blog</a>
+            <a class="nav-link" href="index.html#contact">contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="page-inner">
+        <section class="card" aria-labelledby="about-heading">
+          <div class="card-header">
+            <h1 id="about-heading" class="card-title">About</h1>
+            <span class="card-subtitle">Profile and education</span>
+          </div>
+
+          <div class="about-layout">
+            <div>
+              <div class="profile-photo">
+                <!-- Replace the placeholder below with your own photo, for example:
+                     <img src="png/your_photo.png" alt="Portrait of Minje Park" />
+                -->
+              </div>
+              <div class="about-name">Minje&nbsp;Park</div>
+              <div class="about-role">
+                Undergraduate student, Sungkyunkwan University
+              </div>
+              <div class="about-meta">Seoul, South Korea</div>
+              <div class="about-meta">
+                Email:
+                <a href="mailto:pmj0324@g.skku.edu">pmj0324@g.skku.edu</a>
+              </div>
+            </div>
+
+            <div>
+              <div class="about-section-title">Short bio</div>
+              <p class="about-text">
+                I am an undergraduate student researching the application of
+                machine learning to astrophysics and cosmology. My work focuses
+                on large-scale detector arrays such as IceCube, HAWC, and SWGO,
+                using generative models and transformers to simulate detector
+                signals and reconstruct neutrino events.
+              </p>
+
+              <div class="about-section-title" style="margin-top: 18px;">
+                Education
+              </div>
+              <p class="about-text" style="margin-bottom: 6px;">
+                <strong>B.S., Sungkyunkwan University</strong>
+                &mdash; Physics (Major), Electronic and Electrical Engineering
+                (Double Major)
+              </p>
+              <ul class="list-compact">
+                <li>Undergraduate studies starting Feb 2021</li>
+                <li>Focus on astro-particle physics and machine learning</li>
+              </ul>
+
+              <div class="about-section-title" style="margin-top: 18px;">
+                Interests
+              </div>
+              <p class="about-text">
+                Cosmology, Astrophysics, Machine Learning, Generative AI
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <span>
+            © <span id="year"></span> Minje Park. All rights reserved.
+          </span>
+          <span>Built with a simple static site &amp; custom CSS.</span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent =
+        new Date().getFullYear().toString();
+    </script>
+  </body>
+</html>
+
