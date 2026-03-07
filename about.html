@@ -166,12 +166,23 @@
         margin-top: 24px;
       }
 
+      .intro-card {
+        background: linear-gradient(
+          145deg,
+          rgba(29, 37, 58, 0.94),
+          rgba(14, 21, 38, 0.96)
+        );
+        border-color: rgba(143, 148, 183, 0.4);
+      }
+
       .card-header {
         display: flex;
         align-items: baseline;
         justify-content: space-between;
         gap: 12px;
         margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       .card-title {
@@ -327,7 +338,7 @@
       </header>
 
       <main class="page-inner">
-        <section class="card" aria-labelledby="about-heading">
+        <section class="card intro-card" aria-labelledby="about-heading">
           <div class="card-header">
             <h1 id="about-heading" class="card-title">CV</h1>
             <span class="card-subtitle">Profile and education</span>
@@ -336,9 +347,7 @@
           <div class="about-layout">
             <div class="about-profile">
               <div class="profile-photo">
-                <!-- Replace the placeholder below with your own photo, for example:
-                     <img src="png/your_photo.png" alt="Portrait of Minje Park" />
-                -->
+                <img src="pic.jpg" alt="Portrait of Minje Park" />
               </div>
               <div class="about-name">Minje&nbsp;Park</div>
               <div class="about-role">
@@ -370,7 +379,7 @@
               <div class="about-section-title">Short bio</div>
               <p class="about-text">
                 I am an undergraduate researcher applying machine learning to
-                scientific sensor arrays in IceCube, HAWC, and SWGO.
+                astrophysics and cosmology.
                 I develop generative models for detector signal synthesis and
                 transformer-based models for parameter estimation and event
                 reconstruction.

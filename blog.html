@@ -166,12 +166,23 @@
         margin-top: 24px;
       }
 
+      .intro-card {
+        background: linear-gradient(
+          145deg,
+          rgba(29, 37, 58, 0.94),
+          rgba(14, 21, 38, 0.96)
+        );
+        border-color: rgba(143, 148, 183, 0.4);
+      }
+
       .card-header {
         display: flex;
         align-items: baseline;
         justify-content: space-between;
         gap: 12px;
         margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       .card-title {
@@ -267,7 +278,7 @@
       </header>
 
       <main class="page-inner">
-        <section class="card" aria-labelledby="blog-heading">
+        <section class="card intro-card" aria-labelledby="blog-heading">
           <div class="card-header">
             <h1 id="blog-heading" class="card-title">Blog</h1>
             <span class="card-subtitle">Notes and updates</span>
