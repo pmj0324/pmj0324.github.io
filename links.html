@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Links · Minje Park</title>
+    <meta
+      name="description"
+      content="Useful links related to Minje Park's research and collaborations."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shared-theme.css" />
+    <link rel="stylesheet" href="shared-nav-mobile.css" />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #151a2b;
+        --bg-softer: #1d2336;
+        --fg: #f7f7ff;
+        --fg-muted: #c1c4d6;
+        --accent: #8d9bff;
+        --accent-soft: rgba(141, 155, 255, 0.18);
+        --border-subtle: #262b3f;
+        --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+        --radius-lg: 18px;
+        --radius-pill: 999px;
+        --nav-height: 64px;
+        --content-width: 960px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background-image: linear-gradient(
+            135deg,
+            rgba(3, 7, 18, var(--bg-overlay-start)),
+            rgba(15, 23, 42, var(--bg-overlay-end))
+          ),
+          url("png/mountain.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page-inner {
+        width: 100%;
+        max-width: var(--content-width);
+        margin: 0 auto;
+        padding: 24px 20px 40px;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: linear-gradient(
+          to bottom,
+          rgba(5, 7, 18, 0.9),
+          rgba(5, 7, 18, 0.6),
+          transparent
+        );
+      }
+
+      .navbar-inner {
+        height: var(--nav-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 20%, #f7f7ff, #8d9bff);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
+          0 10px 24px rgba(0, 0, 0, 0.7);
+      }
+
+      .brand-text-main {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-text-sub {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--fg-muted);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 14px;
+      }
+
+      .nav-link {
+        padding: 6px 12px;
+        border-radius: 999px;
+        color: var(--fg-muted);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: background 0.16s ease, color 0.16s ease;
+      }
+
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--fg);
+        text-decoration: none;
+      }
+
+      .nav-link-active {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.96),
+          rgba(8, 12, 28, 0.98)
+        );
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-soft);
+        padding: 22px 22px 20px;
+        margin-top: 24px;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .card-subtitle {
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+
+      .lead-text {
+        font-size: 14px;
+        line-height: 1.65;
+        color: var(--fg-muted);
+        margin: 0;
+      }
+
+      .link-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      @media (max-width: 760px) {
+        .link-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .link-item {
+        border: 1px solid rgba(143, 148, 183, 0.35);
+        border-radius: 14px;
+        background: rgba(8, 12, 28, 0.7);
+        padding: 14px;
+      }
+
+      .link-item-title {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .link-item-text {
+        font-size: 12px;
+        color: var(--fg-muted);
+        line-height: 1.55;
+        margin-bottom: 10px;
+      }
+
+      .link-item a {
+        font-size: 12px;
+      }
+
+      .footer {
+        margin-top: auto;
+        padding: 20px;
+        border-top: 1px solid rgba(24, 30, 46, 0.9);
+        color: #7a7f98;
+        font-size: 12px;
+      }
+
+      .footer-inner {
+        max-width: var(--content-width);
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="navbar">
+        <div class="page-inner navbar-inner">
+          <div class="brand">
+            <div class="brand-avatar" aria-hidden="true"></div>
+            <div>
+              <div class="brand-text-main">Minje&nbsp;Park</div>
+              <div class="brand-text-sub">Links</div>
+            </div>
+          </div>
+          <nav class="nav-links" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">home</a>
+            <a class="nav-link" href="about.html">CV</a>
+            <a class="nav-link" href="research.html">research</a>
+            <a class="nav-link" href="publications.html">publications</a>
+            <a class="nav-link" href="blog.html">blog</a>
+            <a class="nav-link nav-link-active" href="links.html">links</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="page-inner">
+        <section class="card" aria-labelledby="links-heading">
+          <div class="card-header">
+            <h1 id="links-heading" class="card-title">Links</h1>
+            <span class="card-subtitle">Quick guide</span>
+          </div>
+          <p class="lead-text">
+            This page collects useful links for collaborations and profile
+            pages related to my research activities.
+          </p>
+        </section>
+
+        <section class="card" aria-labelledby="collab-heading">
+          <div class="card-header">
+            <h2 id="collab-heading" class="card-title">Collaborations</h2>
+            <span class="card-subtitle">Research organizations</span>
+          </div>
+          <div class="link-grid">
+            <article class="link-item">
+              <div class="link-item-title">IceCube</div>
+              <div class="link-item-text">
+                Official page for the IceCube Neutrino Observatory.
+              </div>
+              <a
+                href="https://icecube.wisc.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Visit website</a
+              >
+            </article>
+            <article class="link-item">
+              <div class="link-item-title">SWGO</div>
+              <div class="link-item-text">
+                Southern Wide-field Gamma-ray Observatory collaboration site.
+              </div>
+              <a
+                href="https://www.swgo.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Visit website</a
+              >
+            </article>
+            <article class="link-item">
+              <div class="link-item-title">HAWC</div>
+              <div class="link-item-text">
+                High-Altitude Water Cherenkov Observatory information page.
+              </div>
+              <a
+                href="https://www.hawc-observatory.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Visit website</a
+              >
+            </article>
+            <article class="link-item">
+              <div class="link-item-title">CAMELS</div>
+              <div class="link-item-text">
+                Cosmological simulations and machine learning benchmark project.
+              </div>
+              <a
+                href="https://www.camel-simulations.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Visit website</a
+              >
+            </article>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="profile-links-heading">
+          <div class="card-header">
+            <h2 id="profile-links-heading" class="card-title">Profile Links</h2>
+            <span class="card-subtitle">Personal channels</span>
+          </div>
+          <div class="link-grid">
+            <article class="link-item">
+              <div class="link-item-title">LinkedIn</div>
+              <div class="link-item-text">
+                Professional profile and latest updates.
+              </div>
+              <a
+                href="https://www.linkedin.com/in/minje-park-81b722365/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open LinkedIn</a
+              >
+            </article>
+            <article class="link-item">
+              <div class="link-item-title">GitHub</div>
+              <div class="link-item-text">
+                Code repositories and project work.
+              </div>
+              <a
+                href="https://github.com/pmj0324"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open GitHub</a
+              >
+            </article>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="supervisor-links-heading">
+          <div class="card-header">
+            <h2 id="supervisor-links-heading" class="card-title">Supervisors</h2>
+            <span class="card-subtitle">Advisor pages</span>
+          </div>
+          <div class="link-grid">
+            <article class="link-item">
+              <div class="link-item-title">Prof. Carsten Rott</div>
+              <div class="link-item-text">
+                University of Utah faculty profile.
+              </div>
+              <a
+                href="https://profiles.faculty.utah.edu/u6033273/about"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open profile</a
+              >
+            </article>
+            <article class="link-item">
+              <div class="link-item-title">Prof. Chang Dong Rho</div>
+              <div class="link-item-text">
+                Sungkyunkwan University research group page.
+              </div>
+              <a
+                href="https://sites.google.com/view/prof-changdongrho"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open profile</a
+              >
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <span>
+            © <span id="year"></span> Minje Park. All rights reserved.
+          </span>
+          <span>Built with a simple static site &amp; custom CSS.</span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent =
+        new Date().getFullYear().toString();
+    </script>
+  </body>
+</html>
