@@ -166,12 +166,23 @@
         margin-top: 24px;
       }
 
+      .intro-card {
+        background: linear-gradient(
+          145deg,
+          rgba(29, 37, 58, 0.94),
+          rgba(14, 21, 38, 0.96)
+        );
+        border-color: rgba(143, 148, 183, 0.4);
+      }
+
       .card-header {
         display: flex;
         align-items: baseline;
         justify-content: space-between;
         gap: 12px;
         margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       .card-title {
@@ -186,37 +197,56 @@
         color: var(--fg-muted);
       }
 
-      .tabs {
+      .lead-text {
+        font-size: 14px;
+        line-height: 1.65;
+        color: var(--fg-muted);
+        margin: 0;
+      }
+
+      .project-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(143, 148, 183, 0.6);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--fg-muted);
+      }
+
+      .project-expand {
+        margin-top: 10px;
+        border-top: 1px solid rgba(37, 42, 70, 0.9);
+        padding-top: 10px;
+      }
+
+      .project-expand summary {
+        cursor: pointer;
+        color: var(--accent);
+        font-size: 12px;
+      }
+
+      .project-expand-content {
+        margin-top: 10px;
+      }
+
+      .asset-row {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-bottom: 14px;
+        margin-top: 8px;
       }
 
-      .tab-button {
+      .asset-chip {
+        display: inline-flex;
+        align-items: center;
+        border: 1px dashed rgba(143, 148, 183, 0.65);
         border-radius: var(--radius-pill);
-        border: 1px solid rgba(143, 148, 183, 0.6);
-        padding: 6px 12px;
-        font-size: 12px;
         background: rgba(8, 12, 28, 0.9);
+        padding: 4px 10px;
+        font-size: 11px;
         color: var(--fg-muted);
-        cursor: pointer;
-        transition: background 0.15s ease, border-color 0.15s ease,
-          color 0.15s ease;
-      }
-
-      .tab-button-active {
-        background: var(--accent-soft);
-        border-color: rgba(141, 155, 255, 0.9);
-        color: var(--accent);
-      }
-
-      .tab-panel {
-        display: none;
-      }
-
-      .tab-panel-active {
-        display: block;
       }
 
       .section-list {
@@ -293,131 +323,76 @@
       </header>
 
       <main class="page-inner">
-        <section class="card" aria-labelledby="research-heading">
+        <section class="card intro-card" aria-labelledby="research-heading">
           <div class="card-header">
             <h1 id="research-heading" class="card-title">Research</h1>
-            <span class="card-subtitle">
-              Machine learning for astro-particle physics experiments
-            </span>
+            <span class="card-subtitle">Overview</span>
           </div>
-          <p class="pub-meta" style="margin-bottom: 14px;">
-            I work on applying modern machine learning methods &mdash; including
-            diffusion models, flow matching, CNNs, and transformers &mdash; to
-            large-scale detector arrays such as IceCube, HAWC, and SWGO.
+          <p class="lead-text">
+            This page summarizes my ongoing research projects in
+            astro-particle physics and machine learning. Each project is managed
+            in its own box and can be expanded as new materials are added.
           </p>
+        </section>
 
-          <div class="tabs" role="tablist" aria-label="Research projects">
-            <button
-              class="tab-button tab-button-active"
-              data-tab="utah"
-              role="tab"
-              aria-selected="true"
-            >
-              IceCube · University of Utah
-            </button>
-            <button
-              class="tab-button"
-              data-tab="skku"
-              role="tab"
-              aria-selected="false"
-            >
-              IceCube · SKKU
-            </button>
-            <button
-              class="tab-button"
-              data-tab="uos"
-              role="tab"
-              aria-selected="false"
-            >
-              SWGO · University of Seoul
-            </button>
+        <section class="card" aria-labelledby="project-utah-heading">
+          <div class="card-header">
+            <h2 id="project-utah-heading" class="card-title">
+              IceCube Upgrade Camera System
+            </h2>
+            <span class="project-tag">Completed</span>
           </div>
+          <div class="pub-meta">
+            University of Utah · Prof. Carsten Rott · Aug 2023 &ndash; Feb 2025
+          </div>
+          <div class="pub-links">
+            CNN/ViT-based sensor calibration and Antarctic ice optical property
+            estimation.
+          </div>
+          <details class="project-expand">
+            <summary>Expand details and materials</summary>
+            <div class="project-expand-content">
+              <p class="pub-links">
+                This expandable area is ready for longer notes, figures, and
+                project updates.
+              </p>
+              <div class="asset-row">
+                <span class="asset-chip">PPT: Coming soon</span>
+                <span class="asset-chip">Description: Expandable notes</span>
+                <span class="asset-chip">Files: To be uploaded</span>
+              </div>
+            </div>
+          </details>
+        </section>
 
-          <div
-            id="tab-utah"
-            class="tab-panel tab-panel-active"
-            role="tabpanel"
-            aria-label="IceCube research at University of Utah"
-          >
-            <div class="pub-title">
-              IceCube Upgrade Camera System &mdash; University of Utah
-            </div>
-            <div class="pub-meta">
-              Undergraduate Researcher · Prof. Carsten Rott · Aug 2023 &ndash;
-              Feb 2025
-            </div>
-            <ul class="section-list">
-              <li class="section-item">
-                Developed CNN and Vision Transformer pipelines for sensor
-                calibration and optical property estimation in the IceCube
-                Upgrade camera system.
-              </li>
-              <li class="section-item">
-                Contributed to performance studies of the camera system for
-                characterizing Antarctic ice optical properties.
-              </li>
-            </ul>
-            <p class="pub-links">
-              Related work:
-              <a
-                href="https://arxiv.org/abs/2507.18525"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Performance Study of the IceCube Upgrade Camera System</a
-              >
-              (ICRC 2025).
-            </p>
+        <section class="card" aria-labelledby="project-skku-heading">
+          <div class="card-header">
+            <h2 id="project-skku-heading" class="card-title">
+              Generative Models for IceCube Signals
+            </h2>
+            <span class="project-tag">Ongoing</span>
           </div>
-
-          <div
-            id="tab-skku"
-            class="tab-panel"
-            role="tabpanel"
-            aria-label="IceCube research at SKKU"
-          >
-            <div class="pub-title">
-              Generative Models for IceCube Signals &mdash; SKKU
-            </div>
-            <div class="pub-meta">
-              Undergraduate Researcher · Prof. Chang Dong Rho · May 2024
-              &ndash; Present
-            </div>
-            <ul class="section-list">
-              <li class="section-item">
-                Developing score-based generative models for synthesizing PMT
-                charge and timing signals in IceCube.
-              </li>
-              <li class="section-item">
-                Building flow-matching models to generate detector signals
-                conditioned on neutrino characteristics.
-              </li>
-            </ul>
+          <div class="pub-meta">
+            SKKU · Prof. Chang Dong Rho · May 2024 &ndash; Present
           </div>
-
-          <div
-            id="tab-uos"
-            class="tab-panel"
-            role="tabpanel"
-            aria-label="SWGO and large-array detectors at University of Seoul"
-          >
-            <div class="pub-title">
-              SWGO and Large-Array Detectors &mdash; University of Seoul
-            </div>
-            <div class="pub-meta">
-              Undergraduate Researcher · Dr. Ian Watson · Jun 2024 &ndash;
-              Present
-            </div>
-            <ul class="section-list">
-              <li class="section-item">
-                Contributing transformer-based models for inferring primary
-                particle properties from large-array detector time-series data.
-              </li>
-              <li class="section-item">
-                Developing diffusion and flow-matching models to improve signal
-                synthesis and reconstruction accuracy on SWGO simulation data.
-              </li>
-            </ul>
+          <div class="pub-links">
+            Score-based diffusion and flow-matching models for PMT charge and
+            timing signal synthesis.
           </div>
+          <details class="project-expand">
+            <summary>Expand details and materials</summary>
+            <div class="project-expand-content">
+              <p class="pub-links">
+                Use this section for long-form explanations, experiment logs,
+                and result summaries as your project grows.
+              </p>
+              <div class="asset-row">
+                <span class="asset-chip">PPT: Coming soon</span>
+                <span class="asset-chip">Description: Expandable notes</span>
+                <span class="asset-chip">Files: To be uploaded</span>
+              </div>
+            </div>
+          </details>
         </section>
       </main>
 
@@ -434,30 +409,6 @@
     <script>
       document.getElementById("year").textContent =
         new Date().getFullYear().toString();
-
-      const buttons = document.querySelectorAll(".tab-button");
-      const panels = document.querySelectorAll(".tab-panel");
-
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const tab = btn.getAttribute("data-tab");
-
-          buttons.forEach((b) => {
-            b.classList.toggle("tab-button-active", b === btn);
-            b.setAttribute(
-              "aria-selected",
-              b === btn ? "true" : "false"
-            );
-          });
-
-          panels.forEach((panel) => {
-            panel.classList.toggle(
-              "tab-panel-active",
-              panel.id === `tab-${tab}`
-            );
-          });
-        });
-      });
     </script>
   </body>
 </html>

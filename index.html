@@ -181,13 +181,22 @@
       .card {
         background: linear-gradient(
           145deg,
-          rgba(21, 26, 43, 0.96),
-          rgba(8, 12, 28, 0.98)
+          rgba(29, 37, 58, 0.94),
+          rgba(14, 21, 38, 0.96)
         );
         border-radius: var(--radius-lg);
-        border: 1px solid var(--border-subtle);
+        border: 1px solid rgba(143, 148, 183, 0.4);
         box-shadow: var(--shadow-soft);
         padding: 22px 22px 20px;
+      }
+
+      .intro-card {
+        background: linear-gradient(
+          145deg,
+          rgba(29, 37, 58, 0.94),
+          rgba(14, 21, 38, 0.96)
+        );
+        border-color: rgba(143, 148, 183, 0.4);
       }
 
       .card + .card {
@@ -200,6 +209,8 @@
         justify-content: space-between;
         gap: 12px;
         margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       .card-title {
@@ -220,6 +231,7 @@
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
+        margin-top: 0;
         margin-bottom: 4px;
       }
 
@@ -227,6 +239,8 @@
         font-size: 14px;
         color: var(--fg-muted);
         margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
       }
 
       .hero-role {
@@ -246,8 +260,8 @@
         width: 7px;
         height: 7px;
         border-radius: 999px;
-        background: #4ade80;
-        box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.12);
+        background: var(--accent);
+        box-shadow: none;
       }
 
       .hero-text {
@@ -333,7 +347,8 @@
         width: 80px;
         height: 80px;
         border-radius: 24px;
-        background: radial-gradient(circle at 20% 10%, #f4f4ff, #8d9bff);
+        object-fit: cover;
+        display: block;
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
         border: 2px solid rgba(255, 255, 255, 0.18);
       }
@@ -483,12 +498,8 @@
         <div class="layout">
           <!-- Left column: hero, selected publications, posts -->
           <section aria-label="Main content">
-            <article class="card" aria-labelledby="hero-heading">
+            <article class="card intro-card" aria-labelledby="hero-heading">
               <header>
-                <p class="hero-role">
-                  <span class="hero-role-dot" aria-hidden="true"></span>
-                  <span>Open to opportunities</span>
-                </p>
                 <h1 id="hero-heading" class="hero-name">Profile</h1>
                 <div class="hero-name-note">Minje&nbsp;Park</div>
               </header>
@@ -606,7 +617,11 @@
           <!-- Right column: profile & details -->
           <aside aria-label="Profile and contact information">
             <section class="card profile-card" id="about">
-              <div class="profile-avatar" aria-hidden="true"></div>
+              <img
+                class="profile-avatar"
+                src="pic.jpg"
+                alt="Portrait of Minje Park"
+              />
               <div>
                 <div class="profile-name">Minje&nbsp;Park</div>
                 <div class="profile-title">
