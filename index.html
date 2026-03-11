@@ -211,6 +211,16 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       }
 
+      .card-title-link {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .card-title-link:hover {
+        color: var(--accent);
+        text-decoration: underline;
+      }
+
       .card-title {
         font-size: 13px;
         font-weight: 700;
@@ -264,6 +274,18 @@
         line-height: 1.75;
         color: rgba(255, 255, 255, 0.65);
         margin-bottom: 18px;
+      }
+
+      .hero-text-list {
+        font-size: 13.5px;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.65);
+        margin: 0 0 18px 1.2em;
+        padding-left: 0.4em;
+      }
+
+      .hero-text-list li {
+        margin-bottom: 4px;
       }
 
       .hero-meta {
@@ -410,6 +432,7 @@
 
       /* item mini-card (pub, blog, research) */
       .item-card {
+        display: block;
         background: linear-gradient(
           145deg,
           rgba(21, 26, 43, 0.50),
@@ -419,6 +442,8 @@
         border-radius: 12px;
         backdrop-filter: blur(8px);
         padding: 12px 14px;
+        text-decoration: none;
+        color: inherit;
         transition: border-color 0.20s ease, background 0.20s ease,
           transform 0.20s ease;
       }
@@ -431,6 +456,7 @@
           rgba(14, 18, 40, 0.63)
         );
         transform: translateY(-1px);
+        text-decoration: none;
       }
 
       .pub-title {
@@ -583,40 +609,15 @@
               <p class="hero-text">
                 I am an undergraduate student at Sungkyunkwan University,
                 majoring in Physics and Electronic and Electrical Engineering.
-                My research focuses on applying machine learning to
-                astrophysical and cosmological data, with particular interest in
-                data-driven modeling of large-scale structure and
-                detector-based observations. Further details are available on
-                the <a href="research.html">Research</a> page.
+                My research focuses on machine learning applications in cosmology and astrophysics.
               </p>
-              <div class="hero-meta">
-                <div>
-                  <div class="hero-meta-label">Affiliation</div>
-                  <div>Sungkyunkwan University</div>
-                </div>
-                <div>
-                  <div class="hero-meta-label">Location</div>
-                  <div>Seoul, South Korea</div>
-                </div>
-                <div>
-                  <div class="hero-meta-label">Email</div>
-                  <div>
-                    <a href="mailto:pmj032400@naver.com">pmj032400@naver.com</a>
-                  </div>
-                </div>
-                <div>
-                  <div class="hero-meta-label">Interests</div>
-                  <div>
-                    Cosmology, Astrophysics, Machine Learning, Generative AI
-                  </div>
-                </div>
-              </div>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#contact">Get in touch</a>
-                <a class="btn btn-ghost" href="#publications"
-                  >View highlights</a
-                >
-              </div>
+              <ul class="hero-text-list">
+                <li>In cosmology, I work on data-driven modeling of large-scale structure.</li>
+                <li>In astrophysics, I am interested in detector-based observations.</li>
+              </ul>
+              <p class="hero-text" style="margin-bottom:0;">
+                Further details are available on the <a href="research.html">Research</a> page.
+              </p>
             </article>
 
             <section
@@ -625,12 +626,12 @@
               aria-labelledby="pub-heading"
             >
               <div class="card-header">
-                <h2 id="pub-heading" class="card-title">Selected highlights</h2>
-                <span class="card-subtitle">Publications &amp; presentations</span>
+                <h2 id="pub-heading" class="card-title"><a href="publications.html" class="card-title-link">selected highlights</a></h2>
+                <span class="card-subtitle">publications &amp; presentations</span>
               </div>
               <ul class="section-list">
                 <li class="section-item">
-                  <div class="item-card">
+                  <a class="item-card" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer">
                     <div class="pub-title">
                       Performance Study of the IceCube Upgrade Camera System
                     </div>
@@ -639,14 +640,11 @@
                       M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)
                     </div>
                     <div class="pub-meta">arXiv:2507.18525 &mdash; ICRC 2025</div>
-                    <div class="pub-links" style="margin-top:5px;">
-                      <a href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer"
-                        style="color:var(--accent);font-size:11px;">📄 View on arXiv →</a>
-                    </div>
-                  </div>
+                    <div class="pub-links" style="margin-top:5px;color:var(--accent);font-size:11px;">📄 View on arXiv →</div>
+                  </a>
                 </li>
                 <li class="section-item">
-                  <div class="item-card">
+                  <a class="item-card" href="publications.html#talks-heading">
                     <div class="pub-title">
                       Diffusion and Flow Matching Model for IceCube Neutrino Event
                       Simulation and Reconstruction
@@ -659,7 +657,7 @@
                       <span style="color:#f0c850;font-size:10px;font-weight:600;">★ Best Presentation Award</span>
                       &nbsp;· Conference poster
                     </div>
-                  </div>
+                  </a>
                 </li>
               </ul>
               <a class="card-footer-link" href="publications.html">View all publications →</a>
@@ -667,19 +665,19 @@
 
             <section class="card" id="blog" aria-labelledby="blog-heading">
               <div class="card-header">
-                <h2 id="blog-heading" class="card-title">Latest posts</h2>
-                <span class="card-subtitle">Short notes or blog posts</span>
+                <h2 id="blog-heading" class="card-title"><a href="blog.html" class="card-title-link">latest posts</a></h2>
+                <span class="card-subtitle">short notes or blog posts</span>
               </div>
               <ul class="section-list">
                 <li class="section-item">
-                  <a class="post-card" href="#">
+                  <a class="post-card" href="blog.html#post-detector-modeling">
                     <div class="post-date">Feb 15,<br>2026</div>
                     <div class="post-title">Early notes on detector modeling</div>
                     <span class="post-arrow">&#8599;</span>
                   </a>
                 </li>
                 <li class="section-item">
-                  <a class="post-card" href="#">
+                  <a class="post-card" href="blog.html#post-learning-research">
                     <div class="post-date">Jan 03,<br>2026</div>
                     <div class="post-title">Thoughts on learning and research</div>
                     <span class="post-arrow">&#8599;</span>
@@ -706,7 +704,7 @@
                 <div class="profile-location">Seoul, South Korea</div>
                 <div class="profile-links">
                   <span class="chip">
-                    <a href="mailto:pmj032400@naver.com">Email</a>
+                    <a href="mailto:&#112;&#109;&#106;&#48;&#51;&#50;&#52;&#48;&#48;&#64;&#110;&#97;&#118;&#101;&#114;&#46;&#99;&#111;&#109;">Email</a>
                   </span>
                   <span class="chip">
                     <a href="https://github.com/pmj0324" target="_blank"
@@ -725,24 +723,6 @@
               </div>
             </section>
 
-            <section class="card" id="contact" aria-labelledby="contact-heading">
-              <div class="card-header">
-                <h2 id="contact-heading" class="card-title">Contact</h2>
-              </div>
-              <p class="hero-text" style="margin-bottom: 10px;">
-                Feel free to reach out by email if you would like to
-                collaborate, ask questions, or just say hello.
-              </p>
-              <p class="hero-text">
-                <strong>Email</strong>:
-                <a href="mailto:pmj032400@naver.com">pmj032400@naver.com</a>
-              </p>
-              <p class="hero-text" style="margin-top: -6px;">
-                <strong>Phone</strong>:
-                <a href="tel:+821040511056">+82-10-4051-1056</a>
-              </p>
-            </section>
-
             <section
               class="card"
               id="research-experience"
@@ -750,12 +730,12 @@
             >
               <div class="card-header">
                 <h2 id="research-heading" class="card-title">
-                  Research experience
+                  <a href="research.html" class="card-title-link">research experience</a>
                 </h2>
               </div>
               <ul class="section-list">
                 <li class="section-item">
-                  <div class="item-card">
+                  <a class="item-card" href="research.html">
                     <div class="pub-title">Undergraduate Researcher</div>
                     <div class="pub-meta">
                       Prof. Carsten Rott &mdash; University of Utah
@@ -764,10 +744,10 @@
                     <div class="pub-links">
                       CNN and Vision Transformer for IceCube Upgrade camera calibration.
                     </div>
-                  </div>
+                  </a>
                 </li>
                 <li class="section-item">
-                  <div class="item-card">
+                  <a class="item-card" href="research.html">
                     <div class="pub-title">Undergraduate Researcher</div>
                     <div class="pub-meta">
                       Prof. Chang Dong Rho &mdash; Sungkyunkwan University
@@ -776,10 +756,10 @@
                     <div class="pub-links">
                       Flow-matching models for IceCube and SWGO detector signal synthesis.
                     </div>
-                  </div>
+                  </a>
                 </li>
                 <li class="section-item">
-                  <div class="item-card">
+                  <a class="item-card" href="research.html">
                     <div class="pub-title">Undergraduate Researcher</div>
                     <div class="pub-meta">
                       Dr. Ian Watson &mdash; University of Seoul
@@ -788,7 +768,7 @@
                     <div class="pub-links">
                       Transformer and diffusion models for SWGO detector time-series analysis.
                     </div>
-                  </div>
+                  </a>
                 </li>
               </ul>
             </section>
