@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.5)  10 MAR 2026 15:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.5)  11 MAR 2026 13:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -725,7 +725,7 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 34.
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 14
-9.
+4.
 
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -738,24 +738,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./Minje_Park_CV.aux)
 \openout1 = `Minje_Park_CV.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -815,7 +815,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 149.
+Package hyperref Info: Link coloring ON on input line 144.
  (./Minje_Park_CV.out) (./Minje_Park_CV.out)
 \@outlinefile=\write4
 \openout4 = `Minje_Park_CV.out'.
@@ -827,10 +827,10 @@ Package hyperref Info: Link coloring ON on input line 149.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/omxlmex.fd)
 
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
-(Font)              using `T1/lmr/bx/n' instead on input line 169.
+(Font)              using `T1/lmr/bx/n' instead on input line 165.
 
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-79.
+76.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -852,22 +852,22 @@ L3 programming layer <2025-01-18>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `Minje_Park_CV.out' has not changed.
-(rerunfilecheck)             Checksum: 1D6F5A5253E219D269FD2BC0BC86D7D1;927.
+(rerunfilecheck)             Checksum: 55E48771821B8FAC98BBA486D266F072;927.
  ) 
 Here is how much of TeX's memory you used:
- 23166 strings out of 474662
- 449770 string characters out of 5751109
- 836663 words of memory out of 5000000
- 45833 multiletter control sequences out of 15000+600000
- 615342 words of font info for 62 fonts, out of 8000000 for 9000
+ 23165 strings out of 474662
+ 449732 string characters out of 5751109
+ 837665 words of memory out of 5000000
+ 45832 multiletter control sequences out of 15000+600000
+ 608072 words of font info for 60 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 102i,12n,107p,1202b,549s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,12n,107p,1202b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></u
 sr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/lo
 cal/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/
 texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texliv
 e/2025basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on Minje_Park_CV.pdf (3 pages, 148629 bytes).
+Output written on Minje_Park_CV.pdf (3 pages, 145741 bytes).
 PDF statistics:
  95 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream

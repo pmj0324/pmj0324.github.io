@@ -55,6 +55,7 @@
 \fancyhead[R]{\small\color{secondary} Minje Park - Curriculum Vitae}
 \renewcommand{\headrulewidth}{\cvrulewidth}
 \renewcommand{\footrulewidth}{\cvrulewidth}
+\lfoot{\color{textgray}\small\textit{Last updated: March 2026}}
 \cfoot{\small - \thepage\ -}
 
 % Custom commands
@@ -122,18 +123,12 @@
     \vspace{3pt}
 }
 
-\newcommand{\conferenceitem}[3]{
+\newcommand{\conferenceitem}[3]{%
     \noindent
-    \begin{minipage}[t]{0.15\textwidth}
-        {\color{primary}\textbf{#1}}
-    \end{minipage}%
+    \parbox[t]{0.15\textwidth}{{\color{primary}\textbf{#1}}}%
     \hfill
-    \begin{minipage}[t]{0.83\textwidth}
-        \textbf{#2}
-        
-        \textit{#3}
-    \end{minipage}
-    \vspace{6pt}
+    \parbox[t]{0.83\textwidth}{\textbf{#2}\\[2pt]\textit{#3}}%
+    \vspace{8pt}\par
 }
 
 \newcommand{\awarditem}[3]{
@@ -166,10 +161,12 @@ Homepage &
 
 \vspace{2pt}
 
+% === Bio ===
 \section{Bio}
 \vspace{3pt}
-I am an undergraduate student at Sungkyunkwan University majoring in Physics and Electronic and Electrical Engineering. My research focuses on applying machine learning methods to astrophysical and cosmological data. I am a member of the IceCube, HAWC, and SWGO collaborations, where I develop generative models for detector signal synthesis and deep learning models for scientific event reconstruction.
+I am an undergraduate student at Sungkyunkwan University, majoring in Physics and Electronic and Electrical Engineering. My research focuses on applying deep generative models to particle astrophysics and cosmology, including detector-signal simulation and large-scale structure generation.
 
+% === Education ===
 \section{Education}
 \experienceitem{B.S., Sungkyunkwan University}{Feb 2021 -- Present}{Seoul, South Korea}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
@@ -178,32 +175,6 @@ I am an undergraduate student at Sungkyunkwan University majoring in Physics and
     \end{itemize}
 }
 \vspace{-8pt}
-
-% === Research Experience ===
-\section{Research Experience}
-\experienceitem{Undergraduate Researcher}{Aug 2023 -- Feb 2025}{Prof.\ Carsten Rott, Department of Physics, University of Utah}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developed CNN and Vision Transformer model for IceCube Upgraed Camera System.
-    \end{itemize}
-}
-\experienceitem{Undergraduate Researcher}{May 2024 -- Feb 2026}{Prof.\ Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developing generative AI models for synthesizing PMT signals.
-        \item Developing flow-matching models to generate IceCube detector signals conditioned on neutrino properties.
-    \end{itemize}
-}
-\experienceitem{Undergraduate Researcher}{Jun 2024 -- Present}{Dr.\ Ian Watson, Department of Physics, University of Seoul}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Contributing to the development of transformer-based models for inferring primary-particle properties from large-array detector time-series signals.
-        \item Developing diffusion and flow-matching models to improve signal synthesis and reconstruction accuracy using SWGO simulation data.
-    \end{itemize}
-}
-\experienceitem{Undergraduate Researcher}{Sep 2025 -- Present}{Prof.\ Wansu Lim, Department of Electronic Engineering, Sungkyunkwan University}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developing a protein-sequence generation model using flow matching.
-        \item Contributing to the development of an OCR model for preliminary diagnosis from medical data.
-    \end{itemize}
-}
 
 % === Publications ===
 \section{Publications}
@@ -219,78 +190,107 @@ I am an undergraduate student at Sungkyunkwan University majoring in Physics and
 
 \publication{Performance Study of the IceCube Upgrade Camera System}
 {C. Rott, \textbf{M. Park}, M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)}
-{arXiv:2507.18525 (Submitted to 39th ICRC, 2025)}
+{Proceedings of Science (PoS), ICRC2025; arXiv:2507.18525}
 
-\newpage
+% === Research Experience ===
+\section{Research Experience}
+\experienceitem{Undergraduate Researcher}{Aug 2023 -- Feb 2025}{Prof.\ Carsten Rott, Department of Physics, University of Utah}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Developed CNN and Vision Transformer models for the IceCube Upgrade Camera System; results published as a poster and proceedings paper at ICRC 2025 (arXiv:2507.18525).
+    \end{itemize}
+}
+\experienceitem{Undergraduate Researcher}{May 2024 -- Present}{Assoc.\ Prof.\ Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Developed generative AI models for synthesizing PMT signals for SWGO.
+        \item Built flow-matching models to generate IceCube detector signals conditioned on neutrino properties; results presented at the K-Neutrino Symposium 2025 (Best Presentation Award).
+    \end{itemize}
+}
+\experienceitem{Undergraduate Researcher}{Jun 2024 -- Present}{Dr.\ Ian Watson, Department of Physics, University of Seoul}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Contributing to the development of transformer-based models for inferring primary-particle properties from large-array SWGO detector time-series signals.
+        \item Developing diffusion and flow-matching models to improve signal synthesis and reconstruction accuracy using SWGO simulation data.
+    \end{itemize}
+}
+\experienceitem{Undergraduate Research Program}{Sep 2025 -- Jun 2026}{Prof.\ Wansu Lim, School of Electrical and Electronic Engineering, Sungkyunkwan University}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Developing a protein-sequence generation model using flow matching.
+        \item Contributing to the development of an OCR model for preliminary diagnosis from medical imaging data.
+    \end{itemize}
+}
+
+% === Honors & Awards ===
 \section{Honors \& Awards}
 
-\awarditem{Best Presentation Award}{K-Neutrino Symposium, Jun 2025}{Awarded for poster presentation: ``Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction''}
+\awarditem{Best Presentation Award}{K-Neutrino Symposium, 2025}{Awarded for poster presentation: ``Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction''}
 
 \awarditem{Honorable Mention}{Korean Physical Society Undergraduate Physics Research Competition, 2024}{Recognized for research on CNN and Vision Transformer models for the IceCube Upgrade Camera System}
 
 % === Conference Presentations ===
 \section{Conference Presentations}
-\conferenceitem{Apr 2026}{Generative AI for IceCube Observatory (Talk, scheduled)}{Spring Meeting of the Korean Physical Society}
+\conferenceitem{Apr 2026}{Generative AI for IceCube Observatory (Talk, scheduled)}{102nd Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
 
-\conferenceitem{Feb 2026}{Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM (Poster)}{The 33rd Korean Conference of Semiconductors}
+\conferenceitem{Feb 2026}{Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM (Poster)}{The 33rd Korean Conference on Semiconductors, Jeongseon, Republic of Korea}
 
-\conferenceitem{Sep 2025}{Flow Matching Model for Generating Cosmic Web Images (Poster)}{Fall Meeting of the Korean Physical Society}
+\conferenceitem{Oct 2025}{Flow Matching Model for Generating Cosmic Web Images (Poster)}{102nd Fall Meeting of the Korean Physical Society, Gwangju, Republic of Korea}
 
-\conferenceitem{Jul 2025}{Performance Study of the IceCube Upgrade Camera System (Poster)}{39th International Cosmic Ray Conference}
+\conferenceitem{Jul 2025}{Performance Study of the IceCube Upgrade Camera System (Poster)}{39th International Cosmic Ray Conference (ICRC 2025), Geneva, Switzerland}
 
-\conferenceitem{Jun 2025}{Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction (Poster)}{K-Neutrino Symposium}
+\conferenceitem{Jun 2025}{Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction (Poster)}{K-Neutrino Symposium, Seoul, Republic of Korea}
 
-\conferenceitem{Apr 2025}{Modeling the Relationship between PMT Response and Air-Shower Particles for SWGO (Poster)}{Spring Meeting of the Korean Physical Society}
+\conferenceitem{Apr 2025}{Modeling the Relationship between PMT Response and Air-Shower Particles for SWGO (Poster)}{101st Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
 
-\conferenceitem{Oct 2024}{Development of a Deep Learning Model for Analyzing Antarctic Ice Optical Properties (Poster)}{Fall Meeting of the Korean Physical Society}
+\conferenceitem{Oct 2024}{Development of a Deep Learning Model for Analyzing Antarctic Ice Optical Properties (Poster)}{101st Fall Meeting of the Korean Physical Society, Yeosu, Republic of Korea}
 
-\conferenceitem{Sep 2024}{Deep Learning for Ice-Property Measurement Using Simulation Images (Talk)}{Fall IceCube Collaboration Meeting}
+\conferenceitem{Sep 2024}{Deep Learning for Ice-Property Measurement Using Simulation Images (Talk)}{Fall IceCube Collaboration Meeting, Madison, Wisconsin, USA}
 
-\conferenceitem{Jul 2024}{Ice-Property Measurement Using a Camera System in the IceCube Upgrade (Talk)}{K-Neutrino Symposium}
+\conferenceitem{Jul 2024}{Ice-Property Measurement Using a Camera System in the IceCube Upgrade (Talk)}{K-Neutrino Symposium, Gwangju, Republic of Korea}
 
-\conferenceitem{Apr 2024}{Study of Optical Properties in Antarctic Ice Using Simulated Images (Poster)}{Spring Meeting of the Korean Physical Society}
+\conferenceitem{Apr 2024}{Study of Optical Properties in Antarctic Ice Using Simulated Images (Poster)}{100th Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
 
+% === Skills ===
 \section{Skills}
+\skillbox{Programming}{
+    \textbf{Languages:} Python, CUDA \\
+    \textbf{Libraries:} NumPy, SciPy, Matplotlib
+}
 \skillbox{Machine Learning}{
     \textbf{Frameworks:} PyTorch, JAX \\
     \textbf{Models:} Transformer, Vision Transformer (ViT), CNN, Diffusion Models, Flow Matching
 }
 \skillbox{Systems \& Tools}{
-    CUDA, Linux, HTCondor, Docker, Git
+    Linux, HTCondor, Docker, Git
 }
-\vspace{-4pt}
-
-\vspace{12pt}
+\vspace{15pt}
 
 % === Collaboration Memberships ===
 \section{Collaboration Memberships}
+\vspace{4pt}
 
-\subsection*{IceCube Collaboration \textit{(Neutrino Detection)} \hfill Aug 2023 -- Present}
-\begin{itemize}[leftmargin=*, itemsep=2pt]
-    \item Contributing to machine-learning algorithm development for muon-track reconstruction.
-    \item Leading the development of deep learning models for the IceCube Upgrade Camera System.
-\end{itemize}
+\begin{tcolorbox}[
+    colback=lightgray,
+    colframe=primary,
+    boxrule=0pt,
+    leftrule=3pt,
+    arc=0pt,
+    left=5pt, right=5pt, top=6pt, bottom=6pt
+]
+\textbf{IceCube Collaboration} \hfill \textit{Aug 2023 -- Present} \\[2pt]
+{\small A cubic-kilometer neutrino detector embedded in Antarctic ice at the South Pole, designed to detect high-energy astrophysical neutrinos.}
+\end{tcolorbox}
+\vspace{3pt}
 
-\vspace{6pt}
-
-\subsection*{SWGO Collaboration \textit{(Gamma-Ray Detection)} \hfill Jun 2024 -- Present}
-\begin{itemize}[leftmargin=*, itemsep=2pt]
-    \item Developing deep learning models for SWGO detector simulation and reconstruction.
-    \item Leading the development of diffusion models for PMT-signal generation.
-\end{itemize}
-
-\vspace{6pt}
-
-\subsection*{HAWC Collaboration \textit{(Gamma-Ray Detection)} \hfill Jun 2024 -- Present}
-\begin{itemize}[leftmargin=*, itemsep=2pt]
-    \item Active research member contributing to collaboration activities.
-\end{itemize}
+\begin{tcolorbox}[
+    colback=lightgray,
+    colframe=primary,
+    boxrule=0pt,
+    leftrule=3pt,
+    arc=0pt,
+    left=5pt, right=5pt, top=6pt, bottom=6pt
+]
+\textbf{SWGO Collaboration} \hfill \textit{Jun 2024 -- Present} \\[2pt]
+{\small The Southern Wide-field Gamma-ray Observatory, a next-generation ground-based gamma-ray detector planned for the high-altitude Andes.}
+\end{tcolorbox}
 
 \vspace{15pt}
-
-\begin{center}
-    \color{textgray}\small
-    \textit{Last updated: March 2026}
-\end{center}
 
 \end{document}
