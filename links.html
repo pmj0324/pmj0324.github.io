@@ -156,12 +156,13 @@
       .card {
         background: linear-gradient(
           145deg,
-          rgba(21, 26, 43, 0.96),
-          rgba(8, 12, 28, 0.98)
+          rgba(21, 26, 43, 0.62),
+          rgba(8, 12, 28, 0.68)
         );
         border-radius: var(--radius-lg);
         border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(12px);
         padding: 22px 22px 20px;
         margin-top: 24px;
       }
@@ -179,8 +180,8 @@
       .card-title {
         font-size: 16px;
         font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        text-transform: none;
       }
 
       .card-subtitle {
@@ -191,8 +192,8 @@
       .intro-card {
         background: linear-gradient(
           145deg,
-          rgba(29, 37, 58, 0.94),
-          rgba(14, 21, 38, 0.96)
+          rgba(29, 37, 58, 0.60),
+          rgba(14, 21, 38, 0.65)
         );
         border-color: rgba(143, 148, 183, 0.4);
       }
@@ -217,29 +218,66 @@
       }
 
       .link-item {
-        border: 1px solid rgba(143, 148, 183, 0.35);
+        border: 1px solid rgba(143, 148, 183, 0.25);
         border-radius: 14px;
-        background: rgba(8, 12, 28, 0.7);
-        padding: 14px;
+        background: rgba(8, 12, 28, 0.38);
+        backdrop-filter: blur(10px);
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transition: border-color 0.18s ease, background 0.18s ease,
+          transform 0.18s ease;
+      }
+
+      .link-item:hover {
+        border-color: rgba(141, 155, 255, 0.45);
+        background: rgba(14, 19, 38, 0.55);
+        transform: translateY(-1px);
+      }
+
+      .link-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: var(--accent-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .link-body {
+        flex: 1;
+        min-width: 0;
       }
 
       .link-item-title {
         font-size: 14px;
         font-weight: 600;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-        margin-bottom: 6px;
+        letter-spacing: 0.02em;
+        margin-bottom: 2px;
       }
 
       .link-item-text {
         font-size: 12px;
         color: var(--fg-muted);
-        line-height: 1.55;
-        margin-bottom: 10px;
+        line-height: 1.5;
       }
 
-      .link-item a {
-        font-size: 12px;
+      .link-item a.link-arrow {
+        font-size: 18px;
+        color: var(--fg-muted);
+        flex-shrink: 0;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .link-item:hover a.link-arrow {
+        color: var(--accent);
       }
 
 
@@ -291,8 +329,7 @@
             <span class="card-subtitle">Quick guide</span>
           </div>
           <p class="lead-text">
-            This page collects useful links for collaborations and profile
-            pages related to my research activities.
+            Useful links for collaborations and profile pages related to my research.
           </p>
         </section>
 
@@ -302,87 +339,63 @@
             <span class="card-subtitle">Research organizations</span>
           </div>
           <div class="link-grid">
-            <article class="link-item">
-              <div class="link-item-title">IceCube</div>
-              <div class="link-item-text">
-                Official page for the IceCube Neutrino Observatory.
+            <a class="link-item" href="https://icecube.wisc.edu/" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">IC</div>
+              <div class="link-body">
+                <div class="link-item-title">IceCube</div>
+                <div class="link-item-text">Neutrino observatory at the South Pole</div>
               </div>
-              <a
-                href="https://icecube.wisc.edu/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Visit website</a
-              >
-            </article>
-            <article class="link-item">
-              <div class="link-item-title">SWGO</div>
-              <div class="link-item-text">
-                Southern Wide-field Gamma-ray Observatory collaboration site.
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="link-item" href="https://www.swgo.org/" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">SW</div>
+              <div class="link-body">
+                <div class="link-item-title">SWGO</div>
+                <div class="link-item-text">Southern wide-field gamma-ray observatory</div>
               </div>
-              <a
-                href="https://www.swgo.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Visit website</a
-              >
-            </article>
-            <article class="link-item">
-              <div class="link-item-title">HAWC</div>
-              <div class="link-item-text">
-                High-Altitude Water Cherenkov Observatory information page.
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="link-item" href="https://www.hawc-observatory.org/" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">HC</div>
+              <div class="link-body">
+                <div class="link-item-title">HAWC</div>
+                <div class="link-item-text">High-altitude water Cherenkov observatory</div>
               </div>
-              <a
-                href="https://www.hawc-observatory.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Visit website</a
-              >
-            </article>
-            <article class="link-item">
-              <div class="link-item-title">CAMELS</div>
-              <div class="link-item-text">
-                Cosmological simulations and machine learning benchmark project.
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="link-item" href="https://www.camel-simulations.org/" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">CA</div>
+              <div class="link-body">
+                <div class="link-item-title">CAMELS</div>
+                <div class="link-item-text">Cosmological simulations and ML benchmarks</div>
               </div>
-              <a
-                href="https://www.camel-simulations.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Visit website</a
-              >
-            </article>
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
           </div>
         </section>
 
         <section class="card" aria-labelledby="profile-links-heading">
           <div class="card-header">
-            <h2 id="profile-links-heading" class="card-title">Profile Links</h2>
+            <h2 id="profile-links-heading" class="card-title">Profile links</h2>
             <span class="card-subtitle">Personal channels</span>
           </div>
           <div class="link-grid">
-            <article class="link-item">
-              <div class="link-item-title">LinkedIn</div>
-              <div class="link-item-text">
-                Professional profile and latest updates.
+            <a class="link-item" href="https://www.linkedin.com/in/minje-park-81b722365/" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">in</div>
+              <div class="link-body">
+                <div class="link-item-title">LinkedIn</div>
+                <div class="link-item-text">Personal professional profile</div>
               </div>
-              <a
-                href="https://www.linkedin.com/in/minje-park-81b722365/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Open LinkedIn</a
-              >
-            </article>
-            <article class="link-item">
-              <div class="link-item-title">GitHub</div>
-              <div class="link-item-text">
-                Code repositories and project work.
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="link-item" href="https://github.com/pmj0324" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">GH</div>
+              <div class="link-body">
+                <div class="link-item-title">GitHub</div>
+                <div class="link-item-text">Personal code repositories and projects</div>
               </div>
-              <a
-                href="https://github.com/pmj0324"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Open GitHub</a
-              >
-            </article>
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
           </div>
         </section>
 
@@ -392,30 +405,47 @@
             <span class="card-subtitle">Advisor pages</span>
           </div>
           <div class="link-grid">
-            <article class="link-item">
-              <div class="link-item-title">Prof. Carsten Rott</div>
-              <div class="link-item-text">
-                University of Utah faculty profile.
+            <a class="link-item" href="https://profiles.faculty.utah.edu/u6033273/about" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">CR</div>
+              <div class="link-body">
+                <div class="link-item-title">Prof. Carsten Rott</div>
+                <div class="link-item-text">Personal faculty page, University of Utah</div>
               </div>
-              <a
-                href="https://profiles.faculty.utah.edu/u6033273/about"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Open profile</a
-              >
-            </article>
-            <article class="link-item">
-              <div class="link-item-title">Prof. Chang Dong Rho</div>
-              <div class="link-item-text">
-                Sungkyunkwan University research group page.
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="link-item" href="https://sites.google.com/view/prof-changdongrho" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">노</div>
+              <div class="link-body">
+                <div class="link-item-title">Prof. Chang Dong Rho</div>
+                <div class="link-item-text">Personal research group page, SKKU</div>
               </div>
-              <a
-                href="https://sites.google.com/view/prof-changdongrho"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Open profile</a
-              >
-            </article>
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="dept-links-heading">
+          <div class="card-header">
+            <h2 id="dept-links-heading" class="card-title">Departments</h2>
+            <span class="card-subtitle">Affiliated departments at SKKU</span>
+          </div>
+          <div class="link-grid">
+            <a class="link-item" href="https://physics.skku.edu/physics/index.do" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">PH</div>
+              <div class="link-body">
+                <div class="link-item-title">Department of Physics</div>
+                <div class="link-item-text">Personal major department, SKKU</div>
+              </div>
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+            <a class="link-item" href="https://eee.skku.edu/eee/index.do" target="_blank" rel="noopener noreferrer">
+              <div class="link-icon">EE</div>
+              <div class="link-body">
+                <div class="link-item-title">School of Electronic and Electrical Engineering</div>
+                <div class="link-item-text">Personal double-major department, SKKU</div>
+              </div>
+              <span class="link-arrow" aria-hidden="true">&#8599;</span>
+            </a>
           </div>
         </section>
       </main>

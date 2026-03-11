@@ -156,12 +156,13 @@
       .card {
         background: linear-gradient(
           145deg,
-          rgba(21, 26, 43, 0.96),
-          rgba(8, 12, 28, 0.98)
+          rgba(21, 26, 43, 0.62),
+          rgba(8, 12, 28, 0.68)
         );
         border-radius: var(--radius-lg);
         border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(12px);
         padding: 22px 22px 20px;
         margin-top: 24px;
       }
@@ -169,10 +170,10 @@
       .intro-card {
         background: linear-gradient(
           145deg,
-          rgba(29, 37, 58, 0.94),
-          rgba(14, 21, 38, 0.96)
+          rgba(29, 37, 58, 0.60),
+          rgba(14, 21, 38, 0.65)
         );
-        border-color: rgba(143, 148, 183, 0.4);
+        border-color: rgba(143, 148, 183, 0.35);
       }
 
       .card-header {
@@ -197,6 +198,7 @@
         color: var(--fg-muted);
       }
 
+      /* ── Publications section ── */
       .section-list {
         list-style: none;
         margin: 0;
@@ -204,7 +206,7 @@
       }
 
       .section-item {
-        padding: 10px 0;
+        padding: 14px 0;
         border-top: 1px solid rgba(37, 42, 70, 0.9);
       }
 
@@ -213,62 +215,310 @@
       }
 
       .pub-title {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 4px;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.45;
+        margin-bottom: 6px;
+        color: var(--fg);
       }
 
       .pub-meta {
-        font-size: 12px;
+        font-size: 12.5px;
         color: var(--fg-muted);
-        margin-bottom: 4px;
+        margin-bottom: 5px;
+        line-height: 1.5;
       }
 
       .pub-links {
-        font-size: 11px;
+        font-size: 12px;
         color: var(--fg-muted);
+        line-height: 1.5;
       }
 
       .tag {
         display: inline-block;
-        padding: 2px 8px;
+        padding: 2px 10px;
         border-radius: var(--radius-pill);
-        border: 1px solid rgba(143, 148, 183, 0.6);
         font-size: 10px;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--fg-muted);
+        letter-spacing: 0.06em;
         margin-right: 6px;
+        vertical-align: middle;
       }
 
-      .talk-details {
-        border: 1px solid rgba(143, 148, 183, 0.35);
-        border-radius: 12px;
-        background: rgba(12, 17, 32, 0.55);
-        padding: 10px 12px;
+      .tag-talk {
+        background: rgba(141, 155, 255, 0.15);
+        color: var(--accent);
+        border: 1px solid rgba(141, 155, 255, 0.35);
       }
 
-      .talk-summary {
-        cursor: pointer;
+      .tag-poster {
+        background: rgba(120, 200, 180, 0.1);
+        color: #7ec8b4;
+        border: 1px solid rgba(120, 200, 180, 0.3);
+      }
+
+      .award-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 10px;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 200, 60, 0.1);
+        border: 1px solid rgba(255, 200, 60, 0.3);
+        font-size: 10px;
+        font-weight: 600;
+        color: #f0c850;
+        letter-spacing: 0.02em;
+      }
+
+      /* ── Timeline layout (date-left · line · content-right) ── */
+      .timeline {
         list-style: none;
+        margin: 8px 0 0;
+        padding: 0;
+        position: relative;
       }
 
-      .talk-summary::-webkit-details-marker {
+      /* single continuous vertical line through all items */
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: calc(72px + 14px); /* center of the 28px dot column */
+        top: 10px;
+        bottom: 10px;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          rgba(141, 155, 255, 0.5) 0%,
+          rgba(141, 155, 255, 0.25) 60%,
+          rgba(141, 155, 255, 0.04) 100%
+        );
+        transform: translateX(-50%);
+      }
+
+      .tl-item {
+        display: grid;
+        grid-template-columns: 72px 28px 1fr;
+        position: relative;
+        padding-bottom: 20px;
+      }
+
+      .tl-item:last-child {
+        padding-bottom: 0;
+      }
+
+      /* left column: date */
+      .tl-left {
+        padding-top: 5px;
+        text-align: right;
+        padding-right: 0;
+      }
+
+      .tl-date {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+        line-height: 1.3;
+      }
+
+      /* center column: dot only (line is drawn by .timeline::before) */
+      .tl-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 5px;
+      }
+
+      .tl-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #0b1020;
+        border: 2px solid rgba(141, 155, 255, 0.55);
+        box-shadow: 0 0 0 3px rgba(141, 155, 255, 0.07);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1;
+        transition: background 0.2s ease, border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .tl-item.is-open .tl-dot {
+        background: var(--accent);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(141, 155, 255, 0.18),
+          0 0 14px rgba(141, 155, 255, 0.3);
+      }
+
+      /* right column: card */
+      .tl-right {
+        padding-left: 14px;
+        min-width: 0;
+      }
+
+      .tl-card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.55),
+          rgba(8, 12, 28, 0.60)
+        );
+        border: 1px solid rgba(38, 43, 63, 0.8);
+        border-radius: 14px;
+        backdrop-filter: blur(10px);
+        transition: border-color 0.22s ease, background 0.22s ease,
+          box-shadow 0.22s ease;
+      }
+
+      .tl-card:hover {
+        border-color: rgba(141, 155, 255, 0.30);
+        background: linear-gradient(
+          145deg,
+          rgba(28, 34, 58, 0.65),
+          rgba(14, 18, 40, 0.70)
+        );
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      .tl-card[open] {
+        border-color: rgba(141, 155, 255, 0.40);
+        background: linear-gradient(
+          145deg,
+          rgba(28, 35, 62, 0.68),
+          rgba(15, 20, 44, 0.72)
+        );
+        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.28);
+      }
+
+      .tl-summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 15px;
+        border-radius: 14px;
+        user-select: none;
+      }
+
+      .tl-summary::-webkit-details-marker {
         display: none;
       }
 
-      .talk-content {
-        margin-top: 10px;
+      .tl-chevron {
+        flex-shrink: 0;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.25);
+        margin-top: 5px;
+        transition: transform 0.22s ease, color 0.22s ease;
       }
 
-      .talk-placeholder {
-        display: inline-block;
-        margin-top: 4px;
-        padding: 2px 8px;
+      .tl-card[open] .tl-chevron {
+        transform: rotate(90deg);
+        color: var(--accent);
+      }
+
+      .tl-text {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .tl-title {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.45;
+        margin-bottom: 6px;
+      }
+
+      .tl-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      .tl-venue {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.45);
+        line-height: 1.5;
+      }
+
+      /* ── Expanded content ── */
+      .tl-content {
+        padding: 0 15px 15px;
+        border-top: 1px solid rgba(143, 148, 183, 0.08);
+        margin-top: 0;
+      }
+
+      .tl-abstract {
+        padding-top: 13px;
+        margin-bottom: 14px;
+      }
+
+      .tl-abstract-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        margin-bottom: 6px;
+      }
+
+      .tl-abstract-text {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.65;
+        margin: 0;
+      }
+
+      .tl-materials {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 2px;
+      }
+
+      .tl-mat-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
         border-radius: var(--radius-pill);
-        border: 1px dashed rgba(143, 148, 183, 0.65);
-        font-size: 11px;
-        color: var(--fg-muted);
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.18s ease, border-color 0.18s ease,
+          color 0.18s ease, opacity 0.18s ease;
+        border: 1px solid transparent;
+      }
+
+      .tl-mat-btn.available {
+        background: rgba(141, 155, 255, 0.12);
+        border-color: rgba(141, 155, 255, 0.35);
+        color: var(--accent);
+      }
+
+      .tl-mat-btn.available:hover {
+        background: rgba(141, 155, 255, 0.22);
+        border-color: rgba(141, 155, 255, 0.55);
+        text-decoration: none;
+      }
+
+      .tl-mat-btn.unavailable {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(143, 148, 183, 0.18);
+        color: rgba(193, 196, 214, 0.35);
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .tl-mat-icon {
+        font-size: 13px;
+        line-height: 1;
       }
 
       .footer {
@@ -352,49 +602,288 @@
 
         <section class="card" aria-labelledby="talks-heading">
           <div class="card-header">
-            <h2 id="talks-heading" class="card-title">Conference talks</h2>
+            <h2 id="talks-heading" class="card-title">Conference presentations</h2>
             <span class="card-subtitle">Click to expand details</span>
           </div>
-          <ul class="section-list">
-            <li class="section-item">
-              <details class="talk-details">
-                <summary class="talk-summary">
-                  <div class="pub-title">Generative AI for IceCube Observatory</div>
-                  <div class="pub-meta">
-                    Spring Meeting of the Korean Physical Society &mdash; April
-                    2026 (scheduled)
+          <ul class="timeline">
+
+            <!-- Apr 2026 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Apr<br>2026</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Generative AI for IceCube Observatory</div>
+                      <div class="tl-tags">
+                        <span class="tag tag-talk">Talk</span>
+                        <span class="tag" style="background:rgba(255,255,255,0.04);color:rgba(193,196,214,0.38);border-color:rgba(193,196,214,0.14);">Scheduled</span>
+                      </div>
+                      <div class="tl-venue">102nd Spring Meeting of the Korean Physical Society &mdash; Daejeon</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Planned conference talk on generative modeling approaches for IceCube event simulation and reconstruction.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">📄</span> Slides</span>
+                    </div>
                   </div>
-                </summary>
-                <div class="talk-content">
-                  <div class="pub-links">
-                    Planned conference presentation on generative modeling
-                    approaches for IceCube event simulation and reconstruction.
-                  </div>
-                  <div class="talk-placeholder">Materials coming soon</div>
-                </div>
-              </details>
+                </details>
+              </div>
             </li>
-            <li class="section-item">
-              <details class="talk-details">
-                <summary class="talk-summary">
-                  <div class="pub-title">
-                    Diffusion and Flow Matching Model for IceCube Neutrino Event
-                    Simulation and Reconstruction
+
+            <!-- Feb 2026 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Feb<br>2026</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM</div>
+                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
+                      <div class="tl-venue">33rd Korean Conference on Semiconductors &mdash; Jeongseon</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Poster on IGZO-based transistor modeling using physics-informed neural networks for next-generation DRAM applications.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> Poster PDF</span>
+                    </div>
                   </div>
-                  <div class="pub-meta">
-                    K-Neutrino Symposium 2025 &mdash; Best Presentation Award
-                  </div>
-                </summary>
-                <div class="talk-content">
-                  <div class="pub-links">
-                    Poster and talk on diffusion and flow-matching models for
-                    realistic detector signal generation and event-level
-                    reconstruction.
-                  </div>
-                  <div class="talk-placeholder">Materials coming soon</div>
-                </div>
-              </details>
+                </details>
+              </div>
             </li>
+
+            <!-- Oct 2025 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Oct<br>2025</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Flow Matching Model for Generating Cosmic Web Images</div>
+                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
+                      <div class="tl-venue">102nd Fall Meeting of the Korean Physical Society &mdash; Gwangju</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Flow-matching generative models for synthesizing cosmic web large-scale structure images from cosmological simulation data.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> Poster PDF</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
+            <!-- Jul 2025 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Jul<br>2025</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Performance Study of the IceCube Upgrade Camera System</div>
+                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
+                      <div class="tl-venue">39th International Cosmic Ray Conference (ICRC 2025) &mdash; Geneva, Switzerland</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">CNN and Vision Transformer models for the IceCube Upgrade Camera System. Results study optical properties of Antarctic glacial ice. Published as conference proceedings (arXiv:2507.18525).</p>
+                    </div>
+                    <div class="tl-materials">
+                      <a class="tl-mat-btn available" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">📄</span> arXiv:2507.18525</a>
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> Poster PDF</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
+            <!-- Jun 2025 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Jun<br>2025</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</div>
+                      <div class="tl-tags">
+                        <span class="tag tag-poster">Poster</span>
+                        <span class="award-badge">&#9733; Best Presentation</span>
+                      </div>
+                      <div class="tl-venue">K-Neutrino Symposium &mdash; Seoul</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Diffusion and flow-matching generative models for realistic IceCube detector signal generation and event-level reconstruction conditioned on neutrino properties.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> Poster PDF</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
+            <!-- Apr 2025 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Apr<br>2025</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Modeling the Relationship between PMT Response and Air-Shower Particles for SWGO</div>
+                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
+                      <div class="tl-venue">101st Spring Meeting of the Korean Physical Society &mdash; Daejeon</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Modeling PMT detector responses from air-shower particle simulations for the Southern Wide-field Gamma-ray Observatory (SWGO) experiment.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> Poster PDF</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
+            <!-- Oct 2024 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Oct<br>2024</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Development of a Deep Learning Model for Analyzing Antarctic Ice Optical Properties</div>
+                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
+                      <div class="tl-venue">101st Fall Meeting of the Korean Physical Society &mdash; Yeosu</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Deep learning approaches for analyzing optical properties of Antarctic ice using simulated camera images from the IceCube Upgrade.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> Poster PDF</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
+            <!-- Sep 2024 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Sep<br>2024</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Deep Learning for Ice-Property Measurement Using Simulation Images</div>
+                      <div class="tl-tags"><span class="tag tag-talk">Talk</span></div>
+                      <div class="tl-venue">Fall IceCube Collaboration Meeting &mdash; Madison, Wisconsin, USA</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Oral presentation on deep learning models for ice-property measurement from simulated camera images within the IceCube Collaboration.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">📄</span> Slides</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
+            <!-- Jul 2024 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Jul<br>2024</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Ice-Property Measurement Using a Camera System in the IceCube Upgrade</div>
+                      <div class="tl-tags"><span class="tag tag-talk">Talk</span></div>
+                      <div class="tl-venue">K-Neutrino Symposium &mdash; Gwangju</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Talk on using the IceCube Upgrade camera system to measure optical properties of glacial ice at the South Pole, and deep learning approaches to interpret camera images.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">📄</span> Slides</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
+            <!-- Apr 2024 -->
+            <li class="tl-item">
+              <div class="tl-left"><div class="tl-date">Apr<br>2024</div></div>
+              <div class="tl-center"><div class="tl-dot"></div></div>
+              <div class="tl-right">
+                <details class="tl-card">
+                  <summary class="tl-summary">
+                    <span class="tl-chevron">&#9656;</span>
+                    <div class="tl-text">
+                      <div class="tl-title">Study of Optical Properties in Antarctic Ice Using Simulated Images</div>
+                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
+                      <div class="tl-venue">100th Spring Meeting of the Korean Physical Society &mdash; Daejeon</div>
+                    </div>
+                  </summary>
+                  <div class="tl-content">
+                    <div class="tl-abstract">
+                      <div class="tl-abstract-label">Abstract</div>
+                      <p class="tl-abstract-text">Study of Antarctic ice optical properties through analysis of simulated IceCube camera images using convolutional neural networks.</p>
+                    </div>
+                    <div class="tl-materials">
+                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> Poster PDF</span>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </li>
+
           </ul>
         </section>
       </main>
@@ -412,6 +901,13 @@
     <script>
       document.getElementById("year").textContent =
         new Date().getFullYear().toString();
+
+      document.querySelectorAll(".tl-card").forEach((details) => {
+        const item = details.closest(".tl-item");
+        details.addEventListener("toggle", () => {
+          item.classList.toggle("is-open", details.open);
+        });
+      });
     </script>
   </body>
 </html>
