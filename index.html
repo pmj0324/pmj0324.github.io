@@ -178,22 +178,23 @@
       .card {
         background: linear-gradient(
           145deg,
-          rgba(29, 37, 58, 0.94),
-          rgba(14, 21, 38, 0.96)
+          rgba(21, 26, 43, 0.62),
+          rgba(8, 12, 28, 0.68)
         );
         border-radius: var(--radius-lg);
-        border: 1px solid rgba(143, 148, 183, 0.4);
+        border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(12px);
         padding: 22px 22px 20px;
       }
 
       .intro-card {
         background: linear-gradient(
           145deg,
-          rgba(29, 37, 58, 0.94),
-          rgba(14, 21, 38, 0.96)
+          rgba(29, 37, 58, 0.60),
+          rgba(14, 21, 38, 0.65)
         );
-        border-color: rgba(143, 148, 183, 0.4);
+        border-color: rgba(143, 148, 183, 0.35);
       }
 
       .card + .card {
@@ -207,78 +208,84 @@
         gap: 12px;
         margin-bottom: 14px;
         padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       }
 
       .card-title {
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 13px;
+        font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
       }
 
       .card-subtitle {
-        font-size: 12px;
-        color: var(--fg-muted);
+        font-size: 11px;
+        color: rgba(193, 196, 214, 0.45);
       }
 
       /* Hero */
       .hero-name {
-        font-size: clamp(30px, 3.1vw, 36px);
+        font-size: clamp(26px, 2.8vw, 32px);
         font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #ffffff;
         display: block;
         width: 100%;
         margin-top: 0;
         margin-bottom: 12px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .hero-role {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 4px 10px;
+        padding: 4px 12px;
         border-radius: var(--radius-pill);
-        background: rgba(8, 12, 28, 0.9);
-        border: 1px solid rgba(141, 155, 255, 0.2);
-        color: var(--fg-muted);
+        background: rgba(141, 155, 255, 0.08);
+        border: 1px solid rgba(141, 155, 255, 0.22);
+        color: rgba(193, 196, 214, 0.8);
         font-size: 12px;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
       }
 
       .hero-role-dot {
-        width: 7px;
-        height: 7px;
+        width: 6px;
+        height: 6px;
         border-radius: 999px;
         background: var(--accent);
-        box-shadow: none;
+        box-shadow: 0 0 6px rgba(141, 155, 255, 0.5);
       }
 
       .hero-text {
-        font-size: 14px;
-        line-height: 1.7;
-        color: var(--fg-muted);
+        font-size: 13.5px;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.65);
         margin-bottom: 18px;
       }
 
       .hero-meta {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px 14px;
+        gap: 12px 18px;
         font-size: 13px;
-        color: var(--fg-muted);
-        margin-bottom: 18px;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 20px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
       }
 
       .hero-meta-label {
         text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-size: 11px;
-        color: #9094aa;
-        margin-bottom: 2px;
+        letter-spacing: 0.1em;
+        font-size: 10px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.3);
+        margin-bottom: 3px;
       }
 
       .hero-actions {
@@ -391,58 +398,136 @@
         list-style: none;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
 
       .section-item {
-        padding: 10px 0;
-        border-top: 1px solid rgba(37, 42, 70, 0.9);
-      }
-
-      .section-item:first-child {
+        padding: 0;
         border-top: none;
       }
 
+      /* item mini-card (pub, blog, research) */
+      .item-card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.50),
+          rgba(8, 12, 28, 0.55)
+        );
+        border: 1px solid rgba(38, 43, 63, 0.7);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        padding: 12px 14px;
+        transition: border-color 0.20s ease, background 0.20s ease,
+          transform 0.20s ease;
+      }
+
+      .item-card:hover {
+        border-color: rgba(141, 155, 255, 0.28);
+        background: linear-gradient(
+          145deg,
+          rgba(28, 34, 58, 0.58),
+          rgba(14, 18, 40, 0.63)
+        );
+        transform: translateY(-1px);
+      }
+
       .pub-title {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 4px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 5px;
+        line-height: 1.4;
       }
 
       .pub-meta {
-        font-size: 12px;
-        color: var(--fg-muted);
-        margin-bottom: 2px;
+        font-size: 11.5px;
+        color: rgba(193, 196, 214, 0.6);
+        margin-bottom: 3px;
+        line-height: 1.5;
       }
 
       .pub-links {
         font-size: 11px;
-        color: var(--fg-muted);
+        color: rgba(193, 196, 214, 0.45);
+        line-height: 1.5;
       }
 
-      .post-row {
+      /* blog post row */
+      .post-card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.50),
+          rgba(8, 12, 28, 0.55)
+        );
+        border: 1px solid rgba(38, 43, 63, 0.7);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        padding: 12px 14px;
         display: flex;
-        align-items: baseline;
-        gap: 10px;
-        font-size: 13px;
-        color: var(--fg-muted);
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.20s ease, background 0.20s ease,
+          transform 0.20s ease;
+      }
+
+      .post-card:hover {
+        border-color: rgba(141, 155, 255, 0.28);
+        background: linear-gradient(
+          145deg,
+          rgba(28, 34, 58, 0.58),
+          rgba(14, 18, 40, 0.63)
+        );
+        transform: translateY(-1px);
+        text-decoration: none;
       }
 
       .post-date {
-        min-width: 88px;
-        font-variant-numeric: tabular-nums;
+        flex-shrink: 0;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+        line-height: 1.4;
+        min-width: 68px;
       }
 
       .post-title {
-        color: var(--fg);
+        font-size: 13px;
+        font-weight: 600;
+        color: #ffffff;
+        flex: 1;
+      }
+
+      .post-arrow {
+        flex-shrink: 0;
+        font-size: 14px;
+        color: rgba(193, 196, 214, 0.25);
+        transition: color 0.18s ease, transform 0.18s ease;
+      }
+
+      .post-card:hover .post-arrow {
+        color: var(--accent);
+        transform: translate(2px, -2px);
       }
 
       .card-footer-link {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        font-size: 12px;
-        color: var(--fg-muted);
-        margin-top: 8px;
+        gap: 5px;
+        font-size: 11.5px;
+        color: rgba(141, 155, 255, 0.65);
+        margin-top: 12px;
+        transition: color 0.15s ease;
+        text-decoration: none;
+      }
+
+      .card-footer-link:hover {
+        color: var(--accent);
+        text-decoration: none;
       }
 
       /* Footer */
@@ -493,7 +578,7 @@
           <section aria-label="Main content">
             <article class="card intro-card" aria-labelledby="hero-heading">
               <header>
-                <h1 id="hero-heading" class="hero-name">Profile</h1>
+                <h1 id="hero-heading" class="hero-name">Minje Park</h1>
               </header>
               <p class="hero-text">
                 I am an undergraduate student at Sungkyunkwan University,
@@ -516,7 +601,7 @@
                 <div>
                   <div class="hero-meta-label">Email</div>
                   <div>
-                    <a href="mailto:pmj0324@g.skku.edu">pmj0324@g.skku.edu</a>
+                    <a href="mailto:pmj032400@naver.com">pmj032400@naver.com</a>
                   </div>
                 </div>
                 <div>
@@ -529,7 +614,7 @@
               <div class="hero-actions">
                 <a class="btn btn-primary" href="#contact">Get in touch</a>
                 <a class="btn btn-ghost" href="#publications"
-                  >View selected work</a
+                  >View highlights</a
                 >
               </div>
             </article>
@@ -540,44 +625,44 @@
               aria-labelledby="pub-heading"
             >
               <div class="card-header">
-                <h2 id="pub-heading" class="card-title">Selected publications</h2>
-                <span class="card-subtitle">Recent highlights</span>
+                <h2 id="pub-heading" class="card-title">Selected highlights</h2>
+                <span class="card-subtitle">Publications &amp; presentations</span>
               </div>
               <ul class="section-list">
                 <li class="section-item">
-                  <div class="pub-title">
-                    Performance Study of the IceCube Upgrade Camera System
-                  </div>
-                  <div class="pub-meta">
-                    C. Rott, M. Park, M. Jansson, G. Iverson, S. Choi (for the
-                    IceCube Collaboration) &mdash; arXiv:2507.18525, 2025
-                  </div>
-                  <div class="pub-links">
-                    <a
-                      href="https://arxiv.org/abs/2507.18525"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >arXiv</a
-                    >
+                  <div class="item-card">
+                    <div class="pub-title">
+                      Performance Study of the IceCube Upgrade Camera System
+                    </div>
+                    <div class="pub-meta">
+                      C. Rott, <strong style="color:rgba(255,255,255,0.75);">M. Park</strong>,
+                      M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)
+                    </div>
+                    <div class="pub-meta">arXiv:2507.18525 &mdash; ICRC 2025</div>
+                    <div class="pub-links" style="margin-top:5px;">
+                      <a href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer"
+                        style="color:var(--accent);font-size:11px;">📄 View on arXiv →</a>
+                    </div>
                   </div>
                 </li>
                 <li class="section-item">
-                  <div class="pub-title">
-                    Diffusion and Flow Matching Model for IceCube Neutrino Event
-                    Simulation and Reconstruction
-                  </div>
-                  <div class="pub-meta">
-                    M. Park &mdash; K-Neutrino Symposium (Best Presentation
-                    Award), 2025
-                  </div>
-                  <div class="pub-links">
-                    <span>Conference poster</span>
+                  <div class="item-card">
+                    <div class="pub-title">
+                      Diffusion and Flow Matching Model for IceCube Neutrino Event
+                      Simulation and Reconstruction
+                    </div>
+                    <div class="pub-meta">
+                      <strong style="color:rgba(255,255,255,0.75);">M. Park</strong>
+                      &mdash; K-Neutrino Symposium, 2025
+                    </div>
+                    <div class="pub-meta">
+                      <span style="color:#f0c850;font-size:10px;font-weight:600;">★ Best Presentation Award</span>
+                      &nbsp;· Conference poster
+                    </div>
                   </div>
                 </li>
               </ul>
-              <a class="card-footer-link" href="publications.html">
-                View full publication list →
-              </a>
+              <a class="card-footer-link" href="publications.html">View all publications →</a>
             </section>
 
             <section class="card" id="blog" aria-labelledby="blog-heading">
@@ -587,24 +672,18 @@
               </div>
               <ul class="section-list">
                 <li class="section-item">
-                  <div class="post-row">
-                    <div class="post-date">Feb 15, 2026</div>
-                    <div>
-                      <a class="post-title" href="#">
-                        A first example blog post
-                      </a>
-                    </div>
-                  </div>
+                  <a class="post-card" href="#">
+                    <div class="post-date">Feb 15,<br>2026</div>
+                    <div class="post-title">Early notes on detector modeling</div>
+                    <span class="post-arrow">&#8599;</span>
+                  </a>
                 </li>
                 <li class="section-item">
-                  <div class="post-row">
-                    <div class="post-date">Jan 03, 2026</div>
-                    <div>
-                      <a class="post-title" href="#">
-                        Thoughts on learning and research
-                      </a>
-                    </div>
-                  </div>
+                  <a class="post-card" href="#">
+                    <div class="post-date">Jan 03,<br>2026</div>
+                    <div class="post-title">Thoughts on learning and research</div>
+                    <span class="post-arrow">&#8599;</span>
+                  </a>
                 </li>
               </ul>
               <a class="card-footer-link" href="blog.html">View all posts →</a>
@@ -627,7 +706,7 @@
                 <div class="profile-location">Seoul, South Korea</div>
                 <div class="profile-links">
                   <span class="chip">
-                    <a href="mailto:pmj0324@g.skku.edu">Email</a>
+                    <a href="mailto:pmj032400@naver.com">Email</a>
                   </span>
                   <span class="chip">
                     <a href="https://github.com/pmj0324" target="_blank"
@@ -656,7 +735,11 @@
               </p>
               <p class="hero-text">
                 <strong>Email</strong>:
-                <a href="mailto:pmj0324@g.skku.edu">pmj0324@g.skku.edu</a>
+                <a href="mailto:pmj032400@naver.com">pmj032400@naver.com</a>
+              </p>
+              <p class="hero-text" style="margin-top: -6px;">
+                <strong>Phone</strong>:
+                <a href="tel:+821040511056">+82-10-4051-1056</a>
               </p>
             </section>
 
@@ -672,42 +755,39 @@
               </div>
               <ul class="section-list">
                 <li class="section-item">
-                  <div class="pub-title">
-                    Undergraduate Researcher, University of Utah
-                  </div>
-                  <div class="pub-meta">
-                    Prof. Carsten Rott &mdash; Aug 2023 &ndash; Feb 2025
-                  </div>
-                  <div class="pub-links">
-                    Developed CNN and Vision Transformer pipelines for sensor
-                    calibration and optical property estimation in IceCube
-                    upgrade studies.
-                  </div>
-                </li>
-                <li class="section-item">
-                  <div class="pub-title">
-                    Undergraduate Researcher, Sungkyunkwan University
-                  </div>
-                  <div class="pub-meta">
-                    Prof. Chang Dong Rho &mdash; May 2024 &ndash; Feb 2026
-                  </div>
-                  <div class="pub-links">
-                    Working on score-based generative models and flow matching
-                    for synthesizing PMT charge and timing signals for the
-                    IceCube Upgrade detector.
+                  <div class="item-card">
+                    <div class="pub-title">Undergraduate Researcher</div>
+                    <div class="pub-meta">
+                      Prof. Carsten Rott &mdash; University of Utah
+                      <span style="color:var(--accent);margin-left:6px;font-size:10px;font-weight:600;">Aug 2023 – Feb 2025</span>
+                    </div>
+                    <div class="pub-links">
+                      CNN and Vision Transformer for IceCube Upgrade camera calibration.
+                    </div>
                   </div>
                 </li>
                 <li class="section-item">
-                  <div class="pub-title">
-                    Undergraduate Researcher, University of Seoul
+                  <div class="item-card">
+                    <div class="pub-title">Undergraduate Researcher</div>
+                    <div class="pub-meta">
+                      Prof. Chang Dong Rho &mdash; Sungkyunkwan University
+                      <span style="color:var(--accent);margin-left:6px;font-size:10px;font-weight:600;">May 2024 – Feb 2026</span>
+                    </div>
+                    <div class="pub-links">
+                      Flow-matching models for IceCube and SWGO detector signal synthesis.
+                    </div>
                   </div>
-                  <div class="pub-meta">
-                    Dr. Ian Watson &mdash; Jun 2024 &ndash; Present
-                  </div>
-                  <div class="pub-links">
-                    Contributing transformer, diffusion, and flow-matching
-                    models for large-array detector time-series analysis in
-                    SWGO and related experiments.
+                </li>
+                <li class="section-item">
+                  <div class="item-card">
+                    <div class="pub-title">Undergraduate Researcher</div>
+                    <div class="pub-meta">
+                      Dr. Ian Watson &mdash; University of Seoul
+                      <span style="color:var(--accent);margin-left:6px;font-size:10px;font-weight:600;">Jun 2024 – Present</span>
+                    </div>
+                    <div class="pub-links">
+                      Transformer and diffusion models for SWGO detector time-series analysis.
+                    </div>
                   </div>
                 </li>
               </ul>
