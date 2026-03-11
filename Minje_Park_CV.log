@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.5)  11 MAR 2026 13:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.5)  11 MAR 2026 23:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -827,10 +827,10 @@ Package hyperref Info: Link coloring ON on input line 144.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/omxlmex.fd)
 
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
-(Font)              using `T1/lmr/bx/n' instead on input line 165.
+(Font)              using `T1/lmr/bx/n' instead on input line 169.
 
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-76.
+80.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -852,25 +852,25 @@ L3 programming layer <2025-01-18>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `Minje_Park_CV.out' has not changed.
-(rerunfilecheck)             Checksum: 55E48771821B8FAC98BBA486D266F072;927.
+(rerunfilecheck)             Checksum: 389C0CE7DE9CF8F19E884A3CBEA2FBF1;927.
  ) 
 Here is how much of TeX's memory you used:
- 23165 strings out of 474662
- 449732 string characters out of 5751109
+ 23163 strings out of 474662
+ 449697 string characters out of 5751109
  837665 words of memory out of 5000000
- 45832 multiletter control sequences out of 15000+600000
+ 45830 multiletter control sequences out of 15000+600000
  608072 words of font info for 60 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 102i,12n,107p,1202b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,12n,107p,1202b,549s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></u
 sr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/lo
 cal/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/
 texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texliv
 e/2025basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on Minje_Park_CV.pdf (3 pages, 145741 bytes).
+Output written on Minje_Park_CV.pdf (3 pages, 145744 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 101 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  12 named destinations out of 1000 (max. 500000)
  77 words of extra memory for PDF output out of 10000 (max. 10000000)
 
