@@ -6,10 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>CV · Minje Park</title>
+    <title>About · Minje Park</title>
     <meta
       name="description"
-      content="CV page for Minje Park, including profile, education, and research background."
+      content="About page for Minje Park with profile, research focus, and CV access."
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
@@ -156,12 +156,13 @@
       .card {
         background: linear-gradient(
           145deg,
-          rgba(21, 26, 43, 0.96),
-          rgba(8, 12, 28, 0.98)
+          rgba(21, 26, 43, 0.62),
+          rgba(8, 12, 28, 0.68)
         );
         border-radius: var(--radius-lg);
         border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(12px);
         padding: 24px 24px 22px;
         margin-top: 24px;
       }
@@ -169,10 +170,10 @@
       .intro-card {
         background: linear-gradient(
           145deg,
-          rgba(29, 37, 58, 0.94),
-          rgba(14, 21, 38, 0.96)
+          rgba(29, 37, 58, 0.60),
+          rgba(14, 21, 38, 0.65)
         );
-        border-color: rgba(143, 148, 183, 0.4);
+        border-color: rgba(143, 148, 183, 0.35);
       }
 
       .card-header {
@@ -182,25 +183,27 @@
         gap: 12px;
         margin-bottom: 14px;
         padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       }
 
       .card-title {
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        color: #ffffff;
       }
 
       .card-subtitle {
-        font-size: 12px;
-        color: var(--fg-muted);
+        font-size: 11px;
+        color: rgba(193, 196, 214, 0.45);
       }
 
       .about-layout {
         display: grid;
-        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
-        gap: 24px;
+        grid-template-columns: 220px 1fr;
+        gap: 28px;
+        align-items: start;
       }
 
       @media (max-width: 880px) {
@@ -209,15 +212,29 @@
         }
       }
 
+      /* ── Profile card ── */
+      .about-profile {
+        background: rgba(8, 12, 26, 0.55);
+        border: 1px solid rgba(143, 148, 183, 0.32);
+        border-radius: 16px;
+        padding: 20px 16px;
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
       .profile-photo {
-        width: 140px;
-        height: 140px;
-        border-radius: 32px;
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
         background: radial-gradient(circle at 20% 10%, #f4f4ff, #8d9bff);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-        border: 2px solid rgba(255, 255, 255, 0.22);
-        margin-bottom: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+          0 0 0 3px rgba(141, 155, 255, 0.22);
+        margin-bottom: 14px;
         overflow: hidden;
+        flex-shrink: 0;
       }
 
       .profile-photo img {
@@ -227,60 +244,169 @@
         display: block;
       }
 
-      .about-profile {
-        background: rgba(8, 12, 26, 0.6);
-        border: 1px solid rgba(143, 148, 183, 0.26);
-        border-radius: 14px;
-        padding: 16px;
-      }
-
       .about-name {
-        font-size: 22px;
-        font-weight: 600;
-        margin-bottom: 4px;
+        font-size: 19px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 3px;
+        letter-spacing: 0.01em;
       }
 
-      .about-role {
-        font-size: 14px;
-        color: var(--fg-muted);
-        margin-bottom: 10px;
+      .about-affiliation {
+        font-size: 11.5px;
+        color: rgba(193, 196, 214, 0.55);
+        margin-bottom: 14px;
+        line-height: 1.4;
+      }
+
+      .about-divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 12px 0;
       }
 
       .about-meta {
-        font-size: 13px;
-        color: var(--fg-muted);
-        margin-bottom: 6px;
+        width: 100%;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        font-size: 12.5px;
+        color: rgba(193, 196, 214, 0.75);
+        margin-bottom: 7px;
         line-height: 1.5;
+        text-align: left;
       }
 
       .about-meta-label {
-        display: inline-block;
-        min-width: 44px;
-        font-size: 11px;
-        letter-spacing: 0.08em;
+        flex-shrink: 0;
+        width: 54px;
+        font-size: 9px;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #9ea4c6;
+        color: rgba(158, 164, 198, 0.7);
+      }
+
+      /* ── Right column ── */
+      .about-right {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .about-section {
+        padding: 18px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .about-section:first-child {
+        padding-top: 0;
+        border-top: none;
       }
 
       .about-section-title {
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 11px;
+        font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-bottom: 6px;
+        letter-spacing: 0.12em;
+        color: #ffffff;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid rgba(141, 155, 255, 0.25);
+        display: inline-block;
       }
 
       .about-text {
-        font-size: 14px;
-        line-height: 1.7;
-        color: var(--fg-muted);
+        font-size: 13.5px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.72);
+        margin: 0;
       }
 
-      .list-compact {
-        margin: 0;
-        padding-left: 18px;
-        font-size: 13px;
-        color: var(--fg-muted);
+      /* Education mini-card */
+      .edu-card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.58),
+          rgba(8, 12, 28, 0.62)
+        );
+        border: 1px solid rgba(38, 43, 63, 0.85);
+        border-radius: 14px;
+        padding: 14px 16px;
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        align-items: baseline;
+        flex-direction: column;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .edu-card:hover {
+        border-color: rgba(141, 155, 255, 0.25);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .edu-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 10px 12px;
+      }
+
+      .edu-badge {
+        display: inline-flex;
+        padding: 3px 10px;
+        border-radius: 6px;
+        background: rgba(141, 155, 255, 0.15);
+        border: 1px solid rgba(141, 155, 255, 0.4);
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.06em;
+      }
+
+      .edu-university {
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+      }
+
+      .edu-major {
+        font-size: 12.5px;
+        color: rgba(193, 196, 214, 0.72);
+        line-height: 1.6;
+      }
+
+      .edu-period {
+        display: inline-flex;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+      }
+
+      /* Research focus chips */
+      .focus-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .focus-tag {
+        padding: 5px 13px;
+        border-radius: var(--radius-pill);
+        background: rgba(141, 155, 255, 0.08);
+        border: 1px solid rgba(141, 155, 255, 0.32);
+        font-size: 12px;
+        color: rgba(220, 222, 238, 0.9);
+        transition: background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .focus-tag:hover {
+        background: rgba(141, 155, 255, 0.16);
+        border-color: rgba(141, 155, 255, 0.45);
       }
 
       .cv-viewer-wrap {
@@ -323,12 +449,12 @@
             <div class="brand-avatar" aria-hidden="true"></div>
             <div>
               <div class="brand-text-main">Minje&nbsp;Park</div>
-              <div class="brand-text-sub">CV</div>
+              <div class="brand-text-sub">About</div>
             </div>
           </div>
           <nav class="nav-links" aria-label="Main navigation">
             <a class="nav-link" href="index.html">home</a>
-            <a class="nav-link nav-link-active" href="about.html">CV</a>
+            <a class="nav-link nav-link-active" href="about.html">about</a>
             <a class="nav-link" href="research.html">research</a>
             <a class="nav-link" href="publications.html">publications</a>
             <a class="nav-link" href="blog.html">blog</a>
@@ -340,8 +466,8 @@
       <main class="page-inner">
         <section class="card intro-card" aria-labelledby="about-heading">
           <div class="card-header">
-            <h1 id="about-heading" class="card-title">CV</h1>
-            <span class="card-subtitle">Profile and education</span>
+            <h1 id="about-heading" class="card-title">About</h1>
+            <span class="card-subtitle">Profile, research focus, and CV</span>
           </div>
 
           <div class="about-layout">
@@ -350,65 +476,66 @@
                 <img src="pic.jpg" alt="Portrait of Minje Park" />
               </div>
               <div class="about-name">Minje&nbsp;Park</div>
-              <div class="about-role">
-                Undergraduate student, Sungkyunkwan University
-              </div>
+              <div class="about-affiliation">Sungkyunkwan University</div>
+              <div class="about-divider"></div>
               <div class="about-meta">
-                <span class="about-meta-label">Location</span>Seoul, South Korea
+                <span class="about-meta-label">Location</span>
+                <span><strong>Seoul</strong>, South Korea</span>
               </div>
               <div class="about-meta">
                 <span class="about-meta-label">Email</span>
-                <a href="mailto:pmj032400@naver.com">pmj032400@naver.com</a>
+                <a href="mailto:pmj032400@naver.com" style="word-break:break-all;">pmj032400@naver.com</a>
               </div>
               <div class="about-meta">
-                <span class="about-meta-label">CV</span>
-                <a
-                  href="Minje_Park_CV.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >View PDF</a
-                >
-                ·
-                <a href="Minje_Park_CV.pdf" download="Minje_Park_CV.pdf"
-                  >Download PDF</a
-                >
+                <span class="about-meta-label">Resume</span>
+                <span>
+                  <a href="Minje_Park_CV.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+                  &nbsp;·&nbsp;
+                  <a href="Minje_Park_CV.pdf" download="Minje_Park_CV.pdf">Download</a>
+                </span>
               </div>
             </div>
 
-            <div>
-              <div class="about-section-title">Short bio</div>
-              <p class="about-text">
-                I am an undergraduate student at Sungkyunkwan University,
-                majoring in Physics and Electronic and Electrical Engineering.
-                My research focuses on applying machine learning to
-                astrophysical and cosmological data, especially data-driven
-                modeling of large-scale structure and detector observations.
-              </p>
-
-              <div class="about-section-title" style="margin-top: 18px;">
-                Education
+            <div class="about-right">
+              <div class="about-section">
+                <div class="about-section-title">Overview</div>
+                <p class="about-text">
+                  I am an undergraduate student at Sungkyunkwan University,
+                  majoring in Physics and Electronic and Electrical Engineering.
+                  I work on deep generative models for computational cosmology and
+                  particle astrophysics, including large-scale structure simulation
+                  and detector-signal generation.
+                </p>
               </div>
-              <p class="about-text" style="margin-bottom: 6px;">
-                <strong>B.S., Sungkyunkwan University</strong>
-                &mdash; Physics (Major), Electronic and Electrical Engineering
-                (Double Major)
-              </p>
-              <ul class="list-compact">
-                <li>Undergraduate studies starting Feb 2021</li>
-                <li>Focus on astro-particle physics and machine learning</li>
-              </ul>
 
-              <div class="about-section-title" style="margin-top: 18px;">
-                Interests
+              <div class="about-section">
+                <div class="about-section-title">Education</div>
+                <div class="edu-card">
+                  <div class="edu-header">
+                    <span class="edu-badge">B.S.</span>
+                    <span class="edu-university">Sungkyunkwan University</span>
+                  </div>
+                  <div class="edu-major">Physics (Major) · Electronic and Electrical Engineering (Double Major)</div>
+                  <span class="edu-period">Feb 2021 — present</span>
+                </div>
               </div>
-              <p class="about-text">
-                Cosmology, Astrophysics, Machine Learning, Generative AI
-              </p>
+
+              <div class="about-section">
+                <div class="about-section-title">Research focus</div>
+                <div class="focus-tags">
+                  <span class="focus-tag">Deep generative models</span>
+                  <span class="focus-tag">Detector simulation</span>
+                  <span class="focus-tag">Event reconstruction</span>
+                  <span class="focus-tag">Computational cosmology</span>
+                  <span class="focus-tag">Particle astrophysics</span>
+                  <span class="focus-tag">ML in astrophysics</span>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="cv-viewer-wrap">
-            <div class="about-section-title">Curriculum Vitae</div>
+            <div class="about-section-title">CV (PDF)</div>
             <object
               class="cv-viewer-frame"
               data="Minje_Park_CV.pdf#view=FitH"
