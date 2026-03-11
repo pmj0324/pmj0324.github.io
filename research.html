@@ -44,8 +44,8 @@
           "Segoe UI", sans-serif;
         background-image: linear-gradient(
             135deg,
-            rgba(3, 7, 18, var(--bg-overlay-start)),
-            rgba(15, 23, 42, var(--bg-overlay-end))
+            rgba(3, 7, 18, 0.82),
+            rgba(15, 23, 42, 0.72)
           ),
           url("png/mountain.png");
         background-size: cover;
@@ -249,6 +249,47 @@
         color: var(--fg-muted);
       }
 
+      /* ── Project figure ── */
+      .project-figure {
+        margin: 14px 0 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px dashed rgba(141, 155, 255, 0.22);
+      }
+
+      .project-fig-img {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+      }
+
+      .project-fig-placeholder {
+        width: 100%;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: rgba(141, 155, 255, 0.03);
+        color: rgba(193, 196, 214, 0.28);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+      }
+
+      .project-fig-icon {
+        font-size: 28px;
+        opacity: 0.35;
+        line-height: 1;
+      }
+
+      .project-fig-caption {
+        font-size: 11px;
+        color: rgba(193, 196, 214, 0.22);
+        margin-top: 4px;
+        font-style: italic;
+      }
+
       .section-list {
         list-style: none;
         margin: 0;
@@ -352,6 +393,15 @@
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
+              <!-- Figure: replace the placeholder div below with an <img> tag when ready -->
+              <!-- Example: <img src="png/icecube-camera-result.png" alt="Camera system analysis results" class="project-fig-img"> -->
+              <div class="project-figure">
+                <div class="project-fig-placeholder">
+                  <span class="project-fig-icon">🖼</span>
+                  <span>Figure / Architecture diagram</span>
+                  <span class="project-fig-caption">Image will appear here</span>
+                </div>
+              </div>
               <p class="pub-links">
                 Additional figures, notes, and detailed results will be added
                 here as the analysis is documented.
@@ -382,6 +432,15 @@
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
+              <!-- Figure: replace the placeholder div below with an <img> tag when ready -->
+              <!-- Example: <img src="png/generative-icecube-arch.png" alt="Model architecture" class="project-fig-img"> -->
+              <div class="project-figure">
+                <div class="project-fig-placeholder">
+                  <span class="project-fig-icon">🖼</span>
+                  <span>Figure / Architecture diagram</span>
+                  <span class="project-fig-caption">Image will appear here</span>
+                </div>
+              </div>
               <p class="pub-links">
                 Detailed training configurations, comparison plots, and
                 ablation studies will be documented here as the project
@@ -413,6 +472,15 @@
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
+              <!-- Figure: replace the placeholder div below with an <img> tag when ready -->
+              <!-- Example: <img src="png/flow-protein-result.png" alt="Model result" class="project-fig-img"> -->
+              <div class="project-figure">
+                <div class="project-fig-placeholder">
+                  <span class="project-fig-icon">🖼</span>
+                  <span>Figure / Architecture diagram</span>
+                  <span class="project-fig-caption">Image will appear here</span>
+                </div>
+              </div>
               <p class="pub-links">
                 This section will collect experimental protocols, evaluation
                 metrics, and links to pre-trained models as they become
