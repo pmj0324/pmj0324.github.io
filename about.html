@@ -203,7 +203,7 @@
         display: grid;
         grid-template-columns: 300px 1fr;
         gap: 28px;
-        align-items: stretch;
+        align-items: start;
       }
 
       @media (max-width: 880px) {
@@ -516,30 +516,37 @@
               <div class="about-section">
                 <div class="about-section-title">Research directions</div>
                 <p class="about-text" style="margin-bottom:14px;">
-                  <strong style="color:rgba(255,255,255,0.88);">Astroparticle physics.</strong>
-                  In the IceCube Collaboration, I built CNN and Vision Transformer
-                  models for the Upgrade Camera System to measure optical properties
-                  of Antarctic ice, and developed flow-matching models that generate
-                  realistic PMT signals conditioned on neutrino properties.
-                  For SWGO, I work on transformer-based inference of primary-particle
-                  properties from water-Cherenkov detector time-series, and on
-                  diffusion and flow-matching models for signal synthesis.
+                  <strong style="color:rgba(255,255,255,0.88);">Computational cosmology.</strong>
+                  I develop flow-matching generative models (FOCUS) that learn to
+                  map noise distributions to 2-D projected dark-matter density fields
+                  from the CAMELS simulation suite. The trained model generates
+                  realistic cosmic-web images conditioned on cosmological parameters
+                  (&Omega;<sub>m</sub>, &sigma;<sub>8</sub>), providing a fast,
+                  differentiable surrogate for expensive N-body simulations.
+                  This enables rapid parameter inference, covariance estimation,
+                  and survey forecasting at a fraction of the computational cost.
+                  Presented as a poster at KPS 2025 (Gwangju).
                 </p>
                 <p class="about-text" style="margin-bottom:14px;">
-                  <strong style="color:rgba(255,255,255,0.88);">Cosmology.</strong>
-                  I apply flow-matching generative models to synthesize images of
-                  cosmic large-scale structure from cosmological simulation data
-                  (CAMELS). The goal is to build fast, data-driven surrogates
-                  that can replace expensive N-body simulations for parameter
-                  inference and survey forecasting.
+                  <strong style="color:rgba(255,255,255,0.88);">Astroparticle physics.</strong>
+                  Within the IceCube Collaboration, I built CNN and Vision Transformer
+                  pipelines for the Upgrade Camera System (D-Egg / mDOM) to
+                  characterize optical properties of South Pole glacial ice,
+                  and developed conditional flow-matching models (GENESIS) that
+                  synthesize realistic PMT charge-and-timing waveforms for the
+                  Upgrade modules. For the SWGO experiment, I design
+                  transformer-based architectures that infer primary-particle
+                  energy, direction, and species from water-Cherenkov detector
+                  time-series, alongside diffusion and flow-matching generators
+                  (DICE) for fast signal synthesis.
                 </p>
                 <p class="about-text">
                   <strong style="color:rgba(255,255,255,0.88);">Looking ahead.</strong>
-                  I am seeking graduate-level opportunities where I can deepen
-                  these two directions &mdash; using modern generative models to
-                  solve open problems in observational cosmology and high-energy
-                  astroparticle experiments. I am particularly interested in
-                  groups working at the intersection of machine learning and
+                  I am seeking graduate-level opportunities to deepen both
+                  directions &mdash; applying modern generative and foundation
+                  models to open problems in observational cosmology and
+                  high-energy astroparticle experiments. I am especially drawn to
+                  groups at the intersection of machine learning and
                   physics-driven simulation.
                 </p>
               </div>
@@ -559,12 +566,12 @@
               <div class="about-section">
                 <div class="about-section-title">Research focus</div>
                 <div class="focus-tags">
+                  <span class="focus-tag">Computational cosmology</span>
                   <span class="focus-tag">Deep generative models</span>
+                  <span class="focus-tag">Particle astrophysics</span>
                   <span class="focus-tag">Detector simulation</span>
                   <span class="focus-tag">Event reconstruction</span>
-                  <span class="focus-tag">Computational cosmology</span>
-                  <span class="focus-tag">Particle astrophysics</span>
-                  <span class="focus-tag">ML in astrophysics</span>
+                  <span class="focus-tag">Flow matching &amp; Diffusion</span>
                 </div>
               </div>
             </div>
