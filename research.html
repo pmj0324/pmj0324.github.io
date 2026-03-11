@@ -369,10 +369,53 @@
             <span class="card-subtitle">Overview</span>
           </div>
           <p class="lead-text">
-            This page summarizes my ongoing research projects in
-            astro-particle physics and machine learning. Each project is managed
-            in its own box and can be expanded as new materials are added.
+            My research develops deep generative models for two domains:
+            computational cosmology and astroparticle detector simulation.
+            Each project below can be expanded for details, code, and materials.
           </p>
+        </section>
+
+        <section class="card" aria-labelledby="project-cosmo-heading">
+          <div class="card-header">
+            <h2 id="project-cosmo-heading" class="card-title">
+              FOCUS &mdash; Flow-matching for Cosmic Large-Scale Structure
+            </h2>
+            <span class="project-tag">Ongoing</span>
+          </div>
+          <div class="pub-meta">
+            Computational Cosmology &middot; CAMELS Simulation Suite &middot; 2025 &ndash; Present
+          </div>
+          <div class="pub-links">
+            Conditional flow-matching model that generates 2-D projected
+            dark-matter density fields from the CAMELS suite, conditioned on
+            cosmological parameters (&Omega;<sub>m</sub>, &sigma;<sub>8</sub>).
+            Aims to replace expensive N-body simulations with a fast,
+            differentiable surrogate for parameter inference and survey
+            forecasting.
+          </div>
+          <details class="project-expand">
+            <summary>Expand details and materials</summary>
+            <div class="project-expand-content">
+              <div class="project-figure">
+                <div class="project-fig-placeholder">
+                  <span class="project-fig-icon">🖼</span>
+                  <span>Figure / Generated cosmic web samples vs. ground truth</span>
+                  <span class="project-fig-caption">Image will appear here</span>
+                </div>
+              </div>
+              <p class="pub-links">
+                Presented as a poster at the 102nd Fall Meeting of the Korean
+                Physical Society (Oct 2025, Gwangju). Current work focuses on
+                conditional generation with varying (&Omega;<sub>m</sub>,
+                &sigma;<sub>8</sub>) and downstream cosmological parameter
+                inference using the trained generator.
+              </p>
+              <div class="asset-row">
+                <a class="asset-chip" href="https://github.com/pmj0324/FOCUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">⌥ GitHub: FOCUS</a>
+                <a class="asset-chip" href="KPS_FOCUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 KPS Poster PDF</a>
+              </div>
+            </div>
+          </details>
         </section>
 
         <section class="card" aria-labelledby="project-utah-heading">
@@ -448,45 +491,6 @@
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">⌥ GitHub: GENESIS</a>
                 <a class="asset-chip" href="https://github.com/pmj0324/DICE" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">⌥ GitHub: DICE</a>
-                <span class="asset-chip">PPT: To be added</span>
-                <span class="asset-chip">Files: To be added</span>
-              </div>
-            </div>
-          </details>
-        </section>
-
-        <section class="card" aria-labelledby="project-cosmo-heading">
-          <div class="card-header">
-            <h2 id="project-cosmo-heading" class="card-title">
-              Flow Matching for Cosmic Large-Scale Structure
-            </h2>
-            <span class="project-tag">Ongoing</span>
-          </div>
-          <div class="pub-meta">
-            Cosmology &amp; ML &middot; CAMELS simulation data
-          </div>
-          <div class="pub-links">
-            Flow-matching generative models for synthesizing cosmic web images
-            from cosmological simulation data, aiming to build fast surrogates
-            for N-body simulations.
-          </div>
-          <details class="project-expand">
-            <summary>Expand details and materials</summary>
-            <div class="project-expand-content">
-              <div class="project-figure">
-                <div class="project-fig-placeholder">
-                  <span class="project-fig-icon">🖼</span>
-                  <span>Figure / Generated cosmic web samples</span>
-                  <span class="project-fig-caption">Image will appear here</span>
-                </div>
-              </div>
-              <p class="pub-links">
-                Presented as a poster at the 102nd Fall Meeting of the Korean
-                Physical Society (Oct 2025, Gwangju). Ongoing work on conditional
-                generation and cosmological parameter inference.
-              </p>
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/FOCUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">⌥ GitHub: FOCUS</a>
                 <span class="asset-chip">PPT: To be added</span>
                 <span class="asset-chip">Files: To be added</span>
               </div>
