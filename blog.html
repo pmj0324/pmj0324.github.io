@@ -156,12 +156,13 @@
       .card {
         background: linear-gradient(
           145deg,
-          rgba(21, 26, 43, 0.96),
-          rgba(8, 12, 28, 0.98)
+          rgba(21, 26, 43, 0.62),
+          rgba(8, 12, 28, 0.68)
         );
         border-radius: var(--radius-lg);
         border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(12px);
         padding: 22px 22px 20px;
         margin-top: 24px;
       }
@@ -169,10 +170,10 @@
       .intro-card {
         background: linear-gradient(
           145deg,
-          rgba(29, 37, 58, 0.94),
-          rgba(14, 21, 38, 0.96)
+          rgba(29, 37, 58, 0.60),
+          rgba(14, 21, 38, 0.65)
         );
-        border-color: rgba(143, 148, 183, 0.4);
+        border-color: rgba(143, 148, 183, 0.35);
       }
 
       .card-header {
@@ -201,39 +202,89 @@
         list-style: none;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
       .section-item {
-        padding: 10px 0;
-        border-top: 1px solid rgba(37, 42, 70, 0.9);
-      }
-
-      .section-item:first-child {
+        padding: 0;
         border-top: none;
       }
 
-      .post-row {
+      .post-card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.55),
+          rgba(8, 12, 28, 0.60)
+        );
+        border: 1px solid rgba(38, 43, 63, 0.8);
+        border-radius: 14px;
+        backdrop-filter: blur(10px);
+        padding: 16px 18px;
         display: flex;
-        align-items: baseline;
-        gap: 10px;
-        font-size: 13px;
-        color: var(--fg-muted);
+        gap: 18px;
+        align-items: flex-start;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.22s ease, background 0.22s ease,
+          box-shadow 0.22s ease, transform 0.22s ease;
+      }
+
+      .post-card:hover {
+        border-color: rgba(141, 155, 255, 0.30);
+        background: linear-gradient(
+          145deg,
+          rgba(28, 34, 58, 0.62),
+          rgba(14, 18, 40, 0.68)
+        );
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+        transform: translateY(-1px);
+        text-decoration: none;
       }
 
       .post-date {
-        min-width: 100px;
-        font-variant-numeric: tabular-nums;
+        flex-shrink: 0;
+        width: 90px;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+        line-height: 1.4;
+        padding-top: 2px;
+      }
+
+      .post-body {
+        flex: 1;
+        min-width: 0;
       }
 
       .post-title {
-        color: var(--fg);
-        font-weight: 500;
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.4;
+        margin-bottom: 5px;
       }
 
       .post-excerpt {
-        font-size: 13px;
-        color: var(--fg-muted);
-        margin-top: 4px;
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .post-arrow {
+        flex-shrink: 0;
+        font-size: 16px;
+        color: rgba(193, 196, 214, 0.3);
+        padding-top: 1px;
+        transition: color 0.18s ease, transform 0.18s ease;
+      }
+
+      .post-card:hover .post-arrow {
+        color: var(--accent);
+        transform: translate(2px, -2px);
       }
 
       .footer {
@@ -285,30 +336,30 @@
           </div>
           <ul class="section-list">
             <li class="section-item">
-              <div class="post-row">
-                <div class="post-date">Feb 15, 2026</div>
-                <div>
+              <a class="post-card" href="#">
+                <div class="post-date">Feb 15,<br>2026</div>
+                <div class="post-body">
                   <div class="post-title">Early notes on detector modeling</div>
-                  <div class="post-excerpt">
-                    A short draft-style entry to experiment with writing about
-                    generative models for detector signals and lessons learned
-                    while training them.
-                  </div>
+                  <p class="post-excerpt">
+                    A short draft on generative models for detector signals and
+                    lessons learned while training them.
+                  </p>
                 </div>
-              </div>
+                <span class="post-arrow">&#8599;</span>
+              </a>
             </li>
             <li class="section-item">
-              <div class="post-row">
-                <div class="post-date">Jan 03, 2026</div>
-                <div>
+              <a class="post-card" href="#">
+                <div class="post-date">Jan 03,<br>2026</div>
+                <div class="post-body">
                   <div class="post-title">Thoughts on learning and research</div>
-                  <div class="post-excerpt">
+                  <p class="post-excerpt">
                     Informal reflections on studying physics, machine learning,
-                    and how small projects accumulate into long-term research
-                    directions.
-                  </div>
+                    and how small projects accumulate into long-term directions.
+                  </p>
                 </div>
-              </div>
+                <span class="post-arrow">&#8599;</span>
+              </a>
             </li>
           </ul>
         </section>

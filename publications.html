@@ -273,6 +273,125 @@
         letter-spacing: 0.02em;
       }
 
+      /* ── Publication item card ── */
+      .pub-item-card {
+        border-top: none;
+        padding: 0;
+      }
+
+      .pub-card {
+        background: linear-gradient(
+          145deg,
+          rgba(21, 26, 43, 0.55),
+          rgba(8, 12, 28, 0.60)
+        );
+        border: 1px solid rgba(38, 43, 63, 0.8);
+        border-radius: 14px;
+        backdrop-filter: blur(10px);
+        transition: border-color 0.22s ease, background 0.22s ease,
+          box-shadow 0.22s ease;
+      }
+
+      .pub-card:hover {
+        border-color: rgba(141, 155, 255, 0.28);
+        background: linear-gradient(
+          145deg,
+          rgba(28, 34, 58, 0.62),
+          rgba(14, 18, 40, 0.68)
+        );
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      .pub-card[open] {
+        border-color: rgba(141, 155, 255, 0.38);
+        background: linear-gradient(
+          145deg,
+          rgba(28, 35, 62, 0.65),
+          rgba(15, 20, 44, 0.70)
+        );
+      }
+
+      .pub-summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 16px;
+        border-radius: 14px;
+        user-select: none;
+      }
+
+      .pub-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .pub-chevron {
+        flex-shrink: 0;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.25);
+        margin-top: 5px;
+        transition: transform 0.22s ease, color 0.22s ease;
+      }
+
+      .pub-card[open] .pub-chevron {
+        transform: rotate(90deg);
+        color: var(--accent);
+      }
+
+      .pub-summary-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .pub-abstract-section {
+        padding: 0 16px 16px;
+        border-top: 1px solid rgba(143, 148, 183, 0.08);
+      }
+
+      .pub-abstract-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        margin: 13px 0 7px;
+      }
+
+      .pub-abstract-text {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.7;
+        margin: 0 0 14px;
+      }
+
+      .pub-action-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pub-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        border: 1px solid rgba(141, 155, 255, 0.35);
+        background: rgba(141, 155, 255, 0.12);
+        color: var(--accent);
+        transition: background 0.18s ease, border-color 0.18s ease;
+      }
+
+      .pub-btn:hover {
+        background: rgba(141, 155, 255, 0.22);
+        border-color: rgba(141, 155, 255, 0.55);
+        text-decoration: none;
+      }
+
       /* ── Timeline layout (date-left · line · content-right) ── */
       .timeline {
         list-style: none;
@@ -568,34 +687,42 @@
         <section class="card intro-card" aria-labelledby="pub-main-heading">
           <div class="card-header">
             <h1 id="pub-main-heading" class="card-title">Publications</h1>
-            <span class="card-subtitle">Selected work</span>
           </div>
-          <p class="pub-meta" style="margin-bottom: 12px;">
-            A selection of publications.
-          </p>
+          <p class="pub-meta" style="margin-bottom: 12px;"></p>
           <ul class="section-list">
-            <li class="section-item">
-              <div class="pub-title">
-                Performance Study of the IceCube Upgrade Camera System
-              </div>
-              <div class="pub-meta">
-                <span class="tag">ICRC 2025</span>
-                C. Rott, M. Park, M. Jansson, G. Iverson, S. Choi (for the
-                IceCube Collaboration)
-              </div>
-              <div class="pub-meta">
-                arXiv:2507.18525 &mdash; Instrumentation and Methods for
-                Astrophysics
-              </div>
-              <div class="pub-links">
-                <a
-                  href="https://arxiv.org/abs/2507.18525"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >View on arXiv</a
-                >
-                · <span>Conference proceedings (ICRC 2025)</span>
-              </div>
+            <li class="section-item pub-item-card">
+              <details class="pub-card">
+                <summary class="pub-summary">
+                  <span class="pub-chevron">&#9656;</span>
+                  <div class="pub-summary-body">
+                    <div class="pub-title">
+                      Performance Study of the IceCube Upgrade Camera System
+                    </div>
+                    <div class="pub-meta">
+                      <span class="tag tag-talk" style="font-size:10px;">ICRC 2025</span>
+                      C. Rott, <strong>M. Park</strong>, M. Jansson, G. Iverson, S. Choi
+                      <span style="color:rgba(193,196,214,0.5);">(for the IceCube Collaboration)</span>
+                    </div>
+                    <div class="pub-meta" style="color:rgba(193,196,214,0.55);">
+                      arXiv:2507.18525 &mdash; Instrumentation and Methods for Astrophysics
+                    </div>
+                  </div>
+                </summary>
+                <div class="pub-abstract-section">
+                  <div class="pub-abstract-label">Abstract</div>
+                  <p class="pub-abstract-text">
+                    The IceCube Upgrade Camera System is a novel calibration system designed to calibrate the IceCube detector by measuring the optical properties of the Antarctic ice. The system comprises nearly 2,000 cameras and illumination LEDs, which are present on every D-Egg and mDOM, the newly designed optical modules for the IceCube Upgrade. These units, deployed across the IceCube Upgrade volume, will capture transmission and reflection images that can be used to characterize the optical properties of both the refrozen ice within drill holes and the bulk ice between strings. Additionally, the images can aid in determining the positions of the optical modules the camera systems are mounted on. To maximize the system's performance, various image analysis methodologies have been explored, ranging from classical maximum likelihood estimation to AI-based approaches using neural networks. In this study, we present preliminary results on the performance of these methods based on images generated by a simulation tool developed specifically for this system.
+                  </p>
+                  <div class="pub-action-row">
+                    <a class="pub-btn" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer">
+                      📄 arXiv:2507.18525
+                    </a>
+                    <a class="pub-btn" href="https://arxiv.org/pdf/2507.18525" target="_blank" rel="noopener noreferrer">
+                      ⬇ PDF
+                    </a>
+                  </div>
+                </div>
+              </details>
             </li>
           </ul>
         </section>
@@ -906,6 +1033,12 @@
         const item = details.closest(".tl-item");
         details.addEventListener("toggle", () => {
           item.classList.toggle("is-open", details.open);
+        });
+      });
+
+      document.querySelectorAll(".pub-card").forEach((details) => {
+        details.addEventListener("toggle", () => {
+          if (details.open) details.scrollIntoView({ behavior: "smooth", block: "nearest" });
         });
       });
     </script>
