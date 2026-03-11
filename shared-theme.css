@@ -2,3 +2,8 @@
   --bg-overlay-start: 0.64;
   --bg-overlay-end: 0.72;
 }
+
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+}
