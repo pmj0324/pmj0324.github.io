@@ -1,0 +1,242 @@
+\documentclass[11pt, a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+
+% === Grayscale Color Scheme ===
+\definecolor{primary}{RGB}{60, 60, 60}
+\definecolor{secondary}{RGB}{80, 80, 80}
+\definecolor{accent}{RGB}{240, 240, 240}
+\definecolor{textgray}{RGB}{70, 70, 70}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    urlcolor=primary,
+    pdftitle={Minje Park - CV},
+    pdfauthor={Minje Park}
+}
+
+% Custom section formatting
+\titleformat{\section}
+    {\color{primary}\Large\bfseries\scshape}
+    {}{0em}
+    {}
+    [\color{primary}\titlerule]
+
+\titlespacing{\section}{0pt}{20pt}{8pt}
+
+% Subsection formatting
+\titleformat{\subsection}
+    {\color{secondary}\large\bfseries}
+    {}{0em}
+    {}
+
+% Page style
+\newcommand{\cvrulewidth}{1.5pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\color{secondary} Minje Park - Curriculum Vitae}
+\renewcommand{\headrulewidth}{\cvrulewidth}
+\renewcommand{\footrulewidth}{\cvrulewidth}
+\lfoot{\color{textgray}\small\textit{Last updated: March 2026}}
+\cfoot{\small - \thepage\ -}
+
+% Custom commands
+\newcommand{\cvtag}[1]{%
+    \tikz[baseline=(tag.base)]\node[draw=primary, fill=accent, rounded corners=3pt, inner sep=3pt, text=primary] (tag) {\small #1};%
+}
+
+\newcommand{\experienceitem}[4]{
+    \begin{tcolorbox}[
+        colback=lightgray,
+        colframe=primary,
+        boxrule=0pt,
+        leftrule=3pt,
+        arc=0pt,
+        left=5pt,
+        right=5pt,
+        top=5pt,
+        bottom=5pt
+    ]
+    \textbf{\large #1} \hfill {\color{primary}#2}
+    
+    \textit{#3}
+    
+    #4
+    \end{tcolorbox}
+    \vspace{3pt}
+}
+
+\newcommand{\conferenceitem}[3]{%
+    \noindent
+    \parbox[t]{0.15\textwidth}{{\color{primary}\textbf{#1}}}%
+    \hfill
+    \parbox[t]{0.83\textwidth}{\textbf{#2}\\[2pt]\textit{#3}}%
+    \vspace{8pt}\par
+}
+
+\newcommand{\awarditem}[3]{
+    \begin{tcolorbox}[
+        colback=white,
+        colframe=primary,
+        boxrule=0pt,
+        leftrule=3pt,
+        arc=0pt,
+        left=5pt,
+        right=5pt,
+        top=4pt,
+        bottom=4pt
+    ]
+    \textbf{#1} \\[2pt]
+    #2 \\[2pt]
+    {\small\textit{#3}}
+    \end{tcolorbox}
+    \vspace{3pt}
+}
+
+\begin{document}
+
+% === Header ===
+\vspace{-6pt}
+
+{\Huge\bfseries\color{primary} MINJE PARK}
+
+\vspace{4pt}
+\noindent
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.16\textwidth}X@{}}
+Email &
+\href{mailto:pmj03400@naver.com}{pmj03400@naver.com} \\
+Homepage &
+\href{https://pmj0324.github.io/}{https://pmj0324.github.io/} \\
+GitHub &
+\href{https://github.com/pmj0324}{github.com/pmj0324} \\
+Scholar &
+\href{https://scholar.google.com/citations?user=oC5mE0AAAAAJ}{Google Scholar (Minje Park)} \\
+\end{tabularx}
+
+\vspace{2pt}
+
+% === Education ===
+\section{Education}
+
+\noindent
+\textbf{Sungkyunkwan University} \hfill \textit{Feb 2021 -- Feb 2027 (Expected)} \\[2pt]
+B.S. in Physics, Double Major in Electronic \& Electrical Engineering
+
+% === Research Experience ===
+\section{Research Experience}
+
+\experienceitem{CNN and Vision Transformer for IceCube Camera Analysis}{Aug 2023 -- Sep 2025}{Supervisor: Carsten Rott, Department of Physics, Sungkyunkwan University}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Developed CNN and Vision Transformer models for the IceCube Upgrade Camera System; results published as a poster and proceedings paper at ICRC 2025 (arXiv:2507.18525).
+    \end{itemize}
+}
+
+\experienceitem{Generative AI for IceCube and SWGO}{May 2024 -- Present}{Supervisor: Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Developed diffusion models for synthesizing PMT signals for SWGO.
+        \item Built flow-matching models to generate IceCube detector signals conditioned on neutrino properties.
+    \end{itemize}
+}
+
+\experienceitem{Transformer-Based Reconstruction for SWGO}{Jun 2024 -- Present}{Supervisor: Ian Watson, Department of Physics, University of Seoul}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Investigated position embedding strategies for transformer-based primary-particle reconstruction in SWGO.
+        \item Developed flow-matching models to synthesize SWGO detector signals from simulation data.
+    \end{itemize}
+}
+
+\experienceitem{Flow and Diffusion Models for Cosmic Web Generation}{Oct 2025 -- Present}{Independent Research}{
+    \begin{itemize}[leftmargin=*, itemsep=2pt]
+        \item Developed flow and diffusion models to generate 2D cosmic web images using the CAMELS simulation suite.
+    \end{itemize}
+}
+
+% === Publications ===
+\section{Publications}
+
+\newcommand{\publication}[3]{
+    \vspace{4pt}
+    \noindent
+    \textbf{#1} \\
+    \textit{#2} \\
+    {\small #3}
+    \vspace{6pt}
+}
+
+\publication{Performance Study of the IceCube Upgrade Camera System}
+{C. Rott, \textbf{\textit{M. Park}}, M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)}
+{Proceedings of Science (PoS), ICRC2025; \href{https://arxiv.org/abs/2507.18525}{arXiv:2507.18525}}
+
+% === Conference Presentations ===
+\section{Conference Presentations}
+\conferenceitem{Apr 2026}{[Talk, scheduled] Generative AI for IceCube Observatory}{102nd Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
+
+\conferenceitem{Apr 2026}{[Poster, scheduled] Mixture Density Networks for Fast Detector Response Simulation in SWGO}{102nd Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
+
+\conferenceitem{Apr 2026}{[Poster, scheduled] Flow Matching Model for Generating Cosmic Web Images}{102nd Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
+
+\conferenceitem{Feb 2026}{[Poster] Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM}{The 33rd Korean Conference on Semiconductors, Jeongseon, Republic of Korea}
+
+\conferenceitem{Oct 2025}{[Poster] Generative AI for Cosmological Simulation and Manifold Representation}{KPS Undergraduate Physics Research Competition, 102nd Fall Meeting of the Korean Physical Society, Gwangju, Republic of Korea}
+
+\conferenceitem{Jun 2025}{[Poster] Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction}{4th K-Neutrino Symposium, Seoul, Republic of Korea}
+
+\conferenceitem{Apr 2025}{[Poster] Modeling the Relationship between PMT Response and Air-Shower Particles for SWGO}{101st Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
+
+\conferenceitem{Oct 2024}{[Poster] Development of a Deep Learning Model for Analyzing Antarctic Ice Optical Properties}{KPS Undergraduate Physics Research Competition, 101st Fall Meeting of the Korean Physical Society, Yeosu, Republic of Korea}
+
+\conferenceitem{Sep 2024}{[Talk] Deep Learning for Ice-Property Measurement Using Simulation Images}{Fall IceCube Collaboration Meeting, Madison, Wisconsin, USA}
+
+\conferenceitem{Jul 2024}{[Talk] Ice-Property Measurement Using a Camera System in the IceCube Upgrade}{3rd K-Neutrino Symposium, Gwangju, Republic of Korea}
+
+\conferenceitem{Apr 2024}{[Poster] Study of Optical Properties in Antarctic Ice Using Simulated Images}{100th Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
+
+% === Honors & Awards ===
+\section{Honors \& Awards}
+
+\awarditem{Best Presentation Award}{4th K-Neutrino Symposium, 2025}{Awarded for poster presentation: ``Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction''}
+
+\awarditem{Merit Award}{Korean Physical Society Undergraduate Physics Research Competition, 2024}{Recognized for research on CNN and Vision Transformer models for the IceCube Upgrade Camera System}
+
+% === Skills ===
+\section{Skills}
+
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.18\textwidth}X@{}}
+Programming   & Python, NumPy, SciPy, Matplotlib \\[4pt]
+Frameworks    & PyTorch, JAX \\[4pt]
+Models        & Transformer, Vision Transformer (ViT), CNN, Diffusion Models, Flow Matching \\[4pt]
+Tools         & Linux, HTCondor, Git, Bash/Shell, HDF5 \\
+\end{tabularx}
+
+% === Collaboration Memberships ===
+\section{Collaboration Memberships}
+
+\noindent
+\textbf{IceCube Collaboration} \hfill \textit{Aug 2023 -- Present} \\
+{\small A neutrino detector embedded in Antarctic ice at the South Pole}
+
+\vspace{8pt}
+
+\noindent
+\textbf{SWGO Collaboration} \hfill \textit{Jun 2024 -- Present} \\
+{\small A next-generation ground-based gamma-ray observatory planned for the high-altitude Andes}
+
+\end{document}
