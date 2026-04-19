@@ -505,13 +505,10 @@
                 <div class="about-section-title">Overview</div>
                 <p class="about-text">
                   I am an undergraduate researcher at Sungkyunkwan University
-                  (Physics / Electronic &amp; Electrical Engineering), working on
-                  deep generative models for physics. My work spans two directions:
-                  (1)&nbsp;accelerating detector simulation and event reconstruction
-                  in astroparticle experiments (IceCube, SWGO), and
-                  (2)&nbsp;generating cosmological large-scale structure from
-                  simulation data (CAMELS). I am a member of the IceCube and
-                  SWGO Collaborations.
+                  (Physics / Electronic &amp; Electrical Engineering), developing
+                  generative models for cosmology and astroparticle physics.
+                  My work focuses on GENESIS for CAMELS field emulation and
+                  JANUS for IceCube detector-event simulation and inference.
                 </p>
               </div>
 
@@ -519,36 +516,16 @@
                 <div class="about-section-title">Research directions</div>
                 <p class="about-text" style="margin-bottom:14px;">
                   <strong style="color:rgba(255,255,255,0.88);">Computational cosmology.</strong>
-                  I develop flow-matching generative models in GENESIS that learn to
-                  map noise distributions to 2-D projected dark-matter density fields
-                  from the CAMELS simulation suite. The trained model generates
-                  realistic cosmic-web images conditioned on cosmological parameters
-                  (&Omega;<sub>m</sub>, &sigma;<sub>8</sub>), providing a fast,
-                  differentiable surrogate for expensive N-body simulations.
-                  This enables rapid parameter inference, covariance estimation,
-                  and survey forecasting at a fraction of the computational cost.
-                  Presented as a poster at KPS 2025 (Gwangju).
-                </p>
-                <p class="about-text" style="margin-bottom:14px;">
-                  <strong style="color:rgba(255,255,255,0.88);">Astroparticle physics.</strong>
-                  Within the IceCube Collaboration, I built CNN and Vision Transformer
-                  pipelines for the Upgrade Camera System (D-Egg / mDOM) to
-                  characterize optical properties of South Pole glacial ice,
-                  and developed conditional flow-matching models (JANUS) that
-                  synthesize realistic PMT charge-and-timing waveforms for the
-                  Upgrade modules. For the SWGO experiment, I design
-                  transformer-based architectures that infer primary-particle
-                  energy, direction, and species from water-Cherenkov detector
-                  time-series.
+                  In GENESIS, I build optimal-transport flow-matching emulators
+                  that jointly generate dark matter, gas, and temperature fields
+                  and support astrophysical and cosmological parameter inference.
                 </p>
                 <p class="about-text">
-                  <strong style="color:rgba(255,255,255,0.88);">Looking ahead.</strong>
-                  I am seeking graduate-level opportunities to deepen both
-                  directions &mdash; applying modern generative and foundation
-                  models to open problems in observational cosmology and
-                  high-energy astroparticle experiments. I am especially drawn to
-                  groups at the intersection of machine learning and
-                  physics-driven simulation.
+                  <strong style="color:rgba(255,255,255,0.88);">Astroparticle physics.</strong>
+                  In JANUS, I develop diffusion and flow-matching models for
+                  realistic IceCube event generation and inference. For SWGO, I
+                  contributed to transformer-based primary-particle reconstruction,
+                  including positional-embedding studies.
                 </p>
               </div>
 
@@ -556,24 +533,24 @@
                 <div class="about-section-title">Research experience</div>
                 <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
                   <li class="about-text" style="line-height:1.6;">
-                    <strong style="color:rgba(255,255,255,0.88);">IceCube Upgrade Camera System</strong>
-                    · <a href="https://profiles.faculty.utah.edu/u6033273" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">Prof. Carsten Rott</a>, University of Utah
-                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">Aug 2023 — Feb 2025 · CNN/ViT for ice optical property measurement</span>
+                    <strong style="color:rgba(255,255,255,0.88);">GENESIS — Cosmic Large-Scale Structure</strong>
+                    · Independent project
+                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">2025 — Present · OT flow matching for multi-field generation and parameter inference</span>
                   </li>
                   <li class="about-text" style="line-height:1.6;">
                     <strong style="color:rgba(255,255,255,0.88);">JANUS — Generative Models for IceCube Signals</strong>
                     · <a href="https://sites.google.com/view/prof-changdongrho" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">Prof. Chang Dong Rho</a>, SKKU
-                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">May 2024 — Feb 2026 · JANUS: flow matching &amp; diffusion for PMT signal synthesis</span>
+                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">May 2024 — Feb 2026 · Diffusion/flow matching for realistic event generation and inference</span>
                   </li>
                   <li class="about-text" style="line-height:1.6;">
                     <strong style="color:rgba(255,255,255,0.88);">SWGO Event Reconstruction &amp; Simulation</strong>
                     · <a href="https://www.linkedin.com/in/ian-watson-582268129/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">Dr. Ian Watson</a>, University of Seoul
-                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">Jun 2024 — Present · Transformer-based inference &amp; generative signal synthesis</span>
+                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">Jun 2024 — Present · Contributed to transformer reconstruction with positional embeddings</span>
                   </li>
                   <li class="about-text" style="line-height:1.6;">
-                    <strong style="color:rgba(255,255,255,0.88);">GENESIS — Cosmic Large-Scale Structure</strong>
-                    · Independent project
-                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">2025 — Present · Flow matching for CAMELS dark-matter density fields</span>
+                    <strong style="color:rgba(255,255,255,0.88);">IceCube OPTICUS Camera System</strong>
+                    · <a href="https://profiles.faculty.utah.edu/u6033273" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">Prof. Carsten Rott</a>, University of Utah
+                    <br><span style="color:rgba(255,255,255,0.45);font-size:0.85em;">Aug 2023 — Feb 2025 · CNN/ViT for ice optical property measurement</span>
                   </li>
                 </ul>
               </div>
