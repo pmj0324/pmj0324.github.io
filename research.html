@@ -443,6 +443,39 @@
         color: rgba(244, 247, 255, 0.94);
       }
 
+      .eq-intro {
+        font-size: 12px;
+        line-height: 1.78;
+        color: var(--fg-muted);
+        margin: 0 0 10px;
+      }
+
+      .eq-block {
+        margin-top: 10px;
+      }
+
+      .eq-label {
+        display: block;
+        font-size: 11px;
+        font-style: italic;
+        color: rgba(193, 196, 214, 0.45);
+        margin-bottom: 4px;
+      }
+
+      .eq-math {
+        padding: 5px 10px;
+        border-radius: 6px;
+        background: rgba(8, 11, 24, 0.62);
+        border: 1px solid rgba(141, 155, 255, 0.09);
+        overflow-x: auto;
+        font-size: 0.8em;
+      }
+
+      .eq-math .mjx-container {
+        margin: 0 !important;
+        color: rgba(244, 247, 255, 0.92);
+      }
+
       .project-inline-figure {
         margin-top: 18px;
       }
@@ -532,49 +565,41 @@
           <div class="project-dual">
             <section class="project-pane" aria-label="GENESIS generation">
               <span class="project-point-label"><strong>Generation</strong></span>
-              <span class="project-point-text">
+              <p class="eq-intro">
                 The model learns a vector field
                 \(\mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\)
-                — a direction assigned to every point in field space at each
-                time \(t\) — that gradually steers random noise toward
-                realistic cosmological maps. Here \(\phi\) are the learned
-                network weights and \(\boldsymbol{\theta}\) the six CAMELS
-                parameters that condition the output.
-                Starting from Gaussian noise \(\mathbf{x}_0\), following
-                this direction field from \(t=0\) to \(t=1\) (i.e.,
-                integrating the ODE below) produces a field sample
-                \(\mathbf{x}_1\) consistent with \(\boldsymbol{\theta}\).
-              </span>
-              <div class="project-equation">
-                \[
-                \dot{\mathbf{x}}_t = \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})
-                \]
+                — a direction at every point in field space at time \(t\)
+                — that steers Gaussian noise \(\mathbf{x}_0\) toward
+                realistic cosmological maps conditioned on
+                \(\boldsymbol{\theta}\). Here \(\phi\) are the network
+                weights and \(\boldsymbol{\theta}\) the six CAMELS
+                parameters \((\Omega_m, \sigma_8, A_\mathrm{SN1},
+                A_\mathrm{SN2}, A_\mathrm{AGN1}, A_\mathrm{AGN2})\).
+              </p>
+              <div class="eq-block">
+                <span class="eq-label">the vector field drives the probability-flow ODE:</span>
+                <div class="eq-math">\[\dot{\mathbf{x}}_t = \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\]</div>
               </div>
-              <div class="project-equation">
-                \[
-                \mathbf{x}_1 = \mathbf{x}_0 + \int_0^1 \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt
-                \]
+              <div class="eq-block">
+                <span class="eq-label">integrate from noise to field to draw a sample:</span>
+                <div class="eq-math">\[\mathbf{x}_1 = \mathbf{x}_0 + \int_0^1 \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt\]</div>
               </div>
             </section>
             <section class="project-pane" aria-label="GENESIS inference">
               <span class="project-point-label"><strong>Inference</strong></span>
-              <span class="project-point-text">
-                Because the model is a continuous normalizing flow (CNF),
-                it can also evaluate the exact probability of any given
-                field \(\mathbf{x}_1\) under a chosen \(\boldsymbol{\theta}\).
-                The divergence \(\nabla\cdot\mathbf{v}^\phi\) along the
-                trajectory measures how much volume the flow expands or
-                contracts, and integrating it gives the log-likelihood
-                via the change-of-variables formula. This means GENESIS can
-                score how well a set of cosmological parameters explains an
-                observed field — with no separate inference network needed.
-              </span>
-              <div class="project-equation">
-                \[
-                \log p(\mathbf{x}_1 \mid \boldsymbol{\theta})
-                = \log p(\mathbf{x}_0)
-                - \int_0^1 \nabla \cdot \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt
-                \]
+              <p class="eq-intro">
+                Because GENESIS is a continuous normalizing flow (CNF),
+                the same \(\mathbf{v}^\phi\) can also evaluate the exact
+                probability of any observed field \(\mathbf{x}_1\) under a
+                given \(\boldsymbol{\theta}\). The divergence
+                \(\nabla\cdot\mathbf{v}^\phi\) measures how the flow
+                compresses or expands volume along the trajectory; integrating
+                it yields the log-likelihood with no extra inference
+                network — enabling training-free parameter estimation.
+              </p>
+              <div class="eq-block">
+                <span class="eq-label">exact log-likelihood via change-of-variables:</span>
+                <div class="eq-math">\[\log p(\mathbf{x}_1 \mid \boldsymbol{\theta}) = \log p(\mathbf{x}_0) - \int_0^1 \nabla \cdot \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt\]</div>
               </div>
             </section>
           </div>
