@@ -395,11 +395,11 @@
           </div>
           <div class="pub-links">
             GENESIS is a conditional optimal-transport flow-matching emulator
-            that jointly generates dark matter, gas, and gas-temperature fields
-            from the full CAMELS parameter space, including both cosmological
-            and astrophysical feedback parameters. The model uses a U-Net
-            backbone with periodic-boundary convolutions and channel
-            squeeze-and-excitation.
+            for cosmological fields. We learn a probability-flow vector field
+            with a flow-matching loss, then integrate that field to generate
+            dark matter, gas, and gas-temperature maps conditioned on the full
+            CAMELS parameter space. The model uses a U-Net backbone with
+            periodic-boundary convolutions and channel squeeze-and-excitation.
           </div>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
@@ -416,7 +416,9 @@
                 25 h<sup>-1</sup> Mpc using auto-power spectra, cross-power
                 spectra, inter-field coherence, one-point distributions, and
                 parameter-response tests across LH, CV, 1P, and EX validation
-                protocols.
+                protocols. We are also exploring likelihood estimation via the
+                change-of-variables formula so the learned flow can support
+                astrophysical and cosmological parameter inference.
               </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: Genesis</a>
