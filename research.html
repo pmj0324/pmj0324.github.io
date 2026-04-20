@@ -478,25 +478,23 @@
         <section class="card" aria-labelledby="project-cosmo-heading">
           <div class="card-header">
             <h2 id="project-cosmo-heading" class="card-title">
-              GENESIS &mdash; Multi-field cosmological simulation and inference
+              GENESIS &mdash; Cosmological multi-field generation and inference
             </h2>
             <span class="project-tag ongoing">Ongoing</span>
           </div>
           <p class="project-summary">
-            GENESIS is a unified project for multi-field cosmological
+            GENESIS is a unified project for cosmological multi-field
             generation and inference in the CAMELS simulation suite.
-            It learns a conditional flow for dark matter, gas, and
-            temperature fields, and we study training-free likelihood-based
-            inference with the same model.
+            It learns a flow defined by a vector-field ODE, and we study
+            training-free likelihood-based inference with the same model.
           </p>
           <div class="project-dual">
             <section class="project-pane" aria-label="GENESIS generation">
               <span class="project-point-label"><strong>Generation</strong></span>
               <span class="project-point-text">
                 GENESIS learns a conditional probability-flow vector field
-                with flow matching and integrates it from a simple base
-                distribution to generate dark matter, gas, and temperature
-                maps conditioned on CAMELS parameters.
+                with flow matching and integrates it to generate dark matter,
+                gas, and temperature maps conditioned on CAMELS parameters.
               </span>
               <div class="project-equation">
                 \[
@@ -538,11 +536,6 @@
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
-              <p class="pub-links">
-                The manuscript compares GENESIS with reference CAMELS
-                simulations on 256<sup>2</sup> maps at 25 h<sup>-1</sup> Mpc
-                to assess how well the model reproduces the target fields.
-              </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: GENESIS</a>
                 <a class="asset-chip" href="attachments/KPS_FOCUS_poster.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 KPS Poster PDF (GENESIS)</a>
