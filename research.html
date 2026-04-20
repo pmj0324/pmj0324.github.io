@@ -284,6 +284,10 @@
         border: 1px dashed rgba(141, 155, 255, 0.22);
       }
 
+      .project-figure-light {
+        background: #ffffff;
+      }
+
       .project-fig-img {
         width: 100%;
         display: block;
@@ -469,9 +473,9 @@
             <span class="card-subtitle">Overview</span>
           </div>
           <p class="lead-text">
-            My work focuses on developing deep generative models for
-            computational cosmology and astroparticle detector simulation.
-            Click each project below to view details, code, and related materials.
+            This page provides an overview of my research projects in
+            computational cosmology and astroparticle physics, with summaries,
+            code, and related materials for each project below.
           </p>
         </section>
 
@@ -485,7 +489,7 @@
           <p class="project-summary">
             GENESIS is a flow-matching-based generative AI model trained on
             the CAMELS simulation suite. It jointly generates dark matter,
-            gas, and temperature fields, while the learned flow is intended
+            gas, and temperature fields. The learned flow is also intended
             to support training-free, likelihood-based parameter inference
             after training.
           </p>
@@ -493,20 +497,24 @@
             <section class="project-pane" aria-label="GENESIS generation">
               <span class="project-point-label"><strong>Generation</strong></span>
               <span class="project-point-text">
-                GENESIS learns a conditional probability-flow vector field
-                with flow matching and integrates it to generate dark matter,
-                gas, and temperature maps conditioned on CAMELS parameters.
+                GENESIS learns a flow defined as the solution to an ordinary
+                differential equation, transporting samples along a learned
+                vector field to generate dark matter, gas, and temperature
+                maps conditioned on CAMELS parameters.
               </span>
               <div class="project-equation">
                 \[
-                \frac{d\mathbf{x}_t}{dt} = \mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c})
+                \begin{aligned}
+                \frac{d}{dt}\phi_t(x) &= v_t(\phi_t(x)) \\
+                \phi_0(x) &= x
+                \end{aligned}
                 \]
               </div>
             </section>
             <section class="project-pane" aria-label="GENESIS inference">
               <span class="project-point-label"><strong>Inference</strong></span>
               <span class="project-point-text">
-                The same learned flow can be evaluated with the
+                The trained flow, network, can be evaluated with the
                 change-of-variables formula, giving a training-free route to
                 likelihood-based inference of astrophysical and cosmological
                 parameters.
@@ -545,56 +553,6 @@
           </details>
         </section>
 
-        <section class="card" aria-labelledby="project-skku-heading">
-          <div class="card-header">
-            <h2 id="project-skku-heading" class="card-title">
-              JANUS &mdash; Generative AI for IceCube neutrino events
-            </h2>
-            <span class="project-tag ongoing">Ongoing</span>
-          </div>
-          <div class="pub-meta">
-            SKKU &middot; Advisor: Prof. Chang Dong Rho &middot; May 2024 &ndash; Feb 2026
-          </div>
-          <p class="project-summary">
-            JANUS explores generative AI for IceCube neutrino event simulation
-            and reconstruction.
-          </p>
-          <p class="project-summary">
-            The IceCube Neutrino Observatory is a cubic-kilometer detector
-            buried in Antarctic ice, and reconstructing event energy,
-            direction, and vertex from sparse photon signals is a key task.
-          </p>
-          <p class="project-summary">
-            JANUS studies conditional diffusion and flow-matching models
-            trained on simulated IceCube data to generate detector responses
-            from particle-level conditions and reconstruct event properties
-            from observed signals.
-          </p>
-          <details class="project-expand">
-            <summary>Expand details and materials</summary>
-            <div class="project-expand-content">
-              <!-- Figure: replace the placeholder div below with an <img> tag when ready -->
-              <div class="project-figure">
-                <iframe
-                  class="project-fig-pdf"
-                  src="slides/JANUS.pdf#toolbar=1&navpanes=0&view=FitH"
-                  title="JANUS slide deck"
-                  loading="lazy"
-                ></iframe>
-              </div>
-              <p class="pub-links">
-                The slide deck is embedded above for quick review, and the
-                poster PDF is linked below for reference.
-              </p>
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
-                <a class="asset-chip" href="slides/JANUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
-                <a class="asset-chip" href="slides/2025_Oct2.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🖼 Poster PDF</a>
-              </div>
-            </div>
-          </details>
-        </section>
-
         <section class="card" aria-labelledby="project-utah-heading">
           <div class="card-header">
             <h2 id="project-utah-heading" class="card-title">
@@ -611,25 +569,72 @@
             to analyze simulated Upgrade camera images and estimate the
             optical properties needed for detector calibration.
           </p>
+          <div class="project-inline-figure">
+            <div class="project-figure project-figure-light">
+              <img
+                class="project-fig-img"
+                src="slides/OPTICUS.png"
+                alt="OPTICUS project preview"
+                loading="lazy"
+              />
+            </div>
+          </div>
           <details class="project-expand">
-            <summary>Expand details and materials</summary>
+            <summary>Expand materials</summary>
             <div class="project-expand-content">
-              <div class="project-figure">
-                <iframe
-                  class="project-fig-pdf"
-                  src="slides/OPTICUS.pdf#toolbar=1&navpanes=0&view=FitH"
-                  title="OPTICUS slide deck"
-                  loading="lazy"
-                ></iframe>
-              </div>
-              <p class="pub-links">
-                The slide deck is embedded above for quick review, and the
-                full PDF and paper links remain below.
-              </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
                 <a class="asset-chip" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 arXiv:2507.18525</a>
                 <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section class="card" aria-labelledby="project-skku-heading">
+          <div class="card-header">
+            <h2 id="project-skku-heading" class="card-title">
+              JANUS &mdash; Generative AI for IceCube neutrino events
+            </h2>
+            <span class="project-tag ongoing">Ongoing</span>
+          </div>
+          <p class="project-summary">
+            The IceCube Neutrino Observatory is a cubic-kilometer-scale
+            neutrino detector embedded deep in the Antarctic ice, designed to
+            observe Cherenkov photons emitted by charged secondary particles
+            produced in neutrino interactions. Reconstructing the physical
+            properties of these events such as energy, direction, and
+            interaction vertex from sparse and noisy photon signals is a
+            central challenge in IceCube data analysis and is essential for
+            identifying and studying astrophysical neutrino sources.
+          </p>
+          <p class="project-summary">
+            To address this problem, JANUS investigates conditional diffusion
+            and flow-matching models trained on simulated IceCube data. These
+            models are designed to operate in both directions: generating
+            realistic detector responses from particle-level conditions, and
+            reconstructing event properties from observed detector signals. By
+            framing both simulation and reconstruction within a unified
+            generative modeling framework, JANUS aims to provide a flexible
+            and scalable approach to neutrino event analysis in IceCube.
+          </p>
+          <div class="project-inline-figure">
+            <div class="project-figure">
+              <img
+                class="project-fig-img"
+                src="slides/JANUS.png"
+                alt="JANUS project preview"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <details class="project-expand">
+            <summary>Expand materials</summary>
+            <div class="project-expand-content">
+              <div class="asset-row">
+                <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
+                <a class="asset-chip" href="slides/JANUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
+                <a class="asset-chip" href="slides/2025_Oct2.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🖼 Poster PDF</a>
               </div>
             </div>
           </details>
