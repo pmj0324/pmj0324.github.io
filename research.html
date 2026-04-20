@@ -378,21 +378,20 @@
         <section class="card" aria-labelledby="project-cosmo-heading">
           <div class="card-header">
             <h2 id="project-cosmo-heading" class="card-title">
-              GENESIS &mdash; Flow-matching for Cosmic Large-Scale Structure
+              GENESIS &mdash; Generative Emulator Networks for Inference and Simulation of Cosmological Structure
             </h2>
             <span class="project-tag">Ongoing</span>
           </div>
           <div class="pub-meta">
-            Computational Cosmology &middot; CAMELS Simulation Suite &middot; 2025 &ndash; Present
+            Computational Cosmology &middot; CAMELS Multifield Dataset &middot; 2025 &ndash; Present
           </div>
           <div class="pub-links">
-            We develop a conditional flow-matching model that generates 2D
-            projected dark-matter density fields from the CAMELS simulation
-            suite, conditioned on cosmological parameters
-            (&Omega;<sub>m</sub>, &sigma;<sub>8</sub>).
-            The model aims to replace expensive N-body simulations with a fast,
-            differentiable surrogate for parameter inference and survey
-            forecasting.
+            GENESIS is a conditional optimal-transport flow-matching emulator
+            that jointly generates dark matter, gas, and gas-temperature fields
+            from the full CAMELS parameter space, including both cosmological
+            and astrophysical feedback parameters. The model uses a U-Net
+            backbone with periodic-boundary convolutions and channel
+            squeeze-and-excitation.
           </div>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
@@ -400,16 +399,16 @@
               <div class="project-figure">
                 <div class="project-fig-placeholder">
                   <span class="project-fig-icon">🖼</span>
-                  <span>Figure: Generated cosmic web samples vs. ground truth</span>
+                  <span>Figure: Multifield samples vs. CAMELS ground truth</span>
                   <span class="project-fig-caption">(Image placeholder)</span>
                 </div>
               </div>
               <p class="pub-links">
-                Presented as a poster at the 102nd Fall Meeting of the Korean
-                Physical Society (Oct 2025, Gwangju). Current work focuses on
-                conditional generation with varying (&Omega;<sub>m</sub>,
-                &sigma;<sub>8</sub>) and downstream cosmological parameter
-                inference using the trained generator.
+                The manuscript evaluates GENESIS on 256<sup>2</sup> maps at
+                25 h<sup>-1</sup> Mpc using auto-power spectra, cross-power
+                spectra, inter-field coherence, one-point distributions, and
+                parameter-response tests across LH, CV, 1P, and EX validation
+                protocols.
               </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: GENESIS</a>
@@ -451,6 +450,7 @@
               </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
+                <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
               </div>
             </div>
           </details>
