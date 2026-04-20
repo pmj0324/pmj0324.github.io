@@ -24,7 +24,7 @@
           displayMath: [["\\[", "\\]"]],
         },
         chtml: {
-          scale: 1.02,
+          scale: 0.9,
         },
       };
     </script>
@@ -359,49 +359,44 @@
       }
 
       .project-summary {
-        font-size: 15px;
-        line-height: 1.75;
+        font-size: 14px;
+        line-height: 1.8;
         color: rgba(238, 241, 255, 0.92);
         margin: 0 0 12px;
       }
 
-      .project-points {
-        list-style: none;
-        margin: 10px 0 0;
-        padding: 0;
+      .project-dual {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 14px;
       }
 
-      .project-point {
-        padding: 16px 0;
-        border-top: 1px solid rgba(141, 155, 255, 0.12);
-      }
-
-      .project-point:first-child {
-        border-top: none;
-        padding-top: 0;
+      .project-pane {
+        min-width: 0;
       }
 
       .project-point-label {
         display: block;
-        margin-bottom: 8px;
-        font-size: 15px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(244, 247, 255, 0.96);
+        margin-bottom: 5px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        text-transform: none;
+        color: rgba(244, 247, 255, 0.94);
       }
 
       .project-point-text {
         display: block;
-        font-size: 14px;
-        line-height: 1.7;
+        font-size: 13px;
+        line-height: 1.75;
         color: var(--fg-muted);
       }
 
       .project-equation {
-        margin-top: 12px;
-        padding: 14px 16px;
-        border-radius: 14px;
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 12px;
         border: 1px solid rgba(141, 155, 255, 0.14);
         background: rgba(10, 14, 28, 0.56);
         overflow-x: auto;
@@ -410,6 +405,21 @@
       .project-equation .mjx-container {
         margin: 0 !important;
         color: rgba(244, 247, 255, 0.94);
+      }
+
+      .project-inline-figure {
+        margin-top: 18px;
+      }
+
+      .project-inline-figure .project-figure {
+        max-width: 100%;
+      }
+
+      @media (max-width: 820px) {
+        .project-dual {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
       }
 
       .footer {
@@ -479,21 +489,18 @@
             GENESIS is a unified project for multi-field cosmological
             simulation and inference in the CAMELS simulation suite, with two
             main goals: <strong>Generation</strong> and <strong>Inference</strong>.
+            The same framework is designed to connect forward modeling and
+            parameter recovery in a single conditional flow.
           </p>
-          <ul class="project-points">
-            <li class="project-point">
-              <span class="project-point-label">Project</span>
+          <div class="project-dual">
+            <section class="project-pane" aria-label="GENESIS generation">
+              <span class="project-point-label"><strong>Generation</strong></span>
               <span class="project-point-text">
-                GENESIS builds a conditional generative model for dark matter,
-                gas, and temperature fields across the astrophysical and
-                cosmological parameter space of CAMELS.
-              </span>
-            </li>
-            <li class="project-point">
-              <span class="project-point-label">Generation</span>
-              <span class="project-point-text">
-                The model learns a conditional probability-flow vector field
-                and integrates it to generate multi-field maps from the target
+                GENESIS uses an optimal-transport-inspired flow-matching
+                objective to learn a conditional probability-flow vector field
+                over dark matter, gas, and temperature fields. Integrating the
+                learned field from a simple base distribution produces
+                multi-field cosmological maps conditioned on the target
                 parameter vector.
               </span>
               <div class="project-equation">
@@ -505,14 +512,15 @@
                 = \mathbb{E}\left[\left\|\mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c}) - \mathbf{u}_t\right\|^2\right]
                 \]
               </div>
-            </li>
-            <li class="project-point">
-              <span class="project-point-label">Inference</span>
+            </section>
+            <section class="project-pane" aria-label="GENESIS inference">
+              <span class="project-point-label"><strong>Inference</strong></span>
               <span class="project-point-text">
-                The same learned flow can be evaluated with the
-                change-of-variables formula, enabling training-free,
-                likelihood-based inference of astrophysical and cosmological
-                parameters.
+                The same learned flow can be evaluated through the
+                change-of-variables formula, so the generative model also
+                provides a route to training-free, likelihood-based inference
+                of astrophysical and cosmological parameters from the same
+                conditional dynamics.
               </span>
               <div class="project-equation">
                 \[
@@ -523,18 +531,23 @@
                 \int_0^1 \nabla \cdot \mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c})\, dt
                 \]
               </div>
-            </li>
-          </ul>
+            </section>
+          </div>
+          <div class="project-inline-figure">
+            <div class="project-figure">
+              <img
+                class="project-fig-img"
+                src="images/genesis_multifield_3x7_black_02.png"
+                alt="GENESIS generated multifield samples"
+              />
+            </div>
+            <p class="pub-links" style="margin-top:8px;">
+              Generated multifield samples from GENESIS.
+            </p>
+          </div>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
-              <div class="project-figure">
-                <div class="project-fig-placeholder">
-                  <span class="project-fig-icon">🖼</span>
-                  <span>Figure: Multifield samples vs. CAMELS ground truth</span>
-                  <span class="project-fig-caption">(Image placeholder)</span>
-                </div>
-              </div>
               <p class="pub-links">
                 The manuscript evaluates GENESIS on 256<sup>2</sup> maps at
                 25 h<sup>-1</sup> Mpc using auto-power spectra, cross-power
