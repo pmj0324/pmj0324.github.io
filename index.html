@@ -240,12 +240,36 @@
         font-weight: 700;
         letter-spacing: 0.04em;
         color: #ffffff;
-        display: block;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         width: 100%;
         margin-top: 0;
         margin-bottom: 12px;
         padding-bottom: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .hero-name-mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+
+      .hero-name-dot {
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 10px rgba(141, 155, 255, 0.45);
+      }
+
+      .hero-name-dot-first {
+        width: 8px;
+      }
+
+      .hero-name-dot-second {
+        width: 13px;
       }
 
       .hero-role {
@@ -603,15 +627,20 @@
           <section aria-label="Main content">
             <article class="card intro-card" aria-labelledby="hero-heading">
               <header>
-                <h1 id="hero-heading" class="hero-name">Minje Park</h1>
+                <h1 id="hero-heading" class="hero-name">
+                  <span>Minje Park</span>
+                  <span class="hero-name-mark" aria-hidden="true">
+                    <span class="hero-name-dot hero-name-dot-first"></span>
+                    <span class="hero-name-dot hero-name-dot-second"></span>
+                  </span>
+                </h1>
               </header>
               <p class="hero-text">
                 Below are the main projects I have worked on in computational cosmology and astroparticle detector simulation.
               </p>
               <ul class="hero-text-list">
                 <li>In <strong style="color:rgba(255,255,255,0.82);">cosmology</strong>, I develop <strong style="color:rgba(255,255,255,0.82);">GENESIS</strong> (GENerative AI for thE Simulation and Inference of cosmological fieldS), an optimal-transport flow-matching emulator designed to support astrophysical and cosmological parameter inference.</li>
-                <li>In <strong style="color:rgba(255,255,255,0.82);">astroparticle physics</strong>, I develop <strong style="color:rgba(255,255,255,0.82);">JANUS</strong>, a flow-matching model for neutrino event generation and reconstruction for the IceCube Neutrino Observatory. I also worked on <strong style="color:rgba(255,255,255,0.82);">OPTICUS</strong>, a Vision Transformer model for optical property measurement in the IceCube Upgrade camera system.</li>
-                <li>For <strong style="color:rgba(255,255,255,0.82);">SWGO</strong>, I contributed to developing a reconstruction model for the next-generation gamma-ray detector.</li>
+                <li>In <strong style="color:rgba(255,255,255,0.82);">astroparticle physics</strong>, I develop <strong style="color:rgba(255,255,255,0.82);">JANUS</strong>, a flow-matching model for neutrino event generation and reconstruction for the IceCube Neutrino Observatory. I also worked on <strong style="color:rgba(255,255,255,0.82);">OPTICUS</strong>, a Vision Transformer model for optical property measurement in the IceCube Upgrade camera system, and contributed to developing a Transformer-based reconstruction model for the next-generation gamma-ray detector for <strong style="color:rgba(255,255,255,0.82);">SWGO</strong>.</li>
               </ul>
               <p class="hero-text" style="margin-bottom:0;">
                 Further details are available on the <a href="research.html">Research</a> and <a href="publications.html">Publications</a> pages.
