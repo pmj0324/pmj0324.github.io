@@ -569,7 +569,8 @@
                 The model learns a vector field
                 \(\mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\)
                 — a direction at every point in field space at time \(t\)
-                — that steers Gaussian noise \(\mathbf{x}_0\) toward
+                — that transports Gaussian noise \(\mathbf{x}_0 \sim \mathcal{N}(\mathbf{0},\mathbf{I})\)
+                toward the data distribution \(p_1\), producing
                 realistic cosmological maps conditioned on
                 \(\boldsymbol{\theta}\). Here \(\phi\) are the network
                 weights and \(\boldsymbol{\theta}\) the six CAMELS
