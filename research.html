@@ -215,6 +215,18 @@
         color: var(--fg-muted);
       }
 
+      .project-tag.ongoing {
+        border-color: rgba(141, 155, 255, 0.72);
+        background: rgba(141, 155, 255, 0.12);
+        color: #b9c2ff;
+      }
+
+      .project-tag.completed {
+        border-color: rgba(112, 214, 163, 0.72);
+        background: rgba(112, 214, 163, 0.1);
+        color: #99e3bf;
+      }
+
       .project-expand {
         margin-top: 10px;
         border-top: 1px solid rgba(37, 42, 70, 0.9);
@@ -388,18 +400,18 @@
             <h2 id="project-cosmo-heading" class="card-title">
               Genesis &mdash; Generative Emulator Networks for Inference and Simulation of Cosmological Structure
             </h2>
-            <span class="project-tag">Ongoing</span>
+            <span class="project-tag ongoing">Ongoing</span>
           </div>
           <div class="pub-meta">
             Computational Cosmology &middot; CAMELS Multifield Dataset &middot; 2025 &ndash; Present
           </div>
           <div class="pub-links">
-            GENESIS is a conditional optimal-transport flow-matching emulator
-            for cosmological fields. We learn a probability-flow vector field
-            with a flow-matching loss, then integrate that field to generate
-            dark matter, gas, and gas-temperature maps conditioned on the full
-            CAMELS parameter space. The model uses a U-Net backbone with
-            periodic-boundary convolutions and channel squeeze-and-excitation.
+            GENESIS learns a probability-flow vector field with a
+            flow-matching loss. We then integrate that field to generate dark
+            matter, gas, and gas-temperature maps conditioned on the full
+            CAMELS parameter space. We are also exploring likelihood-based
+            astrophysical and cosmological parameter inference via
+            change-of-variables.
           </div>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
@@ -416,9 +428,7 @@
                 25 h<sup>-1</sup> Mpc using auto-power spectra, cross-power
                 spectra, inter-field coherence, one-point distributions, and
                 parameter-response tests across LH, CV, 1P, and EX validation
-                protocols. We are also exploring likelihood estimation via the
-                change-of-variables formula so the learned flow can support
-                astrophysical and cosmological parameter inference.
+                protocols.
               </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: Genesis</a>
@@ -433,30 +443,32 @@
             <h2 id="project-utah-heading" class="card-title">
               IceCube Opticus Camera System
             </h2>
-            <span class="project-tag">Completed</span>
+            <span class="project-tag completed">Completed</span>
           </div>
           <div class="pub-meta">
             University of Utah &middot; Advisor: Prof. Carsten Rott &middot; Aug 2023 &ndash; Feb 2025
           </div>
           <div class="pub-links">
-            CNN/ViT-based methods for sensor calibration and estimation of
-            Antarctic ice optical properties.
+            The IceCube Upgrade Camera System uses nearly 2,000 cameras and
+            LEDs on D-Egg and mDOM modules to calibrate the detector through
+            images of Antarctic ice. I study classical and AI-based image
+            analysis methods for estimating ice optical properties and module
+            positions from transmission and reflection data.
           </div>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
-              <!-- Figure: replace the placeholder div below with an <img> tag when ready -->
-              <!-- Example: <img src="images/icecube-camera-result.png" alt="Camera system analysis results" class="project-fig-img"> -->
               <div class="project-figure">
-                <div class="project-fig-placeholder">
-                  <span class="project-fig-icon">🖼</span>
-                  <span>Figure: Architecture diagram</span>
-                  <span class="project-fig-caption">(Image placeholder)</span>
-                </div>
+                <iframe
+                  class="project-fig-pdf"
+                  src="slides/OPTICUS.pdf#view=FitH"
+                  title="OPTICUS slide deck"
+                  loading="lazy"
+                ></iframe>
               </div>
               <p class="pub-links">
-                Additional figures, notes, and detailed results will be added
-                here as the analysis is documented.
+                The slide deck is embedded above for quick review, and the
+                full PDF remains linked below.
               </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: Opticus</a>
@@ -471,14 +483,16 @@
             <h2 id="project-skku-heading" class="card-title">
               Janus &mdash; Generative Models for IceCube Signals
             </h2>
-            <span class="project-tag">Ongoing</span>
+            <span class="project-tag ongoing">Ongoing</span>
           </div>
           <div class="pub-meta">
             SKKU &middot; Advisor: Prof. Chang Dong Rho &middot; May 2024 &ndash; Feb 2026
           </div>
           <div class="pub-links">
-            Score-based diffusion and flow-matching models for PMT charge and
-            timing signal synthesis in IceCube Upgrade detector modules.
+            JANUS develops conditional diffusion and flow-matching models for
+            IceCube. The models are trained on simulated detector responses to
+            generate realistic signals from particle-level conditions and to
+            reconstruct event properties from sparse photon data.
           </div>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
