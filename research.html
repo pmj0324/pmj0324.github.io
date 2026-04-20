@@ -458,7 +458,7 @@
         display: block;
         font-size: 11px;
         font-style: italic;
-        color: rgba(193, 196, 214, 0.45);
+        color: rgba(220, 224, 240, 0.72);
         margin-bottom: 4px;
       }
 
@@ -597,6 +597,10 @@
                 it yields the log-likelihood with no extra inference
                 network — enabling training-free parameter estimation.
               </p>
+              <div class="eq-block">
+                <span class="eq-label">continuity equation along the flow:</span>
+                <div class="eq-math">\[\frac{d}{dt}\log p_t(\phi_t(x)) + \operatorname{div}(\mathbf{v}^\phi_t(\phi_t(x))) = 0\]</div>
+              </div>
               <div class="eq-block">
                 <span class="eq-label">exact log-likelihood via change-of-variables:</span>
                 <div class="eq-math">\[\log p(\mathbf{x}_1 \mid \boldsymbol{\theta}) = \log p(\mathbf{x}_0) - \int_0^1 \nabla \cdot \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt\]</div>
