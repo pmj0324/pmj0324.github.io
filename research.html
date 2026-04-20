@@ -302,6 +302,32 @@
         background: #fff;
       }
 
+      .slide-viewer {
+        margin-top: 14px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(141, 155, 255, 0.22);
+        background: #fff;
+      }
+
+      .slide-viewer object,
+      .slide-viewer iframe {
+        width: 100%;
+        height: 520px;
+        display: block;
+        border: 0;
+      }
+
+      .slide-viewer-fallback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        font-size: 13px;
+        color: var(--fg-muted);
+        background: rgba(141, 155, 255, 0.04);
+      }
+
       .project-fig-placeholder {
         width: 100%;
         min-height: 180px;
@@ -569,26 +595,18 @@
             to analyze simulated Upgrade camera images and estimate the
             optical properties needed for detector calibration.
           </p>
-          <div class="project-inline-figure">
-            <div class="project-figure project-figure-light">
-              <img
-                class="project-fig-img"
-                src="slides/OPTICUS.png"
-                alt="OPTICUS project preview"
-                loading="lazy"
-              />
-            </div>
+          <div class="asset-row" style="margin-top:12px;">
+            <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
+            <a class="asset-chip" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 arXiv:2507.18525</a>
+            <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">↗ Open PDF</a>
           </div>
-          <details class="project-expand">
-            <summary>Expand materials</summary>
-            <div class="project-expand-content">
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
-                <a class="asset-chip" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 arXiv:2507.18525</a>
-                <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
+          <div class="slide-viewer">
+            <object data="slides/OPTICUS.pdf" type="application/pdf">
+              <div class="slide-viewer-fallback">
+                PDF viewer not supported. <a href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="margin-left:6px;">Open slides</a>
               </div>
-            </div>
-          </details>
+            </object>
+          </div>
         </section>
 
         <section class="card" aria-labelledby="project-skku-heading">
@@ -618,26 +636,18 @@
             generative modeling framework, JANUS aims to provide a flexible
             and scalable approach to neutrino event analysis in IceCube.
           </p>
-          <div class="project-inline-figure">
-            <div class="project-figure">
-              <img
-                class="project-fig-img"
-                src="slides/JANUS.png"
-                alt="JANUS project preview"
-                loading="lazy"
-              />
-            </div>
+          <div class="asset-row" style="margin-top:12px;">
+            <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
+            <a class="asset-chip" href="slides/JANUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">↗ Open PDF</a>
+            <a class="asset-chip" href="slides/2025_Oct2.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🖼 Poster PDF</a>
           </div>
-          <details class="project-expand">
-            <summary>Expand materials</summary>
-            <div class="project-expand-content">
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
-                <a class="asset-chip" href="slides/JANUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
-                <a class="asset-chip" href="slides/2025_Oct2.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🖼 Poster PDF</a>
+          <div class="slide-viewer">
+            <object data="slides/JANUS.pdf" type="application/pdf">
+              <div class="slide-viewer-fallback">
+                PDF viewer not supported. <a href="slides/JANUS.pdf" target="_blank" rel="noopener noreferrer" style="margin-left:6px;">Open slides</a>
               </div>
-            </div>
-          </details>
+            </object>
+          </div>
         </section>
 
       </main>
