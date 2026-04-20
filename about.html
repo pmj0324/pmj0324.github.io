@@ -427,6 +427,60 @@
         letter-spacing: 0.02em;
       }
 
+      /* ── Interest category cards ── */
+      .interest-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 4px;
+      }
+
+      @media (max-width: 760px) {
+        .interest-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .interest-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .interest-card {
+        background: rgba(141, 155, 255, 0.05);
+        border: 1px solid rgba(141, 155, 255, 0.2);
+        border-radius: 12px;
+        padding: 12px 14px 14px;
+      }
+
+      .interest-card-title {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 10px;
+        padding-bottom: 7px;
+        border-bottom: 1px solid rgba(141, 155, 255, 0.18);
+      }
+
+      .interest-subtags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .interest-subtag {
+        padding: 3px 9px;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(193, 196, 214, 0.2);
+        font-size: 11px;
+        color: rgba(220, 222, 238, 0.75);
+        letter-spacing: 0.01em;
+      }
+
       .cv-viewer-wrap {
         margin-top: 22px;
       }
@@ -529,23 +583,43 @@
 
               <div class="about-section">
                 <div class="about-section-title">Research interests</div>
-                <div class="focus-tags">
-                  <span class="focus-tag">Cosmology</span>
-                  <span class="focus-tag">Large-Scale Structure</span>
-                  <span class="focus-tag">General Relativity</span>
-                  <span class="focus-tag">Differential Manifold</span>
-                  <span class="focus-tag">Generative AI</span>
-                  <span class="focus-tag">Astroparticle Physics</span>
-                  <span class="focus-tag">Simulation-Based Inference</span>
-                </div>
-                <div class="tech-tags">
-                  <span class="tech-tag">Flow Matching</span>
-                  <span class="tech-tag">Diffusion Models</span>
-                  <span class="tech-tag">Neural ODE</span>
-                  <span class="tech-tag">U-Net</span>
-                  <span class="tech-tag">Vision Transformer</span>
-                  <span class="tech-tag">PyTorch</span>
-                  <span class="tech-tag">JAX</span>
+                <div class="interest-grid">
+                  <div class="interest-card">
+                    <div class="interest-card-title">Cosmology</div>
+                    <div class="interest-subtags">
+                      <span class="interest-subtag">Large-Scale Structure</span>
+                      <span class="interest-subtag">General Relativity</span>
+                      <span class="interest-subtag">Black Hole</span>
+                      <span class="interest-subtag">Galaxy</span>
+                    </div>
+                  </div>
+                  <div class="interest-card">
+                    <div class="interest-card-title">Generative AI</div>
+                    <div class="interest-subtags">
+                      <span class="interest-subtag">Flow Matching</span>
+                      <span class="interest-subtag">Diffusion Models</span>
+                      <span class="interest-subtag">SBI</span>
+                      <span class="interest-subtag">Data Manifold</span>
+                    </div>
+                  </div>
+                  <div class="interest-card">
+                    <div class="interest-card-title">Astroparticle Physics</div>
+                    <div class="interest-subtags">
+                      <span class="interest-subtag">Neutrino Sources</span>
+                      <span class="interest-subtag">AGN</span>
+                      <span class="interest-subtag">Supernova</span>
+                    </div>
+                  </div>
+                  <div class="interest-card">
+                    <div class="interest-card-title">Artificial Intelligence</div>
+                    <div class="interest-subtags">
+                      <span class="interest-subtag">Transformer</span>
+                      <span class="interest-subtag">Foundation Model</span>
+                      <span class="interest-subtag">Representation Learning</span>
+                      <span class="interest-subtag">Inverse Problem</span>
+                      <span class="interest-subtag">Posterior Estimation</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
