@@ -590,10 +590,23 @@
             University of Utah &middot; Advisor: Prof. Carsten Rott &middot; Aug 2023 &ndash; Feb 2025
           </div>
           <p class="project-summary">
-            The IceCube Neutrino Observatory is a cubic-kilometer detector
-            buried in Antarctic ice, and OPTICUS uses a Vision Transformer
-            to analyze simulated Upgrade camera images and estimate the
-            optical properties needed for detector calibration.
+            To improve detector calibration in IceCube, the Upgrade introduced
+            a camera system that images light propagation through Antarctic ice.
+            These images contain information about the optical properties of
+            both the bulk ice and the refrozen drill-hole ice, but extracting
+            that information requires modeling complex, non-linear image
+            patterns.
+          </p>
+          <p class="project-summary">
+            OPTICUS is a hybrid CNN&ndash;Vision Transformer model developed
+            for this task, combining convolutional feature extraction with
+            global attention over image patches. Trained on simulated camera
+            images, it achieved percent-level accuracy in estimating scattering
+            lengths for both bulk ice and hole ice. In particular, the
+            OPTICUS-Bulk model achieved an overall 68% containment of about
+            0.42%, while the OPTICUS-Hole model achieved about 0.18%,
+            demonstrating high-precision optical-property estimation in both
+            regimes.
           </p>
           <div class="asset-row" style="margin-top:12px;">
             <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
