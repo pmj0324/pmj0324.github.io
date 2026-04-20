@@ -398,6 +398,19 @@
         color: var(--fg-muted);
       }
 
+      .project-equation {
+        margin-top: 8px;
+        margin-left: 2px;
+        padding-left: 14px;
+        border-left: 2px solid rgba(141, 155, 255, 0.2);
+        font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+        font-size: 13px;
+        line-height: 1.75;
+        color: rgba(224, 229, 255, 0.78);
+        white-space: nowrap;
+        overflow-x: auto;
+      }
+
       .footer {
         margin-top: auto;
         padding: 20px;
@@ -463,7 +476,8 @@
           </div>
           <p class="project-summary">
             GENESIS is a unified project for multi-field cosmological
-            generation and parameter inference in the CAMELS simulation suite.
+            simulation and inference in the CAMELS simulation suite, with two
+            main goals: <strong>Generation</strong> and <strong>Inference</strong>.
           </p>
           <ul class="project-points">
             <li class="project-point">
@@ -477,19 +491,27 @@
             <li class="project-point">
               <span class="project-point-label">Generation</span>
               <span class="project-point-text">
-                The model learns a probability-flow vector field with a
-                flow-matching loss, then integrates that field to generate
-                multi-field maps conditioned on the target parameter vector.
+                The model learns a conditional probability-flow vector field
+                and integrates it to generate multi-field maps from the target
+                parameter vector.
               </span>
+              <div class="project-equation">
+                d<strong>x</strong><sub>t</sub>/dt = <strong>v</strong><sub>&theta;</sub>(<strong>x</strong><sub>t</sub>, t, <strong>c</strong>)
+                <br />
+                L<sub>FM</sub> = E[ || <strong>v</strong><sub>&theta;</sub>(<strong>x</strong><sub>t</sub>, t, <strong>c</strong>) - <strong>u</strong><sub>t</sub> ||<sup>2</sup> ]
+              </div>
             </li>
             <li class="project-point">
               <span class="project-point-label">Inference</span>
               <span class="project-point-text">
-                Because the same learned flow can be evaluated through the
-                change-of-variables formula, we are studying training-free
+                The same learned flow can be evaluated with the
+                change-of-variables formula, enabling training-free,
                 likelihood-based inference of astrophysical and cosmological
-                parameters from generated-model probabilities.
+                parameters.
               </span>
+              <div class="project-equation">
+                log p<sub>&theta;</sub>(<strong>x</strong><sub>1</sub> | <strong>c</strong>) = log p(<strong>x</strong><sub>0</sub>) - &int;<sub>0</sub><sup>1</sup> &nabla; &middot; <strong>v</strong><sub>&theta;</sub>(<strong>x</strong><sub>t</sub>, t, <strong>c</strong>) dt
+              </div>
             </li>
           </ul>
           <details class="project-expand">
