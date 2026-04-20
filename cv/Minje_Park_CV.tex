@@ -147,16 +147,9 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 
 \experienceitem{GENESIS: Multi-Field Cosmological Simulation and Inference}{May 2025 -- Present}{Independent Research}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Designed GENESIS (GENerative AI for thE Simulation and Inference of cosmological fieldS), a flow-matching framework aimed at two related tasks: conditional cosmological field generation and training-free parameter inference.
-        \[
-        \frac{d\mathbf{x}_t}{dt} = \mathbf{v}_\theta(\mathbf{x}_t,t,\mathbf{c}), \qquad
-        \mathcal{L}_{\mathrm{FM}} = \mathbb{E}\!\left[\left\|\mathbf{v}_\theta(\mathbf{x}_t,t,\mathbf{c}) - \mathbf{u}_t\right\|^2\right]
-        \]
-        \item The learned probability-flow vector field is integrated to generate dark matter, gas, and temperature fields conditioned on CAMELS parameters, while the same flow is also used for likelihood-based inference without additional training.
-        \[
-        \log p_\theta(\mathbf{x}_1 \mid \mathbf{c}) = \log p(\mathbf{x}_0) - \int_0^1 \nabla \cdot \mathbf{v}_\theta(\mathbf{x}_t,t,\mathbf{c})\,dt
-        \]
-        Studying maximum-likelihood estimation of cosmological parameters $\mathbf{c}$ from the same learned flow.
+        \item Designed GENESIS (GENerative AI for thE Simulation and Inference of cosmological fieldS) to connect two tasks in one flow-matching framework: conditional cosmological field generation and training-free parameter inference.
+        \item The model learns a conditional probability-flow vector field $\mathbf{v}_\theta(\mathbf{x}_t,t,\mathbf{c})$ and integrates it to generate dark matter, gas, and temperature fields conditioned on CAMELS parameters.
+        \item The same learned flow is also evaluated through the change-of-variables formula, enabling likelihood-based inference of cosmological parameters $\mathbf{c}$ without additional training.
     \end{itemize}
 }
 
