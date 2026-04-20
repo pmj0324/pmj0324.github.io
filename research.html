@@ -17,6 +17,21 @@
     />
     <link rel="stylesheet" href="shared-theme.css" />
     <link rel="stylesheet" href="shared-nav-mobile.css" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [["\\[", "\\]"]],
+        },
+        chtml: {
+          scale: 1.02,
+        },
+      };
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    ></script>
     <style>
       :root {
         --bg: #0b1020;
@@ -357,9 +372,8 @@
       }
 
       .project-point {
-        padding: 12px 0 12px 14px;
+        padding: 16px 0;
         border-top: 1px solid rgba(141, 155, 255, 0.12);
-        position: relative;
       }
 
       .project-point:first-child {
@@ -367,28 +381,14 @@
         padding-top: 0;
       }
 
-      .project-point::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 20px;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: rgba(141, 155, 255, 0.7);
-      }
-
-      .project-point:first-child::before {
-        top: 8px;
-      }
-
       .project-point-label {
         display: block;
-        margin-bottom: 4px;
-        font-size: 12px;
+        margin-bottom: 8px;
+        font-size: 15px;
+        font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--accent);
+        color: rgba(244, 247, 255, 0.96);
       }
 
       .project-point-text {
@@ -399,16 +399,17 @@
       }
 
       .project-equation {
-        margin-top: 8px;
-        margin-left: 2px;
-        padding-left: 14px;
-        border-left: 2px solid rgba(141, 155, 255, 0.2);
-        font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
-        font-size: 13px;
-        line-height: 1.75;
-        color: rgba(224, 229, 255, 0.78);
-        white-space: nowrap;
+        margin-top: 12px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid rgba(141, 155, 255, 0.14);
+        background: rgba(10, 14, 28, 0.56);
         overflow-x: auto;
+      }
+
+      .project-equation .mjx-container {
+        margin: 0 !important;
+        color: rgba(244, 247, 255, 0.94);
       }
 
       .footer {
@@ -496,9 +497,13 @@
                 parameter vector.
               </span>
               <div class="project-equation">
-                d<strong>x</strong><sub>t</sub>/dt = <strong>v</strong><sub>&theta;</sub>(<strong>x</strong><sub>t</sub>, t, <strong>c</strong>)
-                <br />
-                L<sub>FM</sub> = E[ || <strong>v</strong><sub>&theta;</sub>(<strong>x</strong><sub>t</sub>, t, <strong>c</strong>) - <strong>u</strong><sub>t</sub> ||<sup>2</sup> ]
+                \[
+                \frac{d\mathbf{x}_t}{dt} = \mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c})
+                \]
+                \[
+                \mathcal{L}_{\mathrm{FM}}
+                = \mathbb{E}\left[\left\|\mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c}) - \mathbf{u}_t\right\|^2\right]
+                \]
               </div>
             </li>
             <li class="project-point">
@@ -510,7 +515,13 @@
                 parameters.
               </span>
               <div class="project-equation">
-                log p<sub>&theta;</sub>(<strong>x</strong><sub>1</sub> | <strong>c</strong>) = log p(<strong>x</strong><sub>0</sub>) - &int;<sub>0</sub><sup>1</sup> &nabla; &middot; <strong>v</strong><sub>&theta;</sub>(<strong>x</strong><sub>t</sub>, t, <strong>c</strong>) dt
+                \[
+                \log p_\theta(\mathbf{x}_1 \mid \mathbf{c})
+                =
+                \log p(\mathbf{x}_0)
+                -
+                \int_0^1 \nabla \cdot \mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c})\, dt
+                \]
               </div>
             </li>
           </ul>
