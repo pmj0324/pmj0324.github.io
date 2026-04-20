@@ -216,15 +216,15 @@
       }
 
       .project-tag.ongoing {
-        border-color: rgba(141, 155, 255, 0.72);
-        background: rgba(141, 155, 255, 0.12);
-        color: #b9c2ff;
-      }
-
-      .project-tag.completed {
         border-color: rgba(112, 214, 163, 0.72);
         background: rgba(112, 214, 163, 0.1);
         color: #99e3bf;
+      }
+
+      .project-tag.completed {
+        border-color: rgba(143, 148, 183, 0.52);
+        background: rgba(143, 148, 183, 0.08);
+        color: var(--fg-muted);
       }
 
       .project-expand {
@@ -351,36 +351,50 @@
       }
 
       .project-points {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 10px;
-        margin-top: 12px;
+        list-style: none;
+        margin: 10px 0 0;
+        padding: 0;
       }
 
       .project-point {
-        padding: 12px 14px;
-        border-radius: 14px;
-        border: 1px solid rgba(141, 155, 255, 0.18);
-        background: linear-gradient(
-          160deg,
-          rgba(28, 35, 58, 0.92),
-          rgba(13, 19, 36, 0.96)
-        );
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        padding: 12px 0 12px 14px;
+        border-top: 1px solid rgba(141, 155, 255, 0.12);
+        position: relative;
+      }
+
+      .project-point:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .project-point::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 20px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(141, 155, 255, 0.7);
+      }
+
+      .project-point:first-child::before {
+        top: 8px;
       }
 
       .project-point-label {
         display: block;
-        margin-bottom: 6px;
-        font-size: 11px;
-        letter-spacing: 0.1em;
+        margin-bottom: 4px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--accent);
       }
 
       .project-point-text {
+        display: block;
         font-size: 14px;
-        line-height: 1.6;
+        line-height: 1.7;
         color: var(--fg-muted);
       }
 
@@ -451,33 +465,33 @@
             GENESIS is a unified project for multi-field cosmological
             generation and parameter inference in the CAMELS simulation suite.
           </p>
-          <div class="project-points">
-            <div class="project-point">
+          <ul class="project-points">
+            <li class="project-point">
               <span class="project-point-label">Project</span>
-              <div class="project-point-text">
+              <span class="project-point-text">
                 GENESIS builds a conditional generative model for dark matter,
                 gas, and temperature fields across the astrophysical and
                 cosmological parameter space of CAMELS.
-              </div>
-            </div>
-            <div class="project-point">
+              </span>
+            </li>
+            <li class="project-point">
               <span class="project-point-label">Generation</span>
-              <div class="project-point-text">
+              <span class="project-point-text">
                 The model learns a probability-flow vector field with a
                 flow-matching loss, then integrates that field to generate
                 multi-field maps conditioned on the target parameter vector.
-              </div>
-            </div>
-            <div class="project-point">
+              </span>
+            </li>
+            <li class="project-point">
               <span class="project-point-label">Inference</span>
-              <div class="project-point-text">
+              <span class="project-point-text">
                 Because the same learned flow can be evaluated through the
                 change-of-variables formula, we are studying training-free
                 likelihood-based inference of astrophysical and cosmological
                 parameters from generated-model probabilities.
-              </div>
-            </div>
-          </div>
+              </span>
+            </li>
+          </ul>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
@@ -503,67 +517,6 @@
           </details>
         </section>
 
-        <section class="card" aria-labelledby="project-utah-heading">
-          <div class="card-header">
-            <h2 id="project-utah-heading" class="card-title">
-              IceCube OPTICUS Camera System
-            </h2>
-            <span class="project-tag completed">Completed</span>
-          </div>
-          <div class="pub-meta">
-            University of Utah &middot; Advisor: Prof. Carsten Rott &middot; Aug 2023 &ndash; Feb 2025
-          </div>
-          <p class="project-summary">
-            OPTICUS studies calibration for the IceCube Upgrade through
-            camera-based measurements of Antarctic ice and module geometry.
-          </p>
-          <div class="project-points">
-            <div class="project-point">
-              <span class="project-point-label">System</span>
-              <div class="project-point-text">
-                Nearly 2,000 cameras and LEDs on D-Egg and mDOM modules record
-                transmission and reflection images across the Upgrade volume.
-              </div>
-            </div>
-            <div class="project-point">
-              <span class="project-point-label">Goal</span>
-              <div class="project-point-text">
-                These images help characterize refrozen drill-hole ice, bulk
-                ice between strings, and the positions of the optical modules.
-              </div>
-            </div>
-            <div class="project-point">
-              <span class="project-point-label">Method</span>
-              <div class="project-point-text">
-                I compare classical maximum-likelihood and neural-network
-                analysis methods using images from a dedicated simulation
-                pipeline.
-              </div>
-            </div>
-          </div>
-          <details class="project-expand">
-            <summary>Expand details and materials</summary>
-            <div class="project-expand-content">
-              <div class="project-figure">
-                <iframe
-                  class="project-fig-pdf"
-                  src="slides/OPTICUS.pdf#toolbar=1&navpanes=0&view=FitH"
-                  title="OPTICUS slide deck"
-                  loading="lazy"
-                ></iframe>
-              </div>
-              <p class="pub-links">
-                The slide deck is embedded above for quick review, and the
-                full PDF remains linked below.
-              </p>
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
-                <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
-              </div>
-            </div>
-          </details>
-        </section>
-
         <section class="card" aria-labelledby="project-skku-heading">
           <div class="card-header">
             <h2 id="project-skku-heading" class="card-title">
@@ -578,32 +531,32 @@
             JANUS applies generative modeling to IceCube event simulation and
             reconstruction in a single framework.
           </p>
-          <div class="project-points">
-            <div class="project-point">
+          <ul class="project-points">
+            <li class="project-point">
               <span class="project-point-label">Physics</span>
-              <div class="project-point-text">
+              <span class="project-point-text">
                 IceCube reconstructs quantities such as energy, direction, and
                 interaction vertex from sparse and noisy Cherenkov-photon
                 signals in Antarctic ice.
-              </div>
-            </div>
-            <div class="project-point">
+              </span>
+            </li>
+            <li class="project-point">
               <span class="project-point-label">Model</span>
-              <div class="project-point-text">
+              <span class="project-point-text">
                 JANUS develops conditional score-based diffusion and
                 flow-matching models trained on simulated IceCube detector
                 responses.
-              </div>
-            </div>
-            <div class="project-point">
+              </span>
+            </li>
+            <li class="project-point">
               <span class="project-point-label">Objective</span>
-              <div class="project-point-text">
+              <span class="project-point-text">
                 The same framework is designed to generate detector signals
                 from particle-level conditions and to infer event properties
                 from observed photon data.
-              </div>
-            </div>
-          </div>
+              </span>
+            </li>
+          </ul>
           <details class="project-expand">
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
@@ -624,6 +577,70 @@
                 <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
                 <a class="asset-chip" href="slides/JANUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
                 <a class="asset-chip" href="slides/2025_Oct2.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🖼 Poster PDF</a>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section class="card" aria-labelledby="project-utah-heading">
+          <div class="card-header">
+            <h2 id="project-utah-heading" class="card-title">
+              OPTICUS &mdash; Vision Transformer for IceCube optical-property measurement
+            </h2>
+            <span class="project-tag completed">Completed</span>
+          </div>
+          <div class="pub-meta">
+            University of Utah &middot; Advisor: Prof. Carsten Rott &middot; Aug 2023 &ndash; Feb 2025
+          </div>
+          <p class="project-summary">
+            OPTICUS is a Vision Transformer model for optical-property
+            measurement in the IceCube Upgrade camera system.
+          </p>
+          <ul class="project-points">
+            <li class="project-point">
+              <span class="project-point-label">Context</span>
+              <span class="project-point-text">
+                The IceCube Upgrade Camera System uses cameras and LEDs on
+                D-Egg and mDOM modules to collect transmission and reflection
+                images of Antarctic ice across the detector volume.
+              </span>
+            </li>
+            <li class="project-point">
+              <span class="project-point-label">Model</span>
+              <span class="project-point-text">
+                OPTICUS applies a Vision Transformer to simulated camera
+                images in order to estimate the optical properties of the ice
+                relevant for detector calibration.
+              </span>
+            </li>
+            <li class="project-point">
+              <span class="project-point-label">Result</span>
+              <span class="project-point-text">
+                The model is evaluated within the broader calibration program
+                for the IceCube Upgrade and reported in the accompanying ICRC
+                proceedings paper and slide deck.
+              </span>
+            </li>
+          </ul>
+          <details class="project-expand">
+            <summary>Expand details and materials</summary>
+            <div class="project-expand-content">
+              <div class="project-figure">
+                <iframe
+                  class="project-fig-pdf"
+                  src="slides/OPTICUS.pdf#toolbar=1&navpanes=0&view=FitH"
+                  title="OPTICUS slide deck"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <p class="pub-links">
+                The slide deck is embedded above for quick review, and the
+                full PDF and paper links remain below.
+              </p>
+              <div class="asset-row">
+                <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
+                <a class="asset-chip" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 arXiv:2507.18525</a>
+                <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
               </div>
             </div>
           </details>
