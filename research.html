@@ -513,26 +513,32 @@
             <span class="project-tag ongoing">Ongoing</span>
           </div>
           <p class="project-summary">
-            GENESIS is a flow-matching-based generative AI model trained on
-            the CAMELS simulation suite. It jointly generates dark matter,
-            gas, and temperature fields. The learned flow is also intended
-            to support training-free, likelihood-based parameter inference
-            after training.
+            GENESIS is a conditional generative model trained on the CAMELS
+            Multifield Dataset. It jointly emulates three correlated 2D
+            projected fields &mdash; dark matter density
+            \(M_\mathrm{cdm}\), gas density \(M_\mathrm{gas}\), and gas
+            temperature \(T\) &mdash; conditioned on the full
+            six-dimensional parameter vector
+            \(\boldsymbol{\theta} = (\Omega_m,\,\sigma_8,\,A_\mathrm{SN1},\,A_\mathrm{SN2},\,A_\mathrm{AGN1},\,A_\mathrm{AGN2})\),
+            using optimal-transport flow matching (OT-FM) with a U-Net
+            backbone incorporating periodic-boundary convolutions.
           </p>
           <div class="project-dual">
             <section class="project-pane" aria-label="GENESIS generation">
               <span class="project-point-label"><strong>Generation</strong></span>
               <span class="project-point-text">
-                GENESIS learns a flow defined as the solution to an ordinary
-                differential equation, transporting samples along a learned
-                vector field to generate dark matter, gas, and temperature
-                maps conditioned on CAMELS parameters.
+                GENESIS learns a time-dependent vector field
+                \(\mathbf{v}_\theta(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\)
+                that defines a probability-flow ODE. Integrating from
+                Gaussian noise \(\mathbf{x}_0 \sim \mathcal{N}(\mathbf{0},\mathbf{I})\),
+                the flow map \(\phi_t\) transports samples to the target
+                field distribution conditioned on \(\boldsymbol{\theta}\).
               </span>
               <div class="project-equation">
                 \[
                 \begin{aligned}
-                \frac{d}{dt}\phi_t(x) &= v_t(\phi_t(x)) \\
-                \phi_0(x) &= x
+                \dot{\phi}_t(\mathbf{x}) &= \mathbf{v}_\theta(\phi_t(\mathbf{x}),\,t,\,\boldsymbol{\theta}) \\
+                \phi_0(\mathbf{x}) &= \mathbf{x}
                 \end{aligned}
                 \]
               </div>
@@ -540,18 +546,18 @@
             <section class="project-pane" aria-label="GENESIS inference">
               <span class="project-point-label"><strong>Inference</strong></span>
               <span class="project-point-text">
-                The trained flow, network, can be evaluated with the
-                change-of-variables formula, giving a training-free route to
-                likelihood-based inference of astrophysical and cosmological
-                parameters.
+                As a continuous normalizing flow (CNF), the trained vector
+                field admits exact log-likelihood evaluation via the
+                instantaneous change-of-variables formula, providing a
+                training-free route to likelihood-based parameter inference.
+                The term \(\nabla\cdot\mathbf{v}_\theta\) tracks the volume
+                change along the flow trajectory.
               </span>
               <div class="project-equation">
                 \[
-                \log p_\theta(\mathbf{x}_1 \mid \mathbf{c})
-                =
-                \log p(\mathbf{x}_0)
-                -
-                \int_0^1 \nabla \cdot \mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c})\, dt
+                \log p(\mathbf{x}_1 \mid \boldsymbol{\theta})
+                = \log p(\mathbf{x}_0)
+                - \int_0^1 \nabla \cdot \mathbf{v}_\theta(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt
                 \]
               </div>
             </section>
