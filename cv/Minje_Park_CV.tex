@@ -6,8 +6,6 @@
 \usepackage{lmodern}
 \usepackage[margin=0.75in]{geometry}
 \usepackage{xcolor}
-\usepackage{amsmath}
-\usepackage{amssymb}
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -78,9 +76,9 @@
         bottom=5pt
     ]
     \textbf{\large #1} \hfill {\color{primary}#2}
-    
+
     \textit{#3}
-    
+
     #4
     \end{tcolorbox}
     \vspace{3pt}
@@ -145,30 +143,30 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 % === Research Experience ===
 \section{Research Experience}
 
-\experienceitem{GENESIS: Multi-Field Cosmological Simulation and Inference}{May 2025 -- Present}{Independent Research}{
+\experienceitem{Generative AI for Multi-Field Cosmological Simulation}{May 2025 -- Present}{Independent Research}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Designed GENESIS (GENerative AI for thE Simulation and Inference of cosmological fieldS) for conditional cosmological field generation and training-free parameter inference.
-        \item The model learns a conditional probability-flow vector field and integrates it to generate dark matter, gas, and temperature fields conditioned on CAMELS parameters.
+        \item Developed GENESIS (GENerative AI for thE Simulation and Inference of cosmological fieldS), an optimal-transport flow-matching emulator for multi-field generation using CAMELS simulation data.
+        \item Investigating training-free astrophysical and cosmological parameter inference via maximum-likelihood estimation using GENESIS.
     \end{itemize}
 }
 
-\experienceitem{CNN and Vision Transformer for the IceCube OPTICUS Camera System}{Aug 2023 -- Sep 2025}{Supervisor: Carsten Rott, Department of Physics, Sungkyunkwan University}{
+\experienceitem{CNN and Vision Transformer for IceCube Camera Analysis}{Aug 2023 -- Sep 2025}{Supervisor: Carsten Rott, Department of Physics, Sungkyunkwan University}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
         \item Developed CNN and Vision Transformer models for the IceCube Upgrade Camera System; results published as a poster and proceedings paper at ICRC 2025 (arXiv:2507.18525).
     \end{itemize}
 }
 
-\experienceitem{Generative Modeling for IceCube and SWGO}{May 2024 -- Present}{Supervisor: Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
+\experienceitem{Generative AI for IceCube and SWGO}{May 2024 -- Present}{Supervisor: Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developed diffusion models for SWGO detector-signal synthesis.
-        \item Built JANUS, a flow-matching framework for conditional IceCube detector-signal generation and event-level inference.
+        \item Developed diffusion models and Mixture Density Networks for synthesizing PMT signals for SWGO Tank Simulation.
+        \item Built flow \& diffusion models to generate neutrino event in IceCube Observatory.
     \end{itemize}
 }
 
-\experienceitem{Transformer-Based Reconstruction for SWGO}{Jun 2024 -- Present}{Supervisor: Ian Watson, Department of Physics, University of Seoul}{
+\experienceitem{Transformer-Based Reconstruction Model for SWGO}{Jun 2024 -- Present}{Supervisor: Ian Watson, Department of Physics, University of Seoul}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Investigated position embedding strategies for transformer-based primary-particle reconstruction in SWGO.
-        \item Studied flow-matching models for SWGO detector-signal synthesis from simulation data.
+        \item Investigated position embedding strategies for transformer-based primary-particle reconstruction model in SWGO.
+        \item Developed flow matching models to synthesize SWGO detector signals from simulation data.
     \end{itemize}
 }
 
@@ -188,15 +186,16 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 {C. Rott, \textbf{\textit{M. Park}}, M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)}
 {Proceedings of Science (PoS), ICRC2025; \href{https://arxiv.org/abs/2507.18525}{arXiv:2507.18525}}
 
+\newpage
 % === Conference Presentations ===
 \section{Conference Presentations}
 \conferenceitem{Apr 2026}{[Talk, scheduled] Generative AI for IceCube Observatory}{102nd Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
 
 \conferenceitem{Apr 2026}{[Poster, scheduled] Mixture Density Networks for Fast Detector Response Simulation in SWGO}{102nd Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
 
-\conferenceitem{Apr 2026}{[Poster, scheduled] Flow Matching Model for Generating Cosmic Web Images}{102nd Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
-
 \conferenceitem{Feb 2026}{[Poster] Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM}{The 33rd Korean Conference on Semiconductors, Jeongseon, Republic of Korea}
+
+\conferenceitem{Oct 2025}{[Poster] Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction}{102nd Fall Meeting of the Korean Physical Society, Gwangju, Republic of Korea}
 
 \conferenceitem{Oct 2025}{[Poster] Generative AI for Cosmological Simulation and Manifold Representation}{KPS Undergraduate Physics Research Competition, 102nd Fall Meeting of the Korean Physical Society, Gwangju, Republic of Korea}
 
@@ -212,8 +211,11 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 
 \conferenceitem{Apr 2024}{[Poster] Study of Optical Properties in Antarctic Ice Using Simulated Images}{100th Spring Meeting of the Korean Physical Society, Daejeon, Republic of Korea}
 
+\newpage
 % === Honors & Awards ===
 \section{Honors \& Awards}
+\awarditem{Best Presentation Award}{The 33rd Korean Conference on Semiconductors, 2026}{Awarded for poster presentation: ``Investigation of IGZO-Based 3D Vertical Channel Transistors and
+Physics-Informed Neural Network Modeling for Next-Generation DRAM''}
 
 \awarditem{Best Presentation Award}{4th K-Neutrino Symposium, 2025}{Awarded for poster presentation: ``Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction''}
 
@@ -223,10 +225,11 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 \section{Skills}
 
 \begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.18\textwidth}X@{}}
-Programming   & Python, NumPy, SciPy, Matplotlib \\[4pt]
-Frameworks    & PyTorch, JAX \\[4pt]
-Models        & Transformer, Vision Transformer (ViT), CNN, Diffusion Models, Flow Matching \\[4pt]
-Tools         & Linux, HTCondor, Git, Bash/Shell, HDF5 \\
+Programming    & Python, NumPy, SciPy, Matplotlib \\[6pt]
+Tools          & Linux, HTCondor, Git, Bash/Shell, HDF5 \\[6pt]
+Frameworks     & PyTorch, JAX \\[6pt]
+Architectures  & Transformer, Linformer, Vision Transformer (ViT), Swin Transformer, CNN, ResNet, U-Net, Perceiver \\[6pt]
+Models         & VAE, Diffusion Model, Optimal Transport Flow Matching Model, Mixture Density Network, Physics-Informed Neural Network, Masked Auto Encoder \\[6pt]
 \end{tabularx}
 
 % === Collaboration Memberships ===
