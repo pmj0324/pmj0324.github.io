@@ -427,54 +427,25 @@
         letter-spacing: 0.02em;
       }
 
-      /* ── Interest category grid ── */
-      .interest-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px 20px;
+      /* ── Interest list ── */
+      .interest-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         margin-top: 4px;
       }
 
-      @media (max-width: 760px) {
-        .interest-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
+      .interest-row-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.88);
+        margin-bottom: 2px;
       }
 
-      @media (max-width: 480px) {
-        .interest-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .interest-card {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .interest-card-title {
+      .interest-row-items {
         font-size: 12.5px;
-        font-weight: 700;
-        color: rgba(255, 255, 255, 0.9);
-        padding-bottom: 6px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .interest-subtags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-
-      .interest-subtag {
-        padding: 3px 9px;
-        border-radius: var(--radius-pill);
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(193, 196, 214, 0.18);
-        font-size: 11px;
         color: rgba(193, 196, 214, 0.6);
-        letter-spacing: 0.01em;
+        line-height: 1.6;
       }
 
       .cv-viewer-wrap {
@@ -579,42 +550,22 @@
 
               <div class="about-section">
                 <div class="about-section-title">Research interests</div>
-                <div class="interest-grid">
-                  <div class="interest-card">
-                    <div class="interest-card-title">Cosmology</div>
-                    <div class="interest-subtags">
-                      <span class="interest-subtag">Large-Scale Structure</span>
-                      <span class="interest-subtag">General Relativity</span>
-                      <span class="interest-subtag">Black Hole</span>
-                      <span class="interest-subtag">Galaxy</span>
-                    </div>
+                <div class="interest-list">
+                  <div>
+                    <div class="interest-row-title">Cosmology</div>
+                    <div class="interest-row-items">Large-Scale Structure &middot; General Relativity &middot; Black Hole &middot; Galaxy</div>
                   </div>
-                  <div class="interest-card">
-                    <div class="interest-card-title">Generative AI</div>
-                    <div class="interest-subtags">
-                      <span class="interest-subtag">Flow Matching</span>
-                      <span class="interest-subtag">Diffusion Models</span>
-                      <span class="interest-subtag">SBI</span>
-                      <span class="interest-subtag">Data Manifold</span>
-                    </div>
+                  <div>
+                    <div class="interest-row-title">Generative AI</div>
+                    <div class="interest-row-items">Flow Matching &middot; Diffusion Models &middot; SBI &middot; Data Manifold</div>
                   </div>
-                  <div class="interest-card">
-                    <div class="interest-card-title">Astroparticle Physics</div>
-                    <div class="interest-subtags">
-                      <span class="interest-subtag">Neutrino Sources</span>
-                      <span class="interest-subtag">AGN</span>
-                      <span class="interest-subtag">Supernova</span>
-                    </div>
+                  <div>
+                    <div class="interest-row-title">Astroparticle Physics</div>
+                    <div class="interest-row-items">Neutrino Sources &middot; AGN &middot; Supernova</div>
                   </div>
-                  <div class="interest-card">
-                    <div class="interest-card-title">Artificial Intelligence</div>
-                    <div class="interest-subtags">
-                      <span class="interest-subtag">Transformer</span>
-                      <span class="interest-subtag">Foundation Model</span>
-                      <span class="interest-subtag">Representation Learning</span>
-                      <span class="interest-subtag">Inverse Problem</span>
-                      <span class="interest-subtag">Posterior Estimation</span>
-                    </div>
+                  <div>
+                    <div class="interest-row-title">Artificial Intelligence</div>
+                    <div class="interest-row-items">Transformer &middot; Foundation Model &middot; Representation Learning &middot; Inverse Problem &middot; Posterior Estimation</div>
                   </div>
                 </div>
               </div>
