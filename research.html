@@ -263,6 +263,14 @@
         border-radius: 10px;
       }
 
+      .project-fig-pdf {
+        width: 100%;
+        height: 540px;
+        display: block;
+        border: 0;
+        background: #fff;
+      }
+
       .project-fig-placeholder {
         width: 100%;
         min-height: 180px;
@@ -474,22 +482,22 @@
             <summary>Expand details and materials</summary>
             <div class="project-expand-content">
               <!-- Figure: replace the placeholder div below with an <img> tag when ready -->
-              <!-- Example: <img src="images/generative-icecube-arch.png" alt="Model architecture" class="project-fig-img"> -->
               <div class="project-figure">
-                <div class="project-fig-placeholder">
-                  <span class="project-fig-icon">🖼</span>
-                  <span>Figure: Architecture diagram</span>
-                  <span class="project-fig-caption">(Image placeholder)</span>
-                </div>
+                <iframe
+                  class="project-fig-pdf"
+                  src="slides/JANUS.pdf#view=FitH"
+                  title="JANUS slide deck"
+                  loading="lazy"
+                ></iframe>
               </div>
               <p class="pub-links">
-                Detailed training configurations, comparison plots, and
-                ablation studies will be documented here as the project
-                progresses.
+                The slide deck is embedded above for quick review, and the
+                poster PDF is linked below for reference.
               </p>
               <div class="asset-row">
                 <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
                 <a class="asset-chip" href="slides/JANUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Slides</a>
+                <a class="asset-chip" href="slides/2025_Oct2.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🖼 Poster PDF</a>
               </div>
             </div>
           </details>
