@@ -145,38 +145,38 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 % === Research Experience ===
 \section{Research Experience}
 
-\experienceitem{Generative AI for Multi-Field Cosmological Simulation}{May 2025 -- Present}{Independent Research}{
+\experienceitem{GENESIS: Multi-Field Cosmological Simulation and Inference}{May 2025 -- Present}{Independent Research}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developed GENESIS (GENerative AI for thE Simulation and Inference of cosmological fieldS), a network built to do two tasks at once: generate cosmological fields and support parameter inference.
+        \item Designed GENESIS (GENerative AI for thE Simulation and Inference of cosmological fieldS), a flow-matching framework aimed at two related tasks: conditional cosmological field generation and training-free parameter inference.
         \[
         \frac{d\mathbf{x}_t}{dt} = \mathbf{v}_\theta(\mathbf{x}_t,t,\mathbf{c}), \qquad
         \mathcal{L}_{\mathrm{FM}} = \mathbb{E}\!\left[\left\|\mathbf{v}_\theta(\mathbf{x}_t,t,\mathbf{c}) - \mathbf{u}_t\right\|^2\right]
         \]
-        \item The learned probability-flow vector field generates dark matter, gas, and temperature fields conditioned on CAMELS parameters, and the same flow is used without additional training for likelihood-based inference.
+        \item The learned probability-flow vector field is integrated to generate dark matter, gas, and temperature fields conditioned on CAMELS parameters, while the same flow is also used for likelihood-based inference without additional training.
         \[
         \log p_\theta(\mathbf{x}_1 \mid \mathbf{c}) = \log p(\mathbf{x}_0) - \int_0^1 \nabla \cdot \mathbf{v}_\theta(\mathbf{x}_t,t,\mathbf{c})\,dt
         \]
-        We plan to maximize this likelihood to infer the cosmological parameters $\mathbf{c}$.
+        Studying maximum-likelihood estimation of cosmological parameters $\mathbf{c}$ from the same learned flow.
     \end{itemize}
 }
 
-\experienceitem{CNN and Vision Transformer for IceCube Camera Analysis}{Aug 2023 -- Sep 2025}{Supervisor: Carsten Rott, Department of Physics, Sungkyunkwan University}{
+\experienceitem{CNN and Vision Transformer for the IceCube OPTICUS Camera System}{Aug 2023 -- Sep 2025}{Supervisor: Carsten Rott, Department of Physics, Sungkyunkwan University}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
         \item Developed CNN and Vision Transformer models for the IceCube Upgrade Camera System; results published as a poster and proceedings paper at ICRC 2025 (arXiv:2507.18525).
     \end{itemize}
 }
 
-\experienceitem{Generative AI for IceCube and SWGO}{May 2024 -- Present}{Supervisor: Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
+\experienceitem{Generative Modeling for IceCube and SWGO}{May 2024 -- Present}{Supervisor: Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developed diffusion models for synthesizing PMT signals for SWGO.
-        \item Built flow-matching models to generate IceCube detector signals conditioned on neutrino properties.
+        \item Developed diffusion models for SWGO detector-signal synthesis.
+        \item Built JANUS, a flow-matching framework for conditional IceCube detector-signal generation and event-level inference.
     \end{itemize}
 }
 
 \experienceitem{Transformer-Based Reconstruction for SWGO}{Jun 2024 -- Present}{Supervisor: Ian Watson, Department of Physics, University of Seoul}{
     \begin{itemize}[leftmargin=*, itemsep=2pt]
         \item Investigated position embedding strategies for transformer-based primary-particle reconstruction in SWGO.
-        \item Developed flow-matching models to synthesize SWGO detector signals from simulation data.
+        \item Studied flow-matching models for SWGO detector-signal synthesis from simulation data.
     \end{itemize}
 }
 
