@@ -487,40 +487,33 @@
           </div>
           <p class="project-summary">
             GENESIS is a unified project for multi-field cosmological
-            simulation and inference in the CAMELS simulation suite, with two
-            main goals: <strong>Generation</strong> and <strong>Inference</strong>.
-            The same framework is designed to connect forward modeling and
-            parameter recovery in a single conditional flow.
+            generation and inference in the CAMELS simulation suite.
+            It learns a conditional flow for dark matter, gas, and
+            temperature fields, and we study training-free likelihood-based
+            inference with the same model.
           </p>
           <div class="project-dual">
             <section class="project-pane" aria-label="GENESIS generation">
               <span class="project-point-label"><strong>Generation</strong></span>
               <span class="project-point-text">
-                GENESIS uses an optimal-transport-inspired flow-matching
-                objective to learn a conditional probability-flow vector field
-                over dark matter, gas, and temperature fields. Integrating the
-                learned field from a simple base distribution produces
-                multi-field cosmological maps conditioned on the target
-                parameter vector.
+                GENESIS learns a conditional probability-flow vector field
+                with flow matching and integrates it from a simple base
+                distribution to generate dark matter, gas, and temperature
+                maps conditioned on CAMELS parameters.
               </span>
               <div class="project-equation">
                 \[
                 \frac{d\mathbf{x}_t}{dt} = \mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c})
-                \]
-                \[
-                \mathcal{L}_{\mathrm{FM}}
-                = \mathbb{E}\left[\left\|\mathbf{v}_\theta(\mathbf{x}_t, t, \mathbf{c}) - \mathbf{u}_t\right\|^2\right]
                 \]
               </div>
             </section>
             <section class="project-pane" aria-label="GENESIS inference">
               <span class="project-point-label"><strong>Inference</strong></span>
               <span class="project-point-text">
-                The same learned flow can be evaluated through the
-                change-of-variables formula, so the generative model also
-                provides a route to training-free, likelihood-based inference
-                of astrophysical and cosmological parameters from the same
-                conditional dynamics.
+                The same learned flow can be evaluated with the
+                change-of-variables formula, giving a training-free route to
+                likelihood-based inference of astrophysical and cosmological
+                parameters.
               </span>
               <div class="project-equation">
                 \[
