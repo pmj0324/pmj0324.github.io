@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: genesis_mnras.aux
+The style file: mnras.bst
+Database file #1: genesis_refs.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+You've used 42 entries,
+            2881 wiz_defined-function locations,
+            992 strings with 14206 characters,
+and the built_in function-call counts, 20938 in all, are:
+= -- 1330
+> -- 1909
+< -- 110
++ -- 869
+- -- 314
+* -- 2441
+:= -- 3515
+add.period$ -- 0
+call.type$ -- 42
+change.case$ -- 84
+chr.to.int$ -- 41
+cite$ -- 42
+duplicate$ -- 1036
+empty$ -- 1071
+format.name$ -- 434
+if$ -- 3502
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 41
+newline$ -- 139
+num.names$ -- 332
+pop$ -- 347
+preamble$ -- 1
+purify$ -- 168
+quote$ -- 0
+skip$ -- 599
+stack$ -- 0
+substring$ -- 721
+swap$ -- 586
+text.length$ -- 172
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 378
+warning$ -- 0
+while$ -- 292
+width$ -- 0
+write$ -- 420

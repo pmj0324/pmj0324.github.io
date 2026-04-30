@@ -1,0 +1,221 @@
+\begin{thebibliography}{}
+\makeatletter
+\relax
+\def\mn@urlcharsother{\let\do\@makeother \do\$\do\&\do\#\do\^\do\_\do\%\do\~}
+\def\mn@doi{\begingroup\mn@urlcharsother \@ifnextchar [ {\mn@doi@}
+  {\mn@doi@[]}}
+\def\mn@doi@[#1]#2{\def\@tempa{#1}\ifx\@tempa\@empty \href
+  {http://dx.doi.org/#2} {doi:#2}\else \href {http://dx.doi.org/#2} {#1}\fi
+  \endgroup}
+\def\mn@eprint#1#2{\mn@eprint@#1:#2::\@nil}
+\def\mn@eprint@arXiv#1{\href {http://arxiv.org/abs/#1} {{\tt arXiv:#1}}}
+\def\mn@eprint@dblp#1{\href {http://dblp.uni-trier.de/rec/bibtex/#1.xml}
+  {dblp:#1}}
+\def\mn@eprint@#1:#2:#3:#4\@nil{\def\@tempa {#1}\def\@tempb {#2}\def\@tempc
+  {#3}\ifx \@tempc \@empty \let \@tempc \@tempb \let \@tempb \@tempa \fi \ifx
+  \@tempb \@empty \def\@tempb {arXiv}\fi \@ifundefined
+  {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
+  mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
+
+\bibitem[\protect\citeauthoryear{Andrianomena, Villaescusa-Navarro  \&
+  Hassan}{Andrianomena et~al.}{2022}]{Andrianomena2022}
+Andrianomena S.,  Villaescusa-Navarro F.,   Hassan S.,  2022, \mn@doi [arXiv
+  e-prints] {10.48550/arXiv.2211.05000}
+
+\bibitem[\protect\citeauthoryear{Andrianomena, Hassan  \&
+  Villaescusa-Navarro}{Andrianomena et~al.}{2025}]{Andrianomena2024}
+Andrianomena S.,  Hassan S.,   Villaescusa-Navarro F.,  2025, \mn@doi
+  [Astrophysics and Space Science] {10.1007/s10509-025-04440-9}, 370, 44
+
+\bibitem[\protect\citeauthoryear{Chen, Rubanova, Bettencourt  \& Duvenaud}{Chen
+  et~al.}{2018}]{Chen2018}
+Chen R. T.~Q.,  Rubanova Y.,  Bettencourt J.,   Duvenaud D.,  2018, in Advances
+  in Neural Information Processing Systems.  (\mn@eprint {arXiv} {1806.07366})
+
+\bibitem[\protect\citeauthoryear{Cranmer, Brehmer  \& Louppe}{Cranmer
+  et~al.}{2020}]{Cranmer2020}
+Cranmer K.,  Brehmer J.,   Louppe G.,  2020, \mn@doi [Proceedings of the
+  National Academy of Sciences] {10.1073/pnas.1912789117}, 117, 30055
+
+\bibitem[\protect\citeauthoryear{Friedman \& Hassan}{Friedman \&
+  Hassan}{2022}]{Friedman2022HIGlow}
+Friedman R.,  Hassan S.,  2022, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Goodfellow, Pouget-Abadie, Mirza
+  et~al.}{Goodfellow et~al.}{2014}]{Goodfellow2014}
+Goodfellow I.~J.,  Pouget-Abadie J.,  Mirza M.,   et~al., 2014, in Advances in
+  Neural Information Processing Systems.  (\mn@eprint {arXiv} {1406.2661})
+
+\bibitem[\protect\citeauthoryear{Harris, Millman, van~der Walt  et~al.}{Harris
+  et~al.}{2020}]{Harris2020}
+Harris C.~R.,  Millman K.~J.,  van~der Walt S.~J.,   et~al., 2020, \mn@doi
+  [Nature] {10.1038/s41586-020-2649-2}, 585, 357
+
+\bibitem[\protect\citeauthoryear{Hassan \& Andrianomena}{Hassan \&
+  Andrianomena}{2023}]{Hassan2023HIDM}
+Hassan S.,  Andrianomena S.,  2023, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Hassan, Villaescusa-Navarro, Wandelt
+  et~al.}{Hassan et~al.}{2021}]{Hassan2021HIFlow}
+Hassan S.,  Villaescusa-Navarro F.,  Wandelt B.,   et~al., 2021, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{He, Li, Feng, Ho, Ravanbakhsh, Chen  \&
+  P{\'o}czos}{He et~al.}{2019}]{He2019}
+He S.,  Li Y.,  Feng Y.,  Ho S.,  Ravanbakhsh S.,  Chen W.,   P{\'o}czos B.,
+  2019, \mn@doi [Proceedings of the National Academy of Sciences]
+  {10.1073/pnas.1821458116}, 116, 13825
+
+\bibitem[\protect\citeauthoryear{Ho \& Salimans}{Ho \& Salimans}{2022}]{Ho2022}
+Ho J.,  Salimans T.,  2022, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Ho, Jain  \& Abbeel}{Ho et~al.}{2020}]{Ho2020}
+Ho J.,  Jain A.,   Abbeel P.,  2020, in Advances in Neural Information
+  Processing Systems. p.~6840 (\mn@eprint {arXiv} {2006.11239})
+
+\bibitem[\protect\citeauthoryear{Horowitz, Cuesta-Lazaro  \& Yehia}{Horowitz
+  et~al.}{2025}]{Horowitz2025}
+Horowitz B.,  Cuesta-Lazaro C.,   Yehia O.,  2025, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Hunter}{Hunter}{2007}]{Hunter2007}
+Hunter J.~D.,  2007, \mn@doi [Computing in Science \& Engineering]
+  {10.1109/MCSE.2007.55}, 9, 90
+
+\bibitem[\protect\citeauthoryear{Jo \& Kim}{Jo \& Kim}{2019}]{JoKim2019}
+Jo Y.,  Kim J.-h.,  2019, \mn@doi [MNRAS] {10.1093/mnras/stz2304}, 489, 3565
+
+\bibitem[\protect\citeauthoryear{Kannan, Qiu, Cuesta-Lazaro  \& Jeong}{Kannan
+  et~al.}{2025}]{Kannan2025}
+Kannan S.,  Qiu T.,  Cuesta-Lazaro C.,   Jeong H.,  2025, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Kingma \& Welling}{Kingma \&
+  Welling}{2014}]{Kingma2014}
+Kingma D.~P.,  Welling M.,  2014, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Lipman, Chen, Ben-Hamu, Nickel  \& Le}{Lipman
+  et~al.}{2023}]{Lipman2023}
+Lipman Y.,  Chen R. T.~Q.,  Ben-Hamu H.,  Nickel M.,   Le M.,  2023, in
+  International Conference on Learning Representations.  (\mn@eprint {arXiv}
+  {2210.02747})
+
+\bibitem[\protect\citeauthoryear{Loshchilov \& Hutter}{Loshchilov \&
+  Hutter}{2019}]{Loshchilov2019}
+Loshchilov I.,  Hutter F.,  2019, in International Conference on Learning
+  Representations.  (\mn@eprint {arXiv} {1711.05101})
+
+\bibitem[\protect\citeauthoryear{Mishra, Trotta  \& Viel}{Mishra
+  et~al.}{2026}]{Mishra2026}
+Mishra S.,  Trotta R.,   Viel M.,  2026, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Mudur \& Finkbeiner}{Mudur \&
+  Finkbeiner}{2022}]{Mudur2022DDPM}
+Mudur N.,  Finkbeiner D.~P.,  2022, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Mudur, Cuesta-Lazaro  \& Finkbeiner}{Mudur
+  et~al.}{2024a}]{Mudur2024}
+Mudur N.,  Cuesta-Lazaro C.,   Finkbeiner D.~P.,  2024a, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Mudur, Cuesta-Lazaro  \& Finkbeiner}{Mudur
+  et~al.}{2024b}]{Mudur2024DiffHMC}
+Mudur N.,  Cuesta-Lazaro C.,   Finkbeiner D.~P.,  2024b, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Mustafa, Bard, Bhimji, Luki{\'c}, Al-Rfou  \&
+  Kratochvil}{Mustafa et~al.}{2019}]{Mustafa2019}
+Mustafa M.,  Bard D.,  Bhimji W.,  Luki{\'c} Z.,  Al-Rfou R.,   Kratochvil
+  J.~M.,  2019, \mn@doi [Computational Astrophysics and Cosmology]
+  {10.1186/s40668-019-0029-9}, 6, 1
+
+\bibitem[\protect\citeauthoryear{Ono, Park, Mudur, Ni, Cuesta-Lazaro  \&
+  Villaescusa-Navarro}{Ono et~al.}{2024}]{Ono2024Debiasing}
+Ono V.,  Park C.~F.,  Mudur N.,  Ni Y.,  Cuesta-Lazaro C.,
+  Villaescusa-Navarro F.,  2024, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Park, Ono, Mudur, Ni  \& Cuesta-Lazaro}{Park
+  et~al.}{2023}]{Park2023Diffusion}
+Park C.~F.,  Ono V.,  Mudur N.,  Ni Y.,   Cuesta-Lazaro C.,  2023, arXiv
+  e-prints
+
+\bibitem[\protect\citeauthoryear{Paszke, Gross, Massa  et~al.}{Paszke
+  et~al.}{2019}]{Paszke2019}
+Paszke A.,  Gross S.,  Massa F.,   et~al., 2019, in Advances in Neural
+  Information Processing Systems.  (\mn@eprint {arXiv} {1912.01703})
+
+\bibitem[\protect\citeauthoryear{Perez, Strub, {de Vries}, Dumoulin  \&
+  Courville}{Perez et~al.}{2018}]{Perez2018}
+Perez E.,  Strub F.,  {de Vries} H.,  Dumoulin V.,   Courville A.,  2018, in
+  Proceedings of the Thirty-Second AAAI Conference on Artificial Intelligence.
+  pp 3942--3951
+
+\bibitem[\protect\citeauthoryear{Perraudin, Fluri, Kacprzak, Lucchi  \&
+  Schawinski}{Perraudin et~al.}{2021}]{Perraudin2021}
+Perraudin N.,  Fluri J.,  Kacprzak T.,  Lucchi A.,   Schawinski K.,  2021,
+  A\&A, 646, A75
+
+\bibitem[\protect\citeauthoryear{Pillepich, Springel, Nelson  et~al.}{Pillepich
+  et~al.}{2018}]{Pillepich2018IllustrisTNG}
+Pillepich A.,  Springel V.,  Nelson D.,   et~al., 2018, \mn@doi [MNRAS]
+  {10.1093/mnras/stx2656}, 473, 4077
+
+\bibitem[\protect\citeauthoryear{Ravanbakhsh, Oliva, Fromenteau, Price, Ho,
+  Schneider  \& P{\'o}czos}{Ravanbakhsh et~al.}{2017}]{Ravanbakhsh2017}
+Ravanbakhsh S.,  Oliva J.,  Fromenteau S.,  Price L.~C.,  Ho S.,  Schneider J.,
+    P{\'o}czos B.,  2017, arXiv e-prints
+
+\bibitem[\protect\citeauthoryear{Rezende \& Mohamed}{Rezende \&
+  Mohamed}{2015}]{RezendeMohamed2015}
+Rezende D.~J.,  Mohamed S.,  2015, in International Conference on Machine
+  Learning.  (\mn@eprint {arXiv} {1505.05770})
+
+\bibitem[\protect\citeauthoryear{Ronneberger, Fischer  \& Brox}{Ronneberger
+  et~al.}{2015}]{Ronneberger2015}
+Ronneberger O.,  Fischer P.,   Brox T.,  2015, in Medical Image Computing and
+  Computer-Assisted Intervention. pp 234--241,
+  \mn@doi{10.1007/978-3-319-24574-4_28}
+
+\bibitem[\protect\citeauthoryear{Song, Sohl-Dickstein, Kingma  et~al.}{Song
+  et~al.}{2021}]{Song2021}
+Song Y.,  Sohl-Dickstein J.,  Kingma D.~P.,   et~al., 2021, in International
+  Conference on Learning Representations.  (\mn@eprint {arXiv} {2011.13456})
+
+\bibitem[\protect\citeauthoryear{Vaswani, Shazeer, Parmar, Uszkoreit, Jones,
+  Gomez, Kaiser  \& Polosukhin}{Vaswani et~al.}{2017}]{Vaswani2017}
+Vaswani A.,  Shazeer N.,  Parmar N.,  Uszkoreit J.,  Jones L.,  Gomez A.~N.,
+  Kaiser L.,   Polosukhin I.,  2017, in Advances in Neural Information
+  Processing Systems.  (\mn@eprint {arXiv} {1706.03762})
+
+\bibitem[\protect\citeauthoryear{Villaescusa-Navarro}{Villaescusa-Navarro}{2018}]{Villaescusa2018Pylians}
+Villaescusa-Navarro F.,  2018, Pylians: {Python} libraries for the analysis of
+  numerical simulations, Astrophysics Source Code Library, ascl:1811.008, \url
+  {https://github.com/franciscovillaescusa/Pylians3}
+
+\bibitem[\protect\citeauthoryear{Villaescusa-Navarro, Angl{\'e}s-Alc{\'a}zar,
+  Genel  et~al.}{Villaescusa-Navarro et~al.}{2021}]{Villaescusa2021}
+Villaescusa-Navarro F.,  Angl{\'e}s-Alc{\'a}zar D.,  Genel S.,   et~al., 2021,
+  \mn@doi [ApJ] {10.3847/1538-4357/abf7ba}, 915, 71
+
+\bibitem[\protect\citeauthoryear{Villaescusa-Navarro, Genel,
+  Angl{\'e}s-Alc{\'a}zar  et~al.}{Villaescusa-Navarro
+  et~al.}{2022}]{Villaescusa2022}
+Villaescusa-Navarro F.,  Genel S.,  Angl{\'e}s-Alc{\'a}zar D.,   et~al., 2022,
+  \mn@doi [ApJS] {10.3847/1538-4365/ac5ab0}, 259, 61
+
+\bibitem[\protect\citeauthoryear{Virtanen, Gommers, Oliphant  et~al.}{Virtanen
+  et~al.}{2020}]{Virtanen2020}
+Virtanen P.,  Gommers R.,  Oliphant T.~E.,   et~al., 2020, \mn@doi [Nature
+  Methods] {10.1038/s41592-019-0686-2}, 17, 261
+
+\bibitem[\protect\citeauthoryear{Weinberger, Springel, Hernquist
+  et~al.}{Weinberger et~al.}{2017}]{Weinberger2017}
+Weinberger R.,  Springel V.,  Hernquist L.,   et~al., 2017, \mn@doi [MNRAS]
+  {10.1093/mnras/stw2944}, 465, 3291
+
+\bibitem[\protect\citeauthoryear{Wu \& He}{Wu \& He}{2018}]{Wu2018}
+Wu Y.,  He K.,  2018, in European Conference on Computer Vision. pp 3--19,
+  \mn@doi{10.1007/978-3-030-01261-8_1}
+
+\bibitem[\protect\citeauthoryear{Zhang, Wang, Zhang, Sun, He, Contardo,
+  Villaescusa-Navarro  \& Ho}{Zhang et~al.}{2019}]{Zhang2019}
+Zhang X.,  Wang Y.,  Zhang W.,  Sun Y.,  He S.,  Contardo G.,
+  Villaescusa-Navarro F.,   Ho S.,  2019, arXiv e-prints
+
+\makeatother
+\end{thebibliography}

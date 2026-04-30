@@ -1,0 +1,28 @@
+\begingroup
+  \centering
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.08}
+  \refstepcounter{table}
+  \label{tab:lh_pdf}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc@{}}
+    \toprule
+    Metric & $M_{\mathrm{cdm}}$ & $M_{\mathrm{gas}}$ & $T$ \\
+    \midrule
+    KS stat $D$ & $0.0292$ $[0.0135,\ 0.0574]$ (82\%) & $0.0328$ $[0.0149,\ 0.0568]$ (78\%) & $0.0408$ $[0.0214,\ 0.0734]$ (58\%) \\
+    $\varepsilon_\mu$ & $0.0018$ $[0.0006,\ 0.0038]$ (100\%) & $0.0022$ $[0.0007,\ 0.0047]$ (100\%) & $0.0097$ $[0.0034,\ 0.0231]$ (100\%) \\
+    $\varepsilon_\sigma$ & $0.0171$ $[0.0044,\ 0.0363]$ (100\%) & $0.0161$ $[0.0044,\ 0.0441]$ (99\%) & $0.0247$ $[0.0070,\ 0.0570]$ (98\%) \\
+    JSD & $0.0020$ $[0.0014,\ 0.0039]$ & $0.0022$ $[0.0014,\ 0.0041]$ & $0.0038$ $[0.0022,\ 0.0063]$ \\
+    \bottomrule
+  \end{tabular*}
+  \par\smallskip
+  \parbox{\textwidth}{\small
+    \textbf{Table~\thetable.} LH test-set pixel-value distribution statistics
+    ($N_{\mathrm{sim}}=100$, $n_{\mathrm{gen}}=30$ per sim). Each cell reports
+    the median and 68\% interval [p$_{16}$, p$_{84}$] over the 100 simulations.
+    Pass\% indicates the fraction of simulations below the acceptance threshold
+    (KS\,$\leq\!0.05$; $\varepsilon_\mu\!\leq\!0.05$;
+    $\varepsilon_\sigma\!\leq\!0.10$). JSD has no threshold and is reported for
+    reference.}
+  \par\vspace{1em}
+\endgroup

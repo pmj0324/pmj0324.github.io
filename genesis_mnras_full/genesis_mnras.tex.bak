@@ -1,0 +1,1612 @@
+% genesis_mnras.tex
+%
+% GENESIS — MNRAS Manuscript
+% Based on mnras_template.tex v3.3 (April 2024)
+%
+% FILL MARKERS:  \FILL{description}  — replace with actual values
+% TODO MARKERS:  % TODO: ...         — action items before submission
+%
+% Compile:  pdflatex genesis_mnras.tex
+%           bibtex   genesis_mnras
+%           pdflatex genesis_mnras.tex (x2)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[usenatbib]{mnras}
+
+% \usepackage{newtxtext,newtxmath}  % preferred; uncomment if available
+\usepackage{mathptmx}  % fallback Times font
+\usepackage[T1]{fontenc}
+
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+%%%%% EXTRA PACKAGES %%%%%
+\usepackage{graphicx}
+\graphicspath{{figuers/}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{afterpage}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{multirow}
+% \usepackage{siunitx}  % commented out for compilation (not used in body)
+\usepackage{enumitem}
+
+%%%%% CUSTOM COMMANDS %%%%%
+\newcommand{\FILL}[1]{\textcolor{red}{\textbf{[#1]}}}
+\newcommand{\Mcdm}{M_{\rm cdm}}
+\newcommand{\Mgas}{M_{\rm gas}}
+\newcommand{\Tgas}{T}
+\newcommand{\Om}{\Omega_{\rm m}}
+\newcommand{\sig}{\sigma_8}
+\newcommand{\thetavec}{\boldsymbol{\theta}}
+\newcommand{\kvec}{\boldsymbol{k}}
+\newcommand{\Pk}{P(k)}
+\newcommand{\Pkab}{P_{ab}(k)}
+\newcommand{\rab}{r_{ab}(k)}
+\newcommand{\DeltaP}{\Delta P/P}
+\newcommand{\figfull}{0.86\textwidth}
+\newcommand{\figwide}{0.86\textwidth}
+\newcommand{\figpair}{0.44\textwidth}
+\newcommand{\figtriple}{0.32\textwidth}
+\newcommand{\figcol}{\columnwidth}
+\newcommand{\figcolwide}{\columnwidth}
+\newcommand{\figcolsquare}{0.70\columnwidth}
+% \FloatBarrier is provided by placeins package
+\newcommand{\figplaceholder}[3]{%
+  \fbox{%
+    \begin{minipage}[c][#2][c]{#1}
+      \centering
+      \vspace{0pt}
+      \textbf{Figure Placeholder}\\[0.35em]
+      {\footnotesize #3}
+    \end{minipage}%
+  }%
+}
+\newcommand{\layoutplaceholder}[3]{%
+  \begingroup
+  \setlength{\fboxsep}{0pt}%
+  \fbox{%
+    \begin{minipage}[c][#2][c]{#1}
+      \centering
+      \footnotesize
+      \textbf{#3}\\[0.35em]
+      {\scriptsize placeholder}
+    \end{minipage}%
+  }%
+  \endgroup
+}
+\newenvironment{inlinefigure}[1]{%
+  \par\smallskip
+  \refstepcounter{figure}\label{#1}%
+  \noindent\begin{minipage}{\columnwidth}
+  \centering
+}{%
+  \end{minipage}%
+  \par\smallskip
+}
+\newcommand{\inlinefigcaption}[1]{%
+  \par\vspace{0.4ex}%
+  {\footnotesize\textbf{Figure~\thefigure.} #1\par}%
+}
+
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\dbltopfraction}{0.92}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.86}
+\renewcommand{\dblfloatpagefraction}{0.86}
+\setlength{\textfloatsep}{7pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{7pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{6pt plus 2pt minus 2pt}
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+\title[GENESIS: Cosmological Structure Emulation]{%
+GENESIS: Generative Emulator Networks for Inference and Simulation of
+Cosmological Structure}
+
+\author[M. Park]{%
+Minje Park$^{1}$\thanks{E-mail: pmj0324@g.skku.edu}
+\\
+$^{1}$Department of Physics, Sungkyunkwan University, Suwon 16419, Republic of Korea
+}
+
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+\pubyear{\the\year{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+%% ── Abstract ──────────────────────────────────────────────────────────────
+\begin{abstract}
+Machine-learning methods in cosmology increasingly rely on large,
+physically realistic training sets drawn from hydrodynamic simulations,
+but the cost of such simulations limits dense coverage of cosmological
+and astrophysical parameter space.
+The CAMELS project and its public CAMELS Multifield Dataset provide a
+controlled setting for learning from multiple correlated fields across
+this design space, yet existing approaches have focused primarily on
+single-field generation or have validated multifield outputs through
+per-channel summaries alone.
+We present \textsc{Genesis}, a conditional generative model that
+produces dark matter density, gas density, and gas temperature fields
+as a correlated triplet, conditioned on all six CAMELS parameters
+including four astrophysical feedback parameters.
+The model uses optimal-transport flow matching (OT-FM) with a U-Net backbone
+incorporating periodic-boundary convolutions, explicit conditioning
+embeddings, and multi-scale self-attention.
+We evaluate \textsc{Genesis} as a field-level multifield emulator on
+$256^2$ maps at $25\,h^{-1}$~Mpc, using auto-power spectra,
+cross-power spectra, inter-field coherence, one-point distributions,
+and cosmic-variance leave-one-out consistency across two CAMELS
+validation protocols (LH and CV).
+The model reproduces key per-field and cross-field statistics of the
+target simulations across a broad range of scales, suggesting that
+OT-FM-based multifield emulators offer a practical path toward
+fast cosmological forward modelling.
+\end{abstract}
+
+\begin{keywords}
+methods: numerical -- methods: statistical --
+cosmology: large-scale structure of Universe -- galaxies: formation
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+%% =============================================================
+%%  §1  INTRODUCTION
+%% =============================================================
+\section{Introduction}
+\label{sec:intro}
+
+In modern cosmology, machine learning has emerged as an indispensable
+tool across a broad range of inference and modelling problems,
+including cosmological parameter inference
+\citep{Ravanbakhsh2017,Cranmer2020}, field-level analyses and baryonic
+field mapping \citep{JoKim2019,Zhang2019}, generative modelling of
+cosmological fields \citep{Mustafa2019}, and the emulation of
+expensive simulations \citep{He2019,Perraudin2021}.
+As in many other machine-learning settings, progress in these problems
+depends on access to large and diverse training sets. In cosmology,
+such training sets are often provided by large suites of hydrodynamic
+simulations that span both cosmological and astrophysical parameter
+space, but these simulation campaigns remain computationally expensive.
+The Cosmology and Astrophysics with Machine Learning Simulations
+\citep[CAMELS;][]{Villaescusa2021} project was conceived to address
+this challenge by producing simulation outputs paired with parameter
+labels across thousands of runs while systematically varying both
+cosmological and astrophysical parameters in a controlled design.
+As part of the CAMELS project, the CAMELS Multifield Dataset
+\citep[CMD;][]{Villaescusa2022} makes these simulations publicly
+available as 2D maps and 3D grids of multiple physical fields ---
+dark matter density, gas density, neutral hydrogen, temperature, and
+related quantities --- each paired with full parameter labels spanning
+the design space.
+This makes CMD a natural
+testbed for studying not only individual field statistics but also
+the correlations among physically related observables, and for
+developing generative models conditioned on the full parameter vector.
+
+Since then, CAMELS and CMD have underpinned a growing body of
+machine-learning studies, including multifield cosmological inference
+\citep{Villaescusa2021MultifieldAI}, field-level marginalization of
+baryonic effects \citep{Villaescusa2021FieldLevel}, robust field-level
+inference with halos \citep{Shao2023}, and field-level emulation of
+baryonic effects across hydrodynamic simulations
+\citep{Sharma2024FieldLevel}.Among these directions, deep generative modelling has attracted
+particular attention, driven by the prospect of producing field
+realizations across parameter space and of constructing likelihood
+surrogates for parameter inference \citep{Mudur2024DiffHMC}.
+Early approaches applied GANs \citep{Goodfellow2014} and normalizing
+flows \citep{RezendeMohamed2015} to cosmological multifield emulation,
+HI-map generation, and likelihood-based inference
+\citep{Andrianomena2022,Andrianomena2024,Hassan2021HIFlow,Friedman2022HIGlow}.
+As diffusion models rose to prominence in the deep-learning community
+\citep{Ho2020,Song2021}, they were rapidly adopted for astrophysical
+tasks, including field generation \citep{Mudur2022DDPM}, dark-matter
+reconstruction from biased tracers
+\citep{Park2023Diffusion,Ono2024Debiasing}, HI-map emulation
+\citep{Hassan2023HIDM}, and cosmological field emulation and parameter
+inference \citep{Mudur2024,Mudur2024DiffHMC}.
+More recent work has explored further alternatives: latent-diffusion
+upscaling of cosmological fields \citep{Mishra2026}, stochastic-interpolant
+baryonic field mapping \citep{Horowitz2025}, and hybrid
+physical-neural differentiable simulators \citep{Thomsen2025Hybrid}.
+
+Three directions, however, remain largely unaddressed. First, while
+some works have produced multifield outputs
+\citep{Andrianomena2022,Andrianomena2024}, most generative models
+target a single field in isolation
+\citep{Hassan2021HIFlow,Mudur2022DDPM,Hassan2023HIDM,Mudur2024}, and
+the simultaneous generation of dark matter density, gas density, and
+gas temperature as a correlated triplet has not been explored.
+Second, conditioning has been restricted to the two cosmological
+parameters ($\Om$, $\sig$) across virtually all existing models,
+including those that generate multifield outputs
+\citep{Andrianomena2022,Andrianomena2024}, leaving the four
+astrophysical feedback parameters
+($A_{\rm SN1}$, $A_{\rm SN2}$, $A_{\rm AGN1}$, $A_{\rm AGN2}$) fixed
+or marginalized over, despite their strong influence on baryonic
+fields. This also motivates our choice of fields: dark matter density,
+gas density, and gas temperature are jointly sensitive to both
+cosmological and feedback parameters, making them the natural target
+for a fully conditioned multifield model. Third, while
+optimal-transport flow matching (OT-FM) has recently been explored for
+cosmological representation learning \citep{Kannan2025}, its
+application to direct field generation and emulation remains absent.
+This leaves two key advantages of the OT-FM framework unexploited:
+straighter transport trajectories that reduce the number of function
+evaluations required for generation, and exact likelihood evaluation
+within the continuous normalizing flow (CNF) framework
+\citep{Chen2018} --- neither of which is
+available to diffusion-based surrogates without variational
+approximations \citep{Lipman2023}. A fast multifield forward model covering
+the full parameter space
+$(\Om, \sig, A_{\rm SN1}, A_{\rm SN2}, A_{\rm AGN1}, A_{\rm AGN2})$
+would fill these gaps and provide a practical foundation for
+simulation-based inference \citep[SBI;][]{Cranmer2020} pipelines that
+need conditional field-level sampling at scale
+\citep{Mudur2024DiffHMC}.
+
+In this work, we introduce \textsc{Genesis}
+(\textbf{GEN}erative \textbf{E}mulator \textbf{N}etworks for
+\textbf{I}nference and \textbf{S}imulation of cosmological
+\textbf{S}tructure), a conditional
+CNF trained with OT-FM for multifield cosmological emulation. Our
+contributions are as follows.
+
+\begin{enumerate}[label=\arabic*., leftmargin=*, labelsep=0.5em]
+  \item To the best of our knowledge, \textsc{Genesis} is the first
+        generative model to apply OT-FM to cosmological field emulation,
+        jointly generating $\Mcdm$, $\Mgas$, and $\Tgas$ as a
+        correlated triplet within a single CNF. While multifield
+        outputs have been explored with GANs
+        \citep{Andrianomena2022,Andrianomena2024}, no prior work
+        has produced this specific combination of fields using
+        OT-FM.
+
+  \item \textsc{Genesis} conditions on the full six-dimensional
+        CAMELS parameter vector, including the two cosmological
+        parameters ($\Om$, $\sig$) and all four astrophysical
+        feedback parameters
+        ($A_{\rm SN1}$, $A_{\rm SN2}$, $A_{\rm AGN1}$, $A_{\rm AGN2}$),
+        enabling the model to capture the distinct response of each
+        field to cosmological and feedback variations across the
+        entire design space. To the best of our knowledge, this is
+        the first field-level generative model to produce fields
+        directly from noise under this full parameter conditioning.
+
+  \item We evaluate \textsc{Genesis} across two CAMELS validation
+        protocols: the LH protocol demonstrates reproduction of
+        auto- and cross-power spectra, inter-field coherence, and
+        one-point distributions across the full parameter space;
+        the CV leave-one-out protocol confirms that generated
+        samples are consistent with cosmic-variance scatter at
+        the fiducial cosmology.
+        Both results are directly relevant
+        for simulation-based inference pipelines
+        \citep{Cranmer2020,Mudur2024DiffHMC}.
+\end{enumerate}
+
+The remainder of this paper is organized as follows.
+We begin by describing the CAMELS data and the physical motivation
+behind our choice of fields and conditioning parameters
+(Section~\ref{sec:data}), before presenting the OT-FM framework
+and the \textsc{Genesis} architecture (Section~\ref{sec:methods}).
+We then evaluate the model on the LH protocol
+(Section~\ref{sec:eval}) and the CV protocol
+(Section~\ref{sec:cv_eval}), and discuss the implications,
+limitations, and future directions (Section~\ref{sec:discussion}).
+Section~\ref{sec:conclusion} concludes.
+
+%% =============================================================
+%%  §2  DATA
+%% =============================================================
+\section{CAMELS Multifield Dataset}
+\label{sec:data}
+This section describes the publicly released 2D maps from the CAMELS
+Multifield Dataset (CMD) used by \textsc{Genesis}
+(Section~\ref{sec:camels}), the three target channels
+($\Mcdm$, $\Mgas$, and $\Tgas$) and the IllustrisTNG data splits
+adopted in this work (Section~\ref{sec:fields}), the six conditioning
+parameters and their field-level sensitivities
+(Section~\ref{sec:params}).
+\subsection{IllustrisTNG 2D maps}
+\label{sec:camels}
+The CMD \citep{Villaescusa2022} provides a public collection of 2D maps
+and 3D grids derived from the CAMELS simulations.
+We use the 2D maps from the IllustrisTNG suite, whose hydrodynamic runs
+adopt the baryonic model of \citet{Weinberger2017} and
+\citet{Pillepich2018IllustrisTNG}.
+These simulations evolve a periodic box of side
+$25\,h^{-1}$~Mpc with $256^3$ dark matter particles and an equal number
+of initial gas cells from $z=127$ to $z=0$. 
+Within the public IllustrisTNG map release, we use the LH and CV sets
+for training, validation, testing, and cosmic-variance assessment.
+\begin{description}[font=\normalfont\bfseries,leftmargin=2.2em,labelsep=0.6em]
+  \item[LH set.] One thousand simulations sampling a 6D Latin-hypercube over
+$\Om \in [0.1, 0.5]$,
+$\sig \in [0.6, 1.0]$,
+$A_{\rm SN1} \in [0.25, 4.0]$,
+$A_{\rm SN2} \in [0.5, 2.0]$,
+$A_{\rm AGN1} \in [0.25, 4.0]$,
+$A_{\rm AGN2} \in [0.5, 2.0]$.
+This set provides training, validation, and test data spanning the
+full parameter space; we partition it into 800 training,
+100 validation, and 100 test simulations.
+For each simulation, we use the 15 available two-dimensional maps in
+each target channel, paired by map index to form 15 multifield map
+triplets.
+
+  \item[CV set.] Twenty-seven simulations at the fiducial cosmology
+$(\Om, \sig) = (0.30, 0.80)$
+with varying initial conditions.
+This set is used exclusively to measure the irreducible cosmic variance
+floor and to build the leave-one-out (LOO) null distributions used in
+Section~\ref{sec:cv_eval}.
+\end{description}
+
+\subsection{Field definitions}
+\label{sec:fields}
+
+The CMD provides 2D projected maps of several physical fields, including
+dark matter density, gas density, neutral hydrogen, and gas temperature
+\citep{Villaescusa2022}. We select three of these as the joint
+emulation target of \textsc{Genesis}. All maps comprise
+$256 \times 256$ pixels covering a periodic field of view of
+$(25\,h^{-1}\,\mathrm{Mpc})^2$, extracted from the $z=0$ snapshot.
+Each map is constructed by projecting particle properties onto a regular
+grid using a spherical top-hat smoothing kernel \citep{Villaescusa2022}
+\begin{equation}
+  W_{3\mathrm{D}}(\mathbf{x}) =
+  \begin{cases}
+    \dfrac{3}{4\pi R^3} & |\mathbf{x}| \leq R, \\[4pt]
+    0                   & \text{otherwise},
+  \end{cases}
+  \label{eq:kernel3d}
+\end{equation}
+normalized so that $\int W_{3\mathrm{D}}(\mathbf{x})\,\mathrm{d}^3\mathbf{x} = 1$,
+where $R$ is set to the distance to the 32nd nearest neighbour of each
+particle. The corresponding 2D projected kernel is
+\begin{equation}
+  W_{2\mathrm{D}}(\mathbf{x}') =
+  \int W_{3\mathrm{D}}(\mathbf{x})\,\mathrm{d}z.
+  \label{eq:kernel2d}
+\end{equation}
+For the two density fields, the quantity stored in pixel $\mathbf{x}'$
+is the projected surface mass density
+\begin{equation}
+  \Sigma_a(\mathbf{x}') = \frac{1}{Q}
+  \sum_i m_i
+  \int W_{2\mathrm{D},i}(\mathbf{x}'' - \mathbf{r}'_i)\,\mathrm{d}^2\mathbf{x}'',
+  \label{eq:density}
+\end{equation}
+where $a \in \{\mathrm{cdm},\,\mathrm{gas}\}$, $m_i$ and $\mathbf{r}'_i$
+are the particle mass and projected position, and $Q$ is the pixel area.
+The gas temperature map is the projected mass-weighted temperature
+\begin{equation}
+  T(\mathbf{x}') =
+  \frac{\sum_i m_i\,T_i\,W_{2\mathrm{D},i}(\mathbf{x}' - \mathbf{r}'_i)}
+       {\sum_i m_i\,W_{2\mathrm{D},i}(\mathbf{x}' - \mathbf{r}'_i)},
+  \label{eq:temperature}
+\end{equation}
+where $T_i$ is the temperature of gas particle $i$.
+The three target fields and their units are:
+
+\begin{description}[font=\normalfont,leftmargin=2.8em,labelsep=0.6em]
+  \item[$\Mcdm$:] projected dark matter surface mass density
+        $[h\,\mathrm{M}_\odot\,\mathrm{kpc}^{-2}]$;
+  \item[$\Mgas$:] projected gas surface mass density
+        $[h\,\mathrm{M}_\odot\,\mathrm{kpc}^{-2}]$;
+  \item[$\Tgas$:] projected mass-weighted gas temperature $[\mathrm{K}]$.
+\end{description}
+
+Together, these three fields encode the dominant matter components and
+their thermodynamic state; their cross-correlations serve as direct
+diagnostics of baryonic feedback, motivating the joint emulation
+approach of \textsc{Genesis} (Section~\ref{sec:params}).
+
+\subsection{Conditioning parameters and field-level sensitivity}
+\label{sec:params}
+
+\textsc{Genesis} is conditioned on the full six-dimensional parameter
+vector
+\begin{equation}
+  \boldsymbol{\theta} =
+  (\Om,\,\sig,\,A_{\rm SN1},\,A_{\rm SN2},\,A_{\rm AGN1},\,A_{\rm AGN2}),
+  \label{eq:theta}
+\end{equation}
+which characterizes each IllustrisTNG simulation in CMD
+\citep{Villaescusa2021,Villaescusa2022}.
+Table~\ref{tab:params} summarizes the prior ranges and physical
+meaning of each parameter.
+
+\begin{table}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.06}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    Parameter & Range & Physical meaning & Primary field \\
+    \midrule
+    $\Om$          & $[0.1,\;0.5]$  & Total matter density
+                    & $\Mcdm$ \\
+    $\sig$         & $[0.6,\;1.0]$  & Linear fluctuation amplitude
+                    & $\Mcdm$ \\
+    $A_{\rm SN1}$  & $[0.25,\;4.0]$ & SN wind energy per SFR
+                    & $\Mgas$ \\
+    $A_{\rm SN2}$  & $[0.5,\;2.0]$  & SN wind speed
+                    & $\Mgas$ \\
+    $A_{\rm AGN1}$ & $[0.25,\;4.0]$ & AGN energy per BH accretion
+                    & $\Tgas$ \\
+    $A_{\rm AGN2}$ & $[0.5,\;2.0]$  & AGN kinetic ejection speed
+                    & $\Tgas$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{CAMELS IllustrisTNG conditioning parameters, their
+    Latin-hypercube prior ranges, physical interpretations, and
+    the target field most sensitive to each parameter.}
+  \label{tab:params}
+\end{table}
+
+The two \emph{cosmological parameters} govern the overall amplitude
+and shape of the matter power spectrum.
+$\Om$ sets the total matter density of the Universe, raising the
+amplitude of $P(k)$ for all three fields with a scale dependence
+most pronounced near the power-spectrum turnover.
+$\sig$ defines the root-mean-square amplitude of linear density
+fluctuations smoothed on $8\,h^{-1}$~Mpc scales, controlling the
+overall normalization of the power spectrum.
+Both parameters primarily govern dark matter clustering, with the
+baryonic fields responding through the evolving gravitational
+potential.
+The four \emph{astrophysical feedback parameters} encode the
+subgrid prescriptions of the IllustrisTNG model
+\citep{Weinberger2017,Pillepich2018IllustrisTNG}.
+$A_{\rm SN1}$ and $A_{\rm SN2}$ control two properties of
+supernova-driven galactic winds: the energy emitted per unit
+star-formation rate and the wind speed, respectively.
+$A_{\rm AGN1}$ and $A_{\rm AGN2}$ represent the energy released per
+unit black hole accretion rate and the ejection speed of the kinetic
+mode of black hole feedback, respectively.
+These feedback parameters have negligible effect on the collisionless
+dark matter field but strongly modulate the baryonic fields.
+The following field-level trends are motivated by the CAMELS
+multifield analysis \citep{Villaescusa2022}.
+Supernova feedback ($A_{\rm SN1}$, $A_{\rm SN2}$) expels gas from
+low-mass haloes, suppressing $P_{\Mgas}(k)$ at
+$k \sim 1$--$5\,h\,\mathrm{Mpc}^{-1}$, while AGN feedback
+($A_{\rm AGN1}$, $A_{\rm AGN2}$) operates predominantly in massive
+haloes and dominates the temperature power spectrum at cluster scales
+($k \lesssim 1\,h\,\mathrm{Mpc}^{-1}$).
+The temperature field is the most feedback-sensitive of the three:
+the logarithmic derivative
+$\partial\ln P_\Tgas / \partial\ln A_{\rm AGN1}$ exceeds the
+corresponding dark matter sensitivity by more than an order of
+magnitude.
+
+\iffalse
+\subsection{Preprocessing and normalization}
+\label{sec:preprocessing}
+
+Raw physical fields span many orders of magnitude and differ strongly in
+their dynamic ranges, necessitating careful normalization prior to
+training.
+We apply a two-stage normalization to each channel:
+(i) a $\log_{10}$ transform to compress the dynamic range, followed by
+(ii) an affine rescaling to approximately zero mean and unit variance
+using training-set statistics.
+For $\Mcdm$, which contains extreme high-density peaks associated with
+dark matter haloes, we additionally apply a soft-clipping prior to the
+log transform to suppress numerical instabilities during training
+(see Appendix~\ref{app:norm} for full details).
+\fi
+
+%% =============================================================
+%%  §3  METHODS
+%% =============================================================
+\section{Methodology}
+\label{sec:methods}
+
+The \textsc{Genesis} generative pipeline is built on three components.
+Section~\ref{sec:flow_matching} introduces the OT-FM framework that
+defines the generative objective.
+Section~\ref{sec:architecture} describes the U-Net architecture and the
+physically motivated design choices --- circular convolutions,
+stage-wise conditioning, and scale-limited self-attention --- that
+tailor it to multifield cosmological emulation.
+Section~\ref{sec:training} details the optimization procedure.
+
+\subsection{Optimal-transport flow matching}
+\label{sec:flow_matching}
+
+Flow matching \citep{Lipman2023} learns a time-dependent vector field
+$u_t^\theta(\mathbf{x}_t \mid \thetavec)$ that generates a flow
+$\psi_t : \mathbf{x}_0 \mapsto \mathbf{x}_t$ transporting samples from
+$p_0 = \mathcal{N}(\mathbf{0}, \mathbf{I})$ to the target distribution
+$p_1$ conditioned on $\thetavec$.
+The flow satisfies the continuity equation at each $t$, which is
+enforced implicitly through the training loss \citep{Lipman2023}.
+We adopt the \emph{optimal-transport} variant, OT-FM \citep{Lipman2023},
+which pairs source and target samples via minibatch-OT couplings to
+approximate the Monge map, yielding straight trajectories in expectation
+and reducing the number of function evaluations (NFE) at inference.
+For an OT-coupled pair $(\mathbf{x}_0,\mathbf{x}_1)$, the flow follows
+the linear interpolant \citep{Albergo2023}
+\begin{equation}
+  \psi_t(\mathbf{x}_0) \;=\; (1-t)\,\mathbf{x}_0 + t\,\mathbf{x}_1,
+  \quad t \in [0,1],
+  \label{eq:interpolant}
+\end{equation}
+governed by the probability-flow ODE
+\begin{equation}
+  \dot{\psi}_t(\mathbf{x}_0)
+    = u_t^\theta\!\bigl(\psi_t(\mathbf{x}_0) \mid \thetavec\bigr).
+  \label{eq:pfode}
+\end{equation}
+Training minimizes the CFM loss
+\begin{equation}
+  \mathcal{L}_{\rm CFM} =
+  \mathbb{E}_{t,\,q(\mathbf{x}_1\mid\thetavec),\,p_0}
+  \bigl\|
+    u_t^\theta\!\bigl(\psi_t(\mathbf{x}_0)\mid\thetavec\bigr)
+    - (\mathbf{x}_1 - \mathbf{x}_0)
+  \bigr\|^2,
+  \label{eq:cfm}
+\end{equation}
+where the regression target $(\mathbf{x}_1-\mathbf{x}_0)$ is the
+constant tangent vector along equation~(\ref{eq:interpolant}).
+At inference we solve equation~(\ref{eq:pfode}) with the
+Dormand--Prince (dopri5) adaptive Runge--Kutta solver
+with relative and absolute tolerances $10^{-5}$.
+\textbf{Classifier-free guidance.}
+We follow the classifier-free guidance framework
+\citep[CFG;][]{Ho2022} during training by replacing $\thetavec$ with a learned null token
+$\thetavec_\varnothing$ with probability $p_{\rm cfg}=0.1$.
+This null-token branch was retained because it empirically improved
+training stability and validation performance.
+At inference the CFG velocity can be written as
+\begin{equation}
+  \hat{u}_t = u_t^\theta(\psi_t \mid \thetavec_\varnothing)
+    + s\bigl[
+        u_t^\theta(\psi_t \mid \thetavec)
+      - u_t^\theta(\psi_t \mid \thetavec_\varnothing)
+      \bigr],
+  \label{eq:cfg}
+\end{equation}
+where $s$ is the guidance scale.
+In practice, however, all samples reported in this work are generated
+with $s=1$, so no CFG extrapolation is applied and
+$\hat{u}_t=u_t^\theta(\psi_t \mid \thetavec)$.
+We do not use $s>1$ in order to avoid extrapolating between conditional
+and null-conditioned velocity fields, which may compromise the
+probability-flow interpretation of the OT-CFM dynamics.
+
+\subsection{U-Net architecture}
+\label{sec:architecture}
+
+We parameterize the velocity field $u_t^\theta$ with a U-Net
+architecture equipped with skip connections \citep{Ronneberger2015}.
+The network takes as input the interpolated field
+$\mathbf{x}_t \in \mathbb{R}^{3 \times 256 \times 256}$, the flow time
+$t$, and the conditioning vector
+$\thetavec \in \mathbb{R}^6$.
+The sinusoidal embedding of $t$ and the embedding of $\thetavec$ are
+each mapped to 512 dimensions, concatenated, processed by a joint MLP
+$(1024 \rightarrow 1024 \rightarrow 512)$, and projected into the
+encoder, bottleneck, and decoder residual blocks.
+Starting from this basic U-Net structure, we add the following
+components to improve performance.
+  \begin{figure*}
+    \centering
+    \includegraphics{lh_tiles.pdf}
+    \caption{Representative map triplets $(\Mcdm,\Mgas,\Tgas)$ from
+      the LH test set.
+      Each block compares a true CAMELS map with \textsc{Genesis}
+      samples generated at the same six-dimensional conditioning vector
+      $\thetavec=(\Om,\sig,A_{\rm SN1},A_{\rm SN2},A_{\rm AGN1},A_{\rm AGN2})$.
+      Rows correspond to different LH parameter samples.}
+    \label{fig:lh_tiles}
+  \end{figure*}
+
+\textbf{Circular convolutions.}
+The projected maps inherit periodic boundary conditions from the
+CAMELS simulation volume \citep{Villaescusa2022}.
+We therefore use circular padding in the convolutional layers, reducing
+boundary artefacts that would be introduced by zero or reflective
+padding.
+\textbf{Stage-wise conditioning.}
+The joint time--condition embedding is injected at each resolution level,
+so both large-scale structure and small-scale texture can depend on the
+six CAMELS parameters.
+This matters because the conditioning vector plays different roles at
+different depths: coarse stages govern large-scale morphology and
+power-spectrum amplitude, while finer stages modulate small-scale
+texture and the spatial extent of feedback-driven features.
+\textbf{Scale-limited self-attention.}
+Self-attention \citep{Vaswani2017} is applied at $64 \times 64$
+resolution and below, including the bottleneck and matching decoder
+stages.
+By computing pairwise similarities across all spatial positions, it
+captures the long-range filamentary correlations and inter-field
+dependencies that local convolutions cannot reach, while the resolution
+limit avoids the $\mathcal{O}(N^2)$ memory cost of full-resolution
+attention.
+
+The final architecture has four encoder stages with channel widths
+$[128,256,384,512]$, two residual blocks per encoder stage, strided
+circular convolutions for downsampling, a residual--attention--residual
+bottleneck, and a symmetric decoder with skip concatenations.
+Residual blocks use GroupNorm \citep{Wu2018} with 32 groups, SiLU
+activations, and zero dropout; each GroupNorm layer is additionally
+modulated by learned affine scale and shift parameters derived from the
+time--condition embedding \citep[FiLM;][]{Perez2018}, providing a
+second conditioning pathway that acts directly on the normalized
+activations at every residual block.
+The network maps three input channels to three output velocity channels
+and contains approximately $93.0$ million trainable parameters.
+% We also tested a Swin Transformer backbone \citep{Liu2021}; in our
+% experiments it did not improve the validation metrics and was slower at
+% inference, so we adopt the U-Net backbone for all results below.
+
+\subsection{Training}
+\label{sec:training}
+
+We train with the AdamW optimizer \citep{Loshchilov2019} with learning
+rate $\eta = 2 \times 10^{-4}$, weight decay $\lambda = 10^{-2}$, and
+momentum parameters $(\beta_1, \beta_2) = (0.9, 0.999)$.
+The learning rate is governed by a ReduceLROnPlateau schedule:
+the learning rate is multiplied by $0.5$ whenever the validation loss
+fails to improve over a patience window of 10 epochs, with a minimum
+learning rate of $10^{-6}$.
+Training runs for a maximum of 300 epochs with early stopping triggered
+when the validation loss does not improve for 30 consecutive epochs.
+Each training batch contains $B = 64$ map triplets.
+We apply random horizontal and vertical flips as data augmentation,
+consistent with the isotropy of the projected fields.
+All experiments are conducted on a single NVIDIA A100 GPU.
+
+
+%% =============================================================
+%%  §4  LH EVALUATION
+%% =============================================================
+\section{LH Evaluation}
+\label{sec:eval}
+
+\begin{figure*}
+  \centering
+  \includegraphics{lh_autopk.pdf}
+  \caption{Auto-power spectra and fractional residuals on the LH test
+    set ($N_{\rm sim}=100$, $n_{\rm gen}=30$ per sim).
+    Solid black curves and grey bands show the CAMELS median and
+    16--84 percentile range; dashed coloured curves and coloured bands
+    show the corresponding \textsc{Genesis} statistics.
+    The empirical cosmic-variance floor is shown as a grey residual
+    envelope where plotted.
+    The low-, mid-, and high-$k$ reporting bands are defined in
+    Section~\ref{sec:metrics}; all band-averaged values in the text and
+    tables use those boundaries.}
+  \label{fig:lh_autopk}
+\end{figure*}
+
+This section evaluates \textsc{Genesis} on the 100 held-out LH test
+simulations --- withheld entirely from training and validation and
+spanning the full six-dimensional CAMELS parameter space.
+Any failure to track cosmological or astrophysical variation manifests
+directly in the residuals without averaging over parameter diversity ---
+this makes the LH evaluation the primary test of generalisation across
+the full design space.
+Evaluation metrics are defined in Section~\ref{sec:metrics}; results
+follow in Sections~\ref{sec:res_lh_summary} through~\ref{sec:res_r2},
+with residuals assessed throughout relative to the cosmic-variance
+floor defined in Section~\ref{sec:cv_floor}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{lh_r2_scond.pdf}
+  \caption{Conditional response and calibration on the LH test set.
+    \emph{Left:} $R^2(k)$ of the generated $\log P(k)$ response to the
+    six-dimensional conditioning vector.
+    \emph{Right:} $S_{\rm cond}(k)$; the dashed line marks perfect
+    calibration ($S_{\rm cond}=1$).
+    Colours indicate $\Mcdm$, $\Mgas$, and $\Tgas$.}
+  \label{fig:lh_r2_scond}
+\end{figure}
+
+\begin{figure*}
+  \centering
+  \includegraphics{lh_xi.pdf}
+  \caption{Real-space two-point correlation function $\xi(r)$ on the LH
+    test set ($N_{\rm sim}=100$, $n_{\rm gen}=30$ per sim).
+    \emph{Top row:} $\xi(r)$ for CAMELS (black) and \textsc{Genesis} (coloured).
+    \emph{Bottom row:} fractional residuals $\Delta\xi/|\xi|$.
+    Panels show $\Mcdm$ (left), $\Mgas$ (centre), and $\Tgas$ (right).}
+  \label{fig:lh_xi}
+\end{figure*}
+
+\subsection{Metrics}
+\label{sec:metrics}
+
+\textbf{Auto-power spectrum.}
+For each field $a \in \{\Mcdm, \Mgas, \Tgas\}$ we compute the
+azimuthally averaged 2D power spectrum $P_a(k)$ in 128 integer-rounded
+wavenumber bins spanning the full range accessible by the $256^2$ map,
+from the fundamental mode
+$k_{\rm fund} \approx 0.25\,h\,\mathrm{Mpc}^{-1}$
+to the Nyquist frequency $k_{\rm Ny} \approx 32\,h\,\mathrm{Mpc}^{-1}$.
+For all band-averaged metrics reported in the text and tables, we group
+the bins into three bands:
+low-$k$ ($k < 1\,h\,\mathrm{Mpc}^{-1}$, 3 bins),
+mid-$k$ ($1 \leq k < 5\,h\,\mathrm{Mpc}^{-1}$, 28 bins), and
+high-$k$ ($5\,h\,\mathrm{Mpc}^{-1} \leq k < k_{\rm Ny}$, 33 bins);
+bins at $k \geq k_{\rm Ny}$ are retained as a reference-only
+artefact band.
+The fractional residual is
+\begin{equation}
+  \DeltaP_a(k) =
+  \frac{|\langle P_a^{\rm gen}(k)\rangle
+       - \langle P_a^{\rm true}(k)\rangle|}
+       {\langle P_a^{\rm true}(k)\rangle},
+  \label{eq:dpp}
+\end{equation}
+reported separately for each of the three wavenumber bands.
+
+\textbf{Cross-power spectrum.}
+For each of the three field pairs
+$(ab) \in \{(\Mcdm,\Mgas),\,(\Mcdm,\Tgas),\,(\Mgas,\Tgas)\}$ we
+compute
+\begin{equation}
+  P_{ab}(k) = \mathrm{Re}\!\left[
+    \langle \tilde{\delta}_a(\mathbf{k})\,
+            \tilde{\delta}_b^*(\mathbf{k})\rangle
+  \right]
+  \label{eq:cross}
+\end{equation}
+and evaluate $\DeltaP_{ab}(k)$ as in equation~(\ref{eq:dpp}),
+averaged over the three wavenumber bands.
+The cross-power spectrum is the primary diagnostic of inter-field
+correlations and provides a direct test of joint multifield fidelity;
+a model that generates each channel independently would produce correct
+marginals while failing this test.
+
+\textbf{Inter-field coherence.}
+The scale-dependent correlation coefficient
+\begin{equation}
+  r_{ab}(k) = \frac{P_{ab}(k)}{\sqrt{P_{aa}(k)\,P_{bb}(k)}}
+  \label{eq:rab}
+\end{equation}
+isolates the structural inter-field relationship from amplitude effects,
+probing whether the spatial patterns of the generated fields are
+mutually consistent at each scale.
+To our knowledge, $r_{ab}(k)$ has not been quantitatively evaluated in
+any prior multifield cosmological generative model.
+We report the maximum deviation
+$\Delta r_{ab} = \max_k |r_{ab}^{\rm gen}(k) - r_{ab}^{\rm true}(k)|$
+as a single worst-case summary per field pair.
+
+\textbf{Pixel probability distribution function (PDF).}
+The one-point pixel distribution is evaluated in $\log_{10}$ space using
+the two-sample Kolmogorov--Smirnov (KS) statistic $D_{\rm KS}$, the
+relative error on the mean
+$\epsilon_\mu = |\mu_{\rm gen} - \mu_{\rm true}|/|\mu_{\rm true}|$, and
+the relative error on the standard deviation
+$\epsilon_\sigma = |\sigma_{\rm gen} - \sigma_{\rm true}|/
+\sigma_{\rm true}$.
+The temperature field exhibits a bimodal distribution --- cold gas
+at $\sim10^4$~K and shock-heated halo plasma at
+$\sim10^{6\text{--}7}$~K --- and we additionally verify that both
+peaks are reproduced individually.
+
+\textbf{Conditional power-spectrum response ($R^2$).}
+To quantify how faithfully \textsc{Genesis} tracks the cosmology
+dependence of the power spectrum, we compute the explained variance
+ratio
+\begin{equation}
+  R^2(k) = 1 - \frac{\mathrm{MSE}_\theta[\log P_{\rm gen}(k)]}
+                     {\mathrm{Var}_\theta[\log P_{\rm true}(k)]},
+  \label{eq:r2}
+\end{equation}
+where the expectation is taken over the 100 LH test simulations.
+$R^2 = 1$ indicates perfect tracking of the parameter-induced
+variation; $R^2 = 0$ means the generated spectra carry no more
+information about the conditioning vector than a constant prediction.
+
+\textbf{Conditional calibration ($S_{\rm cond}$).}
+We assess whether the generative spread is calibrated relative to the
+true variability at each conditioning point using the mean squared
+standardized residual
+\begin{equation}
+  S_{\rm cond}(k) = \left\langle
+    \left(\frac{\log P_{\rm gen}(k;\thetavec)
+               - \mu_{\rm true}(k;\thetavec)}
+              {\sigma_{\rm true}(k;\thetavec)}\right)^2
+  \right\rangle_{\thetavec},
+  \label{eq:scond}
+\end{equation}
+where $\mu_{\rm true}$ and $\sigma_{\rm true}$ are the mean and
+standard deviation of $\log P_{\rm true}$ computed from the 15 true
+maps per simulation.
+A perfectly calibrated generator gives $S_{\rm cond} = 1$; values
+below (above) unity indicate underdispersion (overdispersion).
+
+\textbf{Real-space two-point correlation function $\xi(r)$.}
+As a complementary configuration-space probe, we compute $\xi(r)$ via
+the inverse Fourier transform of the azimuthally averaged 2D power
+spectrum, binned over 64 radial separations spanning
+$0.1 \leq r \leq 12.5\,h^{-1}\,\mathrm{Mpc}$.
+This statistic is sensitive to configuration-space clustering structure
+beyond what the power spectrum captures and serves as an auxiliary
+cross-check on the spectral results.
+
+%% =============================================================
+%%  §4.3  LH RESULTS
+%% =============================================================
+\subsection{LH quantitative summary}
+\label{sec:res_lh_summary}
+
+The hierarchy of residuals across the 100 LH test simulations reflects
+the underlying physics directly --- dark matter, governed by gravity
+alone, is the most predictable of the three fields, with auto-power
+errors remaining closest to the cosmic-variance floor across all three
+wavenumber bands.
+The gas density field, shaped by both gravity and supernova wind
+feedback, shows somewhat larger residuals at high $k$: the coupling
+between density structure and stellar winds becomes more pronounced at
+small scales.
+The temperature field, as the most direct tracer of AGN heating and
+shock structure, exhibits the largest residuals and the widest
+inter-simulation scatter --- a consequence of the strong stochasticity
+introduced by black-hole feedback across the six-dimensional parameter
+space.
+All three channels nevertheless remain below 8 per cent across the
+high-$k$ band, indicating that \textsc{Genesis} captures the dominant
+modes of variation throughout the full parameter space, including the
+most feedback-sensitive observables.
+Table~\ref{tab:lh_metrics} collects the auto-power residuals,
+pixel-distribution statistics, and conditional response scores per
+channel.
+
+The cross-channel statistics further confirm joint multifield fidelity;
+Table~\ref{tab:lh_cross} shows that mean cross-power residuals and
+maximum coherence deviations remain well within acceptable bounds across
+all field pairs and wavenumber bands.
+
+\input{figuers/table1_lh_metrics.tex}
+
+\begin{table}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.06}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Statistic & $\Mcdm$--$\Mgas$ & $\Mcdm$--$\Tgas$ & $\Mgas$--$\Tgas$ \\
+    \midrule
+    Mean cross-power residual & 2.0\% & 7.0\% & 4.0\% \\
+    Maximum coherence deviation & 0.010 & 0.030 & 0.039 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Cross-channel LH summary over the 100 held-out simulations.
+    Values are aggregated over the low-, mid-, and high-$k$ bands.}
+  \label{tab:lh_cross}
+\end{table}
+
+%%------------------------------------------------------------
+\subsection{Field visualizations}
+\label{sec:res_vis}
+
+\textsc{Genesis} captures the principal structural features of each
+field across five representative LH conditioning vectors
+(Fig.~\ref{fig:lh_tiles}): the large-scale filamentary network and
+dense halo cores of the dark matter, the clumpy, feedback-broadened
+gas concentrated in high-density regions, and the broad cold--hot
+temperature dichotomy between void gas and shock-heated halo plasma.
+The generated samples are stochastic draws rather than exact
+reconstructions of the same initial conditions as the CAMELS maps ---
+such realization-level matching would require conditioning on the
+initial density field, which lies outside the scope of this model ---
+but they occupy the same morphological and statistical range at each
+conditioning vector, with equivalent large-scale topology and comparable
+small-scale contrast.
+
+%%------------------------------------------------------------
+\subsection{Power-spectrum fidelity}
+\label{sec:res_auto}
+
+The per-channel auto-power spectra and their fractional residuals are
+shown in Fig.~\ref{fig:lh_autopk}, with the cosmic-variance floor
+overlaid as a physical reference.
+The dark matter channel achieves sub-3-per-cent accuracy in every
+wavenumber band, with residuals that lie within or close to the CV
+floor at most scales --- a strong result given that each generated map
+must simultaneously satisfy conditioning on all six parameters spanning
+the full LH design space.
+The gas density and temperature channels, which carry the imprint of
+supernova and AGN feedback, show larger residuals at high $k$, reaching
+up to 8 per cent; this is consistent with the greater stochasticity of
+baryonic fields at small scales, where feedback-driven outflows and
+shock heating dominate the density and temperature structure.
+At low and mid $k$, where the bulk of the cosmological information
+resides, both fields track the true ensemble median faithfully.
+
+%%------------------------------------------------------------
+\subsection{Cross-field consistency}
+\label{sec:res_cross}
+
+Reproducing the correct marginal statistics for each channel in
+isolation is a necessary but insufficient condition for a multifield
+emulator: the joint distribution of the three fields must also be
+internally consistent.
+Fig.~\ref{fig:lh_cross_coherence} examines this through the
+cross-power spectra and inter-field coherence.
+Across all three field pairs and wavenumber bands, the generated
+cross-power residuals remain below 7 per cent and the coherence
+deviations below $0.04$ (Table~\ref{tab:lh_cross}).
+The largest deviations arise in the $\Mcdm$--$\Tgas$ pair at high $k$;
+even here, the coherence remains within $0.03$, suggesting that
+\textsc{Genesis} has internalized the conditional coupling between
+the fields rather than generating them independently.
+AGN-driven heating introduces stochastic temperature fluctuations
+at small scales that are only weakly tied to the local dark-matter
+density --- this coupling makes the $\Mcdm$--$\Tgas$ pair the most
+demanding test of joint generation.
+
+\begin{figure*}
+  \centering
+  \includegraphics{lh_cross_coherence.pdf}
+  \caption{\emph{Top row:} LH cross-power spectra $P_{ab}(k)$ for the
+    three field pairs ($\Mcdm$--$\Mgas$, $\Mcdm$--$\Tgas$, $\Mgas$--$\Tgas$).
+    \emph{Bottom row:} inter-field coherence $r_{ab}(k)$ for the same
+    pairs.
+    Black curves show CAMELS statistics and dashed coloured curves show
+    \textsc{Genesis}; shaded regions show 16--84 percentile ranges over
+    the LH test ensemble.}
+  \label{fig:lh_cross_coherence}
+\end{figure*}
+
+%%------------------------------------------------------------
+\subsection{One-point and configuration-space statistics}
+\label{sec:res_pdf}
+
+Beyond power spectra, the one-point pixel distribution tests whether
+the full amplitude range of the fields is correctly reproduced,
+including the rare high-density and high-temperature tails that are not
+directly constrained by two-point statistics.
+The KS statistics across the 100 LH test simulations lie in the range
+$0.035$--$0.048$, and the JSD values are below $5\times10^{-3}$ for all
+three channels (Table~\ref{tab:lh_pdf}; Appendix
+Fig.~\ref{fig:figs5a}).
+The temperature channel is the most challenging: its bimodal
+distribution, with cold gas at $\sim10^4$~K and shock-heated halo
+plasma at $\sim10^{6\text{--}7}$~K, requires the model to reproduce
+two physically distinct regimes simultaneously.
+Both peaks are present in the generated maps, and the per-simulation
+field means cluster tightly around the $y=x$ diagonal (Appendix
+Fig.~\ref{fig:figs5b}), confirming that the mean amplitude is correctly
+tracked across the full LH parameter range.
+
+The real-space correlation function $\xi(r)$, computed as an auxiliary
+configuration-space check, agrees closely with the true profiles across
+all three channels (Fig.~\ref{fig:lh_xi}), consistent with the spectral
+results above.
+The fractional residuals $\Delta\xi/|\xi|$ are well-behaved at
+$r \lesssim 7\,h^{-1}\,\mathrm{Mpc}$, where $|\xi_{\rm true}|$ is
+sufficiently large for the ratio to be well-defined; at larger
+separations $\xi_{\rm true}$ approaches zero and undergoes a sign
+change; the fractional residual therefore diverges regardless of
+model accuracy.
+
+\input{figuers/table3_lh_pdf.tex}
+
+%%------------------------------------------------------------
+\subsection{Conditional response and calibration}
+\label{sec:res_r2}
+
+A generative model that reproduces mean statistics without tracking
+their parameter dependence would be of limited use for
+simulation-based inference.
+Fig.~\ref{fig:lh_r2_scond} tests this through the $R^2$ and
+$S_{\rm cond}$ diagnostics.
+The overall $R^2$ scores are $0.845$, $0.877$, and $0.823$ for
+$\Mcdm$, $\Mgas$, and $\Tgas$, respectively, indicating that
+\textsc{Genesis} explains the majority of the parameter-induced
+variance in the generated power spectra across the full LH design
+space.
+The lowest values occur at large scales, where the small simulation
+volume produces the largest sample variance and the conditioning signal
+is relatively weak; the response improves consistently toward smaller
+scales.
+The $S_{\rm cond}$ values for the gas and temperature channels are
+mildly above unity at high $k$, reflecting modest overdispersion rather
+than a systematic bias --- the generated ensemble is slightly broader
+than the true per-simulation scatter at small scales, a behaviour
+consistent with the elevated stochasticity of baryonic fields in the
+feedback-sensitive regime.
+For simulation-based inference applications, this mild overdispersion
+implies that generated samples will slightly overestimate the
+per-simulation scatter at small scales; the effect is small enough
+that it is unlikely to bias parameter posteriors at the scales where
+cosmological information is concentrated.
+
+%%------------------------------------------------------------
+\section{CV Evaluation}
+\label{sec:cv_eval}
+
+\begin{figure*}
+  \centering
+  \includegraphics{cv_tiles.pdf}
+  \caption{Representative CV map triplets at the fiducial conditioning
+    vector ($\Om=0.30$, $\sig=0.80$, all $A=1$).
+    Each row shows one true CAMELS realization alongside five independent
+    \textsc{Genesis} samples generated at the same conditioning vector.
+    All maps are shown in $\log_{10}$ space.}
+  \label{fig:cv_tiles}
+\end{figure*}
+
+Where the LH evaluation asks how well \textsc{Genesis} generalises
+across parameter space, the CV evaluation asks a more fundamental
+question: at a fixed cosmology, are the generated samples statistically
+indistinguishable from an additional draw from the true simulation
+ensemble?
+This is a stronger condition than matching mean power spectra, and it
+is directly relevant for simulation-based inference pipelines that
+treat generated samples as stand-ins for new simulations at the same
+parameter point.
+
+\subsection{Cosmic variance as a physical lower bound}
+\label{sec:cv_floor}
+
+Any $P(k)$ estimate from a finite-volume simulation carries
+irreducible scatter: $\mathrm{Var}[P(k_i)] \geq 2P(k_i)^2 /
+N_{\rm modes}(k_i)$, where $N_{\rm modes}(k_i)$ counts the
+independent Fourier modes in annular bin $i$ --- a bound that a
+generative model trained on the same volume cannot escape.
+Sub-floor accuracy is therefore physically meaningless; the
+cosmic-variance floor sets the natural ceiling for emulator fidelity.
+
+We estimate this floor from the 27 CAMELS CV simulations, which share
+the fiducial cosmology
+$(\Om,\,\sig,\,A_{\rm SN1},\,A_{\rm SN2},\,A_{\rm AGN1},\,A_{\rm AGN2})
+=(0.30,\,0.80,\,1,\,1,\,1,\,1)$
+and differ only in their initial conditions --- their inter-realization
+scatter thereby isolates finite-volume noise without contamination from
+parameter variation.
+The field-level floor is defined as
+\begin{equation}
+  \sigma_{{\rm CV},a}(k_i) =
+  \mathrm{std}_{j}\!\bigl[P_a^{(j)}(k_i)\bigr],
+  \quad j = 1,\ldots,27,
+  \label{eq:cv_floor}
+\end{equation}
+and serves as a physical reference throughout both
+Section~\ref{sec:eval} and the CV analyses that follow.
+
+\subsection{CV dataset and leave-one-out construction}
+\label{sec:res_cv}
+
+Each of the 27 CV simulations introduced above contributes 15
+independent maps; \textsc{Genesis} is evaluated against 200 generated
+maps drawn at the same conditioning vector.
+
+The evaluation adopts a leave-one-out (LOO) construction to place the
+model and the true simulations on an equal footing.
+For each CV simulation $j \in \{1,\ldots,27\}$, a null distribution of
+test statistics is built by treating simulation $j$ as a held-out probe:
+the maps of simulation $j$ are passed through the same evaluation
+pipeline that is applied to the generated ensemble, while the remaining
+26 simulations define the reference distribution.
+Repeating this procedure for every $j$ yields 27 null statistics
+$\{T_1,\ldots,T_{27}\}$ that quantify the natural
+simulation-to-simulation scatter at the fiducial cosmology.
+The model statistic $T_{\rm model}$, computed from the 200 generated
+maps against the full 27-simulation reference, is then compared to this
+null distribution.
+The logic is that a well-calibrated generative model should produce a
+$T_{\rm model}$ that is indistinguishable from one of the $T_j$ values
+--- it should look like another simulation, not like an outlier from the
+ensemble.
+
+We classify $T_{\rm model}$ as \emph{natural} if it lies within the
+central 68 per cent interval $[p_{16},p_{84}]$ of the null distribution,
+\emph{caution} if it falls in the adjacent
+$[p_5,p_{16}) \cup (p_{84},p_{95}]$ tails, and \emph{alarm} if it lies
+outside $[p_5,p_{95}]$.
+The natural classification therefore corresponds to the model performing
+no worse than a typical held-out simulation.
+
+In addition to the auto-power, cross-power, coherence, and one-point
+statistics defined in Section~\ref{sec:metrics}, the CV stage introduces
+two further diagnostics.
+The power-spectrum displacement
+\begin{equation}
+  \Delta_{\rm CV}(k) =
+    \frac{\bar{P}_{\rm gen}(k) - \bar{P}_{\rm LOO}(k)}
+         {\bar{P}_{\rm LOO}(k)}
+  \label{eq:dcv}
+\end{equation}
+measures the fractional offset of the generated ensemble mean from the
+LOO reference mean at each wavenumber.
+The variance ratio
+\begin{equation}
+  R_\sigma(k) =
+    \frac{\operatorname{Var}_{\rm gen}[\log P(k)]}
+         {\operatorname{Var}_{\rm LOO}[\log P(k)]}
+  \label{eq:rsigma}
+\end{equation}
+tests whether the sample-to-sample scatter of the generated power
+spectra matches that of the true CV ensemble; $R_\sigma = 1$ indicates
+perfect agreement in dispersion.
+
+Since all 27 CV simulations share the same parameters, the relevant
+question is not whether individual maps match but whether the diversity
+of the generated ensemble is morphologically consistent with that of
+the true ensemble.
+Representative true and generated triplets at the fiducial conditioning
+vector are shown in Fig.~\ref{fig:cv_tiles}.
+
+\subsection{CV spectral consistency}
+\label{sec:cv_spectra}
+
+The generated ensemble tracks both the median and the
+inter-realization spread of the true CV suite across all three channels
+and wavenumber bands (Fig.~\ref{fig:cv_auto_pk}).
+The $k$-dependent LOO statistics $\Delta_{\rm CV}(k)$ and $R_\sigma(k)$
+confirm this: the displacement remains close to zero at all scales, and
+the variance ratio is consistent with unity, indicating that the
+generated ensemble neither over-concentrates nor over-disperses relative
+to the true CV scatter (Fig.~\ref{fig:cv_dcv_rsigma}).
+
+The LOO classification results, summarised in Table~\ref{tab:cv_loo},
+show that $T_{\rm model}$ falls within the natural $[p_{16},p_{84}]$
+band for all combinations of statistic, field, and wavenumber band.
+Cross-power spectra and inter-field coherence at the fiducial cosmology
+are shown in Fig.~\ref{fig:cv_cross_coherence}; all three field pairs
+pass the natural classification across low-, mid-, and high-$k$ bands.
+The fact that $T_{\rm model}$ passes the natural classification
+across all statistics, fields, and scale bands --- equivalent to
+being indistinguishable from a held-out simulation --- supports
+the use of \textsc{Genesis} as a drop-in replacement for new
+simulations at the fiducial cosmology in downstream inference
+pipelines.
+
+\begin{figure*}
+  \centering
+  \includegraphics{cv_auto_pk.pdf}
+  \caption{CV auto-power spectra $P_a(k)$ and fractional residuals for
+    the 27 simulations at the fiducial cosmology
+    ($N_{\rm sim}=27$, $n_{\rm gen}=200$).
+    Thin grey lines show individual true simulations; the thick black
+    line shows their ensemble median; dashed coloured curves and bands
+    show the \textsc{Genesis} ensemble median and 16--84 percentile
+    range.
+    Panels show $\Mcdm$ (left), $\Mgas$ (centre), and $\Tgas$ (right).}
+  \label{fig:cv_auto_pk}
+\end{figure*}
+
+\input{figuers/table2_cv_loo.tex}
+
+\begin{figure}
+  \centering
+  \includegraphics{cv_dcv_rsigma.pdf}
+  \caption{CV LOO test statistics as functions of wavenumber
+    ($N_{\rm sim}=27$, $n_{\rm gen}=200$).
+    \emph{Left:} power-spectrum displacement $\Delta_{\rm CV}(k)$
+    (equation~\ref{eq:dcv}); dashed lines mark $\pm 1$.
+    \emph{Right:} variance ratio $R_\sigma(k)$
+    (equation~\ref{eq:rsigma}); the solid line marks $R_\sigma=1$.
+    Colours indicate $\Mcdm$, $\Mgas$, and $\Tgas$ as in
+    Fig.~\ref{fig:cv_auto_pk}.}
+  \label{fig:cv_dcv_rsigma}
+\end{figure}
+
+\begin{figure*}
+  \centering
+  \includegraphics{cv_cross_coherence.pdf}
+  \caption{CV cross-power spectra and inter-field coherence at the
+    fiducial cosmology ($N_{\rm sim}=27$, $n_{\rm gen}=200$).
+    \emph{Top row:} cross-power $P_{ab}(k)$ for the three field pairs.
+    \emph{Bottom row:} coherence $r_{ab}(k)$ for the same pairs.
+    Grey curves show the 27 individual true CV simulations; dashed
+    coloured curves and bands show the \textsc{Genesis} ensemble.
+    All model values pass the LOO natural classification.}
+  \label{fig:cv_cross_coherence}
+\end{figure*}
+
+\subsection{CV one-point consistency}
+\label{sec:cv_1pt}
+
+The one-point pixel distributions at the fiducial cosmology are shown
+in Fig.~\ref{fig:cv_1pt}.
+For all three channels, the generated pixel distributions are consistent
+with the spread of the true CV ensemble, confirming that the full
+amplitude range of the fields is reproduced and not merely the
+two-point statistics.
+The ensemble standard deviations are slightly broader for $\Mcdm$ and
+$\Tgas$ than for the true CV set, consistent with the mild
+overdispersion observed in $S_{\rm cond}$ at high $k$ in the LH analysis
+(Section~\ref{sec:res_r2}).
+This should be read as a mild caution on per-pixel dispersion rather
+than a failure of the spectral CV protocol: the spectral statistics all
+pass the natural LOO classification, and the one-point broadening
+remains well within the inter-simulation scatter of the true ensemble.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{cv_pixel_pdf.pdf}
+  \caption{CV pixel-value distributions in $\log_{10}$ space at the
+    fiducial cosmology ($N_{\rm sim}=27$, $n_{\rm gen}=200$).
+    Grey filled histograms show the pooled CAMELS CV distribution;
+    coloured histograms show the \textsc{Genesis} ensemble.
+    Panels show $\Mcdm$ (left), $\Mgas$ (centre), and $\Tgas$ (right).}
+  \label{fig:cv_1pt}
+\end{figure}
+
+%% =============================================================
+%%  §6  DISCUSSION
+%% =============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+The evaluations of Sections~\ref{sec:eval} and \ref{sec:cv_eval}
+demonstrate that
+\textsc{Genesis} reproduces single-field and multifield statistics
+across the full CAMELS parameter space and passes both validation
+protocols evaluated in this work (LH and CV).
+In this section we examine the architectural and methodological factors
+underlying this performance (Section~\ref{sec:disc_arch}), interpret
+the proximity to the cosmic variance floor
+(Section~\ref{sec:disc_cv}), place \textsc{Genesis} in the context of
+prior work (Section~\ref{sec:disc_comparison}), and identify the
+principal limitations of the current implementation
+(Section~\ref{sec:disc_limitations}).
+
+\subsection{Multi-field stability and the role of architecture}
+\label{sec:disc_arch}
+
+The stable cross-power fidelity of \textsc{Genesis} across the full
+parameter space --- including regions where GAN-based emulators have
+shown sensitivity to parameter combinations
+\citep{Andrianomena2024} --- can be attributed to two complementary
+factors.
+First, the OT flow-matching objective provides a smooth, well-defined
+transport map between Gaussian noise and the target data distribution,
+without the adversarial instability that makes GAN training sensitive
+to specific regions of parameter space.
+This is consistent with the broader finding that diffusion and flow
+matching models recover statistical properties more uniformly than GANs
+\citep{Aoyama2025}.
+Second, the architecture combines stage-wise conditioning with
+multi-scale attention, allowing the generated fields to respond to the
+full six-dimensional parameter vector while still preserving long-range
+cross-field structure.
+This is particularly important for the $\Mgas$--$\Tgas$ cross-power,
+where the correlation is weaker than $\Mcdm$--$\Mgas$ and more
+sensitive to the feedback parameter values.
+The circular convolution design is motivated by the periodic boundary
+conditions of the simulation box and has the practical advantage that it
+prevents boundary leakage artefacts in the generated fields.
+Although we cannot isolate its contribution from a single ablation, it
+is consistent with earlier use of periodic padding in cosmological
+U-Nets \citep[e.g.][]{Jamieson2022}.
+
+\subsection{Proximity to the cosmic variance floor}
+\label{sec:disc_cv}
+
+The fact that $\Mcdm$ auto-power residuals approach the CV floor is
+physically significant.
+It implies that \textsc{Genesis} has extracted much of the
+information available in the $25\,h^{-1}$~Mpc CAMELS training volume
+for this field: further reducing the mean fractional error would
+require training data from a larger
+simulation volume with a lower cosmic variance floor.
+For $\Mgas$ and $\Tgas$, the CV floors are higher due to the stronger
+influence of feedback stochasticity, and residuals remain somewhat above
+the floor, indicating room for improvement in capturing small-scale
+baryonic physics.
+
+\subsection{Comparison with prior multifield work}
+\label{sec:disc_comparison}
+
+\textsc{Genesis} differs from prior field-level generative models in
+several key respects.
+Unlike field-to-field translation approaches
+\citep{Mishra2026,Horowitz2025} that condition on an input field rather
+than directly on simulation parameters, \textsc{Genesis} simultaneously
+generates three fields conditioned on six parameters.
+It is also the first model to (1) quantitatively evaluate inter-field
+coherence $r_{ab}(k)$ and (2) pass both the LH and CV validation
+protocols, with the CV leave-one-out test confirming cosmic-variance
+consistency.
+The cross-power stability of \textsc{Genesis} across all parameter
+combinations may be compared with the conditional GAN of
+\citet{Andrianomena2024}, which reported cross-power $R^2$ values as
+low as $-11.93$ for specific $(\Om, \sig)$ combinations --- a regime
+where adversarial training is susceptible to mode collapse.
+
+%% Table: comparison (commented out; content absorbed into text)
+%\begin{table*}
+%  \centering
+%  \begin{tabular}{lcccccccc}
+%    \hline
+%    Model & Method & Fields & $n_\theta$ & $P(k)$ & $P_{ab}(k)$ &
+%      $r_{ab}(k)$ & PDF & Protocols \\
+%    \hline
+%    \citet{Andrianomena2022} & GAN & $\Mgas$, HI, B & 2
+%      & $\checkmark$ & $\checkmark$ & --- & $\checkmark$ & LH \\
+%    \citet{Andrianomena2024} & cGAN & $\Mgas$, HI, B & 2
+%      & $\checkmark$ & $\checkmark$ & --- & $\checkmark$ & LH \\
+%    \citet{Mudur2024} & Diffusion & DM & 2
+%      & $\checkmark$ & --- & --- & $\checkmark$ & LH, CV \\
+%    \citet{Mishra2026} & Latent diff. & DM$\rightarrow T^\dagger$ & ---
+%      & $\checkmark$ & --- & --- & $\checkmark$ & CV \\
+%    \citet{Horowitz2025} & SI & DM$\rightarrow$ HI, $T^\dagger$ & $>2$
+%      & $\checkmark$ & --- & $\checkmark$ & --- & LH \\
+%    \textsc{Genesis} (this work) & OT-FM
+%      & $\Mcdm$, $\Mgas$, $\Tgas$ & 6
+%      & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$
+%      & LH, CV \\
+%    \hline
+%  \end{tabular}
+%  \caption{Comparison of multifield and selected single-field
+%    cosmological generative models.
+%    $n_\theta$: number of conditioning parameters.
+%    SI: stochastic interpolant.
+%    $\dagger$: field-to-field translation conditioned on an input field
+%    rather than direct simulation-parameter conditioning;
+%    \citet{Horowitz2025} also conditions on simulation parameters in
+%    addition to the dark matter input field.
+%    Ticks indicate the metric was quantitatively evaluated;
+%    `---' indicates the metric was not reported.
+%    \citet{Andrianomena2024} reports cross-power $R^2$ which tests
+%    spectral shape agreement but does not isolate per-$k$ inter-field
+%    coherence.}
+%  \label{tab:comparison}
+%\end{table*}
+
+\subsection{Limitations}
+\label{sec:disc_limitations}
+
+Several limitations constrain the current implementation.
+\textbf{Two-dimensional projections.}
+\textsc{Genesis} operates on 2D projected maps, losing information
+along the line-of-sight direction.
+This is a deliberate design choice: establishing multifield fidelity in
+the two-dimensional setting --- where validation is computationally
+tractable and comparison with existing work is straightforward --- is a
+necessary prerequisite before extending to three-dimensional volumes.
+Three-dimensional field emulation at comparable resolution would require
+substantially more memory and a different architectural approach, but
+would enable direct comparison with three-dimensional summary statistics
+and weak-lensing analyses.
+\textbf{Simulation volume.}
+The $25\,h^{-1}$~Mpc box imposes a large cosmic variance floor and a
+large fundamental wavenumber
+$k_{\rm fund} \approx 0.25\,h\,\mathrm{Mpc}^{-1}$.
+Large-scale modes (BAO scale,
+$k \lesssim 0.1\,h\,\mathrm{Mpc}^{-1}$) are inaccessible at this box
+size.
+Extension to the CAMELS TNG300-2 volume would reduce the CV floor and
+enable validation at scales relevant for current and future surveys.
+\textbf{Single simulation suite.}
+\textsc{Genesis} is trained exclusively on IllustrisTNG.
+The baryonic model of IllustrisTNG differs from SIMBA and EAGLE in its
+prescriptions for black hole feedback and stellar wind treatment.
+Generalization to other suites would require retraining or transfer
+learning, and the sensitivity of our results to the specific baryonic
+model is not yet quantified.
+
+\subsection{Future directions}
+\label{sec:disc_future}
+
+Natural extensions of this work include:
+\begin{enumerate}[label=\arabic*., leftmargin=*, labelsep=0.5em]
+  \item parameter-sensitivity validation using the CAMELS 1P set,
+        comparing generated power-spectrum ratio curves
+        $P^{\rm gen}(k;\,\theta_i^+)/P^{\rm gen}(k;\,\theta_i^-)$
+        against the true response for each of the six parameters
+        individually;
+  \item out-of-distribution robustness assessment using the CAMELS EX
+        set at parameter values outside the LH training range;
+  \item three-dimensional field emulation using memory-efficient
+        architectures such as latent diffusion models
+        \citep{Rombach2022};
+  \item extension to larger simulation volumes (e.g.\ TNG300-2) to
+        reduce the CV floor and access BAO-scale modes;
+  \item downstream parameter inference using the generated fields as
+        approximate likelihood surrogates for simulation-based
+        inference \citep[SBI;][]{Cranmer2020};
+  \item multi-suite training to disentangle cosmological from baryonic
+        model dependence.
+\end{enumerate}
+
+%% =============================================================
+%%  §7  CONCLUSION
+%% =============================================================
+\section{Conclusions}
+\label{sec:conclusion}
+
+We have presented \textsc{Genesis}, a conditional generative model that
+simultaneously emulates three cosmological fields --- dark matter
+density, gas density, and gas temperature --- conditioned on the full
+six-dimensional parameter vector of the IllustrisTNG suite in the
+CAMELS Multifield Dataset.
+By coupling OT-FM with a U-Net architecture designed for the periodic
+geometry and multifield structure of cosmological simulations,
+\textsc{Genesis} reproduces both single-field
+and cross-field statistics across the LH validation protocol,
+and passes the CV leave-one-out test for cosmic-variance consistency.
+Three aspects of the results are worth noting.
+First, dark matter auto-power residuals approach the cosmic variance
+floor of the $25\,h^{-1}$~Mpc CAMELS volume, suggesting that residual
+error is driven by training-data statistics rather than model capacity.
+Second, cross-power and coherence metrics remain stable across the
+full 6D parameter space, including regions where astrophysical
+feedback strongly modulates the baryonic fields.
+Third, the evaluation framework --- calibrated against the cosmic
+variance floor and combining in-distribution generalization with
+cosmic-variance leave-one-out consistency --- provides a reproducible
+benchmark applicable to future multifield generative models;
+parameter-sensitivity (1P) and out-of-distribution robustness (EX)
+protocols are natural extensions for follow-up work.
+These results suggest that OT-FM-based multifield emulators
+can serve as a useful foundation for fast cosmological forward
+modelling and, in the longer term, for simulation-based inference
+pipelines that require conditional sampling across high-dimensional
+parameter spaces.
+We release all model weights, training code, and the evaluation
+pipeline at \url{https://github.com/pmj0324/GENESIS}.
+
+%% =============================================================
+%%  ACKNOWLEDGEMENTS
+%% =============================================================
+\section*{Acknowledgements}
+
+M.P. acknowledges no external funding for this work.
+Model training and evaluation were performed on the SKKU cluster using
+personally funded computing resources.
+This work made use of
+\textsc{NumPy} \citep{Harris2020},
+\textsc{SciPy} \citep{Virtanen2020},
+\textsc{PyTorch} \citep{Paszke2019},
+\textsc{Pylians3} \citep{Villaescusa2018Pylians},
+and \textsc{Matplotlib} \citep{Hunter2007}.
+
+%% =============================================================
+%%  DATA AVAILABILITY
+%% =============================================================
+\section*{Data Availability}
+
+The CAMELS simulation data used in this work are publicly available at
+\url{https://camels.readthedocs.io}.
+The trained \textsc{Genesis} model weights, training code, evaluation
+pipeline, and scripts to reproduce all figures in this paper will be
+made available at \url{https://github.com/pmj0324/GENESIS} upon
+publication.
+
+%% =============================================================
+%%  REFERENCES
+%% =============================================================
+\bibliographystyle{mnras}
+\bibliography{genesis_refs}
+
+%% =============================================================
+%%  APPENDICES
+%% =============================================================
+\appendix
+
+\section{Normalization scheme}
+\label{app:norm}
+
+Table~\ref{tab:norm} summarizes the normalization parameters for each
+channel.
+The affine parameters $\mu_a$ and $\sigma_a$ are computed from the
+training set.
+
+\begin{table}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{3.5pt}
+  \renewcommand{\arraystretch}{1.06}
+  \begin{tabular}{@{}lp{0.42\columnwidth}cc@{}}
+    \toprule
+    Channel & Transform & $\mu_a$ & $\sigma_a$ \\
+    \midrule
+    $\Mcdm$ & softclip + $\log_{10}$ + affine
+      & \FILL{X.XX} & \FILL{X.XX} \\
+    $\Mgas$ & $\log_{10}$ + affine
+      & \FILL{X.XX} & \FILL{X.XX} \\
+    $\Tgas$ & $\log_{10}$ + affine
+      & \FILL{X.XX} & \FILL{X.XX} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Normalization parameters per channel. The softclip transformation
+    for $\Mcdm$ applies a smooth saturation at the \FILL{99.X}th
+    percentile of the training distribution before the $\log_{10}$
+    transform. All statistics are computed from the 800 training
+    simulations.}
+  \label{tab:norm}
+\end{table}
+
+%%------------------------------------------------------------
+\section{Per-channel pixel statistics}
+\label{app:pixel}
+
+Figs.~\ref{fig:figs5a} and~\ref{fig:figs5b} show per-channel
+one-point diagnostics on the LH test set.
+Fig.~\ref{fig:figs5a} shows the pixel-value histogram for each field
+separately; Fig.~\ref{fig:figs5b} shows the per-simulation field mean,
+comparing the CAMELS truth to the mean of the 30 \textsc{Genesis}
+realisations on a simulation-by-simulation basis.
+
+\begin{inlinefigure}{fig:figs5a}
+  \includegraphics[width=\columnwidth]{lh_pixel_hist.pdf}
+  \inlinefigcaption{Per-channel LH pixel-value histograms in $\log_{10}$ space
+    ($N_{\rm sim}=100$, $n_{\rm gen}=30$ per sim).
+    Filled grey histograms show the pooled CAMELS pixel distribution;
+    coloured histograms show the \textsc{Genesis} ensemble.}
+\end{inlinefigure}
+
+Fig.~\ref{fig:figs5b} shows the per-simulation field mean on a
+simulation-by-simulation basis.
+Points lying close to the $y=x$ diagonal confirm that the
+\textsc{Genesis} ensemble reproduces the mean field amplitude across
+the full LH parameter range.
+
+\begin{inlinefigure}{fig:figs5b}
+  \includegraphics[width=\columnwidth]{lh_pixel_mean.pdf}
+  \inlinefigcaption{Per-simulation field mean on the LH test set
+    ($N_{\rm sim}=100$, $n_{\rm gen}=30$ per sim).
+    Horizontal axis: CAMELS simulation mean; vertical axis: mean of the
+    \textsc{Genesis} ensemble generated at the same conditioning vector.
+    The dashed line marks $y=x$.}
+\end{inlinefigure}
+
+% \section{Swin Transformer comparison}  % TODO: Swin 실험 결과 추가 후 주석 해제
+% \label{app:swin}
+%
+% We compare the primary U-Net architecture against a Swin Transformer
+% \citep{Liu2021} backbone of comparable parameter count.
+% The Swin variant uses the same OT flow-matching objective, conditioning
+% scheme, and training procedure as the U-Net, differing only in the
+% backbone (shifted-window self-attention replacing the convolutional
+% encoder--decoder).
+% Table~\ref{tab:swin_comparison} summarizes the key evaluation metrics
+% for both architectures.
+% The U-Net achieves lower cross-power residuals for the
+% feedback-sensitive pairs ($\Mcdm$--$\Tgas$ and $\Mgas$--$\Tgas$),
+% consistent with the hypothesis that circular convolution provides a
+% more natural inductive bias for periodic-boundary fields.
+% The Swin variant shows higher inference latency due to the cost of
+% shifted-window attention at multiple scales.
+%
+% \begin{table*}
+%   \centering
+%   \small
+%   \setlength{\tabcolsep}{6pt}
+%   \begin{tabular}{lcccc}
+%     \hline
+%     Metric & U-Net & Swin-B & Swin-L & Pass thr. \\
+%     \hline
+%     ...
+%   \end{tabular}
+%   \label{tab:swin_comparison}
+% \end{table*}
+
+\label{lastpage}
+\bsp
+\end{document}
