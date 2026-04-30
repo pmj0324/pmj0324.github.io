@@ -1771,16 +1771,23 @@ would require retraining, transfer learning, or explicit multi-suite
 training to separate cosmological dependence from baryonic model
 dependence.
 
-These limitations suggest several natural next steps. The CAMELS 1P
-set can be used to test whether the generated fields reproduce
-one-parameter response curves for each of the six conditioning
-parameters. The EX set can test robustness near or outside the edges
-of the LH training range. For likelihood-based inference, future work
-should evaluate many CAMELS maps, scan or sample the full
-six-dimensional parameter space, quantify estimator variance, and
-check frequentist coverage or simulation-based calibration. These
-steps are necessary before the likelihood can be used as a reliable
-cosmological inference tool.
+These limitations suggest several natural next steps. Using the CAMELS
+LH test set and the 1P set, we plan to test whether \textsc{Genesis}
+correctly tracks individual one-parameter response curves for each of
+the six conditioning parameters in isolation. The EX set will then be
+used to probe robustness in extreme conditions near or beyond the
+edges of the training range. Beyond validation, a natural direction is
+to broaden the scope of the model: extending training to multiple
+redshift snapshots, to three-dimensional field grids, and to other
+simulation suites such as SIMBA, which would allow the model to
+generalise beyond the IllustrisTNG baryonic prescription and across
+cosmic time. For likelihood-based inference, future work will evaluate
+the CNF likelihood across many CAMELS maps, scan or sample the full
+six-dimensional parameter space, and quantify estimator variance.
+More importantly, rather than restricting inference to grid scans, we
+plan to explore Hamiltonian Monte Carlo and energy-based sampling
+to draw full posterior samples --- thereby testing the true capacity
+of \textsc{Genesis} as a field-level parameter inference engine.
 
 %% =============================================================
 %%  §7  CONCLUSION
