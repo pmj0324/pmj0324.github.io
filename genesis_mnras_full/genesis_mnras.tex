@@ -1324,27 +1324,34 @@ directional measure of bias at the fiducial parameter point. The
 dark-matter channel exhibits a coherent $d_{\rm CV}\simeq -0.5$
 across most scales, indicating that the \textsc{Genesis} mean
 spectrum lies roughly half of the CV simulation-to-simulation scatter
-below the CAMELS mean. This is a systematic but mild underprediction.
-The gas-density channel reaches $d_{\rm CV}\simeq -1$ on some scales,
-suggesting that the bias can approach the level of the intrinsic CV
-scatter. The temperature channel remains closer to unbiased, with
+below the CAMELS mean. This is a systematic negative bias, not random
+scatter: the displacement is coherent across the full $k$-range,
+which indicates a consistent amplitude offset in the generated
+dark-matter power. The gas-density channel reaches $d_{\rm CV}\simeq
+-1$ on some scales --- approaching the full magnitude of the intrinsic
+CV scatter --- and, critically, the bias is again coherent in sign
+across scales rather than fluctuating around zero. Although these
+values nominally fall within one standard deviation of the CV
+ensemble, the consistent directional bias across scales is a strong
+indicator that the model carries a systematic offset, not statistical
+noise. The temperature channel remains closer to unbiased, with
 $d_{\rm CV}$ varying around zero and becoming mildly positive toward
 high $k$.
 
 The map-level spread ratio $R_\sigma$ gives a complementary view of
 the generated ensemble. For $\Mcdm$, $R_\sigma\simeq 0.8$, indicating
-that the generated samples are slightly less dispersed than the
-CAMELS map-to-map variation. For $\Mgas$, $R_\sigma$ remains close to
-unity, showing well-matched map-level spread. For $\Tgas$, $R_\sigma$
-increases to approximately $1.4$ on small scales, indicating broader
-generated temperature fluctuations where feedback and thermal
+that the generated samples are somewhat under-dispersed relative to
+the CAMELS map-to-map variation. For $\Mgas$, $R_\sigma$ remains close
+to unity, showing well-matched map-level spread. For $\Tgas$, $R_\sigma$
+increases to approximately $1.4$ on small scales, indicating systematic
+over-dispersion of temperature fluctuations where feedback and thermal
 processes dominate. This small-scale over-dispersion is consistent
 with the elevated $S_{\rm cond}$ values seen for the LH set in
 Section~\ref{sec:eval_response}. Together, the two CV diagnostics
-suggest a coherent picture: \textsc{Genesis} slightly underestimates
-the dark-matter clustering amplitude at the fiducial point, matches
-the gas-density spread well, and over-disperses temperature on
-feedback-sensitive small scales.
+reveal a model that carries systematic biases: a coherent negative
+amplitude offset in dark matter, and a systematic over-dispersion in
+temperature on small scales --- both of which would propagate into
+downstream parameter inference if left uncorrected.
 
 \subsection{One-point field distributions}
 \label{sec:cv_pixel_pdf}
@@ -1675,14 +1682,19 @@ showing that generated samples at the fiducial parameter point have
 similar auto-power spectra, pixel distributions, and cross-field
 statistics to independent CAMELS realizations.
 
-At the same time, the residuals are not completely uniform across
-fields or scales. In the CV auto-power spectra, the dark-matter field
-shows a small but coherent tendency toward lower power relative to
-the CAMELS median over part of the measured range, although the
-band-averaged residuals remain at small levels. This suggests
-that the model slightly underestimates some aspects of the dark-matter
-fluctuation amplitude, rather than failing catastrophically in any
-particular scale band. 
+At the same time, the residuals are not merely noise: they reflect
+systematic biases that must be taken seriously. The CV diagnostics
+show that the dark-matter channel has a coherent $d_{\rm CV}\simeq
+-0.5$ across scales, and the gas-density channel reaches $d_{\rm
+CV}\simeq -1$ in some $k$-bins. Although both values fall nominally
+within one standard deviation of the CV ensemble, the bias is
+consistently negative across the full scale range for both channels
+--- it does not fluctuate around zero as random error would. This
+pattern is a clear signature of a systematic model bias, not sampling
+variance. A model that persistently underestimates the clustering
+amplitude by a coherent fraction of the cosmic-variance scatter
+would, if used for parameter inference without correction, produce
+systematically biased parameter estimates. 
 
 The cross-field diagnostics are particularly important for interpreting
 the model as a multifield emulator. A model could reproduce the
