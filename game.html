@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>GENESIS Game · Can you tell the difference?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="shared-theme.css" />
+    <link rel="stylesheet" href="shared-nav-mobile.css" />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #151a2b;
+        --bg-softer: #1d2336;
+        --fg: #f7f7ff;
+        --fg-muted: #c1c4d6;
+        --accent: #8d9bff;
+        --accent-soft: rgba(141, 155, 255, 0.18);
+        --border-subtle: #262b3f;
+        --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+        --radius-lg: 18px;
+        --radius-pill: 999px;
+        --nav-height: 64px;
+        --content-width: 960px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, sans-serif;
+        background-image: linear-gradient(135deg, rgba(3,7,18,0.88), rgba(15,23,42,0.78)),
+          url("images/mountain.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .page { min-height: 100vh; display: flex; flex-direction: column; }
+
+      .page-inner {
+        width: 100%;
+        max-width: var(--content-width);
+        margin: 0 auto;
+        padding: 24px 20px 40px;
+      }
+
+      .navbar {
+        position: sticky; top: 0; z-index: 20;
+        backdrop-filter: blur(16px);
+        background: linear-gradient(to bottom, rgba(5,7,18,0.9), rgba(5,7,18,0.6), transparent);
+      }
+
+      .navbar-inner {
+        height: var(--nav-height);
+        display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      }
+
+      .brand-text-main { font-size: 16px; font-weight: 600; letter-spacing: 0.02em; }
+      .brand-text-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--fg-muted); }
+
+      .nav-links { display: flex; align-items: center; gap: 18px; font-size: 14px; }
+      .nav-link {
+        padding: 6px 12px; border-radius: 999px; color: var(--fg-muted);
+        text-decoration: none; text-transform: uppercase;
+        transition: background 0.16s, color 0.16s;
+      }
+      .nav-link:hover { background: rgba(255,255,255,0.05); color: var(--fg); text-decoration: none; }
+      .nav-link-active { background: var(--accent-soft); color: var(--accent); }
+
+      /* ── Game card ── */
+      .game-card {
+        background: linear-gradient(145deg, rgba(21,26,43,0.96), rgba(8,12,28,0.98));
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-soft);
+        padding: 28px 28px 24px;
+        margin-top: 24px;
+      }
+
+      .game-header {
+        display: flex; align-items: baseline; justify-content: space-between;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 14px; margin-bottom: 20px;
+      }
+
+      .game-title { font-size: 20px; font-weight: 700; }
+      .game-subtitle { font-size: 13px; color: var(--fg-muted); margin-top: 4px; }
+
+      .score-board {
+        display: flex; gap: 24px; align-items: center;
+        font-size: 14px; color: var(--fg-muted);
+      }
+
+      .score-val {
+        font-size: 22px; font-weight: 700; color: var(--fg);
+        line-height: 1;
+      }
+
+      .score-item { text-align: center; }
+
+      /* ── Image arena ── */
+      .arena {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .img-card {
+        border-radius: 12px;
+        border: 2px solid transparent;
+        overflow: hidden;
+        cursor: pointer;
+        transition: border-color 0.18s, transform 0.14s, box-shadow 0.18s;
+        background: #0a0d1a;
+        position: relative;
+      }
+
+      .img-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(141,155,255,0.25);
+      }
+
+      .img-card.correct {
+        border-color: #70d6a3;
+        box-shadow: 0 0 24px rgba(112,214,163,0.3);
+      }
+
+      .img-card.wrong {
+        border-color: #ff7878;
+        box-shadow: 0 0 24px rgba(255,120,120,0.3);
+      }
+
+      .img-card.revealed-correct {
+        border-color: #70d6a3;
+        opacity: 0.7;
+      }
+
+      .img-card img {
+        width: 100%;
+        display: block;
+      }
+
+      .img-label {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        padding: 10px 14px 12px;
+        background: linear-gradient(transparent, rgba(5,8,20,0.92));
+        font-size: 13px; font-weight: 600;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        color: rgba(255,255,255,0.0);
+        transition: color 0.2s;
+      }
+
+      .img-label.visible { color: rgba(255,255,255,0.9); }
+
+      /* ── Status bar ── */
+      .status-bar {
+        min-height: 36px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px; font-weight: 500;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        transition: background 0.2s;
+      }
+
+      .status-bar.correct-msg { background: rgba(112,214,163,0.12); color: #70d6a3; }
+      .status-bar.wrong-msg { background: rgba(255,120,120,0.12); color: #ff7878; }
+
+      /* ── Params ── */
+      .params-box {
+        display: none;
+        background: rgba(141,155,255,0.05);
+        border: 1px solid rgba(141,155,255,0.15);
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-size: 12px;
+        color: var(--fg-muted);
+        margin-bottom: 16px;
+        line-height: 1.7;
+      }
+
+      .params-box.visible { display: block; }
+      .params-box strong { color: var(--accent); }
+
+      /* ── Buttons ── */
+      .btn-row { display: flex; justify-content: center; gap: 12px; }
+
+      .btn {
+        padding: 10px 28px;
+        border-radius: var(--radius-pill);
+        border: none; cursor: pointer;
+        font-family: inherit; font-size: 14px; font-weight: 600;
+        letter-spacing: 0.04em;
+        transition: background 0.18s, transform 0.12s;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #0b1020;
+      }
+
+      .btn-primary:hover { background: #a8b4ff; transform: translateY(-1px); }
+      .btn-primary:disabled { opacity: 0.35; cursor: default; transform: none; }
+
+      .btn-ghost {
+        background: rgba(141,155,255,0.1);
+        color: var(--accent);
+        border: 1px solid rgba(141,155,255,0.3);
+      }
+
+      .btn-ghost:hover { background: rgba(141,155,255,0.18); }
+
+      /* ── Progress bar ── */
+      .progress-wrap {
+        height: 4px; background: rgba(255,255,255,0.06);
+        border-radius: 2px; margin-bottom: 20px; overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%; border-radius: 2px;
+        background: var(--accent);
+        transition: width 0.4s ease;
+      }
+
+      /* ── Final screen ── */
+      .final-screen {
+        display: none;
+        text-align: center;
+        padding: 20px 0 10px;
+      }
+
+      .final-score-big {
+        font-size: 64px; font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .final-label { font-size: 16px; color: var(--fg-muted); margin-bottom: 24px; }
+
+      .final-msg {
+        font-size: 15px; color: var(--fg);
+        margin-bottom: 28px; line-height: 1.7;
+      }
+
+      @media (max-width: 600px) {
+        .arena { grid-template-columns: 1fr; }
+        .score-board { gap: 14px; }
+      }
+
+      .footer {
+        margin-top: auto; padding: 20px;
+        border-top: 1px solid rgba(24,30,46,0.9);
+        color: #7a7f98; font-size: 12px;
+      }
+      .footer-inner {
+        max-width: var(--content-width); margin: 0 auto;
+        display: flex; flex-wrap: wrap; align-items: center;
+        justify-content: space-between; gap: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="navbar">
+        <div class="page-inner navbar-inner">
+          <div class="brand">
+            <div>
+              <div class="brand-text-main">Minje&nbsp;Park</div>
+              <div class="brand-text-sub">GENESIS Game</div>
+            </div>
+          </div>
+          <nav class="nav-links" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">home</a>
+            <a class="nav-link" href="about.html">about</a>
+            <a class="nav-link" href="research.html">research</a>
+            <a class="nav-link" href="publications.html">publications</a>
+            <a class="nav-link" href="links.html">links</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="page-inner">
+        <section class="game-card">
+          <div class="game-header">
+            <div>
+              <div class="game-title">Can you tell the difference?</div>
+              <div class="game-subtitle">Which one is the real CAMELS simulation — and which is GENESIS?</div>
+            </div>
+            <div class="score-board">
+              <div class="score-item">
+                <div class="score-val" id="score">0</div>
+                <div>correct</div>
+              </div>
+              <div class="score-item">
+                <div class="score-val" id="round">0</div>
+                <div>of <span id="total">50</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div class="progress-wrap">
+            <div class="progress-fill" id="progress" style="width:0%"></div>
+          </div>
+
+          <!-- Game area -->
+          <div id="game-area">
+            <div class="arena">
+              <div class="img-card" id="card-left" onclick="guess('left')">
+                <img id="img-left" src="" alt="Left image" />
+                <div class="img-label" id="label-left"></div>
+              </div>
+              <div class="img-card" id="card-right" onclick="guess('right')">
+                <img id="img-right" src="" alt="Right image" />
+                <div class="img-label" id="label-right"></div>
+              </div>
+            </div>
+
+            <div class="status-bar" id="status"></div>
+
+            <div class="params-box" id="params-box"></div>
+
+            <div class="btn-row">
+              <button class="btn btn-primary" id="next-btn" onclick="nextRound()" disabled>Next →</button>
+            </div>
+          </div>
+
+          <!-- Final screen -->
+          <div class="final-screen" id="final-screen">
+            <div class="final-score-big" id="final-score"></div>
+            <div class="final-label">out of <span id="final-total"></span> rounds</div>
+            <div class="final-msg" id="final-msg"></div>
+            <div class="btn-row">
+              <button class="btn btn-primary" onclick="startGame()">Play Again</button>
+              <a class="btn btn-ghost" href="research.html#project-cosmo-heading">Learn about GENESIS</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <span>© <span id="year"></span> Minje Park. All rights reserved.</span>
+          <span>Images: CAMELS simulations vs. GENESIS generated fields.</span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const SIMS = [
+        "0.104_0.747_3.308_0.446_1.461_0.549",
+        "0.107_0.847_1.038_0.459_0.763_1.709",
+        "0.120_0.782_0.582_0.532_1.508_0.528",
+        "0.122_0.721_2.418_0.379_0.845_0.889",
+        "0.123_0.626_1.229_0.397_1.630_1.207",
+        "0.132_0.929_3.138_2.763_0.805_0.671",
+        "0.139_0.911_0.691_3.449_1.377_0.899",
+        "0.143_0.703_0.415_1.070_0.542_0.786",
+        "0.149_0.996_3.449_0.288_1.559_0.754",
+        "0.150_0.743_0.924_0.342_1.030_0.523",
+        "0.158_0.968_0.297_2.709_1.612_1.767",
+        "0.162_0.794_0.277_0.492_0.858_1.213",
+        "0.171_0.798_1.560_3.625_0.574_0.927",
+        "0.178_0.714_0.663_2.977_0.729_0.648",
+        "0.179_0.837_2.088_1.514_1.688_0.821",
+        "0.181_0.813_3.326_2.725_1.471_1.513",
+        "0.183_0.799_1.173_2.071_1.912_0.794",
+        "0.184_0.706_1.668_2.801_1.475_1.917",
+        "0.220_0.645_0.286_0.328_0.876_0.672",
+        "0.230_0.758_3.209_0.384_1.799_1.546",
+        "0.247_0.770_0.742_2.076_0.694_1.241",
+        "0.250_0.625_1.569_0.305_1.644_0.721",
+        "0.273_0.825_3.516_2.896_1.451_0.691",
+        "0.282_0.724_1.587_0.270_1.330_0.990",
+        "0.292_0.890_2.152_1.591_0.782_1.419",
+        "0.315_0.986_2.986_0.919_1.208_1.386",
+        "0.316_0.754_1.100_0.979_0.649_1.403",
+        "0.341_0.703_1.091_0.974_0.965_1.637",
+        "0.341_0.898_1.997_1.552_0.927_0.863",
+        "0.346_0.697_0.666_1.420_0.980_1.730",
+        "0.354_0.871_1.340_0.884_1.078_1.006",
+        "0.356_0.803_0.338_2.059_0.748_0.632",
+        "0.373_0.645_1.992_0.441_1.527_0.564",
+        "0.375_0.686_0.916_0.327_1.241_0.815",
+        "0.377_0.671_0.422_1.196_1.664_1.733",
+        "0.387_0.873_1.021_2.117_0.918_1.467",
+        "0.391_0.888_1.600_1.223_1.290_0.642",
+        "0.402_0.769_0.253_1.497_1.676_0.685",
+        "0.407_0.799_2.747_0.832_1.639_1.095",
+        "0.415_0.871_2.920_2.994_1.413_1.928",
+        "0.419_0.969_2.657_0.252_1.040_1.931",
+        "0.425_0.810_0.274_1.696_0.621_1.477",
+        "0.427_0.819_0.677_2.346_1.915_1.094",
+        "0.429_0.667_0.816_2.599_1.706_1.183",
+        "0.434_0.661_0.537_2.856_0.878_0.617",
+        "0.454_0.826_2.953_2.082_0.813_0.907",
+        "0.462_0.617_0.927_0.316_0.778_1.371",
+        "0.462_0.940_0.993_0.433_1.762_1.469",
+        "0.465_0.632_0.829_3.061_1.757_0.967",
+        "0.471_0.760_0.996_1.539_0.561_1.764",
+      ];
+
+      function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function formatParams(key) {
+        const [om, s8, sn1, sn2, agn1, agn2] = key.split("_");
+        return `Ω<sub>m</sub> = ${om} &nbsp;·&nbsp; σ<sub>8</sub> = ${s8} &nbsp;·&nbsp;
+                A<sub>SN1</sub> = ${sn1} &nbsp;·&nbsp; A<sub>SN2</sub> = ${sn2} &nbsp;·&nbsp;
+                A<sub>AGN1</sub> = ${agn1} &nbsp;·&nbsp; A<sub>AGN2</sub> = ${agn2}`;
+      }
+
+      function finalMessage(score, total) {
+        const pct = score / total;
+        if (pct >= 0.9) return "Outstanding! You might have a future in cosmological simulation.";
+        if (pct >= 0.7) return "Great eye! GENESIS is doing its job well.";
+        if (pct >= 0.5) return "Not bad — even experts find it hard to tell these apart.";
+        return "GENESIS fooled you well. That's actually a good sign for the model!";
+      }
+
+      let queue = [], currentSim = null, camelsOnLeft = true, answered = false;
+      let score = 0, roundNum = 0;
+
+      function startGame() {
+        queue = shuffle(SIMS);
+        score = 0; roundNum = 0; answered = false;
+        document.getElementById("score").textContent = 0;
+        document.getElementById("round").textContent = 0;
+        document.getElementById("total").textContent = queue.length;
+        document.getElementById("final-total").textContent = queue.length;
+        document.getElementById("progress").style.width = "0%";
+        document.getElementById("game-area").style.display = "";
+        document.getElementById("final-screen").style.display = "none";
+        nextRound();
+      }
+
+      function nextRound() {
+        if (queue.length === 0) { showFinal(); return; }
+
+        currentSim = queue.pop();
+        camelsOnLeft = Math.random() < 0.5;
+        answered = false;
+
+        const base = "game_genesis/" + currentSim + "/";
+        document.getElementById("img-left").src  = base + (camelsOnLeft ? "camels.png" : "genesis.png");
+        document.getElementById("img-right").src = base + (camelsOnLeft ? "genesis.png" : "camels.png");
+
+        ["card-left","card-right"].forEach(id => {
+          const el = document.getElementById(id);
+          el.className = "img-card";
+          el.onclick = id === "card-left" ? () => guess("left") : () => guess("right");
+        });
+
+        document.getElementById("label-left").className = "img-label";
+        document.getElementById("label-right").className = "img-label";
+        document.getElementById("label-left").textContent = "";
+        document.getElementById("label-right").textContent = "";
+
+        const status = document.getElementById("status");
+        status.className = "status-bar";
+        status.textContent = "Which one is the real CAMELS simulation?";
+
+        document.getElementById("params-box").className = "params-box";
+        document.getElementById("next-btn").disabled = true;
+
+        roundNum++;
+        document.getElementById("round").textContent = roundNum;
+        document.getElementById("progress").style.width =
+          ((roundNum - 1) / SIMS.length * 100) + "%";
+      }
+
+      function guess(side) {
+        if (answered) return;
+        answered = true;
+
+        const isCorrect = (side === "left") === camelsOnLeft;
+
+        const correctSide = camelsOnLeft ? "left" : "right";
+        const wrongSide   = camelsOnLeft ? "right" : "left";
+
+        document.getElementById("card-" + correctSide).classList.add(isCorrect ? "correct" : "revealed-correct");
+        if (!isCorrect) document.getElementById("card-" + side).classList.add("wrong");
+
+        const labelL = document.getElementById("label-left");
+        const labelR = document.getElementById("label-right");
+        labelL.textContent = camelsOnLeft ? "CAMELS" : "GENESIS";
+        labelR.textContent = camelsOnLeft ? "GENESIS" : "CAMELS";
+        labelL.classList.add("visible");
+        labelR.classList.add("visible");
+
+        ["card-left","card-right"].forEach(id => {
+          document.getElementById(id).onclick = null;
+        });
+
+        const status = document.getElementById("status");
+        if (isCorrect) {
+          score++;
+          document.getElementById("score").textContent = score;
+          status.className = "status-bar correct-msg";
+          status.textContent = "✓ Correct!";
+        } else {
+          status.className = "status-bar wrong-msg";
+          status.textContent = "✗ Wrong — GENESIS fooled you!";
+        }
+
+        const paramsBox = document.getElementById("params-box");
+        paramsBox.innerHTML = "<strong>Parameters:</strong> " + formatParams(currentSim);
+        paramsBox.classList.add("visible");
+
+        document.getElementById("next-btn").disabled = false;
+      }
+
+      function showFinal() {
+        document.getElementById("game-area").style.display = "none";
+        document.getElementById("final-screen").style.display = "block";
+        document.getElementById("final-score").textContent = score;
+        document.getElementById("final-msg").textContent = finalMessage(score, SIMS.length);
+        document.getElementById("progress").style.width = "100%";
+      }
+
+      startGame();
+    </script>
+  </body>
+</html>
