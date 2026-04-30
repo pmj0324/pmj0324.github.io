@@ -1791,13 +1791,19 @@ statistics at a useful level. The generated maps match the marginal
 auto-power spectra, one-point distributions, field means, and
 cross-field structure reasonably well, and the conditional log-power
 response tracks much of the variation across the LH parameter space.
-The remaining discrepancies are concentrated in feedback-sensitive
-baryonic quantities: temperature-related correlations and small-scale
-temperature spread are less well matched, and the CV diagnostics show
-a mild underprediction of dark-matter clustering amplitude at the
-fiducial point. Thus, the model captures the dominant multifield
-structure while still leaving clear targets for improved small-scale
-baryonic modelling. In the current implementation, generating 200
+The remaining discrepancies, however, are more than incidental scatter.
+The temperature field exhibits systematic over-dispersion by a factor of
+$R_\sigma \simeq 1.4$ on small scales, indicating that the model does not
+correctly reproduce the conditional variance of the most
+feedback-sensitive channel. The CV diagnostics reveal a coherent negative
+bias of $d_{\rm CV}\simeq -0.5$ in the dark-matter channel --- a
+systematic underprediction of roughly half the cosmic-variance scatter
+that would bias downstream parameter inference if left uncorrected.
+These are not cosmetic limitations: the current model has captured the
+dominant large-scale multifield structure, but further training,
+architectural refinement, and careful calibration are required before
+\textsc{Genesis} can serve as a reliable tool for unbiased cosmological
+inference. In the current implementation, generating 200
 independent multifield samples at a fixed conditioning vector takes
 roughly 20 minutes on a single NVIDIA A100 GPU, showing that moderate
 conditional ensembles are feasible.
