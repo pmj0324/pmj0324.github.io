@@ -10,8 +10,6 @@
     <style>
       :root {
         --bg: #0b1020;
-        --bg-soft: #151a2b;
-        --bg-softer: #1d2336;
         --fg: #f7f7ff;
         --fg-muted: #c1c4d6;
         --accent: #8d9bff;
@@ -73,21 +71,18 @@
       .nav-link:hover { background: rgba(255,255,255,0.05); color: var(--fg); text-decoration: none; }
       .nav-link-active { background: var(--accent-soft); color: var(--accent); }
 
-      /* ── Layout: game + leaderboard side by side ── */
+      /* ── Main layout ── */
       .main-layout {
-        display: grid;
-        grid-template-columns: 1fr 300px;
+        display: flex;
         gap: 20px;
-        align-items: start;
+        align-items: flex-start;
         margin-top: 24px;
-      }
-
-      @media (max-width: 780px) {
-        .main-layout { grid-template-columns: 1fr; }
       }
 
       /* ── Game card ── */
       .game-card {
+        flex: 1;
+        min-width: 0;
         background: linear-gradient(145deg, rgba(21,26,43,0.96), rgba(8,12,28,0.98));
         border-radius: var(--radius-lg);
         border: 1px solid var(--border-subtle);
@@ -96,25 +91,40 @@
       }
 
       .game-header {
-        display: flex; align-items: baseline; justify-content: space-between;
+        display: flex; align-items: center; justify-content: space-between;
         border-bottom: 1px solid rgba(255,255,255,0.1);
         padding-bottom: 12px; margin-bottom: 16px;
+        gap: 12px; flex-wrap: wrap;
       }
 
       .game-title { font-size: 18px; font-weight: 700; }
       .game-subtitle { font-size: 12px; color: var(--fg-muted); margin-top: 3px; }
 
+      .header-right {
+        display: flex; align-items: center; gap: 14px;
+      }
+
       .score-board {
-        display: flex; gap: 20px; align-items: center;
+        display: flex; gap: 18px; align-items: center;
         font-size: 13px; color: var(--fg-muted);
       }
 
-      .score-val {
-        font-size: 20px; font-weight: 700; color: var(--fg);
-        line-height: 1;
-      }
-
+      .score-val { font-size: 20px; font-weight: 700; color: var(--fg); line-height: 1; }
       .score-item { text-align: center; }
+
+      /* ── Leaderboard toggle button ── */
+      .lb-toggle-btn {
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(141,155,255,0.3);
+        background: rgba(141,155,255,0.08);
+        color: var(--accent);
+        font-family: inherit; font-size: 12px; font-weight: 600;
+        cursor: pointer; white-space: nowrap;
+        transition: background 0.18s;
+      }
+      .lb-toggle-btn:hover { background: rgba(141,155,255,0.18); }
+      .lb-toggle-btn.active { background: var(--accent-soft); }
 
       /* ── Params top (always visible) ── */
       .params-top {
@@ -126,18 +136,22 @@
         color: var(--fg-muted);
         margin-bottom: 14px;
         text-align: center;
-        line-height: 1.8;
+        line-height: 1.9;
       }
 
-      .params-top strong { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 2px; }
+      .params-top .params-label {
+        font-size: 10px; text-transform: uppercase;
+        letter-spacing: 0.08em; color: var(--accent);
+        display: block; margin-bottom: 2px;
+      }
 
-      /* ── Image arena ── */
+      /* ── Image arena — two cards side by side, images natural ratio ── */
       .arena {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 12px;
         margin-bottom: 14px;
-        max-width: 520px;
+        max-width: 420px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -158,34 +172,23 @@
         box-shadow: 0 6px 20px rgba(141,155,255,0.25);
       }
 
-      .img-card.correct {
-        border-color: #70d6a3;
-        box-shadow: 0 0 20px rgba(112,214,163,0.3);
-      }
+      .img-card.correct  { border-color: #70d6a3; box-shadow: 0 0 20px rgba(112,214,163,0.3); }
+      .img-card.wrong    { border-color: #ff7878; box-shadow: 0 0 20px rgba(255,120,120,0.3); }
+      .img-card.revealed-correct { border-color: #70d6a3; opacity: 0.7; }
 
-      .img-card.wrong {
-        border-color: #ff7878;
-        box-shadow: 0 0 20px rgba(255,120,120,0.3);
-      }
-
-      .img-card.revealed-correct {
-        border-color: #70d6a3;
-        opacity: 0.7;
-      }
-
+      /* Natural aspect ratio — shows all 3 channels */
       .img-card img {
         width: 100%;
+        height: auto;
         display: block;
-        height: 200px;
-        object-fit: cover;
       }
 
       .img-label {
         position: absolute;
         bottom: 0; left: 0; right: 0;
-        padding: 8px 12px 10px;
+        padding: 8px 10px 10px;
         background: linear-gradient(transparent, rgba(5,8,20,0.92));
-        font-size: 12px; font-weight: 600;
+        font-size: 11px; font-weight: 600;
         letter-spacing: 0.06em; text-transform: uppercase;
         color: rgba(255,255,255,0.0);
         transition: color 0.2s;
@@ -201,13 +204,13 @@
         margin-bottom: 14px;
         border-radius: 8px;
         transition: background 0.2s;
-        max-width: 520px;
+        max-width: 420px;
         margin-left: auto;
         margin-right: auto;
       }
 
       .status-bar.correct-msg { background: rgba(112,214,163,0.12); color: #70d6a3; }
-      .status-bar.wrong-msg { background: rgba(255,120,120,0.12); color: #ff7878; }
+      .status-bar.wrong-msg   { background: rgba(255,120,120,0.12); color: #ff7878; }
 
       /* ── Buttons ── */
       .btn-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
@@ -221,59 +224,40 @@
         transition: background 0.18s, transform 0.12s;
       }
 
-      .btn-primary {
-        background: var(--accent);
-        color: #0b1020;
-      }
-
+      .btn-primary { background: var(--accent); color: #0b1020; }
       .btn-primary:hover { background: #a8b4ff; transform: translateY(-1px); }
       .btn-primary:disabled { opacity: 0.35; cursor: default; transform: none; }
 
       .btn-ghost {
-        background: rgba(141,155,255,0.1);
-        color: var(--accent);
+        background: rgba(141,155,255,0.1); color: var(--accent);
         border: 1px solid rgba(141,155,255,0.3);
       }
-
       .btn-ghost:hover { background: rgba(141,155,255,0.18); }
 
-      .btn-sm {
-        padding: 6px 16px;
-        font-size: 12px;
-      }
+      .btn-sm { padding: 6px 16px; font-size: 12px; }
 
       /* ── Progress bar ── */
       .progress-wrap {
         height: 3px; background: rgba(255,255,255,0.06);
         border-radius: 2px; margin-bottom: 16px; overflow: hidden;
       }
-
       .progress-fill {
-        height: 100%; border-radius: 2px;
-        background: var(--accent);
+        height: 100%; border-radius: 2px; background: var(--accent);
         transition: width 0.4s ease;
       }
 
       /* ── Final screen ── */
       .final-screen {
-        display: none;
-        text-align: center;
-        padding: 16px 0 8px;
+        display: none; text-align: center; padding: 16px 0 8px;
       }
 
       .final-score-big {
-        font-size: 56px; font-weight: 800;
-        color: var(--accent);
-        line-height: 1;
-        margin-bottom: 6px;
+        font-size: 56px; font-weight: 800; color: var(--accent);
+        line-height: 1; margin-bottom: 6px;
       }
 
       .final-label { font-size: 14px; color: var(--fg-muted); margin-bottom: 8px; }
-
-      .final-msg {
-        font-size: 14px; color: var(--fg);
-        margin-bottom: 20px; line-height: 1.7;
-      }
+      .final-msg { font-size: 14px; color: var(--fg); margin-bottom: 20px; line-height: 1.7; }
 
       /* ── Save score form ── */
       .save-score-row {
@@ -285,92 +269,72 @@
         background: rgba(255,255,255,0.06);
         border: 1px solid rgba(141,155,255,0.25);
         border-radius: var(--radius-pill);
-        color: var(--fg);
-        font-family: inherit;
-        font-size: 13px;
-        padding: 8px 16px;
-        outline: none;
-        width: 180px;
+        color: var(--fg); font-family: inherit; font-size: 13px;
+        padding: 8px 16px; outline: none; width: 180px;
         transition: border-color 0.18s;
       }
-
       .name-input::placeholder { color: var(--fg-muted); }
       .name-input:focus { border-color: var(--accent); }
 
-      /* ── Leaderboard card ── */
-      .lb-card {
+      /* ── Leaderboard panel ── */
+      .lb-panel {
+        width: 280px;
+        flex-shrink: 0;
         background: linear-gradient(145deg, rgba(21,26,43,0.96), rgba(8,12,28,0.98));
         border-radius: var(--radius-lg);
         border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-soft);
-        padding: 20px;
+        padding: 18px;
+        display: none; /* hidden by default */
       }
+
+      .lb-panel.open { display: block; }
 
       .lb-title {
-        font-size: 14px; font-weight: 700;
-        letter-spacing: 0.04em; text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 4px;
+        font-size: 13px; font-weight: 700;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        color: var(--accent); margin-bottom: 3px;
       }
 
-      .lb-subtitle {
-        font-size: 11px; color: var(--fg-muted);
-        margin-bottom: 14px;
-      }
+      .lb-subtitle { font-size: 11px; color: var(--fg-muted); margin-bottom: 12px; }
 
       .lb-header-row {
         display: grid;
-        grid-template-columns: 28px 1fr 44px 52px;
-        gap: 6px;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--fg-muted);
-        padding: 0 4px 6px;
+        grid-template-columns: 26px 1fr 46px 42px;
+        gap: 4px;
+        font-size: 10px; text-transform: uppercase;
+        letter-spacing: 0.08em; color: var(--fg-muted);
+        padding: 0 2px 6px;
         border-bottom: 1px solid rgba(255,255,255,0.06);
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
 
       .lb-row {
         display: grid;
-        grid-template-columns: 28px 1fr 44px 52px;
-        gap: 6px;
-        font-size: 12px;
-        padding: 6px 4px;
-        border-radius: 6px;
-        align-items: center;
+        grid-template-columns: 26px 1fr 46px 42px;
+        gap: 4px;
+        font-size: 12px; padding: 5px 2px;
+        border-radius: 6px; align-items: center;
         transition: background 0.15s;
       }
-
       .lb-row:hover { background: rgba(255,255,255,0.03); }
-
       .lb-row.lb-top1 { color: #ffd97d; }
       .lb-row.lb-top2 { color: #d4d4d4; }
       .lb-row.lb-top3 { color: #c8a882; }
 
-      .lb-rank { font-weight: 700; text-align: center; }
-      .lb-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .lb-rank  { font-weight: 700; text-align: center; }
+      .lb-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .lb-score { font-weight: 700; text-align: right; }
-      .lb-pct { color: var(--fg-muted); text-align: right; font-size: 11px; }
+      .lb-pct   { color: var(--fg-muted); text-align: right; font-size: 11px; }
 
       .lb-empty {
-        text-align: center;
-        color: var(--fg-muted);
-        font-size: 12px;
-        padding: 24px 0;
+        text-align: center; color: var(--fg-muted);
+        font-size: 12px; padding: 20px 0;
       }
 
-      .lb-clear-row {
-        margin-top: 12px;
-        text-align: right;
-      }
+      .lb-clear-row { margin-top: 10px; text-align: right; }
 
-      @media (max-width: 600px) {
-        .arena { grid-template-columns: 1fr; max-width: 260px; }
-        .score-board { gap: 14px; }
-        .img-card img { height: 180px; }
-      }
-
+      /* ── Footer ── */
       .footer {
         margin-top: auto; padding: 20px;
         border-top: 1px solid rgba(24,30,46,0.9);
@@ -380,6 +344,13 @@
         max-width: var(--content-width); margin: 0 auto;
         display: flex; flex-wrap: wrap; align-items: center;
         justify-content: space-between; gap: 12px;
+      }
+
+      @media (max-width: 680px) {
+        .main-layout { flex-direction: column; }
+        .lb-panel { width: 100%; }
+        .arena { max-width: 360px; }
+        .score-board { gap: 12px; }
       }
     </style>
   </head>
@@ -413,15 +384,18 @@
                 <div class="game-title">Can you tell the difference?</div>
                 <div class="game-subtitle">Which one is the real CAMELS simulation — and which is GENESIS?</div>
               </div>
-              <div class="score-board">
-                <div class="score-item">
-                  <div class="score-val" id="score">0</div>
-                  <div>correct</div>
+              <div class="header-right">
+                <div class="score-board">
+                  <div class="score-item">
+                    <div class="score-val" id="score">0</div>
+                    <div>correct</div>
+                  </div>
+                  <div class="score-item">
+                    <div class="score-val" id="round">0</div>
+                    <div>of <span id="total">50</span></div>
+                  </div>
                 </div>
-                <div class="score-item">
-                  <div class="score-val" id="round">0</div>
-                  <div>of <span id="total">50</span></div>
-                </div>
+                <button class="lb-toggle-btn" id="lb-toggle" onclick="toggleLeaderboard()">🏆 Leaderboard</button>
               </div>
             </div>
 
@@ -433,8 +407,8 @@
             <!-- Game area -->
             <div id="game-area">
               <!-- Parameters shown at top -->
-              <div class="params-top" id="params-top">
-                <strong>Simulation Parameters</strong>
+              <div class="params-top">
+                <span class="params-label">Simulation Parameters</span>
                 <span id="params-text">—</span>
               </div>
 
@@ -462,22 +436,22 @@
               <div class="final-label">out of <span id="final-total"></span> rounds</div>
               <div class="final-msg" id="final-msg"></div>
 
-              <div class="save-score-row" id="save-row">
+              <div id="save-row" class="save-score-row">
                 <input class="name-input" id="name-input" type="text" maxlength="20" placeholder="Your name" />
-                <button class="btn btn-primary btn-sm" onclick="saveScore()">Save to leaderboard</button>
+                <button class="btn btn-primary btn-sm" onclick="saveScore()">Save score</button>
               </div>
 
               <div class="btn-row">
                 <button class="btn btn-primary" onclick="startGame()">Play Again</button>
-                <a class="btn btn-ghost" href="research.html#project-cosmo-heading">Learn about GENESIS</a>
+                <a class="btn btn-ghost" href="research.html#project-cosmo-heading">About GENESIS</a>
               </div>
             </div>
           </section>
 
-          <!-- ── Leaderboard card ── -->
-          <aside class="lb-card" id="lb-card">
-            <div class="lb-title">Leaderboard</div>
-            <div class="lb-subtitle">Top scores (stored locally)</div>
+          <!-- ── Leaderboard panel (toggled) ── -->
+          <aside class="lb-panel" id="lb-panel">
+            <div class="lb-title">🏆 Leaderboard</div>
+            <div class="lb-subtitle">Top scores · stored in your browser</div>
 
             <div class="lb-header-row">
               <span>#</span>
@@ -489,7 +463,7 @@
             <div id="lb-list"></div>
 
             <div class="lb-clear-row">
-              <button class="btn btn-ghost btn-sm" onclick="clearLeaderboard()">Clear</button>
+              <button class="btn btn-ghost btn-sm" onclick="clearLeaderboard()">Clear all</button>
             </div>
           </aside>
 
@@ -578,11 +552,24 @@
       }
 
       function finalMessage(sc, total) {
-        const pct = sc / total;
-        if (pct >= 0.9) return "Outstanding! You might have a future in cosmological simulation.";
-        if (pct >= 0.7) return "Great eye! GENESIS is doing its job well.";
-        if (pct >= 0.5) return "Not bad — even experts find it hard to tell these apart.";
+        const p = sc / total;
+        if (p >= 0.9) return "Outstanding! You might have a future in cosmological simulation.";
+        if (p >= 0.7) return "Great eye! GENESIS is doing its job well.";
+        if (p >= 0.5) return "Not bad — even experts find it hard to tell these apart.";
         return "GENESIS fooled you well. That's actually a good sign for the model!";
+      }
+
+      function escHtml(s) {
+        return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      }
+
+      /* ── Leaderboard toggle ── */
+      function toggleLeaderboard() {
+        const panel = document.getElementById("lb-panel");
+        const btn   = document.getElementById("lb-toggle");
+        const open  = panel.classList.toggle("open");
+        btn.classList.toggle("active", open);
+        if (open) renderLeaderboard();
       }
 
       /* ── Leaderboard (localStorage) ── */
@@ -600,13 +587,13 @@
       function renderLeaderboard() {
         const scores = loadScores();
         const list = document.getElementById("lb-list");
+        if (!list) return;
         if (scores.length === 0) {
           list.innerHTML = '<div class="lb-empty">No scores yet.<br>Finish a game to get on the board!</div>';
           return;
         }
-        const top = scores.slice(0, 10);
-        list.innerHTML = top.map((e, i) => {
-          const cls = i === 0 ? "lb-row lb-top1" : i === 1 ? "lb-row lb-top2" : i === 2 ? "lb-row lb-top3" : "lb-row";
+        list.innerHTML = scores.slice(0, 10).map((e, i) => {
+          const cls = ["lb-row", i < 3 ? ["lb-top1","lb-top2","lb-top3"][i] : ""].join(" ").trim();
           const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : (i + 1);
           const pct = Math.round(e.score / e.total * 100) + "%";
           return `<div class="${cls}">
@@ -618,23 +605,19 @@
         }).join("");
       }
 
-      function escHtml(s) {
-        return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-      }
-
       function saveScore() {
-        const name = document.getElementById("name-input").value.trim() || "Anonymous";
+        const name = (document.getElementById("name-input").value.trim()) || "Anonymous";
         const scores = loadScores();
         scores.push({ name, score, total: SIMS.length, date: Date.now() });
         scores.sort((a, b) => b.score - a.score || b.date - a.date);
         saveScores(scores);
         document.getElementById("save-row").innerHTML =
-          '<span style="font-size:13px;color:#70d6a3">✓ Score saved!</span>';
-        renderLeaderboard();
+          '<span style="font-size:13px;color:#70d6a3">✓ Saved to leaderboard!</span>';
+        if (document.getElementById("lb-panel").classList.contains("open")) renderLeaderboard();
       }
 
       function clearLeaderboard() {
-        if (!confirm("Clear all leaderboard scores?")) return;
+        if (!confirm("Clear all scores?")) return;
         saveScores([]);
         renderLeaderboard();
       }
@@ -673,9 +656,9 @@
           el.onclick = id === "card-left" ? () => guess("left") : () => guess("right");
         });
 
-        document.getElementById("label-left").className = "img-label";
+        document.getElementById("label-left").className  = "img-label";
         document.getElementById("label-right").className = "img-label";
-        document.getElementById("label-left").textContent = "";
+        document.getElementById("label-left").textContent  = "";
         document.getElementById("label-right").textContent = "";
 
         const status = document.getElementById("status");
@@ -695,7 +678,7 @@
         if (answered) return;
         answered = true;
 
-        const isCorrect = (side === "left") === camelsOnLeft;
+        const isCorrect  = (side === "left") === camelsOnLeft;
         const correctSide = camelsOnLeft ? "left" : "right";
 
         document.getElementById("card-" + correctSide).classList.add(isCorrect ? "correct" : "revealed-correct");
@@ -732,14 +715,12 @@
         document.getElementById("final-score").textContent = score;
         document.getElementById("final-msg").textContent = finalMessage(score, SIMS.length);
         document.getElementById("progress").style.width = "100%";
-        document.getElementById("name-input").value = "";
+        document.getElementById("name-input") && (document.getElementById("name-input").value = "");
         document.getElementById("save-row").innerHTML = `
           <input class="name-input" id="name-input" type="text" maxlength="20" placeholder="Your name" />
-          <button class="btn btn-primary btn-sm" onclick="saveScore()">Save to leaderboard</button>`;
+          <button class="btn btn-primary btn-sm" onclick="saveScore()">Save score</button>`;
       }
 
-      /* ── Init ── */
-      renderLeaderboard();
       startGame();
     </script>
   </body>
