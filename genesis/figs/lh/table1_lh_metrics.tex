@@ -1,0 +1,23 @@
+\begingroup
+  \centering
+  \refstepcounter{table}
+  \label{tab:lh_metrics}
+  \begin{tabular}{lcccccc}
+    \hline\hline
+    Channel & $\bar{\epsilon}_P^{\mathrm{low}}$ & $\bar{\epsilon}_P^{\mathrm{mid}}$ & $\bar{\epsilon}_P^{\mathrm{high}}$ & KS & JSD & $R^2$ \\
+    \hline
+    $M_{\mathrm{cdm}}$ & 3.9\% & 2.1\% & 0.5\% & 0.0336 & 0.00262 & 0.842 \\
+    $M_{\mathrm{gas}}$ & 4.2\% & 5.3\% & 4.7\% & 0.0364 & 0.00293 & 0.882 \\
+    $T$ & 2.7\% & 1.9\% & 3.6\% & 0.0464 & 0.00454 & 0.833 \\
+    \hline
+  \end{tabular}
+  \par\smallskip
+  \parbox{\columnwidth}{\small
+    \textbf{Table~\thetable.} Quantitative evaluation on the LH test set
+    ($N_{\mathrm{sim}}=100$, $n_{\mathrm{gen}}=30$ per sim).
+    Auto-$P(k)$ errors $\bar{\epsilon}_P$ are band-averaged fractional
+    differences between the LH-aggregated CAMELS and \textsc{Genesis}
+    mean auto-power spectra, following equation~(\ref{eq:lh_auto_eps}).
+    KS and JSD measure pixel-value distribution fidelity. $R^2$ is the
+    overall conditional response quality.}
+\endgroup

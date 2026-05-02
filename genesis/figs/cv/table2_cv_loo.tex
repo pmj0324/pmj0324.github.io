@@ -1,0 +1,26 @@
+\begin{table}
+\centering
+\caption{CV Leave-One-Out (LOO) evaluation ($N_{\mathrm{sim}}=27$, $M=15$~maps/sim, $n_{\mathrm{gen}}=200$). Each cell shows the model statistic $T_{\mathrm{model}}$ with the LOO null 68\% interval $[p_{16}, p_{84}]$ as subscript and assessment as superscript: \textbf{N}=natural (within null band), \textbf{C}=caution, \textbf{A}=alarm.}
+\label{tab:cv_loo}
+\begin{tabular}{llccc}
+\hline\hline
+Metric & Field & Low $k$ & Mid $k$ & High $k$ \\
+\hline
+$\Delta_{\mathrm{CV}}$ & $M_{\mathrm{cdm}}$ & $-0.170$$_{[-0.390,\ +0.305]}^{\textbf{N}}$ & $-0.153$$_{[-0.309,\ +0.289]}^{\textbf{N}}$ & $-0.153$$_{[-0.294,\ +0.244]}^{\textbf{N}}$ \\
+ & $M_{\mathrm{gas}}$ & $-0.162$$_{[-0.412,\ +0.318]}^{\textbf{N}}$ & $-0.129$$_{[-0.316,\ +0.313]}^{\textbf{N}}$ & $-0.027$$_{[-0.301,\ +0.338]}^{\textbf{N}}$ \\
+ & $T$ & $-0.049$$_{[-0.433,\ +0.399]}^{\textbf{N}}$ & $-0.021$$_{[-0.319,\ +0.355]}^{\textbf{N}}$ & $+0.128$$_{[-0.359,\ +0.162]}^{\textbf{N}}$ \\
+\hline
+$R_\sigma$ & $M_{\mathrm{cdm}}$ & $+0.204$$_{[+0.152,\ +0.770]}^{\textbf{N}}$ & $+0.161$$_{[+0.137,\ +0.691]}^{\textbf{N}}$ & $+0.101$$_{[+0.150,\ +0.578]}^{\textbf{C}}$ \\
+ & $M_{\mathrm{gas}}$ & $+0.242$$_{[+0.130,\ +0.773]}^{\textbf{N}}$ & $+0.255$$_{[+0.151,\ +0.841]}^{\textbf{N}}$ & $+0.189$$_{[+0.208,\ +1.272]}^{\textbf{C}}$ \\
+ & $T$ & $+0.036$$_{[+0.214,\ +0.597]}^{\textbf{A}}$ & $+0.038$$_{[+0.181,\ +0.615]}^{\textbf{A}}$ & $+0.082$$_{[+0.226,\ +0.780]}^{\textbf{A}}$ \\
+\hline
+Cross-$P(k)$ & $M_{\mathrm{cdm}}$-$M_{\mathrm{gas}}$ & $+3.625$$_{[+2.982,\ +10.946]}^{\textbf{N}}$ & $+0.931$$_{[+0.589,\ +3.070]}^{\textbf{N}}$ & $+0.106$$_{[+0.157,\ +0.654]}^{\textbf{C}}$ \\
+ & $M_{\mathrm{cdm}}$\text{--}$T$ & $+2.617$$_{[+2.732,\ +13.031]}^{\textbf{C}}$ & $+0.222$$_{[+0.293,\ +0.863]}^{\textbf{A}}$ & $+0.013$$_{[+0.045,\ +0.147]}^{\textbf{A}}$ \\
+ & $M_{\mathrm{gas}}$\text{--}$T$ & $+2.362$$_{[+2.571,\ +12.081]}^{\textbf{C}}$ & $+0.165$$_{[+0.286,\ +0.836]}^{\textbf{A}}$ & $+0.013$$_{[+0.023,\ +0.089]}^{\textbf{A}}$ \\
+\hline
+Coherence $r_{ab}$ & $M_{\mathrm{cdm}}$-$M_{\mathrm{gas}}$ & $+0.000$$_{[+0.001,\ +0.003]}^{\textbf{A}}$ & $+0.002$$_{[+0.003,\ +0.018]}^{\textbf{A}}$ & $+0.011$$_{[+0.009,\ +0.036]}^{\textbf{N}}$ \\
+ & $M_{\mathrm{cdm}}$\text{--}$T$ & $+0.011$$_{[+0.018,\ +0.048]}^{\textbf{A}}$ & $+0.018$$_{[+0.025,\ +0.104]}^{\textbf{A}}$ & $+0.008$$_{[+0.020,\ +0.095]}^{\textbf{A}}$ \\
+ & $M_{\mathrm{gas}}$\text{--}$T$ & $+0.011$$_{[+0.018,\ +0.048]}^{\textbf{A}}$ & $+0.015$$_{[+0.023,\ +0.105]}^{\textbf{A}}$ & $+0.012$$_{[+0.029,\ +0.091]}^{\textbf{A}}$ \\
+\hline
+\end{tabular}
+\end{table}
