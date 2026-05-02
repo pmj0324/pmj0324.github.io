@@ -1,14 +1,14 @@
-% genesis_mnras.tex
+% genesis.tex
 %
-% GENESIS — MNRAS Manuscript
-% Based on mnras_template.tex v3.3 (April 2024)
+% GENESIS Manuscript
+% Based on the MNRAS style file v3.3 (April 2024)
 %
 % FILL MARKERS:  \FILL{description}  — replace with actual values
 % TODO MARKERS:  % TODO: ...         — action items before submission
 %
-% Compile:  pdflatex genesis_mnras.tex
-%           bibtex   genesis_mnras
-%           pdflatex genesis_mnras.tex (x2)
+% Compile:  pdflatex genesis.tex
+%           bibtex   genesis
+%           pdflatex genesis.tex (x2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[usenatbib]{mnras}
@@ -199,29 +199,28 @@ Diffusion models have accelerated the development of generative
 modelling across many domains and have been widely adopted in
 cosmology for field generation, emulation, and parameter inference.
 However, diffusion-based approaches typically require many sampling
-steps and generally provide likelihood information only through a
+steps and provide likelihood information only through a
 lower bound. Flow matching has recently emerged as an alternative
 generative framework with stable training, efficient sampling, and
-tractable likelihood evaluation, but its use in cosmology remains
-limited. We present \textsc{Genesis}, a conditional generative
+tractable likelihood evaluation, but its use for conditional multifield
+cosmological emulation remains limited. This work presents \textsc{Genesis}, a conditional generative
 emulator for multifield cosmological maps based on optimal-transport
-flow matching. To our knowledge, this is the first application of
-optimal-transport flow matching to conditional multifield generation
-with CAMELS/CMD maps. The model jointly generates dark matter
-density, gas density, and gas temperature maps, conditioned on the two
-cosmological parameters $(\Omega_{\rm m},\sigma_8)$ and four
-astrophysical feedback parameters of CAMELS. Across held-out
-parameter-varying and fixed-parameter tests, \textsc{Genesis}
-produces multifield samples that broadly reproduce the target CAMELS
-statistics and preserve the main correlations among the three fields.
+flow matching. To date, flow matching has not been applied to
+conditional multifield map generation.
+The model jointly generates dark matter density, gas density, and gas temperature maps,
+conditioned on the two cosmological parameters $(\Omega_{\rm m},\sigma_8)$ and four
+astrophysical feedback parameters of CAMELS.
+\textsc{Genesis} produces multifield samples that reproduce key CAMELS
+summary statistics and preserve the main correlations among the three fields.
 Sampling is also practical: in the current implementation, generating
 one multifield map triplet takes about six seconds on an NVIDIA A100
-GPU. As an initial demonstration of the likelihood capability of the
-learned flow, we perform a two-dimensional $\Omega_{\rm m}$--$\sigma_8$
-scan for one CAMELS map while fixing the remaining parameters, and
-find that the relative likelihood peaks at the input parameter values
-within the evaluated grid. These results indicate that
-optimal-transport flow matching is a promising framework for fast
+GPU.
+As an initial demonstration of the likelihood capability of the
+learned flow, a two-dimensional $\Omega_{\rm m}$--$\sigma_8$
+scan is performed for one CAMELS map while fixing the remaining
+parameters, and the relative likelihood is found to peak at the input
+parameter values within the evaluated grid. These results indicate that
+flow matching is a promising framework for fast
 conditional multifield cosmological emulation, with potential for
 field-level likelihood-based inference.
 \end{abstract}
@@ -318,14 +317,14 @@ representation learning of field-level cold dark matter simulations.
 However, direct conditional generation and emulation of multiple
 co-registered cosmological fields remains largely unexplored.
 
-This motivates our central objective: to bring optimal-transport flow
+This motivates the central objective of this work: to apply optimal-transport flow
 matching (OT-FM) to direct conditional cosmological field generation
 and emulation, thereby exploiting key advantages of OT-FM that remain
 largely unused in cosmological field modelling, including efficient
 sampling through straighter transport paths and likelihood evaluation
 within the continuous normalizing flow (CNF) framework \citep{Chen2018}.
-In addition to statistical fidelity, we report the practical sampling
-cost of the trained model: in the current implementation, generating
+In addition to statistical fidelity, the practical sampling cost of the
+trained model is quantified: in the current implementation, generating
 200 independent multifield map triplets at a fixed conditioning vector
 takes roughly 20 minutes on a single NVIDIA A100 GPU.
 Beyond the choice of generative framework, existing generative models
@@ -343,14 +342,14 @@ Together, these limitations point to the need for a fully conditioned
 multifield generative emulator that can model correlations among
 physically coupled fields.
 
-In this work, we introduce \textsc{Genesis}
+This work introduces \textsc{Genesis}
 (\textbf{GEN}erative \textbf{E}mulator for
 \textbf{S}imulation and parameter \textbf{I}nference from cosmological field\textbf{s}),
 a conditional continuous normalizing flow trained with OT-FM for
 multifield cosmological emulation and field-level likelihood-based
-parameter inference. Our contributions are as follows.
+parameter inference. The main contributions are as follows.
 \begin{enumerate}[label=\arabic*., leftmargin=*, labelsep=0.5em]
-  \item To the best of our knowledge, \textsc{Genesis} is the first
+  \item \textsc{Genesis} appears to be the first
         generative model to apply OT-FM to direct conditional
         generation of multifield cosmological maps.
         While GAN-based models have previously generated multiple
@@ -366,29 +365,28 @@ parameter inference. Our contributions are as follows.
         This conditioning enables the model to capture the distinct
         responses of dark matter density, gas density, and gas
         temperature to cosmological and feedback variations across the
-        CAMELS design space. To the best of our knowledge, this is the
-        first generative model to produce multifield maps conditioned 
-        on this full parameter vector.
+        CAMELS design space. No previous generative model appears to
+        have produced multifield maps conditioned on this full
+        parameter vector.
 
-  \item We illustrate the potential of \textsc{Genesis} for
-        field-level likelihood-based parameter inference without any
-        additional training. Through the CNF change-of-variables
+  \item The inference potential of \textsc{Genesis} is illustrated
+        without additional training. Through the CNF change-of-variables
         formula, the model assigns likelihoods to input multifield maps
         under candidate conditioning vectors. As a proof of concept,
-        we fix one held-out CMD multifield map $\mathbf{x}_1$ and scan
-        the $(\Om,\sig)$ plane while holding the four astrophysical
-        feedback parameters at their true values. Within the evaluated
+        one held-out CMD multifield map $\mathbf{x}_1$ is fixed and
+        the $(\Om,\sig)$ plane is scanned, with the four astrophysical
+        feedback parameters held at their true values. Within the evaluated
         grid, the maximum-likelihood point coincides with the true
         CAMELS parameter point, $(\Om,\sig)=(0.3054,0.8090)$, and the
         Wilks-theorem 1$\sigma$ contour encloses neighbouring grid
-        points. We therefore frame this as evidence that the likelihood
+        points. This is therefore framed as evidence that the likelihood
         surface is centred on the truth at the scan resolution, rather
         than as a unique parameter resolution within stochastic noise.
 \end{enumerate}
 
 The remainder of this paper is organized as follows.
 Section~\ref{sec:data} describes the CAMELS simulations, the CMD
-field data, and our field choices.
+field data, and the field choices.
 Section~\ref{sec:methods} presents the OT-FM framework and \textsc{Genesis}
 architecture.
 Sections~\ref{sec:eval} and~\ref{sec:cv_eval} evaluate \textsc{Genesis}
@@ -399,7 +397,7 @@ concept, demonstrating the potential of \textsc{Genesis} for field-level
 parameter inference.
 Section~\ref{sec:discussion} discusses the progress and limitations of \textsc{Genesis} 
 in the context of existing work, and outlines potential future directions for improving the model and extending its applications. 
-Finally, Section~\ref{sec:conclusions} summarizes our findings and concludes the paper.
+Finally, Section~\ref{sec:conclusions} summarizes the findings and concludes the paper.
 
 %% =============================================================
 %%  §2  DATA
@@ -416,14 +414,15 @@ conditioning parameters and their field-level sensitivities
 
 \subsection{IllustrisTNG 2D maps}
 \label{sec:camels}
-We use the IllustrisTNG 2D maps from the CMD
-\citep{Villaescusa2022}, whose hydrodynamic runs adopt the baryonic
-model of \citet{Weinberger2017} and \citet{Pillepich2018IllustrisTNG}.
+The analysis is based on the IllustrisTNG 2D maps from the CMD
+\citep{Villaescusa2022}. These maps are derived from hydrodynamic
+runs that adopt the baryonic model of \citet{Weinberger2017} and
+\citet{Pillepich2018IllustrisTNG}.
 These simulations evolve a periodic box of side
 $25\,h^{-1}$~Mpc with $256^3$ dark matter particles and an equal
 number of initial gas cells from $z=127$ to $z=0$.
-Within the public IllustrisTNG map release, we use the LH set for
-training, validation, and testing, and the CV set to assess
+Within the public IllustrisTNG map release, the LH set is used for
+training, validation, and testing, and the CV set is used to assess
 statistical consistency across independent realizations at fixed
 parameter values. For each simulation and target channel, the release
 provides 15 projected two-dimensional maps, obtained from five
@@ -433,13 +432,13 @@ non-overlapping slices along each of the three Cartesian axes.
   \item[LH set.] One thousand simulations sampling the
         six-dimensional CAMELS parameter space with a Latin-hypercube
         design (see Table~\ref{tab:params} for parameter ranges).
-        We use this parameter-varying set for training, validation,
-        and testing, partitioning it into 800 training, 100
+        This parameter-varying set is used for training, validation,
+        and testing, and is partitioned into 800 training, 100
         validation, and 100 test simulations.
   \item[CV set.] Twenty-seven simulations at the fiducial parameter
         vector $(\Om, \sig, A_{\rm SN1}, A_{\rm SN2}, A_{\rm AGN1},
         A_{\rm AGN2}) = (0.30, 0.80, 1, 1, 1, 1)$, differing only
-        in their initial conditions. We use this set to test whether
+        in their initial conditions. This set is used to test whether
         generated samples are statistically consistent with
         independent simulations at the same parameter point.
 \end{description}
@@ -447,7 +446,7 @@ non-overlapping slices along each of the three Cartesian axes.
 \subsection{Field definitions}
 \label{sec:fields}
 
-We select three CMD fields as the joint emulation target of
+Three CMD fields are selected as the joint emulation target of
 \textsc{Genesis}: projected dark matter surface mass density
 ($\Mcdm$), projected gas surface mass density ($\Mgas$), and projected
 mass-weighted gas temperature ($\Tgas$). Each map comprises
@@ -531,7 +530,7 @@ spectrum at cluster scales.
 \label{sec:methods}
 This section describes the methodology of \textsc{Genesis}.
 Section~\ref{sec:flow_matching} introduces the optimal-transport flow
-matching (OT-FM) objective, Section~\ref{sec:architecture} presents
+matching (OT-FM), Section~\ref{sec:architecture} presents
 the U-Net architecture and its physically motivated design choices,
 and Section~\ref{sec:training} describes the training and optimisation
 procedure.
@@ -569,9 +568,9 @@ data distribution $p_1(\mathbf{x}\mid\thetavec)$:
   \label{eq:fm}
 \end{equation}
 where $\phi$ denotes the network parameters. However, the target vector
-field $u_t(\mathbf{x}\mid\thetavec)$ is generally intractable. We
-therefore use the conditional flow-matching (CFM) formulation of
-\citet{Lipman2023}. Here, ``conditional'' refers to auxiliary
+field $u_t(\mathbf{x}\mid\thetavec)$ is generally intractable. The
+conditional flow-matching (CFM) formulation of \citet{Lipman2023} is
+therefore used. Here, ``conditional'' refers to auxiliary
 probability paths conditioned on data samples $\mathbf{x}_1$, and is
 distinct from the CAMELS conditioning vector $\thetavec$. CFM defines
 the tractable objective
@@ -587,9 +586,9 @@ the tractable objective
   \right\|^2 .
   \label{eq:cfm_general}
 \end{equation}
-A key result of CFM is that this conditional objective has the same
-gradient with respect to the network parameters as the ideal
-flow-matching objective,
+A key result of \citet{Lipman2023} is that this conditional objective
+has the same gradient with respect to the network parameters as the
+ideal flow-matching objective,
 \begin{equation}
   \nabla_{\phi}\mathcal{L}_{\rm FM}(\phi)
   =
@@ -601,10 +600,10 @@ path $p_t(\mathbf{x}\mid\mathbf{x}_1)$ and its associated velocity
 field, without explicitly evaluating
 $u_t(\mathbf{x})$.
 
-In this work we use the optimal-transport version of CFM, hereafter
-OT-FM. For each conditioning vector $\thetavec$, we draw target samples
+In this work, the optimal-transport version of CFM, hereafter OT-FM,
+is adopted. For each conditioning vector $\thetavec$, target samples
 $\mathbf{x}_1\sim q(\mathbf{x}_1\mid\thetavec)$ and source samples
-$\mathbf{x}_0\sim p_0$. Following \citet{Lipman2023}, the conditional
+$\mathbf{x}_0\sim p_0$ are drawn. Following \citet{Lipman2023}, the conditional
 probability path is taken to be a Gaussian path centred on the linear
 interpolant,
 \begin{equation}
@@ -625,7 +624,7 @@ Using the reparameterization trick \citep{Kingma2014}, this path can be written 
   \mathbf{x}_0\sim\mathcal{N}(\mathbf{0},\mathbf{I}),
   \label{eq:interpolant}
 \end{equation}
-with conditional vector field as follows
+with the associated conditional vector field
 \begin{equation}
   \frac{\mathrm{d}\mathbf{x}_t}{\mathrm{d}t}
   =
@@ -636,7 +635,7 @@ with conditional vector field as follows
   \centering
   \includegraphics[width=\textwidth]{figs/lh/lh_tiles.pdf}
   \caption{
-  Comparison between Camels LH map and Genesis generated map. The
+  Comparison between CAMELS LH maps and \textsc{Genesis}-generated maps. The
   first column shows a CAMELS map triplet, while the remaining columns
   show independent \textsc{Genesis} samples generated at the same
   conditioning vector,
@@ -662,9 +661,9 @@ Training therefore minimizes
 
 \textbf{Sampling.}
 After training, to generate a sample at a specified
-conditioning vector $\thetavec$, we draw
-$\mathbf{x}_0 \sim \mathcal{N}(\mathbf{0},\mathbf{I})$ and integrate
-equation~(\ref{eq:flow_ode}) from $t=0$ to $t=1$ using the
+conditioning vector $\thetavec$, a source sample
+$\mathbf{x}_0 \sim \mathcal{N}(\mathbf{0},\mathbf{I})$ is drawn and
+equation~(\ref{eq:flow_ode}) is integrated from $t=0$ to $t=1$ using the
 Dormand--Prince (\texttt{dopri5}) adaptive Runge--Kutta solver with
 relative and absolute tolerances of $10^{-5}$. The terminal state
 $\mathbf{x}_{1}$ is interpreted as a sample from the learned
@@ -695,10 +694,10 @@ where $w$ is the guidance weight and $\thetavec_\varnothing$ denotes
 the null token. Values $w>1$ strengthen the influence of the
 conditioning vector by amplifying the difference between the
 conditional and unconditional velocity predictions.
-During training, we randomly replace the CAMELS conditioning vector
-$\thetavec$ with $\thetavec_\varnothing$ with probability
+During training, the CAMELS conditioning vector $\thetavec$ is randomly
+replaced with $\thetavec_\varnothing$ with probability
 $p_{\rm cfg}=0.1$, exposing the network to both conditional and
-unconditional velocity prediction tasks. In this work we set $w=1$ at
+unconditional velocity prediction tasks. In this work, $w=1$ is used at
 inference, which recovers the standard conditional velocity
 $\hat{u}_t = u_t^\phi(\mathbf{x}_t \mid \thetavec)$ without
 extrapolation. Thus, the null-token branch is used primarily as a
@@ -724,7 +723,7 @@ regularizes the learned velocity field.
 
 \subsection{U-Net architecture}
 \label{sec:architecture}
-We parameterize the velocity field $u_t^\phi$ with a U-Net
+The velocity field $u_t^\phi$ is parameterized with a U-Net
 architecture equipped with skip connections \citep{Ronneberger2015}.
 The network takes as input the interpolated field
 $\mathbf{x}_t \in \mathbb{R}^{3 \times 256 \times 256}$, the flow
@@ -735,15 +734,15 @@ each to 512 dimensions. These embeddings are concatenated and
 projected through an MLP $(1024 \rightarrow 1024 \rightarrow 512)$ to
 form a shared time--condition embedding $\mathbf{e}_{\rm joint}$.
 
-We augment this backbone with three physically motivated design
+This backbone is augmented with three physically motivated design
 choices. \textbf{Circular convolutions.}
 The projected maps inherit periodic boundary conditions from the
-CAMELS simulation volume \citep{Villaescusa2022}. We therefore use
-circular padding in all convolutional layers, reducing boundary
+CAMELS simulation volume \citep{Villaescusa2022}. Accordingly,
+circular padding is used in all convolutional layers, reducing boundary
 artefacts that would be introduced by zero or reflective padding.
 \textbf{Stage-wise conditioning.}
-At each resolution level, we start from the shared time--condition
-embedding $\mathbf{e}_{\rm joint}$ and augment it with a
+At each resolution level, the shared time--condition embedding
+$\mathbf{e}_{\rm joint}$ is augmented with a
 stage-specific projection of the conditioning embedding,
 \begin{equation}
   \boldsymbol{\ell}_i
@@ -780,13 +779,13 @@ million trainable parameters.
 \subsection{Training}
 \label{sec:training}
 
-We train \textsc{Genesis} in three stages. The initial training stage
+\textsc{Genesis} is trained in three stages. The initial training stage
 uses AdamW \citep{Loshchilov2019} with learning rate
 $\eta=2\times10^{-4}$, weight decay $10^{-2}$, and
 $(\beta_1,\beta_2)=(0.9,0.999)$. The learning rate is warmed up for
 5 epochs and then controlled by a ReduceLROnPlateau scheduler. This
-stage is run for 89 epochs. We then perform two fine-tuning stages. The first fine-tuning stage
-uses a smaller learning rate, $\eta=2\times10^{-5}$, no warm-up, and
+stage is run for 89 epochs. Two fine-tuning stages are then performed:
+the first uses a smaller learning rate, $\eta=2\times10^{-5}$, no warm-up, and
 a ReduceLROnPlateau scheduler with factor $0.65$ and patience 4. This
 stage is run for 42 epochs. The final fine-tuning stage starts from
 the first fine-tuned model and disables classifier-free conditioning
@@ -804,7 +803,7 @@ augmentation. Training is performed on a single NVIDIA A100 GPU.
 This section evaluates \textsc{Genesis} on the held-out CAMELS/CMD
 Latin-hypercube (LH) test set. The LH test set contains 100 held-out
 simulations, each with 15 projected multifield map triplets; for each
-conditioning vector we generate 30 \textsc{Genesis} samples.
+conditioning vector, 30 \textsc{Genesis} samples are generated.
 Section~\ref{sec:eval_morphology} presents representative generated
 map triplets, Section~\ref{sec:eval_autopower} compares the
 auto-power spectra of the three target fields,
@@ -817,27 +816,27 @@ assesses the conditional parameter response and ensemble spread.
 \subsection{Field morphology}
 \label{sec:eval_morphology}
 
-We begin with a visual comparison of \textsc{Genesis} maps from the
-LH test set. Since \textsc{Genesis} is a stochastic generator, the
+A visual comparison of \textsc{Genesis} maps from the
+LH test set is first presented. Since \textsc{Genesis} is a stochastic generator, the
 generated maps are not expected to reconstruct the same realization
 as the CAMELS maps. Instead, this comparison checks whether samples
 generated at the same conditioning vector exhibit similar field
 morphology and cross-field structure.
 
 Figure~\ref{fig:lh_tiles} shows that \textsc{Genesis} produces
-visually plausible samples with filamentary dark-matter structure,
-and gas distributions tracing the cosmic web. The generated maps
+visually plausible samples with filamentary dark-matter structure and
+gas distributions that trace the cosmic web. The generated maps
 differ from the CAMELS map at the realization level, as expected for
 a stochastic generator without initial-condition conditioning. The
 dark-matter and gas-density channels show comparable large-scale
 morphology, while the temperature channel exhibits softer small-scale
-features in the generated samples, a qualitative impression that we
-revisit quantitatively in Section~\ref{sec:eval_response}.
+features in the generated samples, a qualitative impression that is
+revisited quantitatively in Section~\ref{sec:eval_response}.
 
 \subsection{Auto-power spectra}
 \label{sec:eval_autopower}
 
-We next compare the auto-power spectrum $P_a(k)$ of each target field
+The auto-power spectrum $P_a(k)$ is next compared for each target field
 $a\in\{\Mcdm,\Mgas,\Tgas\}$. Here $P_a(k)$ is computed from the
 two-dimensional overdensity field of each map and azimuthally averaged
 in Fourier space. This statistic measures the scale-dependent
@@ -845,12 +844,12 @@ fluctuation amplitude of each field, providing a direct test of whether
 the generated maps reproduce the clustering strength of dark matter,
 gas, and temperature structures.
 
-In this subsection, we aggregate over the 100 held-out LH conditioning
-vectors. Thus, the comparison tests the marginal distribution of
+In this subsection, statistics are aggregated over the 100 held-out LH
+conditioning vectors. Thus, the comparison tests the marginal distribution of
 power spectra across the LH test set. The parameter-dependent response is examined
-separately in Section~\ref{sec:eval_response}. For each field, we
-compute the fractional difference between the LH-aggregated
-\textsc{Genesis} and CAMELS mean auto-power spectra,
+separately in Section~\ref{sec:eval_response}. For each field, the
+fractional difference between the LH-aggregated
+\textsc{Genesis} and CAMELS mean auto-power spectra is computed as
 \begin{equation}
   \epsilon_P(k)
   =
@@ -866,7 +865,7 @@ compute the fractional difference between the LH-aggregated
   \label{eq:lh_auto_eps}
 \end{equation}
 where the average is taken over the held-out LH conditioning vectors.
-We then average $\epsilon_P(k)$ within three reporting bands:
+$\epsilon_P(k)$ is then averaged within three reporting bands:
 low-$k$ ($k<1$), mid-$k$ ($1\leq k<8$), and high-$k$
 ($8\leq k<k_{\rm art}$), with $k$ in units of
 $h\,{\rm Mpc}^{-1}$ and $k_{\rm art}\simeq 16$ denoting the upper
@@ -902,8 +901,8 @@ parameter space.
 \label{sec:eval_onepoint}
 
 The auto-power spectra above are computed from overdensity fields and
-therefore primarily test relative spatial fluctuations. We therefore
-also examine one-point field statistics in physical field space. These
+primarily test relative spatial fluctuations. One-point field
+statistics are also examined in physical field space. These
 diagnostics test whether \textsc{Genesis} reproduces the absolute
 amplitude range of each field, including dense matter and gas regions
 as well as the high-temperature tail of shock- and feedback-heated
@@ -925,9 +924,10 @@ distributions of \textsc{Genesis} and CAMELS are very similar for all
 three target fields. The $\Mcdm$ and $\Mgas$ distributions nearly
 overlap, while $\Tgas$ is more challenging due to the combination of cold
 diffuse gas with shock- and feedback-heated material. Nevertheless,
-the \textsc{Genesis} temperature distribution reproduces the distribution of CAMELS, including its extended high-temperature tail and two modes.
+the \textsc{Genesis} temperature distribution reproduces the CAMELS
+distribution, including its extended high-temperature tail and two modes.
 
-We then compare the pixel distributions in $\log_{10}$ field space using
+The pixel distributions in $\log_{10}$ field space are then compared using
 the Kolmogorov--Smirnov statistic $D_{\rm KS}$, the Jensen--Shannon
 divergence (JSD), and the relative errors in the mean and standard
 deviation,
@@ -1000,14 +1000,14 @@ astrophysical feedback.
 \subsection{Cross-power spectra and inter-field coherence}
 \label{sec:eval_cross_coherence}
 
-The preceding diagnostics test each field individually. We now ask
-whether the three generated fields are mutually consistent. This is
+The preceding diagnostics test each field individually. The mutual
+consistency of the three generated fields is then assessed. This is
 essential for a multifield emulator: matching the auto-power spectra
 and one-point distributions of $\Mcdm$, $\Mgas$, and $\Tgas$
 separately does not guarantee that their spatial correlations are
 correct.
 
-We quantify the joint structure using the cross-power spectrum
+The joint structure is quantified using the cross-power spectrum
 \begin{equation}
   P_{ab}(k)
   =
@@ -1070,9 +1070,9 @@ scales where baryonic feedback introduces additional stochasticity.
 
 The diagnostics above show that \textsc{Genesis} reproduces the
 marginal field statistics and the cross-field correlations of the LH
-test set. We now examine whether the model also tracks how these
-statistics vary across the six-dimensional CAMELS conditioning space.
-For the auto-power spectrum, we quantify this response using
+test set. Whether the model also tracks how these statistics vary
+across the six-dimensional CAMELS conditioning space is then examined.
+For the auto-power spectrum, this response is quantified using
 \begin{equation}
   R^2(k)
   =
@@ -1097,7 +1097,7 @@ A value of $R^2=1$ indicates perfect tracking of the
 parameter-dependent log-power response, while $R^2=0$ corresponds to
 the performance of a parameter-independent mean prediction.
 
-We also examine the normalized within-condition spread,
+The normalized within-condition spread is also examined,
 \begin{equation}
   S_{\rm cond}(k)
   =
@@ -1115,8 +1115,8 @@ We also examine the normalized within-condition spread,
   \label{eq:scond}
 \end{equation}
 where $\mu_a^{\rm true}$ and $\sigma_a^{\rm true}$ are computed from
-the 15 CAMELS projections at the same conditioning vector. We use
-$S_{\rm cond}$ as a diagnostic of within-condition ensemble spread
+the 15 CAMELS projections at the same conditioning vector. $S_{\rm cond}$
+is used as a diagnostic of within-condition ensemble spread
 rather than as a formal calibration test. Since it is computed relative
 to the CAMELS within-condition mean, it includes both generated
 scatter and any residual mean offset. Values near unity indicate that
@@ -1170,13 +1170,13 @@ order $\sqrt{2}\simeq1.4$ times the CAMELS projection-level scatter,
 although this quantity includes both generated scatter and any
 residual mean offset. The largest departures are visible for $\Mgas$
 and $\Tgas$, where feedback and thermal processes introduce
-additional stochasticity. We therefore interpret this as mild
+additional stochasticity. This behaviour is interpreted as mild
 over-dispersion or residual bias in the most feedback-sensitive
 regimes, rather than as a formal coverage statement.
 
 Overall, the LH evaluation shows that \textsc{Genesis} reproduces the
-main per-field and cross-field statistics of CAMELS across the
-six-dimensional parameter space. The strongest agreement appears in
+main per-field and cross-field statistics of CAMELS multifield maps
+across the six-dimensional parameter space. The strongest agreement appears in
 the auto-power spectra, one-point distributions, per-simulation field
 means, and conditional log-power response. The largest remaining
 discrepancies occur in feedback-sensitive baryonic statistics,
@@ -1197,15 +1197,15 @@ Section~\ref{sec:cv_dcv} examines CV-normalized spectral displacement
 and map-level spread, Section~\ref{sec:cv_pixel_pdf} compares
 one-point field distributions, and Section~\ref{sec:cv_cross}
 evaluates cross-power spectra and inter-field coherence. For the CV
-comparisons, we generate 200 independent \textsc{Genesis} samples at
+comparisons, 200 independent \textsc{Genesis} samples are generated at
 the fiducial conditioning vector; this takes roughly 20 minutes on a
 single NVIDIA A100 GPU in the current implementation.
 
 \subsection{Field morphology at fixed parameters}
 \label{sec:cv_tiles}
 
-As in the LH evaluation, we begin with a visual comparison of
-\textsc{Genesis} maps from the CV set. Since the 27 CV simulations
+A visual comparison of \textsc{Genesis} maps from the CV set is first
+presented, as in the LH evaluation. Since the 27 CV simulations
 themselves differ in initial conditions, the relevant question is
 whether samples generated at the fiducial conditioning vector lie
 within the morphological range spanned by independent CAMELS
@@ -1215,7 +1215,7 @@ realizations.
   \centering
   \includegraphics[width=\textwidth]{figs/cv/cv_tiles.pdf}
   \caption{
-  Comparison between CAMELS CV map and Genesis generated map,conditoned on
+  Comparison between CAMELS CV maps and \textsc{Genesis}-generated maps, conditioned on
   $(\Om,\sig,A_{\rm SN1},A_{\rm SN2},A_{\rm AGN1},A_{\rm AGN2})
   =(0.30,0.80,1,1,1,1)$. CAMELS realizations are compared with
   independent \textsc{Genesis} samples generated at the same
@@ -1237,7 +1237,7 @@ using summary statistics across the full CV set.
 \subsection{Auto-power spectra}
 \label{sec:cv_auto_pk}
 
-We first compare the auto-power spectra of the generated maps with
+The auto-power spectra of the generated maps are first compared with
 those of the CAMELS CV maps. Since the CV set is evaluated at fixed
 parameters, this comparison tests whether \textsc{Genesis} produces
 samples with similar spectral statistics to independent CAMELS
@@ -1272,7 +1272,7 @@ large failures.
 \subsection{CV-normalized displacement and map-level spread}
 \label{sec:cv_dcv}
 
-We further summarize the spectral comparison using a CV-normalized
+The spectral comparison is further summarized using a CV-normalized
 displacement,
 \begin{equation}
   d_{{\rm CV},a}(k)
@@ -1291,7 +1291,7 @@ spectrum of the 15 projected maps from CV simulation $j$. This
 quantity measures the displacement of the generated mean spectrum in
 units of the simulation-to-simulation scatter among the CV runs.
 
-We also consider a map-level spread ratio,
+A map-level spread ratio is also considered,
 \begin{equation}
   R_{\sigma,a}(k)
   =
@@ -1302,7 +1302,7 @@ We also consider a map-level spread ratio,
   }.
   \label{eq:rsigma_cv}
 \end{equation}
-We use \(R_\sigma\) only as a diagnostic of relative spread. The
+\(R_\sigma\) is used only as a diagnostic of relative spread. The
 CAMELS CV maps include both realization-to-realization variation and
 projection-level scatter, while the generated maps are independent
 samples from the learned conditional model.
@@ -1356,8 +1356,8 @@ downstream parameter inference if left uncorrected.
 \subsection{One-point field distributions}
 \label{sec:cv_pixel_pdf}
 
-We next compare one-point pixel distributions in $\log_{10}$ field
-space. This complements the power-spectrum comparison by testing the
+One-point pixel distributions in $\log_{10}$ field space are next
+compared. This complements the power-spectrum comparison by testing the
 absolute range of field values rather than only relative fluctuations
 in overdensity.
 
@@ -1372,8 +1372,8 @@ in overdensity.
   \label{fig:cv_pixel_pdf}
 \end{figure}
 
-Figure~\ref{fig:cv_pixel_pdf} shows similar CAMELS and
-\textsc{Genesis} pixel distributions for all three fields. The
+Figure~\ref{fig:cv_pixel_pdf} shows that the CAMELS and
+\textsc{Genesis} pixel distributions are similar for all three fields. The
 agreement is particularly close for the two density fields. The
 temperature distribution is broader and more structured, but the
 generated samples still follow its main shape. This suggests that the
@@ -1384,10 +1384,11 @@ temperature field.
 \subsection{Cross-power spectra and inter-field coherence}
 \label{sec:cv_cross}
 
-Finally, we examine the joint structure of the three generated fields.
-We compare the cross-power spectra \(P_{ab}(k)\) and coherence
+Finally, the joint structure of the three generated fields is examined.
+The cross-power spectra \(P_{ab}(k)\) and coherence
 \(r_{ab}(k)\) for the field pairs
-$\Mcdm$--$\Mgas$, $\Mcdm$--$\Tgas$, and $\Mgas$--$\Tgas$.
+$\Mcdm$--$\Mgas$, $\Mcdm$--$\Tgas$, and $\Mgas$--$\Tgas$
+are compared.
 
 \begin{figure}
   \centering
@@ -1403,7 +1404,7 @@ $\Mcdm$--$\Mgas$, $\Mcdm$--$\Tgas$, and $\Mgas$--$\Tgas$.
 \end{figure}
 
 Figure~\ref{fig:cv_cross_coherence} shows that the generated samples
-broadly follow the CAMELS cross-field statistics. The
+are broadly consistent with the CAMELS cross-field statistics. The
 $\Mcdm$--$\Mgas$ pair shows the closest agreement, while the
 temperature-related pairs show larger differences, particularly on
 smaller scales. This is consistent with the greater sensitivity of
@@ -1467,7 +1468,7 @@ instantaneous change of log-density is
   u_t^\phi(\mathbf{x}_t\mid\thetavec).
   \label{eq:instantaneous_change}
 \end{equation}
-Equivalently, for likelihood evaluation we integrate the learned flow
+Equivalently, for likelihood evaluation the learned flow is integrated
 in the reverse direction, from the fixed data point $\mathbf{x}_1$ to
 the corresponding latent point $\mathbf{z}_1$ in the noise space. The
 conditional log likelihood is then evaluated as
@@ -1482,7 +1483,7 @@ conditional log likelihood is then evaluated as
   \,\mathrm{d}t .
   \label{eq:cnf_likelihood}
 \end{equation}
-We report relative likelihoods,
+Relative likelihoods are reported,
 \begin{equation}
   \Delta\log p(\thetavec)
   =
@@ -1513,7 +1514,7 @@ is the trace of the Jacobian of the velocity field,
   \label{eq:trace_exact}
 \end{equation}
 Because the map dimensionality is large, computing the exact trace at
-each ODE step is intractable. We therefore estimate this trace with
+each ODE step is intractable. The trace is estimated with
 the Hutchinson estimator,
 \begin{equation}
   {\rm Tr}\!\left[
@@ -1533,9 +1534,9 @@ the Hutchinson estimator,
   \mathbf{I}.
   \label{eq:hutchinson}
 \end{equation}
-In practice, we use Rademacher probe vectors and average over three
-Hutchinson seeds at each grid point. The plotted likelihood surface
-uses the seed-averaged value
+In practice, Rademacher probe vectors are used, and the estimate is
+averaged over three Hutchinson seeds at each grid point. The plotted
+likelihood surface uses the seed-averaged value
 \begin{equation}
   \overline{\log p}_{ij}
   =
@@ -1548,8 +1549,8 @@ uses the seed-averaged value
 and the scatter across the three seeds is used as a diagnostic of
 stochastic trace-estimator noise.
 
-We scan the two cosmological parameters $\Om$ and $\sig$, while
-fixing the four astrophysical parameters to their true values. The
+The two cosmological parameters $\Om$ and $\sig$ are scanned, while
+the four astrophysical parameters are fixed to their true values. The
 CAMELS map used in this scan has true conditioning vector
 \begin{equation}
   \thetavec_{\rm true}
@@ -1576,8 +1577,8 @@ candidate grid is
   \label{eq:scan_grid}
 \end{equation}
 The full candidate grid contains $11\times11=121$ points. To avoid
-evaluating points far from the region of interest, we restrict the
-calculation to the ellipse
+evaluating points far from the region of interest, the calculation is
+restricted to the ellipse
 \begin{equation}
   \left(
   \frac{\Om-\Omega_{{\rm m},{\rm true}}}{0.04}
@@ -1719,8 +1720,8 @@ likelihood is computed for the evaluated grid points inside a
 $3\sigma$ ellipse around the CAMELS parameter value. The
 maximum-likelihood grid point coincides with the truth,
 $(\Om,\sig)=(0.3054,0.8090)$, and the Wilks-theorem 1$\sigma$
-contour encloses several adjacent grid points. We therefore interpret
-this result as a proof of concept that the likelihood surface is
+contour encloses several adjacent grid points. This result is
+interpreted as a proof of concept that the likelihood surface is
 centred on the truth at the resolution of the scan, rather than that
 the truth is uniquely resolved within stochastic noise.
 
@@ -1772,9 +1773,9 @@ training to separate cosmological dependence from baryonic model
 dependence.
 
 These limitations suggest several natural next steps. Using the CAMELS
-LH test set and the 1P set, we plan to test whether \textsc{Genesis}
-correctly tracks individual one-parameter response curves for each of
-the six conditioning parameters in isolation. The EX set will then be
+LH test set and the 1P set, future validation will test whether
+\textsc{Genesis} correctly tracks individual one-parameter response
+curves for each of the six conditioning parameters in isolation. The EX set will then be
 used to probe robustness in extreme conditions near or beyond the
 edges of the training range. Beyond validation, a natural direction is
 to broaden the scope of the model: extending training to multiple
@@ -1784,8 +1785,8 @@ generalise beyond the IllustrisTNG baryonic prescription and across
 cosmic time. For likelihood-based inference, future work will evaluate
 the CNF likelihood across many CAMELS maps, scan or sample the full
 six-dimensional parameter space, and quantify estimator variance.
-More importantly, rather than restricting inference to grid scans, we
-plan to explore Hamiltonian Monte Carlo and energy-based sampling
+More importantly, rather than restricting inference to grid scans,
+Hamiltonian Monte Carlo and energy-based sampling will be explored
 to draw full posterior samples --- thereby testing the true capacity
 of \textsc{Genesis} as a field-level parameter inference engine.
 
@@ -1795,18 +1796,17 @@ of \textsc{Genesis} as a field-level parameter inference engine.
 \section{Conclusions}
 \label{sec:conclusions}
 
-We have presented \textsc{Genesis}, a conditional generative emulator
+\textsc{Genesis} has been presented as a conditional generative emulator
 for multifield cosmological maps based on optimal-transport flow
-matching. The model jointly generates projected dark matter density,
+matching. The model jointly generates dark matter density,
 gas density, and gas temperature fields, conditioned on the full
-six-dimensional CAMELS parameter vector. We evaluated the model on
+six-dimensional CAMELS parameter vector. The model was evaluated on
 both the parameter-varying LH test set and the fixed-parameter CV set
-using morphology, auto-power spectra, one-point statistics,
-cross-field coherence, conditional response, and ensemble-spread
+using a suite of one-point, two-point, cross-field, and conditional
 diagnostics.
 
 Across these tests, \textsc{Genesis} reproduces the main CAMELS
-statistics at a useful level. The generated maps match the marginal
+statistics with good overall fidelity. The generated maps match the marginal
 auto-power spectra, one-point distributions, field means, and
 cross-field structure reasonably well, and the conditional log-power
 response tracks much of the variation across the LH parameter space.
@@ -1818,21 +1818,17 @@ feedback-sensitive channel. The CV diagnostics reveal a coherent negative
 bias of $d_{\rm CV}\simeq -0.5$ in the dark-matter channel --- a
 systematic underprediction of roughly half the cosmic-variance scatter
 that would bias downstream parameter inference if left uncorrected.
-These are not cosmetic limitations: the current model has captured the
-dominant large-scale multifield structure, but further training,
-architectural refinement, and careful calibration are required before
-\textsc{Genesis} can serve as a reliable tool for unbiased cosmological
-inference. In the current implementation, generating 200
-independent multifield samples at a fixed conditioning vector takes
-roughly 20 minutes on a single NVIDIA A100 GPU, showing that moderate
-conditional ensembles are feasible.
+These discrepancies indicate that further calibration is required
+before precision inference applications. In the current implementation,
+generating 200 independent multifield samples at a fixed conditioning
+vector takes roughly 20 minutes on a single NVIDIA A100 GPU, showing
+that moderate conditional ensembles are feasible.
 
-We also demonstrated likelihood-based inference using the continuous
-normalizing-flow change-of-variables formula. In a two-dimensional
-$\Om$--$\sig$ scan with the astrophysical parameters fixed, the
-likelihood maximum coincides with the true CAMELS parameter value for
-the fixed observed map. This is not yet a calibrated cosmological
-inference pipeline, but it shows that the learned flow likelihood
+Finally, a proof-of-concept likelihood evaluation has been demonstrated.
+In a two-dimensional $\Om$--$\sig$ scan with the other parameters fixed,
+the likelihood maximum coincides with the true CAMELS parameter value
+for the fixed observed map. This is not yet a calibrated cosmological
+inference pipeline, but it suggests that the learned flow likelihood
 contains useful parameter information. Overall, these results indicate
 that flow matching can be a promising tool for both conditional
 cosmological field generation and field-level likelihood-based

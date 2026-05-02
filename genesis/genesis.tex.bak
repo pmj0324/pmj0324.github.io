@@ -1,14 +1,14 @@
-% genesis_mnras.tex
+% genesis.tex
 %
-% GENESIS — MNRAS Manuscript
-% Based on mnras_template.tex v3.3 (April 2024)
+% GENESIS Manuscript
+% Based on the MNRAS style file v3.3 (April 2024)
 %
 % FILL MARKERS:  \FILL{description}  — replace with actual values
 % TODO MARKERS:  % TODO: ...         — action items before submission
 %
-% Compile:  pdflatex genesis_mnras.tex
-%           bibtex   genesis_mnras
-%           pdflatex genesis_mnras.tex (x2)
+% Compile:  pdflatex genesis.tex
+%           bibtex   genesis
+%           pdflatex genesis.tex (x2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[usenatbib]{mnras}
