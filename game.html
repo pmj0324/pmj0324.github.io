@@ -145,13 +145,13 @@
         display: block; margin-bottom: 2px;
       }
 
-      /* ── Image arena — two cards side by side, images natural ratio ── */
+      /* ── Image arena — stacked cards, images natural ratio ── */
       .arena {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 14px;
         margin-bottom: 14px;
-        max-width: 420px;
+        max-width: 560px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -227,6 +227,13 @@
       .btn-primary { background: var(--accent); color: #0b1020; }
       .btn-primary:hover { background: #a8b4ff; transform: translateY(-1px); }
       .btn-primary:disabled { opacity: 0.35; cursor: default; transform: none; }
+
+      .btn-danger {
+        background: rgba(255,120,120,0.1);
+        color: #ff9a9a;
+        border: 1px solid rgba(255,120,120,0.28);
+      }
+      .btn-danger:hover { background: rgba(255,120,120,0.18); }
 
       .btn-ghost {
         background: rgba(141,155,255,0.1); color: var(--accent);
@@ -349,7 +356,7 @@
       @media (max-width: 680px) {
         .main-layout { flex-direction: column; }
         .lb-panel { width: 100%; }
-        .arena { max-width: 360px; }
+        .arena { max-width: 100%; }
         .score-board { gap: 12px; }
       }
     </style>
@@ -414,13 +421,13 @@
               </div>
 
               <div class="arena">
-                <div class="img-card" id="card-left" onclick="guess('left')">
-                  <img id="img-left" src="" alt="Left image" />
-                  <div class="img-label" id="label-left"></div>
+                <div class="img-card" id="card-top" onclick="guess('top')">
+                  <img id="img-top" src="" alt="Top candidate image" />
+                  <div class="img-label" id="label-top"></div>
                 </div>
-                <div class="img-card" id="card-right" onclick="guess('right')">
-                  <img id="img-right" src="" alt="Right image" />
-                  <div class="img-label" id="label-right"></div>
+                <div class="img-card" id="card-bottom" onclick="guess('bottom')">
+                  <img id="img-bottom" src="" alt="Bottom candidate image" />
+                  <div class="img-label" id="label-bottom"></div>
                 </div>
               </div>
 
@@ -428,6 +435,7 @@
 
               <div class="btn-row">
                 <button class="btn btn-primary" id="next-btn" onclick="nextRound()" disabled>Next →</button>
+                <button class="btn btn-danger" id="end-btn" onclick="endGame()">End Game</button>
               </div>
             </div>
 
@@ -619,6 +627,7 @@
       }
 
       function finalMessage(sc, total) {
+        if (total === 0) return "Game ended before any guesses were recorded.";
         const p = sc / total;
         if (p >= 0.9) return "Outstanding! You might have a future in cosmological simulation.";
         if (p >= 0.7) return "Great eye! GENESIS is doing its job well.";
@@ -675,7 +684,8 @@
       function saveScore() {
         const name = (document.getElementById("name-input").value.trim()) || "Anonymous";
         const scores = loadScores();
-        scores.push({ name, score, total: SIMS.length, date: Date.now() });
+        if (finalTotal === 0) return;
+        scores.push({ name, score, total: finalTotal, date: Date.now() });
         scores.sort((a, b) => b.score - a.score || b.date - a.date);
         saveScores(scores);
         document.getElementById("save-row").innerHTML =
@@ -690,12 +700,12 @@
       }
 
       /* ── Game state ── */
-      let queue = [], currentSim = null, camelsOnLeft = true, answered = false;
-      let score = 0, roundNum = 0;
+      let queue = [], currentSim = null, camelsOnTop = true, answered = false;
+      let score = 0, roundNum = 0, answeredRounds = 0, finalTotal = SIMS.length;
 
       function startGame() {
         queue = shuffle(SIMS);
-        score = 0; roundNum = 0; answered = false;
+        score = 0; roundNum = 0; answeredRounds = 0; answered = false; finalTotal = SIMS.length;
         document.getElementById("score").textContent = 0;
         document.getElementById("round").textContent = 0;
         document.getElementById("total").textContent = queue.length;
@@ -707,29 +717,29 @@
       }
 
       function nextRound() {
-        if (queue.length === 0) { showFinal(); return; }
+        if (queue.length === 0) { showFinal(answeredRounds); return; }
 
         currentSim = queue.pop();
-        camelsOnLeft = Math.random() < 0.5;
+        camelsOnTop = Math.random() < 0.5;
         answered = false;
 
         const variant = IMAGE_VARIANTS[Math.floor(Math.random() * IMAGE_VARIANTS.length)];
         const base = "genesis_game/" + currentSim + "/";
         const camelsSrc = base + "camels_" + variant + ".png";
         const genesisSrc = base + "genesis_" + variant + ".png";
-        document.getElementById("img-left").src = camelsOnLeft ? camelsSrc : genesisSrc;
-        document.getElementById("img-right").src = camelsOnLeft ? genesisSrc : camelsSrc;
+        document.getElementById("img-top").src = camelsOnTop ? camelsSrc : genesisSrc;
+        document.getElementById("img-bottom").src = camelsOnTop ? genesisSrc : camelsSrc;
 
-        ["card-left","card-right"].forEach(id => {
+        ["card-top","card-bottom"].forEach(id => {
           const el = document.getElementById(id);
           el.className = "img-card";
-          el.onclick = id === "card-left" ? () => guess("left") : () => guess("right");
+          el.onclick = id === "card-top" ? () => guess("top") : () => guess("bottom");
         });
 
-        document.getElementById("label-left").className  = "img-label";
-        document.getElementById("label-right").className = "img-label";
-        document.getElementById("label-left").textContent  = "";
-        document.getElementById("label-right").textContent = "";
+        document.getElementById("label-top").className  = "img-label";
+        document.getElementById("label-bottom").className = "img-label";
+        document.getElementById("label-top").textContent  = "";
+        document.getElementById("label-bottom").textContent = "";
 
         const status = document.getElementById("status");
         status.className = "status-bar";
@@ -747,21 +757,22 @@
       function guess(side) {
         if (answered) return;
         answered = true;
+        answeredRounds++;
 
-        const isCorrect  = (side === "left") === camelsOnLeft;
-        const correctSide = camelsOnLeft ? "left" : "right";
+        const isCorrect  = (side === "top") === camelsOnTop;
+        const correctSide = camelsOnTop ? "top" : "bottom";
 
         document.getElementById("card-" + correctSide).classList.add(isCorrect ? "correct" : "revealed-correct");
         if (!isCorrect) document.getElementById("card-" + side).classList.add("wrong");
 
-        const labelL = document.getElementById("label-left");
-        const labelR = document.getElementById("label-right");
-        labelL.textContent = camelsOnLeft ? "CAMELS" : "GENESIS";
-        labelR.textContent = camelsOnLeft ? "GENESIS" : "CAMELS";
-        labelL.classList.add("visible");
-        labelR.classList.add("visible");
+        const labelTop = document.getElementById("label-top");
+        const labelBottom = document.getElementById("label-bottom");
+        labelTop.textContent = camelsOnTop ? "CAMELS" : "GENESIS";
+        labelBottom.textContent = camelsOnTop ? "GENESIS" : "CAMELS";
+        labelTop.classList.add("visible");
+        labelBottom.classList.add("visible");
 
-        ["card-left","card-right"].forEach(id => {
+        ["card-top","card-bottom"].forEach(id => {
           document.getElementById(id).onclick = null;
         });
 
@@ -777,18 +788,35 @@
         }
 
         document.getElementById("next-btn").disabled = false;
+        document.getElementById("progress").style.width =
+          (answeredRounds / SIMS.length * 100) + "%";
       }
 
-      function showFinal() {
+      function endGame() {
+        const msg = answeredRounds === 0
+          ? "End the game? No guesses have been recorded yet."
+          : "End the game now and keep your current score?";
+        if (!confirm(msg)) return;
+        showFinal(answeredRounds, true);
+      }
+
+      function showFinal(total = SIMS.length, endedEarly = false) {
+        finalTotal = total;
         document.getElementById("game-area").style.display = "none";
         document.getElementById("final-screen").style.display = "block";
         document.getElementById("final-score").textContent = score;
-        document.getElementById("final-msg").textContent = finalMessage(score, SIMS.length);
-        document.getElementById("progress").style.width = "100%";
+        document.getElementById("final-total").textContent = finalTotal;
+        const message = finalMessage(score, finalTotal);
+        document.getElementById("final-msg").textContent = endedEarly && finalTotal > 0
+          ? "Game ended early. " + message
+          : message;
+        document.getElementById("progress").style.width =
+          (finalTotal / SIMS.length * 100) + "%";
         document.getElementById("name-input") && (document.getElementById("name-input").value = "");
-        document.getElementById("save-row").innerHTML = `
-          <input class="name-input" id="name-input" type="text" maxlength="20" placeholder="Your name" />
-          <button class="btn btn-primary btn-sm" onclick="saveScore()">Save score</button>`;
+        document.getElementById("save-row").innerHTML = finalTotal > 0
+          ? `<input class="name-input" id="name-input" type="text" maxlength="20" placeholder="Your name" />
+             <button class="btn btn-primary btn-sm" onclick="saveScore()">Save score</button>`
+          : '<span style="font-size:13px;color:#c1c4d6">No score to save yet.</span>';
       }
 
       startGame();
