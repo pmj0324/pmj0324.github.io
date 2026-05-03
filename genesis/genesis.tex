@@ -504,8 +504,8 @@ This section describes the methodology of \textsc{Genesis}.
 Section~\ref{sec:flow_matching} introduces the optimal-transport flow
 matching (OT-FM), Section~\ref{sec:architecture} presents
 the U-Net architecture and its physically motivated design choices,
-and Section~\ref{sec:training} describes the training and optimisation
-procedure.
+and Section~\ref{sec:training} summarizes the training procedure.
+Full optimisation settings are given in Appendix~\ref{app:training_details}.
 
 \subsection{Optimal-transport flow matching}
 \label{sec:flow_matching}
@@ -751,20 +751,13 @@ million trainable parameters.
 \subsection{Training}
 \label{sec:training}
 
-\textsc{Genesis} is trained in three stages. The initial training stage
-uses AdamW \citep{Loshchilov2019} with learning rate
-$\eta=2\times10^{-4}$, weight decay $10^{-2}$, and
-$(\beta_1,\beta_2)=(0.9,0.999)$. The learning rate is warmed up for
-5 epochs and then controlled by a ReduceLROnPlateau scheduler. This
-stage is run for 89 epochs. Two fine-tuning stages are then performed:
-the first uses a smaller learning rate, $\eta=2\times10^{-5}$, no warm-up, and
-a ReduceLROnPlateau scheduler with factor $0.65$ and patience 4. This
-stage is run for 42 epochs. The final fine-tuning stage starts from
-the first fine-tuned model and disables classifier-free conditioning
-dropout by setting $p_{\rm cfg}=0$. This stage is run for 25 epochs
-and provides the checkpoint used for all results reported in this
-work. All stages use batches of $B=16$ multifield map triplets and D4 data
-augmentation. Training is performed on a single NVIDIA A100 GPU.
+\textsc{Genesis} is trained with the OT-FM objective using AdamW
+optimisation \citep{Loshchilov2019}, D4 data augmentation, and the
+classifier-free conditioning dropout described above. The final
+checkpoint is obtained through an initial training stage followed by
+two fine-tuning stages, with the last stage disabling conditioning
+dropout. All results reported below use this final checkpoint. Full
+optimisation settings are provided in Appendix~\ref{app:training_details}.
 
 %% =============================================================
 %%  §4  LH EVALUATION
@@ -1169,6 +1162,19 @@ especially temperature-related correlations and small-scale ensemble
 spread. Additional LH map tiles across a wider range of conditioning
 vectors are shown in Appendix~\ref{app:lh_tiles}.
 
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figs/cv/cv_auto_pk.pdf}
+  \caption{
+  Auto-power spectra on the CV set. Top panels show CAMELS and
+  \textsc{Genesis} auto-power spectra for $\Mcdm$, $\Mgas$, and
+  $\Tgas$; shaded regions indicate the 16--84 percentile ranges.
+  Bottom panels show fractional residuals relative to the CAMELS
+  median.
+  }
+  \label{fig:cv_auto_pk}
+\end{figure*}
+
 %%------------------------------------------------------------
 \section{CV Evaluation}
 \label{sec:cv_eval}
@@ -1214,19 +1220,6 @@ those of the CAMELS CV maps. Since the CV set is evaluated at fixed
 parameters, this comparison tests whether \textsc{Genesis} produces
 samples with similar spectral statistics to independent CAMELS
 realizations at the fiducial parameter point.
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=\textwidth]{figs/cv/cv_auto_pk.pdf}
-  \caption{
-  Auto-power spectra on the CV set. Top panels show CAMELS and
-  \textsc{Genesis} auto-power spectra for $\Mcdm$, $\Mgas$, and
-  $\Tgas$; shaded regions indicate the 16--84 percentile ranges.
-  Bottom panels show fractional residuals relative to the CAMELS
-  median.
-  }
-  \label{fig:cv_auto_pk}
-\end{figure*}
 
 Figure~\ref{fig:cv_auto_pk} shows that the generated spectra follow
 the CAMELS medians for all three fields. The residuals are generally
@@ -1412,15 +1405,16 @@ the Hutchinson trace estimator and the scan setup, and
 Section~\ref{sec:likelihood_results} presents a two-dimensional
 profile likelihood scan in the $\Om$--$\sig$ plane.
 
-\subsection{Flow likelihood from change of variables}
+\subsection{Likelihood evaluation by change of variables}
 \label{sec:likelihood_change}
 
-\textsc{Genesis} is trained as a continuous normalizing flow so,
-in principle, it can provide an explicit likelihood for a map at a
-specified conditioning vector $\thetavec$. In the likelihood scan, the
-observed map $\mathbf{x}_1$ is fixed and only the candidate
-conditioning vector is changed.
-The learned probability-flow ODE is
+\textsc{Genesis} defines an ODE transport from the base distribution to
+the conditional data distribution. As a result, likelihoods can be
+evaluated using the instantaneous change-of-variables formula for
+continuous normalizing flows \citep{Chen2018}. In the likelihood scan,
+the observed map $\mathbf{x}_1$ is fixed and only the candidate
+conditioning vector $\thetavec$ is varied. The learned probability-flow
+ODE is
 \begin{equation}
   \frac{\mathrm{d}\mathbf{x}_t}{\mathrm{d}t}
   =
@@ -1429,8 +1423,8 @@ The learned probability-flow ODE is
   \label{eq:likelihood_pfode}
 \end{equation}
 with $\mathbf{x}_0\sim p_0=\mathcal{N}(\mathbf{0},\mathbf{I})$ and
-$\mathbf{x}_1$ in the data distribution. Along this flow, the
-instantaneous change of log-density is
+$\mathbf{x}_1$ in the data distribution. Along the forward flow, the
+instantaneous change in log density is
 \begin{equation}
   \frac{\mathrm{d}}{\mathrm{d}t}
   \log p_t(\mathbf{x}_t\mid\thetavec)
@@ -1440,21 +1434,24 @@ instantaneous change of log-density is
   u_t^\phi(\mathbf{x}_t\mid\thetavec).
   \label{eq:instantaneous_change}
 \end{equation}
-Equivalently, for likelihood evaluation the learned flow is integrated
-in the reverse direction, from the fixed data point $\mathbf{x}_1$ to
-the corresponding latent point $\mathbf{z}_1$ in the noise space. The
-conditional log likelihood is then evaluated as
+For likelihood evaluation, the ODE is solved in reverse from the fixed
+data point $\mathbf{x}_1$ to the corresponding latent point
+$\mathbf{z}_0$ in the noise space. Equivalently, writing the associated
+forward trajectory from $\mathbf{z}_0$ to $\mathbf{x}_1$, the conditional
+log likelihood is
 \begin{equation}
   \log p_\phi(\mathbf{x}_1\mid\thetavec)
   =
-  \log p_0(\mathbf{z}_1)
-  +
+  \log p_0(\mathbf{z}_0)
+  -
   \int_0^1
   \nabla_{\mathbf{x}_t}\!\cdot
   u_t^\phi(\mathbf{x}_t\mid\thetavec)
   \,\mathrm{d}t .
   \label{eq:cnf_likelihood}
 \end{equation}
+In practice, the same quantity is accumulated during reverse ODE
+integration with the corresponding sign convention.
 Relative likelihoods are reported,
 \begin{equation}
   \Delta\log p(\thetavec)
@@ -1842,12 +1839,29 @@ publication.
 %% =============================================================
 %%  APPENDICES
 %% =============================================================
-\clearpage
-\onecolumn
 \appendix
 
-{\footnotesize\noindent This paper has been typeset from a
-\TeX/\LaTeX\ file prepared by the author.\par\medskip}
+\section{Training details}
+\label{app:training_details}
+
+\textsc{Genesis} is trained in three stages. The initial training stage
+uses AdamW \citep{Loshchilov2019} with learning rate
+$\eta=2\times10^{-4}$, weight decay $10^{-2}$, and
+$(\beta_1,\beta_2)=(0.9,0.999)$. The learning rate is warmed up for
+5 epochs and then controlled by a ReduceLROnPlateau scheduler. This
+stage is run for 89 epochs. Two fine-tuning stages are then performed:
+the first uses a smaller learning rate, $\eta=2\times10^{-5}$, no
+warm-up, and a ReduceLROnPlateau scheduler with factor $0.65$ and
+patience 4. This stage is run for 42 epochs. The final fine-tuning
+stage starts from the first fine-tuned model and disables
+classifier-free conditioning dropout by setting $p_{\rm cfg}=0$. This
+stage is run for 25 epochs and provides the checkpoint used for all
+results reported in this work. All stages use batches of $B=16$
+multifield map triplets and D4 data augmentation. Training is performed
+on a single NVIDIA A100 GPU.
+
+\clearpage
+\onecolumn
 
 \section{Additional LH map tiles}
 \label{app:lh_tiles}
