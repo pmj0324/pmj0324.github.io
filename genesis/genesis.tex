@@ -122,42 +122,14 @@ $^{1}$Department of Physics, Sungkyunkwan University, Suwon 16419, Republic of K
 
 \date{Accepted XXX. Received YYY; in original form ZZZ}
 
-%\pubyear{\the\year{}}
+\pubyear{\the\year{}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-%\label{firstpage}
-%\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
 \maketitle
-\makeatletter
-\gdef\@journal{\makebox[\textwidth]{\hfill Preprint \tod@y\hfill
-  Compiled using MNRAS \LaTeX\ style file v\@version}}
-\def\ps@titlepage{\let\@mkboth\@gobbletwo
- \def\@oddhead{\footnotesize\@journal}
- \def\@oddfoot{}
- \def\@evenhead{\footnotesize\@journal\hfill}
- \def\@evenfoot{}
- \def\sectionmark##1{}
- \def\subsectionmark##1{}}
-\thispagestyle{titlepage}
-\def\ps@headings{\let\@mkboth\markboth
- \def\@oddhead{\Large\hfill{\it\@shorttitle}\hspace{1.5em}%
-   \rm\@ddell\thepage}
- \def\@oddfoot{}
- \def\@evenhead{\Large\@ddell\thepage\hspace{1.5em}\it\@shortauthor\hfill}
- \def\@evenfoot{}
- \def\sectionmark##1{\markboth{##1}{}}
- \def\subsectionmark##1{\markright{##1}}}
-\def\ps@myheadings{\let\@mkboth\@gobbletwo
- \def\@oddhead{\Large\hfill\it\rightmark\hspace{1.5em}\rm\@ddell\thepage}
- \def\@oddfoot{}
- \def\@evenhead{\Large\@ddell\thepage\hspace{1.5em}\it\leftmark\hfill}
- \def\@evenfoot{}
- \def\sectionmark##1{}
- \def\subsectionmark##1{}}
-\ps@headings
-\makeatother
 
 %% ── Abstract ──────────────────────────────────────────────────────────────
 % \begin{abstract}
@@ -1135,6 +1107,19 @@ to the CAMELS projection-level scatter.
   \label{fig:lh_r2_scond}
 \end{figure}
 
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figs/cv/cv_tiles.pdf}
+  \caption{
+  Comparison between CAMELS CV maps and \textsc{Genesis}-generated maps, conditioned on
+  $(\Om,\sig,A_{\rm SN1},A_{\rm SN2},A_{\rm AGN1},A_{\rm AGN2})
+  =(0.30,0.80,1,1,1,1)$. CAMELS realizations are compared with
+  independent \textsc{Genesis} samples generated at the same
+  conditioning vector. Rows show $\Mcdm$, $\Mgas$, and $\Tgas$.
+  }
+  \label{fig:cv_tiles}
+\end{figure*}
+
 The left panel of Figure~\ref{fig:lh_r2_scond} shows that
 \textsc{Genesis} tracks a substantial fraction of the
 parameter-dependent variation in the log-power spectra. The overall
@@ -1210,19 +1195,6 @@ themselves differ in initial conditions, the relevant question is
 whether samples generated at the fiducial conditioning vector lie
 within the morphological range spanned by independent CAMELS
 realizations.
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=\textwidth]{figs/cv/cv_tiles.pdf}
-  \caption{
-  Comparison between CAMELS CV maps and \textsc{Genesis}-generated maps, conditioned on
-  $(\Om,\sig,A_{\rm SN1},A_{\rm SN2},A_{\rm AGN1},A_{\rm AGN2})
-  =(0.30,0.80,1,1,1,1)$. CAMELS realizations are compared with
-  independent \textsc{Genesis} samples generated at the same
-  conditioning vector. Rows show $\Mcdm$, $\Mgas$, and $\Tgas$.
-  }
-  \label{fig:cv_tiles}
-\end{figure*}
 
 Figure~\ref{fig:cv_tiles} shows that \textsc{Genesis} produces
 visually plausible samples at the fiducial parameter point. The
