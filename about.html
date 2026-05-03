@@ -11,23 +11,19 @@
       name="description"
       content="About page for Minje Park with profile, research focus, and CV access."
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="shared-theme.css" />
+        <link rel="stylesheet" href="shared-theme.css" />
     <link rel="stylesheet" href="shared-nav-mobile.css" />
     <style>
       :root {
         --bg: #0b1020;
         --bg-soft: #151a2b;
         --bg-softer: #1d2336;
-        --fg: #f7f7ff;
-        --fg-muted: #c1c4d6;
+        --fg: #ffffff;
+        --fg-muted: #f4f6ff;
         --accent: #8d9bff;
         --accent-soft: rgba(141, 155, 255, 0.18);
-        --border-subtle: #262b3f;
-        --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+        --border-subtle: rgba(220, 226, 255, 0.24);
+        --shadow-soft: 0 22px 58px rgba(0, 0, 0, 0.62);
         --radius-lg: 18px;
         --radius-pill: 999px;
         --nav-height: 64px;
@@ -40,19 +36,30 @@
 
       body {
         margin: 0;
-        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        background-image: linear-gradient(
-            135deg,
-            rgba(3, 7, 18, 0.82),
-            rgba(15, 23, 42, 0.72)
-          ),
-          url("images/mountain.png");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+        font-family: Helvetica, Arial, sans-serif;
+        position: relative;
+        background: #0b1020;
+        overflow-x: hidden;
         color: var(--fg);
         -webkit-font-smoothing: antialiased;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: -8px;
+        z-index: 0;
+        pointer-events: none;
+        background-image: linear-gradient(
+            135deg,
+            rgba(3, 7, 18, 0.70),
+            rgba(15, 23, 42, 0.60)
+          ),
+          url("nasa.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px);
+        transform: scale(1.015);
       }
 
       a {
@@ -68,6 +75,8 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        position: relative;
+        z-index: 1;
       }
 
       .page-inner {
@@ -116,13 +125,13 @@
       .brand-text-main {
         font-size: 16px;
         font-weight: 600;
-        letter-spacing: 0.02em;
+        letter-spacing: 0;
       }
 
       .brand-text-sub {
         font-size: 11px;
         text-transform: uppercase;
-        letter-spacing: 0.16em;
+        letter-spacing: 0;
         color: var(--fg-muted);
       }
 
@@ -156,8 +165,8 @@
       .card {
         background: linear-gradient(
           145deg,
-          rgba(21, 26, 43, 0.62),
-          rgba(8, 12, 28, 0.68)
+          rgba(18, 24, 42, 0.78),
+          rgba(7, 11, 25, 0.84)
         );
         border-radius: var(--radius-lg);
         border: 1px solid var(--border-subtle);
@@ -170,10 +179,10 @@
       .intro-card {
         background: linear-gradient(
           145deg,
-          rgba(29, 37, 58, 0.60),
-          rgba(14, 21, 38, 0.65)
+          rgba(27, 36, 58, 0.78),
+          rgba(11, 18, 36, 0.84)
         );
-        border-color: rgba(143, 148, 183, 0.35);
+        border-color: rgba(220, 226, 255, 0.32);
       }
 
       .card-header {
@@ -189,14 +198,14 @@
       .card-title {
         font-size: 14px;
         font-weight: 800;
-        letter-spacing: 0.08em;
+        letter-spacing: 0;
         text-transform: uppercase;
         color: #ffffff;
       }
 
       .card-subtitle {
         font-size: 11px;
-        color: rgba(193, 196, 214, 0.45);
+        color: rgba(255, 255, 255, 0.84);
       }
 
       .about-layout {
@@ -214,8 +223,8 @@
 
       /* ── Profile card ── */
       .about-profile {
-        background: rgba(8, 12, 26, 0.55);
-        border: 1px solid rgba(143, 148, 183, 0.32);
+        background: rgba(7, 11, 25, 0.78);
+        border: 1px solid rgba(220, 226, 255, 0.28);
         border-radius: 16px;
         padding: 20px 16px;
         backdrop-filter: blur(10px);
@@ -249,12 +258,12 @@
         font-weight: 700;
         color: #ffffff;
         margin-bottom: 3px;
-        letter-spacing: 0.01em;
+        letter-spacing: 0;
       }
 
       .about-affiliation {
         font-size: 11.5px;
-        color: rgba(193, 196, 214, 0.55);
+        color: rgba(255, 255, 255, 0.86);
         margin-bottom: 14px;
         line-height: 1.4;
       }
@@ -272,7 +281,7 @@
         align-items: baseline;
         gap: 8px;
         font-size: 12.5px;
-        color: rgba(193, 196, 214, 0.75);
+        color: rgba(255, 255, 255, 0.84);
         margin-bottom: 7px;
         line-height: 1.5;
         text-align: left;
@@ -282,7 +291,7 @@
         flex-shrink: 0;
         width: 54px;
         font-size: 9px;
-        letter-spacing: 0.12em;
+        letter-spacing: 0;
         text-transform: uppercase;
         color: rgba(158, 164, 198, 0.7);
       }
@@ -308,7 +317,7 @@
         font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.12em;
+        letter-spacing: 0;
         color: #ffffff;
         margin-bottom: 10px;
         padding-bottom: 6px;
@@ -319,7 +328,7 @@
       .about-text {
         font-size: 13.5px;
         line-height: 1.8;
-        color: rgba(255, 255, 255, 0.72);
+        color: rgba(255, 255, 255, 0.94);
         margin: 0;
       }
 
@@ -327,10 +336,10 @@
       .edu-card {
         background: linear-gradient(
           145deg,
-          rgba(21, 26, 43, 0.58),
-          rgba(8, 12, 28, 0.62)
+          rgba(18, 24, 42, 0.76),
+          rgba(7, 11, 25, 0.82)
         );
-        border: 1px solid rgba(38, 43, 63, 0.85);
+        border: 1px solid rgba(220, 226, 255, 0.20);
         border-radius: 14px;
         padding: 14px 16px;
         backdrop-filter: blur(8px);
@@ -363,7 +372,7 @@
         font-size: 11px;
         font-weight: 700;
         color: var(--accent);
-        letter-spacing: 0.06em;
+        letter-spacing: 0;
       }
 
       .edu-university {
@@ -384,7 +393,7 @@
         font-size: 11px;
         font-weight: 600;
         color: var(--accent);
-        letter-spacing: 0.05em;
+        letter-spacing: 0;
       }
 
       /* Research focus chips */
@@ -423,8 +432,8 @@
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(193, 196, 214, 0.18);
         font-size: 11px;
-        color: rgba(193, 196, 214, 0.55);
-        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.82);
+        letter-spacing: 0;
       }
 
       /* ── Interest list ── */
@@ -444,7 +453,7 @@
 
       .interest-row-items {
         font-size: 12.5px;
-        color: rgba(193, 196, 214, 0.6);
+        color: rgba(255, 255, 255, 0.74);
         line-height: 1.6;
       }
 
@@ -635,6 +644,7 @@
             © <span id="year"></span> Minje Park. All rights reserved.
           </span>
           <span>Built with a simple static site &amp; custom CSS.</span>
+          <span>Background: <a href="https://science.nasa.gov/asset/webb/cosmic-cliffs-in-the-carina-nebula-nircam-image/" target="_blank" rel="noopener noreferrer">Cosmic Cliffs in the Carina Nebula</a>; image credit: NASA, ESA, CSA, STScI.</span>
         </div>
       </footer>
     </div>
