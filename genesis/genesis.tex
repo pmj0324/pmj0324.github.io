@@ -349,7 +349,7 @@ parameter inference. The main contributions are as follows.
         the $(\Om,\sig)$ plane is scanned, with the four astrophysical
         feedback parameters held at their true values. Within the evaluated
         grid, the maximum-likelihood point coincides with the true
-        CAMELS parameter point, $(\Om,\sig)=(0.3054,0.8090)$, and the
+        CAMELS parameter point, and the
         Wilks-theorem 1$\sigma$ contour encloses neighbouring grid
         points. This is therefore framed as evidence that the likelihood
         surface is centred on the truth at the scan resolution, rather
@@ -1401,7 +1401,7 @@ denoted $\mathbf{x}_1$, and scanning the cosmological parameters
 $\Om$ and $\sig$. Section~\ref{sec:likelihood_change} describes likelihood
 evaluation through the change-of-variables formula for continuous
 normalizing flows, Section~\ref{sec:likelihood_hutchinson} describes
-the Hutchinson trace estimator and the scan setup, and
+the stochastic trace estimate and summarizes the scan setup, and
 Section~\ref{sec:likelihood_results} presents a two-dimensional
 profile likelihood scan in the $\Om$--$\sig$ plane.
 
@@ -1466,13 +1466,13 @@ where the maximum is taken over the evaluated scan grid. Thus the
 best grid point has $\Delta\log p=0$, and all other grid points have
 negative values.
 
-\subsection{Hutchinson trace estimation and scan setup}
+\subsection{Trace estimation and scan setup}
 \label{sec:likelihood_hutchinson}
 The divergence term
 $\nabla_{\mathbf{x}_t}\!\cdot
 u_t^\phi(\mathbf{x}_t\mid\thetavec)$ in
-equation~\eqref{eq:cnf_likelihood}
-is the trace of the Jacobian of the velocity field,
+equation~\eqref{eq:cnf_likelihood} is the trace of the velocity-field
+Jacobian,
 \begin{equation}
   \nabla_{\mathbf{x}_t}\!\cdot
   u_t^\phi(\mathbf{x}_t\mid\thetavec)
@@ -1482,9 +1482,11 @@ is the trace of the Jacobian of the velocity field,
   \right].
   \label{eq:trace_exact}
 \end{equation}
-Because the map dimensionality is large, computing the exact trace at
-each ODE step is intractable. The trace is estimated with
-the Hutchinson estimator,
+Direct evaluation of this trace would require the full Jacobian at each
+ODE step, whose dimension is set by all map pixels and channels. This
+is computationally prohibitive for the multifield maps considered here,
+so the divergence is estimated stochastically using the Hutchinson
+identity,
 \begin{equation}
   {\rm Tr}\!\left[
     \frac{\partial u_t^\phi}{\partial \mathbf{x}}
@@ -1503,65 +1505,17 @@ the Hutchinson estimator,
   \mathbf{I}.
   \label{eq:hutchinson}
 \end{equation}
-In practice, Rademacher probe vectors are used, and the estimate is
-averaged over three Hutchinson seeds at each grid point. The plotted
-likelihood surface uses the seed-averaged value
-\begin{equation}
-  \overline{\log p}_{ij}
-  =
-  \frac{1}{3}
-  \sum_{s=0}^{2}
-  \log p_{\phi,s}
-  (\mathbf{x}_1\mid\thetavec_{ij}),
-  \label{eq:hutchinson_mean}
-\end{equation}
-and the scatter across the three seeds is used as a diagnostic of
-stochastic trace-estimator noise.
+Rademacher probe vectors are used in the calculations below, and the
+likelihood values are averaged over independent Hutchinson estimates to
+reduce trace-estimator noise.
 
-The two cosmological parameters $\Om$ and $\sig$ are scanned, while
-the four astrophysical parameters are fixed to their true values. The
-CAMELS map used in this scan has true conditioning vector
-\begin{equation}
-  \thetavec_{\rm true}
-  =
-  (0.3054,\,0.8090,\,3.7373,\,3.8106,\,1.3822,\,0.6639).
-  \label{eq:scan_true_params}
-\end{equation}
-This parameter vector is close to the Planck 2018 cosmology. The
-candidate grid is
-\begin{equation}
-\begin{aligned}
-  \Om &\in
-  \{0.1985,0.2199,0.2413,0.2626,0.2840,0.3054,
-  \\
-  &\qquad
-    0.3268,0.3482,0.3695,0.3909,0.4123\},
-  \\
-  \sig &\in
-  \{0.6000,0.6400,0.6800,0.7200,0.7600,0.8090,
-  \\
-  &\qquad
-    0.8400,0.8800,0.9200,0.9600,1.0000\}.
-\end{aligned}
-  \label{eq:scan_grid}
-\end{equation}
-The full candidate grid contains $11\times11=121$ points. To avoid
-evaluating points far from the region of interest, the calculation is
-restricted to the ellipse
-\begin{equation}
-  \left(
-  \frac{\Om-\Omega_{{\rm m},{\rm true}}}{0.04}
-  \right)^2
-  +
-  \left(
-  \frac{\sig-\sigma_{8,{\rm true}}}{0.07}
-  \right)^2
-  \leq 3^2 .
-  \label{eq:scan_ellipse}
-\end{equation}
-This skips 28 points outside the ellipse and leaves 93 evaluated
-grid points. Each likelihood is computed with the Dormand--Prince
-solver using 100 function evaluations.
+For the proof-of-concept scan, only the two cosmological parameters
+$\Om$ and $\sig$ are varied. The four astrophysical feedback parameters
+are fixed to the CAMELS values of the selected map, and candidate
+cosmologies are evaluated on a local grid around the true parameter
+point. The scan is restricted to a broad ellipse around this region to
+avoid unnecessary evaluations far from the local likelihood peak. The
+numerical scan settings are listed in Appendix~\ref{app:likelihood_scan}.
 
 \subsection{Two-dimensional profile likelihood scan}
 \label{sec:likelihood_results}
@@ -1573,26 +1527,23 @@ solver using 100 function evaluations.
   fixed CAMELS map $\mathbf{x}_1$. The colour scale shows
   $\Delta\log p(\mathbf{x}_1\mid\thetavec)$ relative to the maximum
   evaluated grid value. The true CAMELS parameter and the
-  maximum-likelihood grid point coincide at
-  $(\Om,\sig)=(0.3054,0.8090)$. Grey regions indicate grid points
+  maximum-likelihood grid point coincide. Grey regions indicate grid points
   outside the evaluated scan ellipse, and markers show evaluated grid
   points. Contours show the Wilks-theorem 1 and 2$\sigma$ levels for
-  two parameters, corresponding to
-  $\Delta\log p=-1.15$ and $-3.09$.
+  two parameters.
   }
   \label{fig:likelihood_scan_2d}
 \end{figure}
 
 Figure~\ref{fig:likelihood_scan_2d} shows that the seed-averaged
-relative likelihood peaks at the true CAMELS parameter point,
-$(\Om,\sig)=(0.3054,0.8090)$, which is included explicitly in the
-scan grid. The colour scale shows the relative log likelihood, not an
+relative likelihood peaks at the true CAMELS parameter point, which is
+included explicitly in the scan grid. The colour scale shows the relative log likelihood, not an
 absolute likelihood; values close to zero therefore correspond to
 conditioning vectors that best explain the fixed map $\mathbf{x}_1$
 within the evaluated grid. The surface is broad and the grey region
-marks grid points skipped by the ellipse cut, so this result should
-be interpreted as a proof-of-concept likelihood scan rather than a
-precise cosmological constraint.
+marks grid points outside the evaluated region, so this result should be
+interpreted as a proof-of-concept likelihood scan rather than a precise
+cosmological constraint.
 
 \begin{figure*}
   \centering
@@ -1603,8 +1554,7 @@ precise cosmological constraint.
   $\Om$. Right: profile in $\sig$, obtained by maximizing over
   $\Om$ at each $\sig$. Error bars show the scatter across Hutchinson
   seeds. The vertical dashed line marks the CAMELS parameter value.
-  Horizontal lines show the 1D Wilks-theorem 1 and 2$\sigma$ levels,
-  $\Delta\log p=-0.5$ and $-2.0$.
+  Horizontal lines show the 1D Wilks-theorem 1 and 2$\sigma$ levels.
   }
   \label{fig:likelihood_scan_profiles}
 \end{figure*}
@@ -1677,45 +1627,43 @@ larger residuals, especially toward smaller scales. This behaviour is
 consistent with the temperature field being more sensitive to local
 heating and feedback processes than to density alone.
 
-The likelihood scan demonstrates a separate aspect of the model:
-because \textsc{Genesis} is formulated as a continuous normalizing
-flow, the same trained model can be used to assign likelihoods to
-input maps under candidate conditioning vectors. In the
+The likelihood scan demonstrates a separate consequence of the CNF
+formulation: the same trained model can be used to assign likelihoods
+to input maps under candidate conditioning vectors. In the
 two-dimensional $\Om$--$\sig$ scan, one CAMELS map $\mathbf{x}_1$ is
-held fixed while the conditioning vector is varied over a restricted
-grid that includes the true parameter point. The four astrophysical
-feedback parameters are fixed to their true values, and the relative
-likelihood is computed for the evaluated grid points inside a
-$3\sigma$ ellipse around the CAMELS parameter value. The
-maximum-likelihood grid point coincides with the truth,
-$(\Om,\sig)=(0.3054,0.8090)$, and the Wilks-theorem 1$\sigma$
-contour encloses several adjacent grid points. This result is
-interpreted as a proof of concept that the likelihood surface is
-centred on the truth at the resolution of the scan, rather than that
-the truth is uniquely resolved within stochastic noise.
+held fixed while the conditioning vector is varied over a local grid
+around the true parameter point. The four astrophysical feedback
+parameters are fixed to their CAMELS values, and the relative
+likelihood is evaluated only in the neighbourhood targeted by the
+scan. The maximum-likelihood grid point coincides with the truth, and
+the Wilks-theorem 1$\sigma$ contour encloses several adjacent grid
+points. This result is interpreted as a proof of concept that the
+likelihood surface is centred on the truth at the resolution of the
+scan, rather than that the truth is uniquely resolved within stochastic
+noise.
 
 There are several limitations to this likelihood-based inference
 demonstration. First, the scan varies only two cosmological parameters
 and keeps the four astrophysical feedback parameters fixed. It is
 therefore a low-dimensional profile likelihood slice, not a full
 posterior analysis over the six-dimensional CAMELS parameter space. In
-addition, only 93 of the 121 candidate grid points are evaluated after
-applying the ellipse cut. The scan is therefore an encouraging
-consistency check on the local likelihood surface, but not a
-standalone validation of calibrated inference.
+addition, the finite grid and the local scan region limit the
+interpretation of the likelihood contours. The scan is therefore an
+encouraging consistency check on the local likelihood surface, but not
+a standalone validation of calibrated inference.
 
 Second, likelihood evaluation is computationally expensive. In the
 scan presented here, each conditioning vector requires an ODE solve
-with stochastic divergence estimation, taking roughly two minutes on
-an NVIDIA A100 GPU in the current implementation. The Hutchinson trace
-estimator is unbiased and, when the random probe vectors are fixed,
-gives a consistent relative trend across the scan, but it still
-introduces non-negligible stochastic noise. Reducing this noise
-requires averaging over more Hutchinson seeds, which directly
-increases the runtime of each likelihood evaluation. Variance-reduction
-strategies, improved ODE solvers, or learned approximations to the
-likelihood surface may therefore be required for practical inference
-applications.
+with stochastic divergence estimation. This makes dense scans or
+marginalization over the full CAMELS parameter space substantially more
+costly than forward generation. The Hutchinson trace estimator is
+unbiased and gives a consistent relative trend across the scan, but it
+still introduces stochastic noise into individual likelihood
+evaluations. Reducing this noise requires additional trace estimates,
+which directly increases the runtime of each grid point.
+Variance-reduction strategies, improved ODE solvers, or learned
+approximations to the likelihood surface may therefore be required for
+practical inference applications.
 
 A broader statistical limitation is that the current evaluation does
 not yet provide a fully calibrated inference procedure. The LH and CV
@@ -1859,6 +1807,64 @@ stage is run for 25 epochs and provides the checkpoint used for all
 results reported in this work. All stages use batches of $B=16$
 multifield map triplets and D4 data augmentation. Training is performed
 on a single NVIDIA A100 GPU.
+
+\section{Likelihood scan details}
+\label{app:likelihood_scan}
+
+The likelihood scan in Section~\ref{sec:likelihood_inference} uses one
+CAMELS map whose true conditioning vector is
+\begin{equation}
+  \thetavec_{\rm true}
+  =
+  (0.3054,\,0.8090,\,3.7373,\,3.8106,\,1.3822,\,0.6639).
+  \label{eq:scan_true_params}
+\end{equation}
+The first two entries are close to the Planck 2018 cosmology. The
+candidate grid is
+\begin{align}
+  \Om &\in
+  \{0.1985,0.2199,0.2413,0.2626,0.2840,0.3054,\nonumber\\
+      &\hspace{1.2cm}
+        0.3268,0.3482,0.3695,0.3909,0.4123\},\\
+  \sig &\in
+  \{0.6000,0.6400,0.6800,0.7200,0.7600,0.8090,\nonumber\\
+       &\hspace{1.2cm}
+         0.8400,0.8800,0.9200,0.9600,1.0000\}.
+\end{align}
+The true cosmological point is included explicitly in the grid. To
+avoid evaluating points far from the region of interest, the calculation
+is restricted to
+\begin{equation}
+  \left(
+  \frac{\Om-\Omega_{{\rm m},{\rm true}}}{0.04}
+  \right)^2
+  +
+  \left(
+  \frac{\sig-\sigma_{8,{\rm true}}}{0.07}
+  \right)^2
+  \leq 3^2 .
+  \label{eq:scan_ellipse}
+\end{equation}
+This cut removes 28 of the 121 candidate grid points, leaving 93
+evaluated likelihoods. A Dormand--Prince solver is used, with 100
+function evaluations per likelihood.
+
+Rademacher probe vectors are used for the Hutchinson trace estimate.
+For each evaluated grid point, three independent Hutchinson estimates
+are computed and averaged as
+\begin{equation}
+  \overline{\log p}_{ij}
+  =
+  \frac{1}{3}
+  \sum_{s=0}^{2}
+  \log p_{\phi,s}
+  (\mathbf{x}_1\mid\thetavec_{ij}).
+  \label{eq:hutchinson_mean}
+\end{equation}
+The scatter across the three estimates is used as the uncertainty shown
+in Figure~\ref{fig:likelihood_scan_profiles}. In the current
+implementation, one likelihood evaluation takes roughly two minutes on
+an NVIDIA A100 GPU.
 
 \clearpage
 \onecolumn
