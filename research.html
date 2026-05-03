@@ -209,11 +209,42 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
 
+      .project-card-header {
+        align-items: stretch;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .project-card-header .card-title {
+        margin: 0;
+      }
+
       .card-title {
         font-size: 18px;
         font-weight: 600;
         letter-spacing: 0;
         text-transform: none;
+      }
+
+      .project-title-main {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .project-title-expansion {
+        font-size: 15px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.84);
+      }
+
+      .project-action-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0;
       }
 
       .card-subtitle {
@@ -269,9 +300,10 @@
 
       .asset-row {
         display: flex;
+        justify-content: flex-start;
         flex-wrap: wrap;
         gap: 8px;
-        margin-top: 8px;
+        margin: 0;
       }
 
       .asset-chip {
@@ -558,17 +590,20 @@
         </section>
 
         <section class="card" aria-labelledby="project-cosmo-heading">
-          <div class="card-header">
+          <div class="card-header project-card-header">
             <h2 id="project-cosmo-heading" class="card-title">
-              GENESIS &mdash; GENerative Emulator for Simulation and parameter Inference from cosmological fields
+              <span class="project-title-main">GENESIS</span>
+              <span class="project-title-expansion">&mdash; GENerative Emulator for Simulation and parameter Inference from cosmological fields</span>
             </h2>
-            <span class="project-tag ongoing">Ongoing</span>
-          </div>
-          <div class="asset-row" style="margin-top:12px;">
-            <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: Code</a>
-            <a class="asset-chip" href="genesis/genesis.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Paper</a>
-            <a class="asset-chip" href="attachments/KPS_FOCUS_poster.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Poster</a>
-            <a class="asset-chip" href="game.html" style="border-style:solid;color:var(--accent);text-decoration:none;">🎮 Game</a>
+            <div class="project-action-row">
+              <div class="asset-row">
+                <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: Code</a>
+                <a class="asset-chip" href="genesis/genesis.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Paper</a>
+                <a class="asset-chip" href="attachments/KPS_FOCUS_poster.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Poster</a>
+                <a class="asset-chip" href="game.html" style="border-style:solid;color:var(--accent);text-decoration:none;">🎮 Game</a>
+              </div>
+              <span class="project-tag ongoing">Ongoing</span>
+            </div>
           </div>
           <p class="project-summary">
             GENESIS is a conditional generative model trained on the CAMELS
@@ -666,11 +701,17 @@
         </section>
 
         <section class="card" aria-labelledby="project-skku-heading">
-          <div class="card-header">
+          <div class="card-header project-card-header">
             <h2 id="project-skku-heading" class="card-title">
               JANUS &mdash; Generative AI for IceCube neutrino events
             </h2>
-            <span class="project-tag ongoing">Ongoing</span>
+            <div class="project-action-row">
+              <div class="asset-row">
+                <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
+                <a class="asset-chip" href="slides/JANUS_KPS_Final.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 KPS Poster</a>
+              </div>
+              <span class="project-tag ongoing">Ongoing</span>
+            </div>
           </div>
           <p class="project-summary">
             The IceCube Neutrino Observatory is a cubic-kilometer-scale
@@ -692,10 +733,6 @@
             generative modeling framework, JANUS aims to provide a flexible
             and scalable approach to neutrino event analysis in IceCube.
           </p>
-          <div class="asset-row" style="margin-top:12px;">
-            <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
-            <a class="asset-chip" href="slides/JANUS_KPS_Final.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 KPS Poster</a>
-          </div>
           <div class="slide-viewer">
             <object data="slides/JANUS_KPS_Final.pdf" type="application/pdf">
               <div class="slide-viewer-fallback">
@@ -706,11 +743,18 @@
         </section>
 
         <section class="card" aria-labelledby="project-utah-heading">
-          <div class="card-header">
+          <div class="card-header project-card-header">
             <h2 id="project-utah-heading" class="card-title">
               OPTICUS &mdash; Vision Transformer for IceCube optical-property measurement
             </h2>
-            <span class="project-tag completed">Completed</span>
+            <div class="project-action-row">
+              <div class="asset-row">
+                <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
+                <a class="asset-chip" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 arXiv:2507.18525</a>
+                <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">↗ Open PDF</a>
+              </div>
+              <span class="project-tag completed">Completed</span>
+            </div>
           </div>
           <p class="project-summary">
             To improve detector calibration in IceCube, the Upgrade introduced
@@ -731,11 +775,6 @@
             demonstrating high-precision optical-property estimation in both
             regimes.
           </p>
-          <div class="asset-row" style="margin-top:12px;">
-            <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
-            <a class="asset-chip" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 arXiv:2507.18525</a>
-            <a class="asset-chip" href="slides/OPTICUS.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">↗ Open PDF</a>
-          </div>
           <div class="slide-viewer">
             <object data="slides/OPTICUS.pdf" type="application/pdf">
               <div class="slide-viewer-fallback">
