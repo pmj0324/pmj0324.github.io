@@ -132,69 +132,37 @@ $^{1}$Department of Physics, Sungkyunkwan University, Suwon 16419, Republic of K
 \maketitle
 
 %% ── Abstract ──────────────────────────────────────────────────────────────
-% \begin{abstract}
-% Diffusion models have accelerated the development of generative
-% modelling across many domains and have been widely adopted in
-% cosmology for field generation, emulation, and parameter inference.
-% However, diffusion-based approaches typically require many sampling
-% steps and generally provide likelihood information only through a
-% lower bound. Flow matching has recently emerged as an alternative
-% generative framework with stable training, efficient sampling, and
-% tractable likelihood evaluation, but its use in cosmology remains
-% limited.
-
-% We present \textsc{Genesis}, a conditional generative emulator for
-% multifield cosmological maps based on optimal-transport flow
-% matching. To our knowledge, this is the first application of
-% optimal-transport flow matching to conditional multifield generation
-% with CAMELS/CMD maps. The model jointly generates dark matter density,
-% gas density, and gas temperature maps, conditioned on the two
-% cosmological parameters $(\Om,\sig)$ and four astrophysical feedback
-% parameters of CAMELS. Across held-out parameter-varying and
-% fixed-parameter tests, \textsc{Genesis} produces multifield samples
-% that broadly reproduce the target CAMELS statistics and preserve the
-% main correlations among the three fields. Sampling is also practical:
-% in the current implementation, generating one multifield map triplet
-% takes about six seconds on an NVIDIA A100 GPU.
-
-% As an initial demonstration of the likelihood capability of the
-% learned flow, we perform a two-dimensional $\Om$--$\sig$ scan for one
-% CAMELS map while fixing the remaining parameters, and find that the
-% relative likelihood peaks at the input parameter values within the
-% evaluated grid. These results indicate that optimal-transport flow
-% matching is a promising framework for fast conditional multifield
-% cosmological emulation, with potential for field-level
-% likelihood-based inference.
-% \end{abstract}
 \begin{abstract}
-Diffusion models have accelerated the development of generative
-modelling across many domains and have been widely adopted in
-cosmology for field generation, emulation, and parameter inference.
-However, diffusion-based approaches typically require many sampling
-steps and provide likelihood information only through a
-lower bound. Flow matching has recently emerged as an alternative
-generative framework with stable training, efficient sampling, and
-tractable likelihood evaluation, but its use for conditional multifield
-cosmological emulation remains limited. This work presents \textsc{Genesis}, a conditional generative
-emulator for multifield cosmological maps based on optimal-transport
-flow matching. To date, flow matching has not been applied to
-conditional multifield map generation.
-The model jointly generates dark matter density, gas density, and gas temperature maps,
-conditioned on the two cosmological parameters $(\Omega_{\rm m},\sigma_8)$ and four
-astrophysical feedback parameters of CAMELS.
-\textsc{Genesis} produces multifield samples that reproduce key CAMELS
-summary statistics and preserve the main correlations among the three fields.
-Sampling is also practical: in the current implementation, generating
-one multifield map triplet takes about six seconds on an NVIDIA A100
-GPU.
-As an initial demonstration of the likelihood capability of the
-learned flow, a two-dimensional $\Omega_{\rm m}$--$\sigma_8$
-scan is performed for one CAMELS map while fixing the remaining
-parameters, and the relative likelihood is found to peak at the input
-parameter values within the evaluated grid. These results indicate that
-flow matching is a promising framework for fast
-conditional multifield cosmological emulation, with potential for
-field-level likelihood-based inference.
+Diffusion models have reshaped generative modelling across many
+domains and have also found wide application in cosmology, including
+field reconstruction, emulation, and parameter inference. However,
+diffusion-based approaches typically require many sampling steps and
+provide only variational lower bounds on the likelihood. Flow matching
+has recently emerged as an alternative generative framework with stable
+training, efficient sampling, and tractable likelihood evaluation, but
+its use in cosmology remains relatively limited.
+
+To explore flow matching as a cosmological emulator with efficient
+sampling and likelihood access, we introduce \textsc{Genesis}, a
+conditional continuous normalizing flow trained with optimal-transport
+flow matching on the IllustrisTNG maps of the CAMELS Multifield
+Dataset. Given $(\Om,\sig)$ and the CAMELS supernova- and
+AGN-feedback parameters, \textsc{Genesis} generates
+$25\,h^{-1}\,\mathrm{Mpc}$ two-dimensional maps of dark matter
+density, gas density, and gas temperature, while jointly modelling
+their shared structure and baryonic responses. The generated samples
+reproduce the main one- and two-point statistics of CAMELS while
+preserving the leading correlations among the three fields, with each
+multifield realization generated in a few seconds in our
+implementation.
+As an initial proof of concept for likelihood-based inference with
+this flow-matching emulator, we perform a two-dimensional
+$\Om$--$\sig$ relative-likelihood scan for one CAMELS map using the
+\textsc{Genesis} continuous-normalizing-flow likelihood, with the
+remaining parameters fixed. The likelihood surface peaks at the true
+parameter values, showing that the learned flow assigns informative
+field-level likelihoods that can be used as a basis for future
+cosmological parameter inference.
 \end{abstract}
 
 \begin{keywords}
