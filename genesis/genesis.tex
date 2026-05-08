@@ -1369,7 +1369,7 @@ denoted $\mathbf{x}_1$, and scanning the cosmological parameters
 $\Om$ and $\sig$. Section~\ref{sec:likelihood_change} describes likelihood
 evaluation through the change-of-variables formula for continuous
 normalizing flows, Section~\ref{sec:likelihood_hutchinson} describes
-the stochastic trace estimate and summarizes the scan setup, and
+the stochastic trace estimator and summarizes the scan setup, and
 Section~\ref{sec:likelihood_results} presents a two-dimensional
 profile likelihood scan in the $\Om$--$\sig$ plane.
 
@@ -1434,7 +1434,7 @@ where the maximum is taken over the evaluated scan grid. Thus the
 best grid point has $\Delta\log p=0$, and all other grid points have
 negative values.
 
-\subsection{Trace estimation and scan setup}
+\subsection{Stochastic trace estimation and scan setup}
 \label{sec:likelihood_hutchinson}
 The divergence term
 $\nabla_{\mathbf{x}_t}\!\cdot
@@ -1446,24 +1446,26 @@ Jacobian,
   u_t^\phi(\mathbf{x}_t\mid\thetavec)
   =
   {\rm Tr}\!\left[
-    \frac{\partial u_t^\phi}{\partial \mathbf{x}}
+    \frac{\partial u_t^\phi}{\partial \mathbf{x}_t}
   \right].
   \label{eq:trace_exact}
 \end{equation}
 Direct evaluation of this trace would require the full Jacobian at each
-ODE step, whose dimension is set by all map pixels and channels. This
-is computationally prohibitive for the multifield maps considered here,
-so the divergence is estimated stochastically using the Hutchinson
-identity,
+ODE step. For the three $256\times256$ fields considered here, this
+Jacobian acts on all pixels and channels, making explicit trace
+evaluation computationally prohibitive. Following standard CNF
+likelihood practice \citep{Grathwohl2019,Lipman2023}, the divergence is
+therefore estimated stochastically using the Hutchinson trace estimator
+\citep{Hutchinson1989},
 \begin{equation}
   {\rm Tr}\!\left[
-    \frac{\partial u_t^\phi}{\partial \mathbf{x}}
+    \frac{\partial u_t^\phi}{\partial \mathbf{x}_t}
   \right]
   =
   \mathbb{E}_{\boldsymbol{\epsilon}}
   \left[
     \boldsymbol{\epsilon}^{\mathsf T}
-    \frac{\partial u_t^\phi}{\partial \mathbf{x}}
+    \frac{\partial u_t^\phi}{\partial \mathbf{x}_t}
     \boldsymbol{\epsilon}
   \right],
   \qquad
@@ -1473,9 +1475,10 @@ identity,
   \mathbf{I}.
   \label{eq:hutchinson}
 \end{equation}
-Rademacher probe vectors are used in the calculations below, and the
-likelihood values are averaged over independent Hutchinson estimates to
-reduce trace-estimator noise.
+Rademacher probe vectors are used in the calculations below, with each
+component independently taking values $\pm1$ with equal probability.
+The likelihood values are averaged over independent Hutchinson
+estimates to reduce trace-estimator noise.
 
 For the proof-of-concept scan, only the two cosmological parameters
 $\Om$ and $\sig$ are varied. The four astrophysical feedback parameters
