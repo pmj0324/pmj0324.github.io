@@ -390,6 +390,7 @@
             <a class="nav-link" href="index.html">home</a>
             <a class="nav-link" href="about.html">about</a>
             <a class="nav-link" href="research.html">research</a>
+            <a class="nav-link" href="calendar.html">calendar</a>
             <a class="nav-link" href="publications.html">publications</a>
             <a class="nav-link" href="links.html">links</a>
             <a class="nav-link nav-link-active" href="game.html">game</a>
@@ -645,10 +646,10 @@
       function finalMessage(sc, total) {
         if (total === 0) return "Game ended before any guesses were recorded.";
         const p = sc / total;
-        if (p >= 0.9) return "Outstanding! You might have a future in cosmological simulation.";
-        if (p >= 0.7) return "Great eye! GENESIS is doing its job well.";
-        if (p >= 0.5) return "Not bad — even experts find it hard to tell these apart.";
-        return "GENESIS fooled you well. That's actually a good sign for the model!";
+        if (p >= 0.9) return "Outstanding! You picked up on very subtle field-level differences.";
+        if (p >= 0.7) return "Great eye! The generated and simulated fields are close, but not identical.";
+        if (p >= 0.5) return "Nice work. Some rounds are intentionally subtle.";
+        return "A challenging run. The visual differences can be quite small in this setup.";
       }
 
       function escHtml(s) {
@@ -800,7 +801,7 @@
           status.textContent = "✓ Correct!";
         } else {
           status.className = "status-bar wrong-msg";
-          status.textContent = "✗ Wrong — GENESIS fooled you!";
+          status.textContent = "✗ Wrong — the visual difference was subtle.";
         }
 
         document.getElementById("next-btn").disabled = false;
