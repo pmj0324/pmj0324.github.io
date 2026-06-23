@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Calendar · Minje Park</title>
+    <meta name="description" content="Personal calendar of Minje Park." />
+    <link rel="stylesheet" href="shared-theme.css" />
+    <link rel="stylesheet" href="shared-nav-mobile.css" />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #151a2b;
+        --bg-softer: #1d2336;
+        --fg: #ffffff;
+        --fg-muted: #f4f6ff;
+        --accent: #8d9bff;
+        --accent-soft: rgba(141, 155, 255, 0.18);
+        --border-subtle: rgba(220, 226, 255, 0.24);
+        --shadow-soft: 0 22px 58px rgba(0, 0, 0, 0.62);
+        --radius-lg: 18px;
+        --radius-pill: 999px;
+        --nav-height: 64px;
+        --content-width: 960px;
+        --todo-color: #7fe0a8;
+        --event-color: #8d9bff;
+        --day-h: 86px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Helvetica, Arial, sans-serif;
+        position: relative;
+        background: #0b1020;
+        overflow-x: hidden;
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: -8px;
+        z-index: 0;
+        pointer-events: none;
+        background-image: linear-gradient(
+            135deg,
+            rgba(3, 7, 18, 0.7),
+            rgba(15, 23, 42, 0.6)
+          ),
+          url("nasa.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px);
+        transform: scale(1.015);
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-inner {
+        width: 100%;
+        max-width: var(--content-width);
+        margin: 0 auto;
+        padding: 24px 20px 40px;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: linear-gradient(
+          to bottom,
+          rgba(5, 7, 18, 0.9),
+          rgba(5, 7, 18, 0.6),
+          transparent
+        );
+      }
+
+      .navbar-inner {
+        height: var(--nav-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-text-main {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0;
+      }
+
+      .brand-text-sub {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0;
+        color: var(--fg-muted);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 14px;
+      }
+
+      .nav-link {
+        padding: 6px 12px;
+        border-radius: 999px;
+        color: var(--fg-muted);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: background 0.16s ease, color 0.16s ease;
+      }
+
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--fg);
+        text-decoration: none;
+      }
+
+      .card {
+        background: linear-gradient(
+          145deg,
+          rgba(18, 24, 42, 0.78),
+          rgba(7, 11, 25, 0.84)
+        );
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(12px);
+        padding: 22px 22px 20px;
+        margin-top: 24px;
+      }
+
+      .intro-card {
+        background: linear-gradient(
+          145deg,
+          rgba(27, 36, 58, 0.78),
+          rgba(11, 18, 36, 0.84)
+        );
+        border-color: rgba(220, 226, 255, 0.32);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .card-subtitle {
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+
+      /* Toolbar */
+      .cal-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .cal-month-label {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        min-width: 150px;
+      }
+
+      .cal-month-label .year-dim {
+        color: var(--fg-muted);
+        font-weight: 500;
+      }
+
+      .cal-btn {
+        font-family: inherit;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: var(--fg-muted);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-pill);
+        padding: 7px 14px;
+        cursor: pointer;
+        transition: background 0.16s ease, color 0.16s ease,
+          border-color 0.16s ease;
+      }
+
+      .cal-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--fg);
+        border-color: rgba(141, 155, 255, 0.45);
+      }
+
+      .cal-btn-primary {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-color: rgba(141, 155, 255, 0.45);
+      }
+
+      .cal-spacer {
+        flex: 1;
+      }
+
+      .cal-legend {
+        display: flex;
+        gap: 14px;
+        font-size: 11.5px;
+        color: var(--fg-muted);
+        align-items: center;
+      }
+
+      .legend-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+
+      .legend-dot.event {
+        background: var(--event-color);
+      }
+
+      .legend-dot.todo {
+        background: var(--todo-color);
+      }
+
+      /* Weekday header (fixed, above the scroll viewport) */
+      .weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        margin-bottom: 6px;
+        padding-right: 10px; /* room for scrollbar */
+      }
+
+      .weekday {
+        text-align: center;
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--fg-muted);
+        padding: 2px 0;
+      }
+
+      .weekday.sun {
+        color: #ff9b9b;
+      }
+
+      .weekday.sat {
+        color: #9bc4ff;
+      }
+
+      /* Scroll viewport: shows ~5 weeks, scroll inside */
+      .cal-viewport {
+        position: relative;
+        height: calc(var(--day-h) * 5 + 24px);
+        overflow-y: auto;
+        padding-right: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(141, 155, 255, 0.4) transparent;
+        overscroll-behavior: contain;
+      }
+
+      .cal-viewport::-webkit-scrollbar {
+        width: 8px;
+      }
+      .cal-viewport::-webkit-scrollbar-thumb {
+        background: rgba(141, 155, 255, 0.4);
+        border-radius: 8px;
+      }
+      .cal-viewport::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .weeks {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .week {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+      }
+
+      .day {
+        position: relative;
+        min-height: var(--day-h);
+        border: 1px solid rgba(220, 226, 255, 0.14);
+        border-radius: 12px;
+        background: rgba(12, 17, 35, 0.5);
+        padding: 6px 7px 8px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: border-color 0.18s ease, background 0.18s ease,
+          transform 0.12s ease;
+        overflow: hidden;
+      }
+
+      .day:hover {
+        border-color: rgba(141, 155, 255, 0.5);
+        background: rgba(31, 40, 64, 0.6);
+        transform: translateY(-1px);
+      }
+
+      /* alternate-month tint so the months read as joined-but-distinct */
+      .day.alt {
+        background: rgba(20, 27, 50, 0.62);
+      }
+      .day.alt:hover {
+        background: rgba(36, 46, 74, 0.7);
+      }
+
+      .day-head {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+
+      .day-num {
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1;
+      }
+
+      .day.sun .day-num {
+        color: #ff9b9b;
+      }
+
+      .day.sat .day-num {
+        color: #9bc4ff;
+      }
+
+      .day-month {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--accent);
+      }
+
+      .day.today {
+        border-color: var(--accent);
+        box-shadow: inset 0 0 0 1px rgba(141, 155, 255, 0.5);
+      }
+
+      .day.today .day-num {
+        background: var(--accent);
+        color: #0b1020;
+        border-radius: 6px;
+        padding: 2px 5px;
+      }
+
+      .chips {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 1px;
+        min-width: 0;
+      }
+
+      .chip {
+        font-size: 10.5px;
+        line-height: 1.25;
+        padding: 2px 5px;
+        border-radius: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+
+      .chip.event {
+        background: rgba(141, 155, 255, 0.22);
+        color: #dfe3ff;
+      }
+
+      .chip.todo {
+        background: rgba(127, 224, 168, 0.18);
+        color: #d6ffe6;
+      }
+
+      .chip.todo.done {
+        text-decoration: line-through;
+        opacity: 0.55;
+      }
+
+      .chip-more {
+        font-size: 10px;
+        color: var(--fg-muted);
+        padding-left: 2px;
+      }
+
+      .sentinel {
+        height: 1px;
+      }
+
+      /* Modal */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: rgba(3, 6, 16, 0.66);
+        backdrop-filter: blur(4px);
+        display: none;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 80px 16px 40px;
+      }
+
+      .modal-backdrop.open {
+        display: flex;
+      }
+
+      .modal {
+        width: 100%;
+        max-width: 440px;
+        background: linear-gradient(
+          145deg,
+          rgba(27, 36, 58, 0.96),
+          rgba(11, 18, 36, 0.97)
+        );
+        border: 1px solid rgba(220, 226, 255, 0.32);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        padding: 20px 20px 18px;
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-date {
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .modal-weekday {
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        color: var(--fg-muted);
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0 4px;
+      }
+
+      .modal-close:hover {
+        color: #fff;
+      }
+
+      .item-list {
+        list-style: none;
+        margin: 0 0 14px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 260px;
+        overflow-y: auto;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(220, 226, 255, 0.16);
+        border-radius: 10px;
+        padding: 8px 10px;
+      }
+
+      .item-type {
+        flex-shrink: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+
+      .item-type.event {
+        background: var(--event-color);
+      }
+
+      .item-check {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        accent-color: var(--todo-color);
+        cursor: pointer;
+      }
+
+      .item-text {
+        flex: 1;
+        font-size: 13px;
+        line-height: 1.4;
+        word-break: break-word;
+      }
+
+      .item.done .item-text {
+        text-decoration: line-through;
+        opacity: 0.55;
+      }
+
+      .item-del {
+        flex-shrink: 0;
+        background: none;
+        border: none;
+        color: var(--fg-muted);
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1;
+        padding: 2px 4px;
+        border-radius: 6px;
+      }
+
+      .item-del:hover {
+        color: #ff9b9b;
+        background: rgba(255, 155, 155, 0.12);
+      }
+
+      .empty-note {
+        font-size: 12.5px;
+        color: var(--fg-muted);
+        margin: 2px 0 14px;
+      }
+
+      .add-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .add-input {
+        flex: 1;
+        font-family: inherit;
+        font-size: 13px;
+        color: var(--fg);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border-subtle);
+        border-radius: 10px;
+        padding: 9px 11px;
+      }
+
+      .add-input::placeholder {
+        color: rgba(244, 246, 255, 0.5);
+      }
+
+      .add-input:focus {
+        outline: none;
+        border-color: rgba(141, 155, 255, 0.6);
+        background: rgba(255, 255, 255, 0.09);
+      }
+
+      .type-toggle {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .type-opt {
+        flex: 1;
+        text-align: center;
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        padding: 7px 0;
+        border-radius: 10px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--fg-muted);
+        cursor: pointer;
+      }
+
+      .type-opt.active.event {
+        border-color: rgba(141, 155, 255, 0.6);
+        background: rgba(141, 155, 255, 0.18);
+        color: #dfe3ff;
+      }
+
+      .type-opt.active.todo {
+        border-color: rgba(127, 224, 168, 0.55);
+        background: rgba(127, 224, 168, 0.16);
+        color: #d6ffe6;
+      }
+
+      .footer {
+        margin-top: auto;
+        padding: 20px;
+        border-top: 1px solid rgba(24, 30, 46, 0.9);
+        color: #7a7f98;
+        font-size: 12px;
+      }
+
+      .footer-inner {
+        max-width: var(--content-width);
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      @media (max-width: 560px) {
+        :root {
+          --day-h: 64px;
+        }
+        .chip {
+          font-size: 9.5px;
+          padding: 1px 4px;
+        }
+        .nav-links {
+          gap: 10px;
+          font-size: 12px;
+        }
+        .cal-month-label {
+          min-width: 120px;
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="navbar">
+        <div class="page-inner navbar-inner">
+          <div class="brand">
+            <div>
+              <div class="brand-text-main">Minje&nbsp;Park</div>
+              <div class="brand-text-sub">Calendar</div>
+            </div>
+          </div>
+          <nav class="nav-links" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">home</a>
+            <a class="nav-link" href="about.html">about</a>
+            <a class="nav-link" href="research.html">research</a>
+            <a class="nav-link" href="publications.html">publications</a>
+            <a class="nav-link" href="links.html">links</a>
+            <a class="nav-link" href="game.html">game</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="page-inner">
+        <section class="card intro-card" aria-labelledby="cal-heading">
+          <div class="card-header">
+            <h1 id="cal-heading" class="card-title">Calendar</h1>
+            <span class="card-subtitle">Scroll the weeks</span>
+          </div>
+
+          <div class="cal-toolbar">
+            <span class="cal-month-label" id="month-label"></span>
+            <button class="cal-btn cal-btn-primary" id="btn-today">Today</button>
+            <button class="cal-btn" id="btn-export">Export</button>
+            <button class="cal-btn" id="btn-import">Import</button>
+            <input
+              type="file"
+              id="import-file"
+              accept="application/json"
+              style="display: none"
+            />
+            <span class="cal-spacer"></span>
+            <span class="cal-legend">
+              <span><span class="legend-dot event"></span>Event</span>
+              <span><span class="legend-dot todo"></span>To-do</span>
+            </span>
+          </div>
+
+          <div class="weekdays" id="weekdays"></div>
+
+          <div class="cal-viewport" id="viewport">
+            <div class="sentinel" id="sentinel-top"></div>
+            <div class="weeks" id="weeks"></div>
+            <div class="sentinel" id="sentinel-bottom"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <span>
+            © <span id="year"></span> Minje Park. All rights reserved.
+          </span>
+          <span>Saved locally in this browser. Use Export to back up.</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Day modal -->
+    <div class="modal-backdrop" id="modal-backdrop">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-date"
+      >
+        <div class="modal-header">
+          <div>
+            <div class="modal-date" id="modal-date"></div>
+            <div class="modal-weekday" id="modal-weekday"></div>
+          </div>
+          <button class="modal-close" id="modal-close" aria-label="Close">
+            &times;
+          </button>
+        </div>
+
+        <ul class="item-list" id="item-list"></ul>
+        <p class="empty-note" id="empty-note" style="display: none">
+          No items yet. Add an event or to-do below.
+        </p>
+
+        <div class="type-toggle">
+          <div class="type-opt event active" id="opt-event" data-type="event">
+            Event
+          </div>
+          <div class="type-opt todo" id="opt-todo" data-type="todo">To-do</div>
+        </div>
+        <div class="add-row">
+          <input
+            type="text"
+            class="add-input"
+            id="add-input"
+            placeholder="Add an item and press Enter"
+          />
+          <button class="cal-btn cal-btn-primary" id="add-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        document.getElementById("year").textContent =
+          new Date().getFullYear().toString();
+
+        var STORAGE_KEY = "minje-calendar-v1";
+        // Week starts Monday, Sunday is last.
+        var WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        var MONTHS = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        var MONTHS_SHORT = [
+          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        var DAYNAMES = [
+          "Sunday", "Monday", "Tuesday", "Wednesday",
+          "Thursday", "Friday", "Saturday"
+        ];
+        var DAY_MS = 86400000;
+
+        // ---- Data ----
+        function loadData() {
+          try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : {};
+          } catch (e) {
+            return {};
+          }
+        }
+        function saveData() {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          } catch (e) {
+            alert("Could not save (storage may be full or blocked).");
+          }
+        }
+        var data = loadData();
+
+        function pad(n) {
+          return String(n).padStart(2, "0");
+        }
+        function keyOf(date) {
+          return (
+            date.getFullYear() +
+            "-" +
+            pad(date.getMonth() + 1) +
+            "-" +
+            pad(date.getDate())
+          );
+        }
+        function itemsFor(key) {
+          return data[key] || [];
+        }
+
+        // Monday of the week containing `date`
+        function mondayOf(date) {
+          var d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          var offset = (d.getDay() + 6) % 7; // 0 for Monday
+          d.setDate(d.getDate() - offset);
+          return d;
+        }
+
+        // ---- Setup header ----
+        var weekdaysEl = document.getElementById("weekdays");
+        WEEKDAYS.forEach(function (name, i) {
+          var el = document.createElement("div");
+          el.className =
+            "weekday" + (i === 6 ? " sun" : i === 5 ? " sat" : "");
+          el.textContent = name;
+          weekdaysEl.appendChild(el);
+        });
+
+        var weeksEl = document.getElementById("weeks");
+        var viewport = document.getElementById("viewport");
+        var monthLabel = document.getElementById("month-label");
+
+        var today = new Date();
+        var todayKey = keyOf(today);
+        var anchorMonday = mondayOf(today); // reference week (offset 0)
+
+        var loadedStart = 0; // smallest week offset rendered (inclusive)
+        var loadedEnd = -1; // largest week offset rendered (inclusive)
+
+        function mondayForOffset(offset) {
+          return new Date(anchorMonday.getTime() + offset * 7 * DAY_MS);
+        }
+
+        function buildWeek(offset) {
+          var monday = mondayForOffset(offset);
+          var row = document.createElement("div");
+          row.className = "week";
+          row.dataset.offset = offset;
+          // label for this row = month of its Thursday (ISO-ish)
+          var thursday = new Date(monday.getTime() + 3 * DAY_MS);
+          row.dataset.month = thursday.getMonth();
+          row.dataset.year = thursday.getFullYear();
+
+          for (var i = 0; i < 7; i++) {
+            var d = new Date(monday.getTime() + i * DAY_MS);
+            var key = keyOf(d);
+            var dow = d.getDay();
+            var cell = document.createElement("div");
+            cell.className =
+              "day" +
+              (dow === 0 ? " sun" : dow === 6 ? " sat" : "") +
+              (d.getMonth() % 2 === 1 ? " alt" : "") +
+              (key === todayKey ? " today" : "");
+            cell.dataset.key = key;
+            cell.dataset.time = d.getTime();
+
+            var head = document.createElement("div");
+            head.className = "day-head";
+            var num = document.createElement("span");
+            num.className = "day-num";
+            num.textContent = d.getDate();
+            head.appendChild(num);
+            if (d.getDate() === 1) {
+              var ml = document.createElement("span");
+              ml.className = "day-month";
+              ml.textContent = MONTHS_SHORT[d.getMonth()];
+              head.appendChild(ml);
+            }
+            cell.appendChild(head);
+            cell.appendChild(buildChips(key));
+            row.appendChild(cell);
+          }
+          return row;
+        }
+
+        function buildChips(key) {
+          var wrap = document.createElement("div");
+          wrap.className = "chips";
+          var items = itemsFor(key);
+          var max = 2;
+          items.slice(0, max).forEach(function (it) {
+            var chip = document.createElement("div");
+            chip.className = "chip " + it.type + (it.done ? " done" : "");
+            chip.textContent =
+              (it.type === "todo" ? (it.done ? "✓ " : "○ ") : "") + it.text;
+            wrap.appendChild(chip);
+          });
+          if (items.length > max) {
+            var more = document.createElement("div");
+            more.className = "chip-more";
+            more.textContent = "+" + (items.length - max) + " more";
+            wrap.appendChild(more);
+          }
+          return wrap;
+        }
+
+        function refreshDayCell(key) {
+          var cell = weeksEl.querySelector('.day[data-key="' + key + '"]');
+          if (!cell) return;
+          var oldChips = cell.querySelector(".chips");
+          if (oldChips) oldChips.remove();
+          cell.appendChild(buildChips(key));
+        }
+
+        function appendWeek() {
+          loadedEnd += 1;
+          weeksEl.appendChild(buildWeek(loadedEnd));
+        }
+        function prependWeek() {
+          loadedStart -= 1;
+          var row = buildWeek(loadedStart);
+          var prevH = weeksEl.offsetHeight;
+          var prevScroll = viewport.scrollTop;
+          weeksEl.insertBefore(row, weeksEl.firstChild);
+          var newH = weeksEl.offsetHeight;
+          viewport.scrollTop = prevScroll + (newH - prevH);
+        }
+
+        // initial render: enough weeks to fill + buffers
+        (function initRender() {
+          loadedStart = 0;
+          loadedEnd = -1;
+          for (var i = 0; i < 5; i++) appendWeek(); // offsets 0..4 (this week down)
+          for (var j = 0; j < 4; j++) prependWeek(); // 4 weeks above
+          // place "today" week near the top of the viewport
+          var todayRow = weeksEl.querySelector(
+            '.day.today'
+          );
+          if (todayRow) {
+            var row = todayRow.closest(".week");
+            viewport.scrollTop = row.offsetTop - 2;
+          }
+          updateMonthLabel();
+        })();
+
+        // ---- Month label follows scroll ----
+        function updateMonthLabel() {
+          var rows = weeksEl.children;
+          var top = viewport.scrollTop;
+          var chosen = rows[0];
+          for (var i = 0; i < rows.length; i++) {
+            var r = rows[i];
+            if (r.offsetTop + r.offsetHeight - 4 > top) {
+              chosen = r;
+              break;
+            }
+          }
+          if (!chosen) return;
+          var m = +chosen.dataset.month;
+          var y = +chosen.dataset.year;
+          monthLabel.innerHTML =
+            MONTHS[m] + ' <span class="year-dim">' + y + "</span>";
+        }
+
+        // ---- Lazy-load weeks as the viewport scrolls ----
+        var THRESHOLD = 200;
+        function fillForScroll() {
+          var guard = 0;
+          // grow downward
+          while (
+            viewport.scrollTop + viewport.clientHeight >
+              weeksEl.offsetHeight - THRESHOLD &&
+            guard++ < 12
+          ) {
+            appendWeek();
+          }
+          // grow upward (prependWeek preserves scroll position)
+          guard = 0;
+          while (viewport.scrollTop < THRESHOLD && guard++ < 12) {
+            prependWeek();
+          }
+        }
+
+        viewport.addEventListener("scroll", function () {
+          fillForScroll();
+          updateMonthLabel();
+        });
+
+        // ---- Modal ----
+        var backdrop = document.getElementById("modal-backdrop");
+        var modalDate = document.getElementById("modal-date");
+        var modalWeekday = document.getElementById("modal-weekday");
+        var itemList = document.getElementById("item-list");
+        var emptyNote = document.getElementById("empty-note");
+        var addInput = document.getElementById("add-input");
+        var optEvent = document.getElementById("opt-event");
+        var optTodo = document.getElementById("opt-todo");
+        var activeKey = null;
+        var activeType = "event";
+
+        function openModal(time, key) {
+          activeKey = key;
+          var dt = new Date(time);
+          modalDate.textContent =
+            MONTHS[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+          modalWeekday.textContent = DAYNAMES[dt.getDay()];
+          renderItems();
+          backdrop.classList.add("open");
+          setTimeout(function () {
+            addInput.focus();
+          }, 30);
+        }
+        function closeModal() {
+          backdrop.classList.remove("open");
+          activeKey = null;
+        }
+
+        function renderItems() {
+          var items = itemsFor(activeKey);
+          itemList.innerHTML = "";
+          emptyNote.style.display = items.length ? "none" : "block";
+          items.forEach(function (it) {
+            var li = document.createElement("li");
+            li.className = "item" + (it.done ? " done" : "");
+
+            if (it.type === "todo") {
+              var cb = document.createElement("input");
+              cb.type = "checkbox";
+              cb.className = "item-check";
+              cb.checked = !!it.done;
+              cb.addEventListener("change", function () {
+                it.done = cb.checked;
+                saveData();
+                li.classList.toggle("done", it.done);
+                refreshDayCell(activeKey);
+              });
+              li.appendChild(cb);
+            } else {
+              var dot = document.createElement("span");
+              dot.className = "item-type event";
+              li.appendChild(dot);
+            }
+
+            var txt = document.createElement("span");
+            txt.className = "item-text";
+            txt.textContent = it.text;
+            li.appendChild(txt);
+
+            var del = document.createElement("button");
+            del.className = "item-del";
+            del.innerHTML = "&times;";
+            del.setAttribute("aria-label", "Delete");
+            del.addEventListener("click", function () {
+              var arr = data[activeKey] || [];
+              var idx = arr.indexOf(it);
+              if (idx > -1) arr.splice(idx, 1);
+              if (arr.length === 0) delete data[activeKey];
+              saveData();
+              renderItems();
+              refreshDayCell(activeKey);
+            });
+            li.appendChild(del);
+
+            itemList.appendChild(li);
+          });
+        }
+
+        function addItem() {
+          var text = addInput.value.trim();
+          if (!text || !activeKey) return;
+          if (!data[activeKey]) data[activeKey] = [];
+          var item = {
+            id: Date.now() + "-" + Math.random().toString(36).slice(2, 7),
+            text: text,
+            type: activeType
+          };
+          if (activeType === "todo") item.done = false;
+          data[activeKey].push(item);
+          saveData();
+          addInput.value = "";
+          renderItems();
+          refreshDayCell(activeKey);
+          addInput.focus();
+        }
+
+        function setType(t) {
+          activeType = t;
+          optEvent.classList.toggle("active", t === "event");
+          optTodo.classList.toggle("active", t === "todo");
+        }
+
+        // ---- Event wiring ----
+        weeksEl.addEventListener("click", function (e) {
+          var cell = e.target.closest(".day");
+          if (!cell) return;
+          openModal(+cell.dataset.time, cell.dataset.key);
+        });
+
+        document
+          .getElementById("modal-close")
+          .addEventListener("click", closeModal);
+        backdrop.addEventListener("click", function (e) {
+          if (e.target === backdrop) closeModal();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && backdrop.classList.contains("open"))
+            closeModal();
+        });
+
+        document.getElementById("add-btn").addEventListener("click", addItem);
+        addInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") addItem();
+        });
+        optEvent.addEventListener("click", function () {
+          setType("event");
+        });
+        optTodo.addEventListener("click", function () {
+          setType("todo");
+        });
+
+        // Today button
+        document
+          .getElementById("btn-today")
+          .addEventListener("click", function () {
+            var todayCell = weeksEl.querySelector(".day.today");
+            if (todayCell) {
+              var row = todayCell.closest(".week");
+              viewport.scrollTo({ top: row.offsetTop - 2, behavior: "smooth" });
+            }
+          });
+
+        // Export / Import
+        document
+          .getElementById("btn-export")
+          .addEventListener("click", function () {
+            var blob = new Blob([JSON.stringify(data, null, 2)], {
+              type: "application/json"
+            });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = "calendar-backup-" + todayKey + ".json";
+            a.click();
+            URL.revokeObjectURL(url);
+          });
+
+        var importFile = document.getElementById("import-file");
+        document
+          .getElementById("btn-import")
+          .addEventListener("click", function () {
+            importFile.click();
+          });
+        importFile.addEventListener("change", function () {
+          var file = importFile.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function () {
+            try {
+              var incoming = JSON.parse(reader.result);
+              if (typeof incoming !== "object" || incoming === null)
+                throw new Error("bad");
+              if (
+                confirm("Replace current calendar data with the imported file?")
+              ) {
+                data = incoming;
+                saveData();
+                weeksEl
+                  .querySelectorAll(".day[data-key]")
+                  .forEach(function (cell) {
+                    refreshDayCell(cell.dataset.key);
+                  });
+              }
+            } catch (err) {
+              alert("Could not read that file as calendar JSON.");
+            }
+            importFile.value = "";
+          };
+          reader.readAsText(file);
+        });
+      })();
+    </script>
+  </body>
+</html>
