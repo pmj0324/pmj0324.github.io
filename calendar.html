@@ -2,43 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Calendar · Minje Park</title>
-    <meta name="description" content="Personal calendar of Minje Park." />
-    <link rel="stylesheet" href="shared-theme.css" />
-    <link rel="stylesheet" href="shared-nav-mobile.css" />
     <style>
       :root {
-        --bg: #0b1020;
-        --bg-soft: #151a2b;
-        --bg-softer: #1d2336;
-        --fg: #ffffff;
-        --fg-muted: #f4f6ff;
-        --accent: #8d9bff;
-        --accent-soft: rgba(141, 155, 255, 0.18);
-        --border-subtle: rgba(220, 226, 255, 0.24);
-        --shadow-soft: 0 22px 58px rgba(0, 0, 0, 0.62);
-        --radius-lg: 18px;
-        --radius-pill: 999px;
-        --nav-height: 64px;
-        --content-width: 960px;
-        --todo-color: #7fe0a8;
-        --event-color: #8d9bff;
-        --day-h: 86px;
+        --bg: #eef2f5;
+        --surface: #ffffff;
+        --surface-quiet: #f7f9fb;
+        --surface-ink: #111827;
+        --fg: #18202a;
+        --fg-muted: #667085;
+        --fg-soft: #98a2b3;
+        --line: #d8dee7;
+        --line-strong: #bcc7d4;
+        --accent: #1f7a8c;
+        --accent-strong: #145767;
+        --accent-soft: rgba(31, 122, 140, 0.12);
+        --orange: #c86b31;
+        --orange-soft: rgba(200, 107, 49, 0.12);
+        --green: #2f8f5b;
+        --green-soft: rgba(47, 143, 91, 0.12);
+        --shadow-soft: 0 2px 12px rgba(16, 24, 40, 0.07);
+        --nav-height: 46px;
+        --content-width: 1540px;
+        --todo-color: var(--green);
+        --event-color: #667085;
+        --day-h: 118px;
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
       body {
         margin: 0;
-        font-family: Helvetica, Arial, sans-serif;
-        position: relative;
-        background: #0b1020;
+        font-family: Inter, Helvetica, Arial, sans-serif;
+        background: var(--bg);
         overflow-x: hidden;
         color: var(--fg);
         -webkit-font-smoothing: antialiased;
@@ -47,29 +44,30 @@
       body::before {
         content: "";
         position: fixed;
-        inset: -8px;
+        inset: 0;
         z-index: 0;
         pointer-events: none;
-        background-image: linear-gradient(
-            135deg,
-            rgba(3, 7, 18, 0.7),
-            rgba(15, 23, 42, 0.6)
-          ),
-          url("nasa.jpg");
-        background-size: cover;
-        background-position: center;
-        filter: blur(2px);
-        transform: scale(1.015);
+        background:
+          linear-gradient(rgba(216,222,231,0.55) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(216,222,231,0.45) 1px, transparent 1px);
+        background-size: 28px 28px;
+        opacity: 0.42;
       }
 
-      a {
-        color: var(--accent);
-        text-decoration: none;
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: linear-gradient(180deg,
+          rgba(255,255,255,0.86),
+          rgba(238,242,245,0.92) 42%,
+          rgba(238,242,245,0.98));
       }
 
-      a:hover {
-        text-decoration: underline;
-      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
 
       .page {
         min-height: 100vh;
@@ -83,672 +81,738 @@
         width: 100%;
         max-width: var(--content-width);
         margin: 0 auto;
-        padding: 24px 20px 40px;
+        padding: 18px 20px 40px;
       }
 
+      /* ── Navbar ── */
       .navbar {
         position: sticky;
         top: 0;
         z-index: 20;
-        backdrop-filter: blur(16px);
-        background: linear-gradient(
-          to bottom,
-          rgba(5, 7, 18, 0.9),
-          rgba(5, 7, 18, 0.6),
-          transparent
-        );
+        background: rgba(255,255,255,0.88);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(12px);
       }
-
       .navbar-inner {
         height: var(--nav-height);
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 24px;
+        padding-top: 0;
+        padding-bottom: 0;
       }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .brand-text-main {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0;
-      }
-
-      .brand-text-sub {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        color: var(--fg-muted);
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        font-size: 14px;
-      }
-
+      .brand-text-main { font-size: 14px; font-weight: 700; color: var(--fg); line-height: 1.1; }
+      .brand-text-sub  { font-size: 10px; text-transform: uppercase; color: var(--accent); line-height: 1.1; }
+      .nav-links { display: flex; align-items: center; gap: 4px; font-size: 11px; }
       .nav-link {
-        padding: 6px 12px;
-        border-radius: 999px;
+        padding: 5px 8px;
+        border-radius: 6px;
         color: var(--fg-muted);
         text-decoration: none;
         text-transform: uppercase;
-        transition: background 0.16s ease, color 0.16s ease;
+        transition: background 0.16s, color 0.16s;
       }
+      .nav-link:hover { background: var(--surface-quiet); color: var(--fg); text-decoration: none; }
+      .nav-link-active { background: var(--surface-ink); color: #fff; }
 
-      .nav-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--fg);
-        text-decoration: none;
-      }
-
-      .nav-link-active {
-        background: var(--accent-soft);
-        color: var(--accent);
-      }
-
-      .card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.78),
-          rgba(7, 11, 25, 0.84)
-        );
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-subtle);
-        box-shadow: var(--shadow-soft);
-        backdrop-filter: blur(12px);
-        padding: 22px 22px 20px;
-        margin-top: 24px;
-      }
-
-      .intro-card {
-        background: linear-gradient(
-          145deg,
-          rgba(27, 36, 58, 0.78),
-          rgba(11, 18, 36, 0.84)
-        );
-        border-color: rgba(220, 226, 255, 0.32);
-      }
-
+      /* ── Page card ── */
+      .card { background: transparent; border: 0; box-shadow: none; padding: 0; margin-top: 18px; }
       .card-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex; align-items: baseline; justify-content: space-between;
+        gap: 12px; margin-bottom: 14px;
       }
-
-      .card-title {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        margin: 0;
-      }
-
+      .card-title { font-size: 28px; font-weight: 700; margin: 0; }
       .card-subtitle {
-        font-size: 12px;
-        color: var(--fg-muted);
+        font-size: 12px; color: var(--fg-muted);
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: 6px; padding: 6px 9px;
       }
 
-      /* Toolbar */
+      /* ── Toolbar ── */
       .cal-toolbar {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 14px;
+        display: flex; flex-wrap: wrap; align-items: center;
+        gap: 8px; margin-bottom: 10px;
       }
-
       .cal-month-label {
-        font-size: 16px;
-        font-weight: 700;
-        letter-spacing: 0.01em;
-        min-width: 150px;
+        font-size: 17px; font-weight: 700; letter-spacing: 0.01em;
+        min-width: 150px; color: var(--fg);
       }
-
-      .cal-month-label .year-dim {
-        color: var(--fg-muted);
-        font-weight: 500;
-      }
-
+      .cal-month-label .year-dim { color: var(--fg-muted); font-weight: 500; }
+      .cal-spacer { flex: 1; }
       .cal-btn {
-        font-family: inherit;
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
-        color: var(--fg-muted);
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-pill);
-        padding: 7px 14px;
-        cursor: pointer;
-        transition: background 0.16s ease, color 0.16s ease,
-          border-color 0.16s ease;
+        font-family: inherit; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.02em; color: var(--fg-muted);
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: 6px; padding: 8px 12px; cursor: pointer;
+        transition: background 0.16s, color 0.16s, border-color 0.16s;
       }
-
-      .cal-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--fg);
-        border-color: rgba(141, 155, 255, 0.45);
-      }
-
+      .cal-btn:hover { background: var(--surface-quiet); color: var(--fg); border-color: var(--line-strong); }
       .cal-btn-primary {
-        background: var(--accent-soft);
-        color: var(--accent);
-        border-color: rgba(141, 155, 255, 0.45);
+        background: var(--accent-soft); color: var(--accent);
+        border-color: rgba(31,122,140,0.26);
       }
 
-      .cal-spacer {
-        flex: 1;
-      }
-
-      .cal-legend {
-        display: flex;
-        gap: 14px;
-        font-size: 11.5px;
-        color: var(--fg-muted);
-        align-items: center;
-      }
-
-      .legend-dot {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        margin-right: 5px;
-        vertical-align: middle;
-      }
-
-      .legend-dot.event {
-        background: var(--event-color);
-      }
-
-      .legend-dot.todo {
-        background: var(--todo-color);
-      }
-
-      /* Weekday header (fixed, above the scroll viewport) */
-      .weekdays {
+      /* ── Shell ── */
+      .calendar-shell {
         display: grid;
-        grid-template-columns: repeat(7, minmax(0, 1fr));
-        gap: 6px;
-        margin-bottom: 6px;
-        padding-right: 10px; /* room for scrollbar */
+        grid-template-columns: 240px minmax(0, 1fr) 300px;
+        gap: 12px;
+        align-items: start;
+        width: 100%;
       }
 
-      .weekday {
-        text-align: center;
-        font-size: 10.5px;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
+      /* ── Shared panel base ── */
+      .add-panel, .view-panel {
+        position: sticky;
+        top: calc(var(--nav-height) + 18px);
+        max-height: calc(100vh - var(--nav-height) - 36px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(31,122,140,0.2) transparent;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        box-shadow: var(--shadow-soft);
+      }
+      .add-panel  { border-left: 3px solid var(--accent); }
+      .view-panel { border-left: 3px solid var(--green); }
+
+      .panel-kicker {
+        font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--fg-muted); margin-bottom: 4px;
+      }
+      .panel-date { font-size: 20px; font-weight: 700; color: var(--fg); }
+      .panel-weekday { font-size: 11px; color: var(--fg-muted); margin-top: 2px; }
+      .panel-section {
+        margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+      }
+      .panel-section-title {
+        display: flex; align-items: center; gap: 6px;
+        font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em;
+        color: var(--fg-muted); margin-bottom: 8px;
+      }
+
+      /* ── Add panel form elements ── */
+      .form-label {
+        display: block; font-size: 10px; text-transform: uppercase;
+        letter-spacing: 0.05em; color: var(--fg-muted); margin: 10px 0 4px;
+      }
+
+      /* ── Left panel tabs ── */
+      .add-tabs {
+        display: flex; gap: 4px; margin: 12px 0 0;
+        background: var(--surface-quiet); border-radius: 8px; padding: 3px;
+      }
+      .add-tab {
+        flex: 1; font-family: inherit; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.04em; padding: 7px 0; border-radius: 6px;
+        border: none; background: transparent; color: var(--fg-muted);
+        cursor: pointer; transition: background 0.15s, color 0.15s;
+      }
+      .add-tab:hover { color: var(--fg); }
+      .add-tab.active {
+        background: var(--surface); color: var(--fg);
+        box-shadow: 0 1px 4px rgba(16,24,40,0.08);
+        font-weight: 600;
+      }
+      .add-tab-panel { display: none; padding-top: 12px; }
+      .add-tab-panel.active { display: block; }
+
+      .add-input, .schedule-input {
+        width: 100%; font-family: inherit; font-size: 13px;
+        color: var(--fg); background: #fff;
+        border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+      }
+      .schedule-input { font-size: 12px; padding: 7px 9px; }
+      .add-input::placeholder, .schedule-input::placeholder { color: var(--fg-soft); }
+      .add-input:focus, .schedule-input:focus {
+        outline: none; border-color: rgba(31,122,140,0.56);
+        box-shadow: 0 0 0 3px rgba(31,122,140,0.1);
+      }
+
+      .all-day-row, .important-row {
+        display: flex; align-items: center; gap: 8px;
+        color: var(--fg-muted); font-size: 12px; margin: 7px 0;
+      }
+      .all-day-row input, .important-row input { accent-color: var(--accent); }
+
+      .time-row {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 6px 0;
+      }
+      .time-row[hidden] { display: none; }
+      .time-input {
+        width: 100%; font-family: inherit; font-size: 12px;
+        color: var(--fg); background: #fff;
+        border: 1px solid var(--line); border-radius: 6px; padding: 7px 8px;
+      }
+      .time-input:focus {
+        outline: none; border-color: rgba(31,122,140,0.56);
+        box-shadow: 0 0 0 3px rgba(31,122,140,0.1);
+      }
+
+      .color-picker-row { margin: 4px 0 0; }
+      .color-swatches { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+      .color-swatch {
+        width: 20px; height: 20px; border-radius: 50%;
+        border: 2px solid transparent; cursor: pointer;
+        transition: transform 0.1s, border-color 0.12s;
+        flex: 0 0 auto;
+      }
+      .color-swatch:hover { transform: scale(1.2); }
+      .color-swatch.active {
+        border-color: rgba(0,0,0,0.3);
+        box-shadow: 0 0 0 2px #fff inset;
+      }
+      .color-swatch.locked { opacity: 0.35; cursor: default; }
+      .color-swatch.locked.active { opacity: 1; }
+      .color-lock-note {
+        font-size: 9.5px; color: var(--fg-soft); font-style: italic;
+        margin-top: 3px;
+      }
+
+      .add-row { display: flex; gap: 6px; margin-top: 8px; }
+      .add-row .add-input { font-size: 12.5px; padding: 8px 10px; }
+
+      .note-input {
+        width: 100%; font-family: inherit; font-size: 12.5px;
+        color: var(--fg); background: #fff;
+        border: 1px solid var(--line); border-radius: 6px;
+        padding: 9px 10px; line-height: 1.45; resize: vertical;
+      }
+      .note-input:focus {
+        outline: none; border-color: rgba(31,122,140,0.56);
+        box-shadow: 0 0 0 3px rgba(31,122,140,0.1);
+      }
+      .note-input-day  { min-height: 80px; }
+      .note-input-sm   { min-height: 52px; margin-top: 8px; font-size: 12px; }
+      .note-input-week { min-height: 64px; }
+      .note-input-month{ min-height: 64px; }
+
+      .note-view {
+        font-size: 12.5px; color: var(--fg-muted); line-height: 1.5;
+        white-space: pre-wrap; margin: 0; padding: 0;
+      }
+
+      /* note textarea inside add form */
+      .add-panel .note-input { margin-top: 6px; min-height: 70px; }
+
+      /* ── Memo list ── */
+      .memo-list { margin-bottom: 10px; }
+      .memo-item {
+        border: 1px solid var(--line); border-radius: 7px;
+        padding: 8px 10px; margin-bottom: 6px;
+        background: var(--surface-quiet); position: relative;
+      }
+      .memo-item-title {
+        font-size: 12px; font-weight: 600; color: var(--fg); margin-bottom: 3px;
+      }
+      .memo-item-body {
+        font-size: 11.5px; color: var(--fg-muted); line-height: 1.45;
+        white-space: pre-wrap; word-break: break-word;
+      }
+      .memo-item-del {
+        position: absolute; top: 6px; right: 8px;
+        background: none; border: none; cursor: pointer;
+        color: var(--fg-soft); font-size: 13px; line-height: 1; padding: 2px;
+        opacity: 0.5;
+      }
+      .memo-item-del:hover { opacity: 1; color: var(--fg); }
+      .memo-form-sep {
+        border: none; border-top: 1px solid var(--line);
+        margin: 10px 0 10px;
+      }
+      .memo-form-title {
+        font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em;
+        font-weight: 700; color: var(--fg-muted); margin-bottom: 5px;
+      }
+      .memo-add-row {
+        display: flex; gap: 6px; margin-top: 6px;
+      }
+
+      /* ── Overview panel (right) ── */
+      .ov-section { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+      .ov-section-hdr {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .ov-section-title {
+        font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+        font-weight: 700; color: var(--fg-muted);
+      }
+      .ov-section-tag {
+        font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em;
+        color: var(--fg-soft); background: var(--surface-quiet);
+        border: 1px solid var(--line); border-radius: 99px; padding: 1px 6px;
+      }
+      .ov-empty { font-size: 11.5px; color: var(--fg-soft); padding: 2px 0; }
+      .ov-day { margin-bottom: 8px; }
+      .ov-day-hdr {
+        font-size: 10.5px; font-weight: 600; color: var(--fg-muted);
+        margin: 8px 0 4px;
+      }
+      .ov-day-hdr.is-today { color: var(--accent); }
+      .ov-item {
+        font-size: 11.5px; border-radius: 5px;
+        border: 1px solid transparent; border-left: 3px solid transparent;
+        padding: 3px 7px 3px 6px; margin-bottom: 3px; line-height: 1.4;
+        display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+        cursor: pointer;
+      }
+      .ov-item-time {
+        font-size: 10px; opacity: 0.65; flex: 0 0 auto; font-variant-numeric: tabular-nums;
+      }
+      .ov-item-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .ov-item-note {
+        display: none;
+        flex-basis: 100%;
+        margin-top: 4px;
+        padding: 5px 6px;
+        border-top: 1px solid rgba(0,0,0,0.08);
         color: var(--fg-muted);
-        padding: 2px 0;
+        font-size: 10.5px;
+        white-space: pre-wrap;
+      }
+      .ov-item.open .ov-item-note { display: block; }
+      .ov-note-title {
+        display: block;
+        margin-top: 4px;
+        color: var(--fg);
+        font-weight: 700;
+      }
+      .ov-week-block {
+        display: grid;
+        grid-template-columns: 58px minmax(0, 1fr);
+        gap: 8px;
+        margin: 9px 0;
+        padding-left: 2px;
+      }
+      .ov-week-label {
+        color: var(--fg-soft);
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1.35;
+        padding-top: 2px;
+      }
+      .ov-week-label-title {
+        display: block;
+        color: var(--fg-muted);
+      }
+      .ov-week-date {
+        display: block;
+        margin-top: 2px;
+        font-size: 9px;
+        font-weight: 500;
+        color: var(--fg-soft);
+      }
+      .ov-week-body {
+        border-left: 1px solid var(--line);
+        padding-left: 8px;
+        min-width: 0;
+      }
+      .ov-week-hdr {
+        font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.07em;
+        color: var(--fg-soft); margin: 12px 0 4px; font-weight: 600;
+      }
+
+      /* ── Calendar main ── */
+      .calendar-main {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: 8px; box-shadow: var(--shadow-soft); padding: 16px;
         min-width: 0;
       }
 
-      .weekday.sun {
-        color: #ff9b9b;
+      .cal-legend {
+        display: flex; gap: 14px; font-size: 11.5px;
+        color: var(--fg-muted); align-items: center; margin-bottom: 6px;
       }
+      .legend-dot {
+        display: inline-block; width: 8px; height: 8px;
+        border-radius: 50%; margin-right: 5px; vertical-align: middle;
+      }
+      .legend-dot.event { background: var(--event-color); }
+      .legend-dot.todo  { background: var(--todo-color); }
 
-      .weekday.sat {
-        color: #9bc4ff;
+      /* ── Schedule strip ── */
+      .schedule-strip {
+        display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; min-height: 4px;
       }
-
-      /* Scroll viewport: shows ~5 weeks, scroll inside */
-      .cal-viewport {
-        position: relative;
-        height: calc(var(--day-h) * 5 + 24px);
-        overflow-y: auto;
-        padding-right: 4px;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(141, 155, 255, 0.4) transparent;
-        overscroll-behavior: contain;
+      .schedule-pill {
+        position: relative; display: inline-flex; align-items: center; gap: 5px;
+        background: var(--surface-quiet); border: 1px solid var(--line);
+        border-radius: 6px; padding: 4px 8px 4px 6px;
+        font-size: 11px; color: var(--fg-muted);
+        user-select: none; cursor: default;
       }
-
-      .cal-viewport::-webkit-scrollbar {
-        width: 8px;
+      .schedule-pill:hover { border-color: var(--line-strong); color: var(--fg); }
+      .schedule-pill-dot {
+        width: 9px; height: 9px; border-radius: 50%;
+        flex-shrink: 0; cursor: pointer;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.85);
       }
-      .cal-viewport::-webkit-scrollbar-thumb {
-        background: rgba(141, 155, 255, 0.4);
+      .schedule-color-popup {
+        position: absolute;
+        z-index: 30;
+        top: calc(100% + 6px);
+        left: 0;
+        display: none;
+        grid-template-columns: repeat(5, 18px);
+        gap: 6px;
+        padding: 8px;
+        background: var(--surface);
+        border: 1px solid var(--line);
         border-radius: 8px;
+        box-shadow: var(--shadow-soft);
       }
-      .cal-viewport::-webkit-scrollbar-track {
-        background: transparent;
+      .schedule-pill.open .schedule-color-popup { display: grid; }
+      .sch-color-opt {
+        width: 18px; height: 18px; border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px var(--line);
+        cursor: pointer;
       }
+      .sch-color-opt.active { box-shadow: 0 0 0 2px var(--surface-ink); }
 
-      .weeks {
+      .category-stack,
+      .important-list,
+      .mini-list {
         display: flex;
         flex-direction: column;
         gap: 6px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
       }
+      .category-stack span,
+      .mini-item,
+      .important-item {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--surface-quiet);
+        color: var(--fg-muted);
+        font-size: 11.5px;
+        line-height: 1.35;
+        padding: 7px 8px;
+      }
+      .mini-item-time,
+      .important-date {
+        display: block;
+        color: var(--accent);
+        font-size: 10.5px;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      /* ── Calendar grid ── */
+      .weekdays {
+        display: grid; grid-template-columns: repeat(7, minmax(0,1fr));
+        gap: 6px; margin-bottom: 6px; padding-right: 10px;
+      }
+      .weekday {
+        text-align: center; font-size: 10px; text-transform: uppercase;
+        letter-spacing: 0.08em; color: var(--fg-muted); padding: 2px 0;
+      }
+      .weekday.sun { color: var(--orange); }
+      .weekday.sat { color: var(--fg-muted); }
 
-      .week {
+      .cal-viewport {
+        position: relative;
+        height: calc(var(--day-h) * 4 + 18px);
+        overflow-y: auto; padding-right: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(31,122,140,0.28) transparent;
+        overscroll-behavior: contain;
+      }
+      .cal-viewport::-webkit-scrollbar { width: 8px; }
+      .cal-viewport::-webkit-scrollbar-thumb { background: rgba(31,122,140,0.28); border-radius: 8px; }
+      .cal-viewport::-webkit-scrollbar-track { background: transparent; }
+
+      .weeks { display: flex; flex-direction: column; gap: 6px; }
+      .week  {
+        position: relative;
         display: grid;
-        grid-template-columns: repeat(7, minmax(0, 1fr));
+        grid-template-columns: repeat(7, minmax(0,1fr));
         gap: 6px;
       }
 
       .day {
-        position: relative;
-        min-width: 0;
-        min-height: var(--day-h);
-        border: 1px solid rgba(220, 226, 255, 0.14);
-        border-radius: 12px;
-        background: rgba(12, 17, 35, 0.5);
-        padding: 6px 7px 8px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        transition: border-color 0.18s ease, background 0.18s ease,
-          transform 0.12s ease;
-        overflow: hidden;
+        position: relative; min-width: 0; min-height: var(--day-h);
+        border: 1px solid var(--line); border-radius: 6px;
+        background: #fff; padding: 6px 7px 8px; cursor: pointer;
+        display: flex; flex-direction: column; gap: 4px;
+        transition: border-color 0.18s, background 0.18s;
+        overflow: visible;
       }
-
-      .day:hover {
-        border-color: rgba(141, 155, 255, 0.5);
-        background: rgba(31, 40, 64, 0.6);
-        transform: translateY(-1px);
-      }
-
-      /* alternate-month tint so the months read as joined-but-distinct */
-      .day.alt {
-        background: rgba(20, 27, 50, 0.62);
-      }
-      .day.alt:hover {
-        background: rgba(36, 46, 74, 0.7);
-      }
+      .day:hover { border-color: rgba(31,122,140,0.38); background: #fbfcfd; }
+      .day.alt { background: var(--surface-quiet); }
+      .day.alt:hover { background: #fff; }
 
       .day-head {
-        display: flex;
-        align-items: baseline;
-        gap: 6px;
+        display: flex; align-items: center; gap: 6px; min-width: 0;
+        min-height: 17px;
       }
-
-      .day-num {
-        font-size: 12px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.85);
-        line-height: 1;
-      }
-
-      .day.sun .day-num {
-        color: #ff9b9b;
-      }
-
-      .day.sat .day-num {
-        color: #9bc4ff;
-      }
-
+      .day-num  { font-size: 12px; font-weight: 600; color: var(--fg); line-height: 1; }
+      .day.sun .day-num { color: var(--orange); }
+      .day.sat .day-num { color: var(--fg); }
       .day-month {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        color: var(--accent);
+        font-size: 10px; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.03em; color: var(--accent);
       }
-
       .day.today {
         border-color: var(--accent);
-        box-shadow: inset 0 0 0 1px rgba(141, 155, 255, 0.5);
+        box-shadow: inset 0 0 0 1px rgba(31,122,140,0.18);
       }
-
+      .day.selected {
+        border-color: var(--accent); background: rgba(31,122,140,0.06);
+        box-shadow: inset 0 0 0 1px rgba(31,122,140,0.24);
+      }
       .day.today .day-num {
-        background: var(--accent);
-        color: #0b1020;
-        border-radius: 6px;
-        padding: 2px 5px;
+        background: var(--accent); color: #fff;
+        border-radius: 4px; padding: 1px 5px;
       }
-
-      .chips {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-        margin-top: 1px;
-        min-width: 0;
-      }
-
-      .chip {
-        font-size: 10.5px;
-        line-height: 1.25;
-        padding: 2px 5px;
-        border-radius: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-      }
-
-      .chip.event {
-        background: rgba(141, 155, 255, 0.22);
-        color: #dfe3ff;
-      }
-
-      .chip.todo {
-        background: rgba(127, 224, 168, 0.18);
-        color: #d6ffe6;
-      }
-
-      .chip.todo.done {
-        text-decoration: line-through;
-        opacity: 0.55;
-      }
-
-      .chip-more {
-        font-size: 10px;
-        color: var(--fg-muted);
-        padding-left: 2px;
-      }
-
-      .sentinel {
-        height: 1px;
-      }
-
-      /* Modal */
-      .modal-backdrop {
-        position: fixed;
-        inset: 0;
-        z-index: 40;
-        background: rgba(3, 6, 16, 0.66);
-        backdrop-filter: blur(4px);
-        display: none;
-        align-items: flex-start;
-        justify-content: center;
-        padding: 80px 16px 40px;
-      }
-
-      .modal-backdrop.open {
-        display: flex;
-      }
-
-      .modal {
-        width: 100%;
-        max-width: 440px;
-        background: linear-gradient(
-          145deg,
-          rgba(27, 36, 58, 0.96),
-          rgba(11, 18, 36, 0.97)
-        );
-        border: 1px solid rgba(220, 226, 255, 0.32);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-soft);
-        padding: 20px 20px 18px;
-      }
-
-      .modal-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .modal-date {
-        font-size: 15px;
+      .today-badge {
+        margin-left: auto;
+        border: 1px solid rgba(31,122,140,0.24);
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 9px;
         font-weight: 700;
-      }
-
-      .modal-weekday {
-        font-size: 12px;
-        color: var(--fg-muted);
-      }
-
-      .modal-close {
-        background: none;
-        border: none;
-        color: var(--fg-muted);
-        font-size: 22px;
+        letter-spacing: 0.04em;
         line-height: 1;
-        cursor: pointer;
-        padding: 0 4px;
+        padding: 3px 5px;
       }
 
-      .modal-close:hover {
-        color: #fff;
+      .chips { display: flex; flex-direction: column; gap: 3px; margin-top: 1px; min-width: 0; }
+      .chip {
+        font-size: 10.5px; line-height: 1.25; padding: 2px 5px 2px 4px; border-radius: 4px;
+        border: 1px solid transparent;
+        border-left: 3px solid transparent;
+        overflow: hidden; max-width: 100%; white-space: nowrap;
+        display: flex; align-items: center; gap: 4px;
+        min-height: 19px;
       }
-
-      .item-list {
-        list-style: none;
-        margin: 0 0 14px;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        max-height: 260px;
-        overflow-y: auto;
+      .important-mark {
+        color: #dc2626;
+        font-weight: 800;
+        flex: 0 0 auto;
       }
-
-      .item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(220, 226, 255, 0.16);
-        border-radius: 10px;
-        padding: 8px 10px;
+      .chip.todo.done .chip-text { text-decoration: line-through; opacity: 0.55; }
+      .chip-text {
+        display: inline-flex; align-items: baseline; gap: 3px;
+        white-space: nowrap; min-width: 0;
       }
-
-      .item-type {
-        flex-shrink: 0;
-        width: 8px;
-        height: 8px;
+      .chip-text.h-scroll {
+        animation: chip-h-scroll linear infinite;
+        will-change: transform;
+      }
+      .chip.range {
+        border-left-width: 0;
+        border-radius: 0;
+        opacity: 0.82;
+        min-height: 19px;
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+      .chip.range.range-start {
+        border-left-width: 3px;
+        border-radius: 4px 0 0 4px;
+        padding-left: 4px;
+      }
+      .chip.range.range-end { border-radius: 0 4px 4px 0; }
+      .chip.range.range-start.range-end { border-radius: 4px; }
+      .chip.range .chip-text { font-weight: 600; }
+      .range-layer {
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        top: 29px;
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0,1fr));
+        grid-auto-rows: 19px;
+        column-gap: 22px;
+        row-gap: 3px;
+        pointer-events: none;
+        z-index: 4;
+      }
+      .range-band {
+        max-width: none;
+        margin: 0;
+        min-height: 19px;
+        height: 19px;
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.5) inset;
+      }
+      .range-placeholder {
+        min-height: 19px;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .todo-toggle {
+        flex: 0 0 auto;
+        width: 13px;
+        height: 13px;
         border-radius: 50%;
-      }
-
-      .item-type.event {
-        background: var(--event-color);
-      }
-
-      .item-check {
-        flex-shrink: 0;
-        width: 16px;
-        height: 16px;
-        accent-color: var(--todo-color);
+        border: 1.5px solid currentColor;
+        background: rgba(255,255,255,0.34);
+        color: inherit;
         cursor: pointer;
-      }
-
-      .item-text {
-        flex: 1;
-        font-size: 13px;
-        line-height: 1.4;
-        word-break: break-word;
-      }
-
-      .item.done .item-text {
-        text-decoration: line-through;
-        opacity: 0.55;
-      }
-
-      .item-del {
-        flex-shrink: 0;
-        background: none;
-        border: none;
-        color: var(--fg-muted);
-        cursor: pointer;
-        font-size: 16px;
-        line-height: 1;
-        padding: 2px 4px;
-        border-radius: 6px;
-      }
-
-      .item-del:hover {
-        color: #ff9b9b;
-        background: rgba(255, 155, 155, 0.12);
-      }
-
-      .empty-note {
-        font-size: 12.5px;
-        color: var(--fg-muted);
-        margin: 2px 0 14px;
-      }
-
-      .add-row {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-
-      .add-input {
-        flex: 1;
-        font-family: inherit;
-        font-size: 13px;
-        color: var(--fg);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid var(--border-subtle);
-        border-radius: 10px;
-        padding: 9px 11px;
-      }
-
-      .add-input::placeholder {
-        color: rgba(244, 246, 255, 0.5);
-      }
-
-      .add-input:focus {
-        outline: none;
-        border-color: rgba(141, 155, 255, 0.6);
-        background: rgba(255, 255, 255, 0.09);
-      }
-
-      .type-toggle {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 4px;
-      }
-
-      .type-opt {
-        flex: 1;
-        text-align: center;
-        font-size: 11.5px;
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
-        padding: 7px 0;
-        border-radius: 10px;
-        border: 1px solid var(--border-subtle);
-        background: rgba(255, 255, 255, 0.04);
-        color: var(--fg-muted);
-        cursor: pointer;
-      }
-
-      .type-opt.active.event {
-        border-color: rgba(141, 155, 255, 0.6);
-        background: rgba(141, 155, 255, 0.18);
-        color: #dfe3ff;
-      }
-
-      .type-opt.active.todo {
-        border-color: rgba(127, 224, 168, 0.55);
-        background: rgba(127, 224, 168, 0.16);
-        color: #d6ffe6;
-      }
-
-      .footer {
-        margin-top: auto;
-        padding: 20px;
-        border-top: 1px solid rgba(24, 30, 46, 0.9);
-        color: #7a7f98;
-        font-size: 12px;
-      }
-
-      .footer-inner {
-        max-width: var(--content-width);
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
+        display: inline-flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 12px;
+        justify-content: center;
+        padding: 0;
+        font-size: 9px;
+        line-height: 1;
+        opacity: 0.78;
+      }
+      .chip .todo-toggle { margin-left: auto; }
+      .todo-toggle:hover { opacity: 1; background: rgba(255,255,255,0.58); }
+      .todo-toggle.checked {
+        background: currentColor;
+        opacity: 1;
+      }
+      .todo-toggle.checked::before {
+        content: "✓";
+        color: #fff;
+        transform: translateY(-0.5px);
+      }
+      .ov-item .todo-toggle {
+        width: 14px;
+        height: 14px;
+        margin-top: 1px;
+        margin-left: auto;
+      }
+      .ov-item.todo.done .ov-item-text { text-decoration: line-through; opacity: 0.55; }
+      @keyframes chip-h-scroll {
+        0%,  20% { transform: translateX(0); }
+        80%, 100% { transform: translateX(var(--h-travel, 0)); }
       }
 
+      /* sliding chips when items overflow */
+      .chips-scroll {
+        overflow: hidden;
+        height: 37px; /* 2 chips × ~17px + 1 gap × 3px */
+        -webkit-mask-image: linear-gradient(to bottom, transparent, #000 5px, #000 calc(100% - 5px), transparent);
+        mask-image: linear-gradient(to bottom, transparent, #000 5px, #000 calc(100% - 5px), transparent);
+      }
+      .chips-track {
+        display: flex; flex-direction: column; gap: 3px;
+        animation: chips-slide linear infinite;
+        will-change: transform;
+      }
+      @keyframes chips-slide {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(var(--chips-travel, 0px)); }
+      }
+
+      /* animation stop */
+      body.anim-paused .chips-track,
+      body.anim-paused .chip-text.h-scroll { animation: none; }
+      body.anim-paused .chip-text { overflow: hidden; text-overflow: ellipsis; }
+      body.anim-paused .chips-scroll { height: auto; overflow: visible; mask-image: none; -webkit-mask-image: none; }
+
+      /* ── View panel — items ── */
+      .item-list {
+        list-style: none; margin: 0 0 6px; padding: 0;
+        display: flex; flex-direction: column; gap: 6px;
+        max-height: 220px; overflow-y: auto;
+        scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.1) transparent;
+      }
+      .item {
+        display: flex; align-items: flex-start; gap: 8px;
+        border: 1px solid var(--line); border-radius: 6px;
+        background: var(--surface-quiet); padding: 7px 9px; position: relative;
+      }
+      .item-dot {
+        flex-shrink: 0; width: 9px; height: 9px;
+        border-radius: 50%; margin-top: 4px;
+      }
+      .item-check {
+        flex-shrink: 0; width: 15px; height: 15px;
+        accent-color: var(--todo-color); cursor: pointer; margin-top: 2px;
+      }
+      .item-main { flex: 1; min-width: 0; }
+      .item-text { font-size: 12.5px; line-height: 1.4; word-break: break-word; }
+      .item-meta { color: var(--fg-muted); font-size: 10.5px; margin-top: 2px; }
+      .item.done .item-text { text-decoration: line-through; opacity: 0.55; }
+      .item-del {
+        flex-shrink: 0; background: none; border: none;
+        color: var(--fg-soft); cursor: pointer; font-size: 15px;
+        line-height: 1; padding: 1px 3px; border-radius: 4px;
+      }
+      .item-del:hover { color: #b64723; background: rgba(200,107,49,0.1); }
+      .empty-note { font-size: 12px; color: var(--fg-muted); margin: 2px 0 6px; }
+
+      /* ── Timeline ── */
+      .timeline {
+        position: relative; margin: 4px 0 2px;
+        font-size: 10px; color: var(--fg-muted);
+      }
+      .tl-hour-label {
+        position: absolute; left: 0; width: 32px;
+        text-align: right; line-height: 1; color: var(--fg-soft);
+      }
+      .tl-hour-line {
+        position: absolute; left: 36px; right: 0;
+        border-top: 1px solid var(--line);
+      }
+      .tl-item {
+        position: absolute; left: 40px; right: 2px;
+        border-radius: 4px; padding: 2px 6px;
+        font-size: 10.5px; line-height: 1.3; overflow: hidden;
+        border-left: 3px solid transparent;
+        white-space: nowrap; text-overflow: ellipsis;
+      }
+
+      /* ── Week/month note labels ── */
+      .period-label {
+        font-size: 10px; color: var(--fg-soft);
+        background: var(--surface-quiet); border: 1px solid var(--line);
+        border-radius: 4px; padding: 1px 5px; margin-left: 4px;
+      }
+
+      /* ── Summary count badge ── */
+      .summary-count {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 20px; height: 20px; border-radius: 5px;
+        background: var(--surface-ink); color: #fff;
+        font-size: 10px; font-weight: 700; padding: 0 5px;
+      }
+
+      /* ── Footer ── */
+      .footer {
+        margin-top: auto; padding: 20px;
+        border-top: 1px solid var(--line); color: var(--fg-muted); font-size: 12px;
+      }
+      .footer-inner {
+        max-width: var(--content-width); margin: 0 auto;
+        display: flex; flex-wrap: wrap; align-items: center;
+        justify-content: space-between; gap: 12px;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 1120px) {
+        .calendar-shell { grid-template-columns: 1fr; }
+        .add-panel, .view-panel { position: static; max-height: none; }
+      }
+      @media (max-width: 880px) {
+        .navbar-inner { height: auto; flex-direction: column; align-items: flex-start; gap: 6px; padding: 8px 12px 7px; }
+        .nav-links { width: 100%; overflow-x: auto; padding-bottom: 2px; white-space: nowrap; scrollbar-width: none; }
+        .nav-links::-webkit-scrollbar { display: none; }
+        .nav-link { flex: 0 0 auto; }
+      }
       @media (max-width: 560px) {
-        :root {
-          --day-h: 64px;
-        }
-        .page-inner {
-          padding-left: 12px;
-          padding-right: 12px;
-        }
-        .card {
-          max-width: 100%;
-          overflow: hidden;
-          padding: 18px 14px 16px;
-          border-radius: 14px;
-        }
-        .card-header {
-          align-items: flex-start;
-        }
-        .card-subtitle {
-          font-size: 11px;
-        }
-        .cal-toolbar {
-          gap: 8px;
-        }
-        .cal-month-label {
-          flex: 0 0 100%;
-          min-width: 0;
-          font-size: 15px;
-        }
-        .cal-spacer {
-          display: none;
-        }
-        .cal-legend {
-          flex: 0 0 100%;
-          order: 2;
-        }
-        .cal-btn {
-          font-size: 11px;
-          padding: 6px 10px;
-        }
-        .weekdays,
-        .week {
-          gap: 4px;
-          grid-template-columns: repeat(7, calc((100% - 24px) / 7));
-          max-width: 100%;
-        }
-        .weekdays {
-          padding-right: 6px;
-        }
-        .cal-viewport {
-          max-width: 100%;
-          overflow-x: hidden;
-          padding-right: 4px;
-        }
-        .weeks {
-          max-width: 100%;
-          min-width: 0;
-        }
-        .day-head {
-          gap: 3px;
-          min-width: 0;
-        }
-        .day {
-          border-radius: 10px;
-          padding: 6px 5px 7px;
-        }
-        .day-num {
-          font-size: 11px;
-        }
-        .day-month {
-          font-size: 9px;
-        }
-        .chip {
-          font-size: 9.5px;
-          padding: 1px 4px;
-        }
-        .nav-links {
-          gap: 10px;
-          font-size: 12px;
-        }
+        :root { --day-h: 76px; }
+        .page-inner { padding-left: 12px; padding-right: 12px; }
+        .add-row { flex-direction: column; }
+        .add-row .cal-btn { width: 100%; }
+        .time-row { grid-template-columns: 1fr; }
+        .weekdays, .week { gap: 4px; grid-template-columns: repeat(7, calc((100% - 24px)/7)); }
+        .weekdays { padding-right: 6px; }
+        .cal-viewport { overflow-x: hidden; }
+        .day { padding: 5px 4px 6px; border-radius: 5px; }
+        .day-num { font-size: 11px; }
+        .chip { font-size: 9.5px; padding: 1px 4px; }
+        .chips-scroll { height: 31px; } /* 2 × ~14px + 3px gap (mobile chip size) */
       }
     </style>
   </head>
@@ -775,620 +839,2145 @@
       </header>
 
       <main class="page-inner">
-        <section class="card intro-card" aria-labelledby="cal-heading">
+        <section class="card" aria-labelledby="cal-heading">
           <div class="card-header">
             <h1 id="cal-heading" class="card-title">Calendar</h1>
-            <span class="card-subtitle">Scroll the weeks</span>
+            <span class="card-subtitle">Asia/Seoul</span>
           </div>
 
-          <div class="cal-toolbar">
-            <span class="cal-month-label" id="month-label"></span>
-            <button class="cal-btn cal-btn-primary" id="btn-today">Today</button>
-            <button class="cal-btn" id="btn-share">Share</button>
-            <button class="cal-btn" id="btn-export">Backup</button>
-            <button class="cal-btn" id="btn-import">Import</button>
-            <input
-              type="file"
-              id="import-file"
-              accept="application/json"
-              style="display: none"
-            />
-            <span class="cal-spacer"></span>
-            <span class="cal-legend">
-              <span><span class="legend-dot event"></span>Event</span>
-              <span><span class="legend-dot todo"></span>To-do</span>
-            </span>
-          </div>
+          <div class="calendar-shell">
 
-          <div class="weekdays" id="weekdays"></div>
+            <!-- ── Left: Add panel ── -->
+            <aside class="add-panel" aria-label="Add schedule item">
+              <div class="panel-kicker">Adding to</div>
+              <div class="panel-date" id="add-panel-date">—</div>
+              <div class="panel-weekday" id="add-panel-weekday"></div>
 
-          <div class="cal-viewport" id="viewport">
-            <div class="sentinel" id="sentinel-top"></div>
-            <div class="weeks" id="weeks"></div>
-            <div class="sentinel" id="sentinel-bottom"></div>
+              <div class="add-tabs">
+                <button class="add-tab active" data-tab="schedule">Schedule</button>
+                <button class="add-tab"        data-tab="todo">To-do</button>
+                <button class="add-tab"        data-tab="note">Memo</button>
+              </div>
+
+              <!-- ── Tab: Schedule ── -->
+              <div class="add-tab-panel active" data-tab="schedule">
+                <label class="form-label" for="schedule-input">Schedule</label>
+                <input type="text" class="schedule-input" id="schedule-input"
+                  placeholder="Schedule group" list="schedule-list" autocomplete="off" />
+                <datalist id="schedule-list"></datalist>
+
+                <div class="color-picker-row" id="color-picker-row">
+                  <div class="form-label" style="margin-top:6px">Color</div>
+                  <div class="color-swatches" id="color-swatches"></div>
+                  <div class="color-lock-note" id="color-lock-note" style="display:none"></div>
+                </div>
+
+                <label class="all-day-row">
+                  <input type="checkbox" id="all-day-input" />
+                  <span>All-day</span>
+                </label>
+                <label class="all-day-row">
+                  <input type="checkbox" id="range-input" />
+                  <span>Date range</span>
+                </label>
+                <div class="time-row" id="range-row" hidden>
+                  <input type="date" class="time-input" id="range-end-input"
+                    aria-label="Range end date" />
+                </div>
+                <div class="time-row" id="time-row">
+                  <input type="time" class="time-input" id="start-input" aria-label="Start time" />
+                  <input type="time" class="time-input" id="end-input"   aria-label="End time" />
+                </div>
+                <label class="important-row">
+                  <input type="checkbox" id="important-input" />
+                  <span>Important</span>
+                </label>
+                <div class="add-row">
+                  <input type="text" class="add-input" id="add-input" placeholder="Title" />
+                  <button class="cal-btn cal-btn-primary" id="add-btn">Add</button>
+                </div>
+                <textarea class="note-input note-input-sm" id="schedule-note-input"
+                  placeholder="Add a note to this event…"></textarea>
+              </div>
+
+              <!-- ── Tab: To-do ── -->
+              <div class="add-tab-panel" data-tab="todo">
+                <label class="important-row" style="margin-top:2px">
+                  <input type="checkbox" id="todo-important" />
+                  <span>Important</span>
+                </label>
+                <label class="all-day-row">
+                  <input type="checkbox" id="todo-range-input" />
+                  <span>Date range</span>
+                </label>
+                <div class="time-row" id="todo-range-row" hidden>
+                  <input type="date" class="time-input" id="todo-range-end-input"
+                    aria-label="To-do range end date" />
+                </div>
+                <div class="add-row">
+                  <input type="text" class="add-input" id="todo-input" placeholder="Add to-do…" />
+                  <button class="cal-btn cal-btn-primary" id="todo-add-btn">Add</button>
+                </div>
+                <textarea class="note-input note-input-sm" id="todo-note-input"
+                  placeholder="Add a note to this to-do…"></textarea>
+              </div>
+
+              <!-- ── Tab: Memo ── -->
+              <div class="add-tab-panel" data-tab="note">
+                <div class="memo-list" id="memo-list"></div>
+                <hr class="memo-form-sep" />
+                <div class="memo-form-title">New standalone memo</div>
+                <input type="text" class="add-input" id="memo-title"
+                  placeholder="Title (optional)" />
+                <textarea class="note-input note-input-sm" id="memo-body"
+                  placeholder="Write a standalone memo for this day…"
+                  style="min-height:72px;margin-top:6px"></textarea>
+                <label class="all-day-row">
+                  <input type="checkbox" id="memo-range-input" />
+                  <span>Date range</span>
+                </label>
+                <div class="time-row" id="memo-range-row" hidden>
+                  <input type="date" class="time-input" id="memo-range-end-input"
+                    aria-label="Memo range end date" />
+                </div>
+                <div class="memo-add-row">
+                  <button class="cal-btn cal-btn-primary" id="memo-add-btn"
+                    style="width:100%">Add memo</button>
+                </div>
+              </div>
+            </aside>
+
+            <!-- ── Center: Calendar ── -->
+            <div class="calendar-main">
+              <div class="cal-toolbar">
+                <span class="cal-month-label" id="month-label"></span>
+                <button class="cal-btn cal-btn-primary" id="btn-today">Today</button>
+                <button class="cal-btn" id="btn-share">Share</button>
+                <button class="cal-btn" id="btn-export">Backup</button>
+                <button class="cal-btn" id="btn-import">Import</button>
+                <input type="file" id="import-file" accept="application/json" style="display:none" />
+                <span class="cal-spacer"></span>
+                <button class="cal-btn" id="btn-anim">Stop</button>
+              </div>
+
+              <div class="schedule-strip" id="schedule-strip"></div>
+
+              <div class="weekdays" id="weekdays"></div>
+              <div class="cal-viewport" id="viewport">
+                <div class="sentinel" id="sentinel-top"></div>
+                <div class="weeks" id="weeks"></div>
+                <div class="sentinel" id="sentinel-bottom"></div>
+              </div>
+            </div>
+
+            <!-- ── Right: Overview panel ── -->
+            <aside class="view-panel" aria-label="Schedule overview">
+              <div class="panel-kicker">Today</div>
+              <div class="panel-date" id="ov-today-date"></div>
+              <div id="ov-today-list" style="margin-top:10px"></div>
+
+              <div class="ov-section">
+                <div class="ov-section-hdr">
+                  <span class="ov-section-title">This week</span>
+                  <span class="ov-section-tag">Important</span>
+                </div>
+                <div id="ov-week"></div>
+              </div>
+
+              <div class="ov-section">
+                <div class="ov-section-hdr">
+                  <span class="ov-section-title">Upcoming</span>
+                  <span class="ov-section-tag" id="ov-upcoming-label"></span>
+                </div>
+                <div id="ov-upcoming"></div>
+              </div>
+            </aside>
+
           </div>
         </section>
       </main>
 
       <footer class="footer">
         <div class="footer-inner">
-          <span>
-            © <span id="year"></span> Minje Park. All rights reserved.
-          </span>
-          <span>Saved locally in this browser. Use Backup to back up.</span>
+          <span>© <span id="year"></span> Minje Park. All rights reserved.</span>
+          <span>Local calendar</span>
         </div>
       </footer>
     </div>
 
-    <!-- Day modal -->
-    <div class="modal-backdrop" id="modal-backdrop">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-date"
-      >
-        <div class="modal-header">
-          <div>
-            <div class="modal-date" id="modal-date"></div>
-            <div class="modal-weekday" id="modal-weekday"></div>
-          </div>
-          <button class="modal-close" id="modal-close" aria-label="Close">
-            &times;
-          </button>
-        </div>
-
-        <ul class="item-list" id="item-list"></ul>
-        <p class="empty-note" id="empty-note" style="display: none">
-          No items yet. Add an event or to-do below.
-        </p>
-
-        <div class="type-toggle">
-          <div class="type-opt event active" id="opt-event" data-type="event">
-            Event
-          </div>
-          <div class="type-opt todo" id="opt-todo" data-type="todo">To-do</div>
-        </div>
-        <div class="add-row">
-          <input
-            type="text"
-            class="add-input"
-            id="add-input"
-            placeholder="Add an item and press Enter"
-          />
-          <button class="cal-btn cal-btn-primary" id="add-btn">Add</button>
-        </div>
-      </div>
-    </div>
-
     <script>
-      (function () {
-        "use strict";
+    (function () {
+      "use strict";
 
-        document.getElementById("year").textContent =
-          new Date().getFullYear().toString();
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-        var STORAGE_KEY = "minje-calendar-v1";
-        // Week starts Monday, Sunday is last.
-        var WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-        var MONTHS = [
-          "January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
-        ];
-        var MONTHS_SHORT = [
-          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-        ];
-        var DAYNAMES = [
-          "Sunday", "Monday", "Tuesday", "Wednesday",
-          "Thursday", "Friday", "Saturday"
-        ];
-        var DAY_MS = 86400000;
+      // ── Storage keys ──
+      var STORAGE_KEY    = "minje-calendar-v1";
+      var NOTES_KEY      = "minje-calendar-notes-v1";
+      var SCHEDULES_KEY  = "minje-calendar-schedules-v1";
+      var WEEK_NOTES_KEY = "minje-calendar-week-notes-v1";
+      var MON_NOTES_KEY  = "minje-calendar-month-notes-v1";
+      var MEMOS_KEY      = "minje-calendar-memos-v1";
+      var ONSITE_SEED_KEY   = "minje-calendar-onsite-seed-2026-v3";
+      var MEETINGS_SEED_KEY = "minje-calendar-meetings-seed-2026-v1";
+      var CLEAR_SCHEDULES_KEY = "minje-calendar-clear-schedules-2026-06-24-v1";
+      var SNU_PERSONAL_SEED_KEY = "minje-calendar-snu-personal-2026-v2";
+      var SNU_GROUP_MEMO_SEED_KEY = "minje-calendar-snu-group-memo-2026-v1";
+      var SNU_INTERNSHIP_SEED_KEY = "minje-calendar-snu-internship-report-2026-v2";
+      var ISP_PERSONAL_SEED_KEY = "minje-calendar-isp-personal-2026-v1";
+      var ISP_DEADLINE_SEED_KEY = "minje-calendar-isp-deadlines-2026-v3";
+      var SKKU_LECTURE_SEED_KEY = "minje-calendar-skku-lecture-2026-v4";
+      var SNU_MEETING_SCHEDULE = "SNU";
+      var ISP_MEETING_SCHEDULE = "ISP";
+      var SKKU_OFFICIAL_SCHEDULE = "SKKU";
+      var SKKU_SCHEDULE = "성균논어";
 
-        // ---- Data ----
-        function loadData() {
-          try {
-            var raw = localStorage.getItem(STORAGE_KEY);
-            return raw ? JSON.parse(raw) : {};
-          } catch (e) {
-            return {};
+      var ONSITE_CLASS_ITEMS = [
+        { key: "2026-06-22", id: "onsite-class-2026-06-22" },
+        { key: "2026-06-24", id: "onsite-class-2026-06-24" },
+        { key: "2026-06-29", id: "onsite-class-2026-06-29" },
+        { key: "2026-07-01", id: "onsite-class-2026-07-01" },
+        { key: "2026-07-06", id: "onsite-class-2026-07-06" },
+        { key: "2026-07-08", id: "onsite-class-2026-07-08" },
+        { key: "2026-07-10", id: "onsite-class-2026-07-10" }
+      ];
+
+      var WEEKDAYS    = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+      var MONTHS      = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      var MONTHS_SHORT= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      var DAYNAMES    = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+      var DAY_MS = 86400000;
+
+      // ── Load / save ──
+      function load(key, fallback) {
+        try { var r = localStorage.getItem(key); return r ? JSON.parse(r) : fallback; }
+        catch(e) { return fallback; }
+      }
+      function save(key, val) {
+        try { localStorage.setItem(key, JSON.stringify(val)); }
+        catch(e) { alert("Could not save (storage may be full)."); }
+      }
+
+      var data      = load(STORAGE_KEY,    {});
+      var notes     = load(NOTES_KEY,      {});
+      var schedules = load(SCHEDULES_KEY,  {});
+      var weekNotes = load(WEEK_NOTES_KEY, {});
+      var monNotes  = load(MON_NOTES_KEY,  {});
+      var memos     = load(MEMOS_KEY,      {});
+
+      function saveData()      { save(STORAGE_KEY,    data); }
+      function saveNotes()     { save(NOTES_KEY,      notes); }
+      function saveSchedules() { save(SCHEDULES_KEY,  schedules); }
+      function saveWeekNotes() { save(WEEK_NOTES_KEY, weekNotes); }
+      function saveMonNotes()  { save(MON_NOTES_KEY,  monNotes); }
+      function saveMemos()     { save(MEMOS_KEY,      memos); }
+
+      function clearExistingSchedulesOnce() {
+        if (localStorage.getItem(CLEAR_SCHEDULES_KEY)) return;
+        data = {};
+        schedules = {};
+        saveData();
+        saveSchedules();
+        localStorage.setItem(CLEAR_SCHEDULES_KEY, "1");
+      }
+      clearExistingSchedulesOnce();
+
+      // ── Seed onsite classes ──
+      function seedOnsiteClasses() {
+        if (localStorage.getItem(ONSITE_SEED_KEY)) return;
+        var SCH = "성균 논어 현장 수업";
+        if (!schedules[SCH]) { schedules[SCH] = { colorKey: "teal" }; saveSchedules(); }
+        var changed = false;
+        ONSITE_CLASS_ITEMS.forEach(function(entry) {
+          if (!data[entry.key]) data[entry.key] = [];
+          var exists = data[entry.key].some(function(item) {
+            if (item.id === entry.id || item.text === SCH || item.text === "현장 수업") {
+              item.id = entry.id; item.text = SCH; item.type = "event";
+              item.allDay = false; item.start = "11:00"; item.end = "13:00";
+              item.scheduleName = SCH;
+              changed = true; return true;
+            }
+            return false;
+          });
+          if (!exists) {
+            data[entry.key].push({
+              id: entry.id, text: SCH, type: "event",
+              allDay: false, start: "11:00", end: "13:00",
+              important: false, scheduleName: SCH
+            });
+            changed = true;
           }
-        }
-        function saveData() {
-          try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-          } catch (e) {
-            alert("Could not save (storage may be full or blocked).");
+        });
+        localStorage.setItem(ONSITE_SEED_KEY, "1");
+        if (changed) saveData();
+      }
+      // Seed disabled: start from an empty schedule.
+
+      // ── Recurring meetings seed ──
+      function getDaysBetween(startKey, endKey, dow) {
+        // dow: 0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat
+        var result = [];
+        var p = startKey.split("-").map(Number);
+        var cur = new Date(p[0], p[1]-1, p[2]);
+        var p2 = endKey.split("-").map(Number);
+        var end = new Date(p2[0], p2[1]-1, p2[2]);
+        while (cur <= end) {
+          if (cur.getDay() === dow) {
+            result.push(cur.getFullYear() + "-" +
+              String(cur.getMonth()+1).padStart(2,"0") + "-" +
+              String(cur.getDate()).padStart(2,"0"));
           }
+          cur = new Date(cur.getTime() + 86400000);
         }
-        var data = loadData();
+        return result;
+      }
 
-        function pad(n) {
-          return String(n).padStart(2, "0");
-        }
-        function keyOf(date) {
-          return (
-            date.getFullYear() +
-            "-" +
-            pad(date.getMonth() + 1) +
-            "-" +
-            pad(date.getDate())
-          );
-        }
-        function itemsFor(key) {
-          return data[key] || [];
-        }
+      function seedSnuPersonalMeeting() {
+        if (localStorage.getItem(SNU_PERSONAL_SEED_KEY)) return;
+        if (!schedules[SNU_MEETING_SCHEDULE]) schedules[SNU_MEETING_SCHEDULE] = {};
+        schedules[SNU_MEETING_SCHEDULE].colorKey = "snu";
+        saveSchedules();
 
-        // Monday of the week containing `date`
-        function mondayOf(date) {
-          var d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-          var offset = (d.getDay() + 6) % 7; // 0 for Monday
-          d.setDate(d.getDate() - offset);
-          return d;
-        }
-
-        // ---- Setup header ----
-        var weekdaysEl = document.getElementById("weekdays");
-        WEEKDAYS.forEach(function (name, i) {
-          var el = document.createElement("div");
-          el.className =
-            "weekday" + (i === 6 ? " sun" : i === 5 ? " sat" : "");
-          el.textContent = name;
-          weekdaysEl.appendChild(el);
+        Object.keys(data).forEach(function(key) {
+          var next = itemsFor(key).filter(function(item) {
+            return !(
+              /^snu-personal-\d{4}-\d{2}-\d{2}$/.test(item.id || "") ||
+              /^snu-group-\d{4}-\d{2}-\d{2}$/.test(item.id || "") ||
+              /^pm-\d{4}-\d{2}-\d{2}$/.test(item.id || "") ||
+              /^gm-\d{4}-\d{2}-\d{2}$/.test(item.id || "")
+            );
+          });
+          if (next.length) data[key] = next;
+          else delete data[key];
         });
 
-        var weeksEl = document.getElementById("weeks");
-        var viewport = document.getElementById("viewport");
-        var monthLabel = document.getElementById("month-label");
-
-        var today = new Date();
-        var todayKey = keyOf(today);
-        var anchorMonday = mondayOf(today); // reference week (offset 0)
-
-        var loadedStart = 0; // smallest week offset rendered (inclusive)
-        var loadedEnd = -1; // largest week offset rendered (inclusive)
-
-        function mondayForOffset(offset) {
-          return new Date(anchorMonday.getTime() + offset * 7 * DAY_MS);
-        }
-
-        function buildWeek(offset) {
-          var monday = mondayForOffset(offset);
-          var row = document.createElement("div");
-          row.className = "week";
-          row.dataset.offset = offset;
-          // label for this row = month of its Thursday (ISO-ish)
-          var thursday = new Date(monday.getTime() + 3 * DAY_MS);
-          row.dataset.month = thursday.getMonth();
-          row.dataset.year = thursday.getFullYear();
-
-          for (var i = 0; i < 7; i++) {
-            var d = new Date(monday.getTime() + i * DAY_MS);
-            var key = keyOf(d);
-            var dow = d.getDay();
-            var cell = document.createElement("div");
-            cell.className =
-              "day" +
-              (dow === 0 ? " sun" : dow === 6 ? " sat" : "") +
-              (d.getMonth() % 2 === 1 ? " alt" : "") +
-              (key === todayKey ? " today" : "");
-            cell.dataset.key = key;
-            cell.dataset.time = d.getTime();
-
-            var head = document.createElement("div");
-            head.className = "day-head";
-            var num = document.createElement("span");
-            num.className = "day-num";
-            num.textContent = d.getDate();
-            head.appendChild(num);
-            if (d.getDate() === 1) {
-              var ml = document.createElement("span");
-              ml.className = "day-month";
-              ml.textContent = MONTHS_SHORT[d.getMonth()];
-              head.appendChild(ml);
-            }
-            cell.appendChild(head);
-            cell.appendChild(buildChips(key));
-            row.appendChild(cell);
+        getDaysBetween("2026-06-30", "2026-08-11", 2).forEach(function(key) {
+          if (!data[key]) data[key] = [];
+          if (!data[key].some(function(it){ return it.id === "snu-personal-" + key; })) {
+            data[key].push({
+              id: "snu-personal-" + key,
+              text: "Personal Meeting",
+              type: "event",
+              allDay: false,
+              start: "15:00",
+              end: "16:00",
+              important: false,
+              scheduleName: SNU_MEETING_SCHEDULE
+            });
           }
-          return row;
-        }
+        });
 
-        function buildChips(key) {
-          var wrap = document.createElement("div");
-          wrap.className = "chips";
-          var items = itemsFor(key);
-          var max = 2;
-          items.slice(0, max).forEach(function (it) {
-            var chip = document.createElement("div");
-            chip.className = "chip " + it.type + (it.done ? " done" : "");
-            chip.textContent =
-              (it.type === "todo" ? (it.done ? "✓ " : "○ ") : "") + it.text;
-            wrap.appendChild(chip);
+        getDaysBetween("2026-06-26", "2026-08-14", 5).forEach(function(key) {
+          if (!data[key]) data[key] = [];
+          if (!data[key].some(function(it){ return it.id === "snu-group-" + key; })) {
+            data[key].push({
+              id: "snu-group-" + key,
+              text: "Group Meeting",
+              type: "event",
+              allDay: false,
+              start: "11:00",
+              end: "13:00",
+              important: false,
+              scheduleName: SNU_MEETING_SCHEDULE
+            });
+          }
+        });
+
+        localStorage.setItem(SNU_PERSONAL_SEED_KEY, "1");
+        saveData();
+      }
+      seedSnuPersonalMeeting();
+
+      function upsertMemo(key, id, title, body) {
+        if (!memos[key]) memos[key] = [];
+        var memo = memos[key].find(function(m){ return m.id === id; });
+        if (memo) {
+          memo.title = title;
+          memo.body = body;
+        } else {
+          memos[key].push({
+            id: id,
+            title: title,
+            body: body,
+            createdAt: new Date().toISOString()
           });
-          if (items.length > max) {
-            var more = document.createElement("div");
-            more.className = "chip-more";
-            more.textContent = "+" + (items.length - max) + " more";
-            wrap.appendChild(more);
+        }
+      }
+      function upsertItemMemo(key, itemId, title, body) {
+        var item = itemsFor(key).find(function(it){ return it.id === itemId; });
+        if (!item) return false;
+        item.memo = { title: title || "Item memo", body: body || "" };
+        delete item.note;
+        return true;
+      }
+      function removeStandaloneMemo(key, memoId) {
+        if (!Array.isArray(memos[key])) return false;
+        var next = memos[key].filter(function(m){ return m.id !== memoId; });
+        if (next.length === memos[key].length) return false;
+        if (next.length) memos[key] = next;
+        else delete memos[key];
+        return true;
+      }
+      var SNU_GROUP_MEETING_LOCATIONS = {
+        "2026-06-26": "56-1 3F meeting room 1",
+        "2026-07-03": "56-1 3F meeting room 1",
+        "2026-07-10": "56-1 3F meeting room 1",
+        "2026-07-17": "56-1 3F meeting room 1",
+        "2026-07-24": "56-1 3F meeting room 1"
+      };
+      function snuGroupMeetingLocation(key) {
+        return SNU_GROUP_MEETING_LOCATIONS[key] || "Bldg 56-1 (3rd floor) or Bldg 56 (Rm 322)";
+      }
+      function findSnuGroupMeetingItem(key) {
+        return itemsFor(key).find(function(item) {
+          return item.id === "snu-group-" + key ||
+            item.id === "gm-" + key ||
+            (item.scheduleName === SNU_MEETING_SCHEDULE &&
+              (item.text === "Group Meeting" || item.text === "SNU Group Meeting"));
+        });
+      }
+      function upsertSnuGroupMeetingMemo(key) {
+        var item = findSnuGroupMeetingItem(key);
+        if (!item) return false;
+        item.memo = {
+          title: "SNU Group Meeting",
+          body: "Location: " + snuGroupMeetingLocation(key)
+        };
+        delete item.note;
+        return true;
+      }
+
+      function seedSnuGroupMeetingMemos() {
+        if (localStorage.getItem(SNU_GROUP_MEMO_SEED_KEY)) return;
+        if (!schedules[SNU_MEETING_SCHEDULE]) schedules[SNU_MEETING_SCHEDULE] = {};
+        schedules[SNU_MEETING_SCHEDULE].colorKey = "snu";
+
+        getDaysBetween("2026-06-26", "2026-08-14", 5).forEach(function(key) {
+          upsertSnuGroupMeetingMemo(key);
+          removeStandaloneMemo(key, "snu-group-location-memo-" + key);
+        });
+
+        var specialKey = "2026-06-30";
+        if (!data[specialKey]) data[specialKey] = [];
+        var special = data[specialKey].find(function(item) {
+          return item.id === "snu-personal-" + specialKey ||
+            item.id === "snu-group-special-" + specialKey ||
+            (item.scheduleName === SNU_MEETING_SCHEDULE && item.text === "Personal Meeting");
+        });
+        if (special) {
+          special.text = "Group Meeting";
+          special.type = "event";
+          special.allDay = false;
+          special.start = special.start || "15:00";
+          special.end = special.end || "16:00";
+          special.important = true;
+          special.scheduleName = SNU_MEETING_SCHEDULE;
+        } else {
+          special = {
+            id: "snu-group-special-" + specialKey,
+            text: "Group Meeting",
+            type: "event",
+            allDay: false,
+            start: "15:00",
+            end: "16:00",
+            important: true,
+            scheduleName: SNU_MEETING_SCHEDULE
+          };
+          data[specialKey].push(special);
+        }
+        upsertItemMemo(
+          specialKey,
+          special.id || "snu-group-special-" + specialKey,
+          "SNU Group Meeting",
+          "Location: " + snuGroupMeetingLocation(specialKey) + "\nResearch topic selection"
+        );
+        removeStandaloneMemo(specialKey, "snu-group-location-memo-" + specialKey);
+        removeStandaloneMemo(specialKey, "snu-group-topic-memo-" + specialKey);
+
+        localStorage.setItem(SNU_GROUP_MEMO_SEED_KEY, "1");
+        saveData();
+        saveMemos();
+        saveSchedules();
+      }
+      seedSnuGroupMeetingMemos();
+
+      function seedSnuInternshipReport() {
+        if (localStorage.getItem(SNU_INTERNSHIP_SEED_KEY)) return;
+        var key = "2026-08-11";
+        if (!schedules[SNU_MEETING_SCHEDULE]) schedules[SNU_MEETING_SCHEDULE] = {};
+        schedules[SNU_MEETING_SCHEDULE].colorKey = "snu";
+        if (!data[key]) data[key] = [];
+        var internshipItem = data[key].find(function(it){
+          return it.id === "snu-internship-report-2026-08-11";
+        });
+        if (!internshipItem) {
+          internshipItem = {
+            id: "snu-internship-report-2026-08-11",
+            text: "인턴십결과보고 서류 제출",
+            type: "todo",
+            allDay: true,
+            important: true,
+            done: false,
+            scheduleName: SNU_MEETING_SCHEDULE
+          };
+          data[key].push(internshipItem);
+        }
+        var internshipMemoBody = "가. 출석부 및 결과보고서(붙임5): 지도교수 서명 필수, 보고서 최소 3장 이상 작성 요망\n\n(반드시 서명으로 받아와야 함/ 도장은 인정 불가하며, 불가피하게 도장날인 시 지도교수가 보고서 내용을 확인했다는 이메일 등 증빙 추가제출)\n\n나. 건강보험취득실확인서: 2026. 7. 20. 이후 발급분만 인정\n\n다. 통장사본: 장려금 지급받을 학생 본인명의의 계좌\n\n※ 서류누락 시 장려금 지급 불가, 타 과제 참여여부 변동 시 바로 보고";
+        internshipItem.memo = {
+          title: "인턴십결과보고 제출 서류",
+          body: internshipMemoBody
+        };
+        delete internshipItem.note;
+        removeStandaloneMemo(key, "snu-internship-report-memo-2026-08-11");
+        localStorage.setItem(SNU_INTERNSHIP_SEED_KEY, "1");
+        saveData();
+        saveMemos();
+        saveSchedules();
+      }
+      seedSnuInternshipReport();
+
+      function seedIspPersonalMeeting() {
+        if (localStorage.getItem(ISP_PERSONAL_SEED_KEY)) return;
+        if (!schedules[ISP_MEETING_SCHEDULE]) schedules[ISP_MEETING_SCHEDULE] = {};
+        schedules[ISP_MEETING_SCHEDULE].colorKey = "red";
+        saveSchedules();
+
+        getDaysBetween("2026-07-01", "2026-08-31", 3).forEach(function(key) {
+          if (!data[key]) data[key] = [];
+          if (!data[key].some(function(it){ return it.id === "isp-personal-" + key; })) {
+            data[key].push({
+              id: "isp-personal-" + key,
+              text: "Personal Meeting",
+              type: "event",
+              allDay: false,
+              start: "17:00",
+              end: "18:00",
+              important: false,
+              scheduleName: ISP_MEETING_SCHEDULE
+            });
           }
+        });
+
+        localStorage.setItem(ISP_PERSONAL_SEED_KEY, "1");
+        saveData();
+      }
+      seedIspPersonalMeeting();
+
+      function seedIspDeadlines() {
+        if (localStorage.getItem(ISP_DEADLINE_SEED_KEY)) return;
+        if (!schedules[ISP_MEETING_SCHEDULE]) schedules[ISP_MEETING_SCHEDULE] = {};
+        schedules[ISP_MEETING_SCHEDULE].colorKey = "red";
+        saveSchedules();
+
+        [
+          {
+            key: "2026-07-22",
+            id: "isp-abstract-deadline-2026-07-22",
+            text: "AAAI Abstract deadline",
+            memoId: "isp-abstract-deadline-memo-2026-07-22",
+            memo: "Official deadline: July 21, 2026 11:59 PM UTC-12\nKST: July 22, 2026 8:59 PM"
+          },
+          {
+            key: "2026-07-29",
+            id: "isp-full-paper-deadline-2026-07-29",
+            text: "AAAI Full paper deadline",
+            memoId: "isp-full-paper-deadline-memo-2026-07-29",
+            memo: "Official deadline: July 28, 2026 11:59 PM UTC-12\nKST: July 29, 2026 8:59 PM"
+          },
+          {
+            key: "2026-08-01",
+            id: "isp-supp-code-deadline-2026-08-01",
+            text: "AAAI Supplementary material & code deadline",
+            memoId: "isp-supp-code-deadline-memo-2026-08-01",
+            memo: "Official deadline: July 31, 2026 11:59 PM UTC-12\nKST: August 1, 2026 8:59 PM"
+          }
+        ].forEach(function(entry) {
+          if (!data[entry.key]) data[entry.key] = [];
+          var existing = data[entry.key].find(function(it){ return it.id === entry.id; });
+          if (existing) {
+            existing.text = entry.text;
+            existing.type = "todo";
+            existing.allDay = true;
+            existing.important = true;
+            existing.done = !!existing.done;
+            existing.scheduleName = ISP_MEETING_SCHEDULE;
+          } else {
+            existing = {
+              id: entry.id,
+              text: entry.text,
+              type: "todo",
+              allDay: true,
+              important: true,
+              done: false,
+              scheduleName: ISP_MEETING_SCHEDULE
+            };
+            data[entry.key].push(existing);
+          }
+          existing.memo = { title: entry.text, body: entry.memo };
+          delete existing.note;
+          removeStandaloneMemo(entry.key, entry.memoId);
+        });
+
+        localStorage.setItem(ISP_DEADLINE_SEED_KEY, "1");
+        saveData();
+        saveMemos();
+      }
+      seedIspDeadlines();
+
+      function seedSkkuLecture() {
+        if (localStorage.getItem(SKKU_LECTURE_SEED_KEY)) return;
+        if (schedules["SKKU"]) delete schedules["SKKU"];
+        if (schedules["성균 논어 현장 수업"]) delete schedules["성균 논어 현장 수업"];
+        if (!schedules[SKKU_SCHEDULE]) schedules[SKKU_SCHEDULE] = {};
+        schedules[SKKU_SCHEDULE].colorKey = "forest";
+        saveSchedules();
+
+        function upsertSkkuItem(key, id, attrs) {
+          if (!data[key]) data[key] = [];
+          var item = data[key].find(function(it){ return it.id === id; });
+          if (!item) {
+            data[key].push(Object.assign({ id: id }, attrs));
+            return;
+          }
+          Object.keys(attrs).forEach(function(name) {
+            item[name] = attrs[name];
+          });
+        }
+
+        Object.keys(data).forEach(function(key) {
+          if (key <= "2026-07-10") return;
+          var next = itemsFor(key).filter(function(item) {
+            return !(
+              (item.id && item.id.indexOf("skku-lecture-") === 0) ||
+              (item.scheduleName === SKKU_SCHEDULE && item.text === "현장 수업")
+            );
+          });
+          if (next.length) data[key] = next;
+          else delete data[key];
+        });
+
+        getDaysBetween("2026-06-22", "2026-07-08", 1)
+          .concat(getDaysBetween("2026-06-22", "2026-07-08", 3))
+          .sort()
+          .forEach(function(key) {
+            upsertSkkuItem(key, "skku-lecture-" + key, {
+              text: "현장 수업",
+              type: "event",
+              allDay: false,
+              start: "11:00",
+              end: "13:00",
+              important: false,
+              scheduleName: SKKU_SCHEDULE
+            });
+          });
+
+        upsertSkkuItem("2026-07-10", "skku-final-2026-07-10", {
+          text: "기말",
+          type: "event",
+          allDay: true,
+          important: true,
+          scheduleName: SKKU_SCHEDULE
+        });
+
+        upsertSkkuItem("2026-06-28", "skku-rp1-2026-06-28", {
+          text: "1차 RP 과제",
+          type: "todo",
+          allDay: false,
+          start: "23:59",
+          important: true,
+          done: false,
+          scheduleName: SKKU_SCHEDULE
+        });
+
+        upsertSkkuItem("2026-07-05", "skku-rp2-2026-07-05", {
+          text: "2차 RP 과제",
+          type: "todo",
+          allDay: false,
+          start: "23:59",
+          important: true,
+          done: false,
+          scheduleName: SKKU_SCHEDULE
+        });
+
+        localStorage.setItem(SKKU_LECTURE_SEED_KEY, "1");
+        saveData();
+      }
+      seedSkkuLecture();
+
+      function normalizeSkkuSchedule() {
+        var changed = false;
+        Object.keys(data).forEach(function(key) {
+          if (key > "2026-07-10") {
+            var next = itemsFor(key).filter(function(item) {
+              return !(
+                (item.id && item.id.indexOf("skku-lecture-") === 0) ||
+                (item.scheduleName === SKKU_SCHEDULE && item.text === "현장 수업")
+              );
+            });
+            if (next.length !== itemsFor(key).length) {
+              if (next.length) data[key] = next;
+              else delete data[key];
+              changed = true;
+            }
+          }
+          itemsFor(key).forEach(function(item) {
+            var before = JSON.stringify(item);
+            if (
+              item.scheduleName === "SKKU" ||
+              item.scheduleName === "성균 논어 현장 수업" ||
+              (item.id && item.id.indexOf("skku-") === 0)
+            ) {
+              item.scheduleName = SKKU_SCHEDULE;
+              if (item.text === "성균 논어 현장 수업") item.text = "현장 수업";
+              if (item.text === "성논 기말") item.text = "기말";
+              if (String(item.text || "").indexOf("1차 RP") === 0) item.text = "1차 RP 과제";
+              if (String(item.text || "").indexOf("2차 RP") === 0) item.text = "2차 RP 과제";
+              if (String(item.text || "").indexOf("RP") > -1) {
+                item.type = "todo";
+                item.allDay = false;
+                item.start = item.start || "23:59";
+                item.done = !!item.done;
+              }
+            }
+            if (JSON.stringify(item) !== before) changed = true;
+          });
+        });
+        if (schedules["SKKU"]) { delete schedules["SKKU"]; changed = true; }
+        if (schedules["성균 논어 현장 수업"]) { delete schedules["성균 논어 현장 수업"]; changed = true; }
+        if (!schedules[SKKU_SCHEDULE]) { schedules[SKKU_SCHEDULE] = { colorKey: "forest" }; changed = true; }
+        if (schedules[SKKU_SCHEDULE].colorKey !== "forest") {
+          schedules[SKKU_SCHEDULE].colorKey = "forest";
+          changed = true;
+        }
+        if (changed) { saveData(); saveSchedules(); }
+      }
+      normalizeSkkuSchedule();
+
+      function syncSkkuOfficialSchedule() {
+        var changedData = false;
+        var changedMemos = false;
+        if (!schedules[SKKU_OFFICIAL_SCHEDULE]) schedules[SKKU_OFFICIAL_SCHEDULE] = {};
+        schedules[SKKU_OFFICIAL_SCHEDULE].colorKey = "forest";
+        saveSchedules();
+
+        function upsertOfficial(key, id, text, rangeLabel, important) {
+          var rangeParts = rangeLabel ? rangeLabel.split(" to ") : [];
+          if (!data[key]) data[key] = [];
+          var item = data[key].find(function(it){ return it.id === id; });
+          var attrs = {
+            text: text,
+            type: "event",
+            allDay: false,
+            start: "09:00",
+            end: "10:00",
+            important: !!important,
+            scheduleName: SKKU_OFFICIAL_SCHEDULE
+          };
+          if (rangeParts.length === 2 && rangeParts[1] > key) {
+            attrs.rangeStart = key;
+            attrs.rangeEnd = rangeParts[1];
+          }
+          if (item) {
+            Object.keys(attrs).forEach(function(name) { item[name] = attrs[name]; });
+            if (!attrs.rangeStart) {
+              delete item.rangeStart;
+              delete item.rangeEnd;
+            }
+          } else {
+            data[key].push(Object.assign({ id: id }, attrs));
+          }
+          changedData = true;
+
+          if (rangeLabel) {
+            var officialItem = data[key].find(function(it){ return it.id === id; });
+            if (officialItem) {
+              officialItem.memo = { title: text, body: "Period: " + rangeLabel };
+              delete officialItem.note;
+            }
+            removeStandaloneMemo(key, id + "-memo");
+            changedMemos = true;
+          }
+        }
+
+        upsertOfficial("2026-06-29", "skku-official-grade-open-2026-spring", "1학기 성적 공시", "2026-06-29 to 2026-07-03", false);
+        upsertOfficial("2026-07-07", "skku-official-grade-final-2026-spring", "1학기 성적 확정", "", true);
+        upsertOfficial("2026-08-31", "skku-official-fall-start-2026", "2학기 개강", "", false);
+        upsertOfficial("2026-08-31", "skku-official-course-change-2026-fall", "수강신청 확인/변경", "2026-08-31 to 2026-09-05", false);
+        upsertOfficial("2026-09-16", "skku-official-course-withdrawal-2026-fall", "수강철회 신청", "2026-09-16 to 2026-09-18", false);
+        upsertOfficial("2026-10-19", "skku-official-midterm-2026-fall", "2학기 중간시험", "2026-10-19 to 2026-10-23", false);
+        upsertOfficial("2026-12-14", "skku-official-final-2026-fall", "2학기 기말시험", "2026-12-14 to 2026-12-18", false);
+        upsertOfficial("2026-12-14", "skku-official-grade-input-2026-fall", "2학기 성적 입력", "2026-12-14 to 2026-12-23", false);
+        upsertOfficial("2026-12-18", "skku-official-fall-end-2026", "2학기 종강", "", false);
+        upsertOfficial("2026-12-24", "skku-official-grade-open-2026-fall", "2학기 성적 공시", "2026-12-24 to 2026-12-30", true);
+        upsertOfficial("2026-12-30", "skku-official-three-cert-2026-winter", "3품인증 취득증빙 제출기한", "", true);
+        upsertOfficial("2027-01-05", "skku-official-grade-final-2026-fall", "2학기 성적 확정", "", true);
+
+        if (changedData) saveData();
+        if (changedMemos) saveMemos();
+      }
+      syncSkkuOfficialSchedule();
+
+      function normalizeItemMemos() {
+        var changedData = false;
+        var changedMemos = false;
+
+        Object.keys(data).forEach(function(key) {
+          itemsFor(key).forEach(function(item) {
+            if (item.note && !item.memo) {
+              item.memo = {
+                title: item.type === "todo" ? "To-do memo" : "Schedule memo",
+                body: item.note
+              };
+              delete item.note;
+              changedData = true;
+            }
+          });
+        });
+
+        getDaysBetween("2026-06-26", "2026-08-14", 5).forEach(function(key) {
+          if (upsertSnuGroupMeetingMemo(key)) {
+            changedData = true;
+          }
+          if (removeStandaloneMemo(key, "snu-group-location-memo-" + key)) changedMemos = true;
+        });
+        var specialKey = "2026-06-30";
+        var special = itemsFor(specialKey).find(function(item) {
+          return item.id === "snu-group-special-" + specialKey ||
+            item.id === "snu-personal-" + specialKey ||
+            (item.scheduleName === SNU_MEETING_SCHEDULE && item.text === "Group Meeting");
+        });
+        if (special) {
+          special.memo = {
+            title: "SNU Group Meeting",
+            body: "Location: " + snuGroupMeetingLocation(specialKey) + "\nResearch topic selection"
+          };
+          delete special.note;
+          changedData = true;
+        }
+        if (removeStandaloneMemo(specialKey, "snu-group-location-memo-" + specialKey)) changedMemos = true;
+        if (removeStandaloneMemo(specialKey, "snu-group-topic-memo-" + specialKey)) changedMemos = true;
+
+        if (upsertItemMemo("2026-08-11", "snu-internship-report-2026-08-11", "인턴십결과보고 제출 서류", "가. 출석부 및 결과보고서(붙임5): 지도교수 서명 필수, 보고서 최소 3장 이상 작성 요망\n\n(반드시 서명으로 받아와야 함/ 도장은 인정 불가하며, 불가피하게 도장날인 시 지도교수가 보고서 내용을 확인했다는 이메일 등 증빙 추가제출)\n\n나. 건강보험취득실확인서: 2026. 7. 20. 이후 발급분만 인정\n\n다. 통장사본: 장려금 지급받을 학생 본인명의의 계좌\n\n※ 서류누락 시 장려금 지급 불가, 타 과제 참여여부 변동 시 바로 보고")) changedData = true;
+        if (removeStandaloneMemo("2026-08-11", "snu-internship-report-memo-2026-08-11")) changedMemos = true;
+
+        [
+          ["2026-07-22", "isp-abstract-deadline-2026-07-22", "isp-abstract-deadline-memo-2026-07-22", "AAAI Abstract deadline", "Official deadline: July 21, 2026 11:59 PM UTC-12\nKST: July 22, 2026 8:59 PM"],
+          ["2026-07-29", "isp-full-paper-deadline-2026-07-29", "isp-full-paper-deadline-memo-2026-07-29", "AAAI Full paper deadline", "Official deadline: July 28, 2026 11:59 PM UTC-12\nKST: July 29, 2026 8:59 PM"],
+          ["2026-08-01", "isp-supp-code-deadline-2026-08-01", "isp-supp-code-deadline-memo-2026-08-01", "AAAI Supplementary material & code deadline", "Official deadline: July 31, 2026 11:59 PM UTC-12\nKST: August 1, 2026 8:59 PM"]
+        ].forEach(function(entry) {
+          if (upsertItemMemo(entry[0], entry[1], entry[3], entry[4])) changedData = true;
+          if (removeStandaloneMemo(entry[0], entry[2])) changedMemos = true;
+        });
+
+        [
+          ["2026-06-29", "skku-official-grade-open-2026-spring", "2026-06-29 to 2026-07-03"],
+          ["2026-08-31", "skku-official-course-change-2026-fall", "2026-08-31 to 2026-09-05"],
+          ["2026-09-16", "skku-official-course-withdrawal-2026-fall", "2026-09-16 to 2026-09-18"],
+          ["2026-10-19", "skku-official-midterm-2026-fall", "2026-10-19 to 2026-10-23"],
+          ["2026-12-14", "skku-official-final-2026-fall", "2026-12-14 to 2026-12-18"],
+          ["2026-12-14", "skku-official-grade-input-2026-fall", "2026-12-14 to 2026-12-23"],
+          ["2026-12-24", "skku-official-grade-open-2026-fall", "2026-12-24 to 2026-12-30"]
+        ].forEach(function(entry) {
+          var item = itemsFor(entry[0]).find(function(it){ return it.id === entry[1]; });
+          if (item) {
+            item.memo = { title: item.text, body: "Period: " + entry[2] };
+            delete item.note;
+            changedData = true;
+          }
+          if (removeStandaloneMemo(entry[0], entry[1] + "-memo")) changedMemos = true;
+        });
+
+        if (changedData) saveData();
+        if (changedMemos) saveMemos();
+      }
+      normalizeItemMemos();
+
+      function seedMeetings() {
+        if (localStorage.getItem(MEETINGS_SEED_KEY)) return;
+
+        // Schedules
+        if (!schedules[SNU_MEETING_SCHEDULE])      schedules[SNU_MEETING_SCHEDULE]      = { colorKey: "snu" };
+        schedules[SNU_MEETING_SCHEDULE].colorKey = "snu";
+        if (!schedules["ISP Lab Personal Meeting"])schedules["ISP Lab Personal Meeting"]= { colorKey: "green" };
+        delete schedules["SNU 미팅"];
+        delete schedules["Personal Meeting"];
+        delete schedules["Group Meeting"];
+        saveSchedules();
+
+        // SNU Personal Meeting: Tuesdays 11:00-12:00, Jun 30 → Aug 31
+        getDaysBetween("2026-06-30", "2026-08-31", 2).forEach(function(key) {
+          if (!data[key]) data[key] = [];
+          if (!data[key].some(function(it){ return it.id === "pm-" + key; }))
+            data[key].push({ id: "pm-"+key, text: "SNU Personal Meeting", type: "event",
+              allDay: false, start: "11:00", end: "12:00",
+              important: false, scheduleName: SNU_MEETING_SCHEDULE });
+        });
+
+        // SNU Group Meeting: Fridays 11:00-12:00, Jun 26 → Aug 31
+        getDaysBetween("2026-06-26", "2026-08-31", 5).forEach(function(key) {
+          if (!data[key]) data[key] = [];
+          if (!data[key].some(function(it){ return it.id === "gm-" + key; }))
+            data[key].push({ id: "gm-"+key, text: "SNU Group Meeting", type: "event",
+              allDay: false, start: "11:00", end: "12:00",
+              important: false, scheduleName: SNU_MEETING_SCHEDULE });
+        });
+
+        // ISP Lab Personal Meeting: Tuesdays all-day, Jun 30 → Jul 31
+        getDaysBetween("2026-06-30", "2026-07-31", 2).forEach(function(key) {
+          if (!data[key]) data[key] = [];
+          if (!data[key].some(function(it){ return it.id === "isp-" + key; }))
+            data[key].push({ id: "isp-"+key, text: "ISP Lab Personal Meeting", type: "event",
+              allDay: true, important: false, scheduleName: "ISP Lab Personal Meeting" });
+        });
+
+        localStorage.setItem(MEETINGS_SEED_KEY, "1");
+        saveData();
+      }
+      // Seed disabled: start from an empty schedule.
+
+      function migrateScheduleColors() {
+        var forced = {
+          "성균 논어 현장 수업":       "forest",
+          "ISP Lab Personal Meeting": "red"
+        };
+        var changed = false;
+        Object.keys(forced).forEach(function(name) {
+          if (!schedules[name]) { schedules[name] = {}; changed = true; }
+          if (schedules[name].colorKey !== forced[name]) {
+            schedules[name].colorKey = forced[name];
+            changed = true;
+          }
+        });
+        if (changed) saveSchedules();
+      }
+      // Seed color migration disabled while schedule is empty.
+
+      function normalizeSnuMeetings() {
+        var changedData = false;
+        var changedSchedules = false;
+        if (!schedules[SNU_MEETING_SCHEDULE]) {
+          schedules[SNU_MEETING_SCHEDULE] = { colorKey: "snu" };
+          changedSchedules = true;
+        }
+        if (schedules[SNU_MEETING_SCHEDULE].colorKey !== "snu") {
+          schedules[SNU_MEETING_SCHEDULE].colorKey = "snu";
+          changedSchedules = true;
+        }
+        ["SNU 미팅", "Personal Meeting", "Group Meeting"].forEach(function(name) {
+          if (schedules[name]) {
+            delete schedules[name];
+            changedSchedules = true;
+          }
+        });
+        Object.keys(data).forEach(function(key) {
+          itemsFor(key).forEach(function(item) {
+            var before = JSON.stringify(item);
+            if (
+              (item.id && item.id.indexOf("pm-") === 0) ||
+              (item.id && item.id.indexOf("gm-") === 0) ||
+              item.scheduleName === "SNU 미팅" ||
+              item.scheduleName === "Personal Meeting" ||
+              item.scheduleName === "Group Meeting" ||
+              item.text === "Personal Meeting" ||
+              item.text === "Group Meeting" ||
+              item.text === "SNU Personal Meeting" ||
+              item.text === "SNU Group Meeting"
+            ) {
+              if ((item.id && item.id.indexOf("pm-") === 0) || item.text === "Personal Meeting") {
+                item.text = "SNU Personal Meeting";
+                item.allDay = false;
+                item.start = "11:00";
+                item.end = "12:00";
+              }
+              if ((item.id && item.id.indexOf("gm-") === 0) || item.text === "Group Meeting") {
+                item.text = "SNU Group Meeting";
+                item.allDay = false;
+                item.start = "11:00";
+                item.end = "12:00";
+              }
+              if (item.scheduleName !== SNU_MEETING_SCHEDULE) {
+                item.scheduleName = SNU_MEETING_SCHEDULE;
+                changedData = true;
+              }
+              if (String(item.text || "").indexOf("SNU ") !== 0) {
+                item.text = "SNU " + item.text;
+              }
+              item.scheduleName = SNU_MEETING_SCHEDULE;
+            }
+            if (JSON.stringify(item) !== before) changedData = true;
+          });
+        });
+        if (changedData) saveData();
+        if (changedSchedules) saveSchedules();
+      }
+      // SNU normalization disabled while schedule is empty.
+
+      // ── Date utils ──
+      function pad(n) { return String(n).padStart(2, "0"); }
+      function keyOf(date) {
+        return date.getFullYear() + "-" + pad(date.getMonth()+1) + "-" + pad(date.getDate());
+      }
+      function dateFromKey(key) {
+        var p = key.split("-").map(Number);
+        return new Date(p[0], p[1]-1, p[2]);
+      }
+      function mondayOf(date) {
+        var d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+        return d;
+      }
+      function isoWeekKey(date) {
+        var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        var day = d.getUTCDay() || 7;
+        d.setUTCDate(d.getUTCDate() + 4 - day);
+        var yr = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        var wn = Math.ceil((((d - yr) / 86400000) + 1) / 7);
+        return d.getUTCFullYear() + "-W" + pad(wn);
+      }
+      function monthKey(date) { return date.getFullYear() + "-" + pad(date.getMonth()+1); }
+      function timeToMinutes(t) {
+        var p = t.split(":"); return parseInt(p[0])*60 + parseInt(p[1]);
+      }
+      function weekRangeLabel(date) {
+        var mon = mondayOf(date);
+        var sun = new Date(mon.getTime() + 6 * DAY_MS);
+        var wk  = isoWeekKey(date).split("-W")[1];
+        var label = "W" + wk + " · " + MONTHS_SHORT[mon.getMonth()] + " " + mon.getDate();
+        if (mon.getMonth() !== sun.getMonth())
+          label += "–" + MONTHS_SHORT[sun.getMonth()] + " " + sun.getDate();
+        else
+          label += "–" + sun.getDate();
+        return label;
+      }
+
+      var COLOR_OPTIONS = [
+        { key: "default", name: "Auto",    bg: "#eef2f5", fg: "#18202a", solid: "#667085" },
+        { key: "teal",    name: "Teal",    bg: "#e2f2f4", fg: "#145767", solid: "#1f7a8c" },
+        { key: "green",   name: "Green",   bg: "#e4f3ea", fg: "#1f6b43", solid: "#2f8f5b" },
+        { key: "forest",  name: "Forest",  bg: "#d1eddb", fg: "#0d4d24", solid: "#166534" },
+        { key: "blue",    name: "Blue",    bg: "#e8eefc", fg: "#244aa3", solid: "#3867d6" },
+        { key: "snu",     name: "SNU",     bg: "#dce8f6", fg: "#002d6b", solid: "#003876" },
+        { key: "navy",    name: "Navy",    bg: "#dde8f5", fg: "#002d6b", solid: "#003876" },
+        { key: "violet",  name: "Violet",  bg: "#eee8fb", fg: "#5b3aa3", solid: "#7c5cc7" },
+        { key: "orange",  name: "Orange",  bg: "#f8e7dc", fg: "#8a3f14", solid: "#c86b31" },
+        { key: "amber",   name: "Amber",   bg: "#fef3e2", fg: "#92400e", solid: "#d97706" },
+        { key: "red",     name: "Red",     bg: "#fee2e2", fg: "#991b1b", solid: "#dc2626" },
+        { key: "rose",    name: "Rose",    bg: "#fbe7ed", fg: "#9f2948", solid: "#d45073" },
+        { key: "slate",   name: "Slate",   bg: "#e9edf2", fg: "#344054", solid: "#667085" }
+      ];
+
+      function colorOption(key) {
+        return COLOR_OPTIONS.find(function(o){ return o.key === key; }) || COLOR_OPTIONS[0];
+      }
+      var MEMO_COLOR = { bg: "#fff7ed", fg: "#8a3f14", solid: "#d97706" };
+
+      var FORCED_COLORS = {
+        "성균 논어 현장 수업":       "forest",
+        "ISP Lab Personal Meeting": "red",
+        "SNU":                       "snu",
+        "ISP":                       "red",
+        "SKKU":                      "forest",
+        "성균논어":                  "forest"
+      };
+
+      function itemsFor(key) { return Array.isArray(data[key]) ? data[key] : []; }
+      function memosFor(key) { return Array.isArray(memos[key]) ? memos[key] : []; }
+      function memoToItem(memo, sourceKey) {
+        return {
+          id: "memo-" + (memo.id || sourceKey),
+          text: memo.title || "Memo",
+          type: "memo",
+          allDay: true,
+          important: false,
+          rangeStart: memo.rangeStart,
+          rangeEnd: memo.rangeEnd,
+          memo: { title: memo.title || "Memo", body: memo.body || "" },
+          sourceKey: sourceKey,
+          memoId: memo.id
+        };
+      }
+      function isRangeItem(item) {
+        return item.rangeStart && item.rangeEnd && item.rangeEnd > item.rangeStart;
+      }
+      function rangeContains(item, key) {
+        return isRangeItem(item) && item.rangeStart <= key && key <= item.rangeEnd;
+      }
+      function displayItemsFor(key) {
+        var direct = itemsFor(key).slice();
+        memosFor(key).forEach(function(memo) {
+          direct.push(memoToItem(memo, key));
+        });
+        Object.keys(data).forEach(function(sourceKey) {
+          if (sourceKey === key) return;
+          itemsFor(sourceKey).forEach(function(item) {
+            if (rangeContains(item, key)) direct.push(item);
+          });
+        });
+        Object.keys(memos).forEach(function(sourceKey) {
+          if (sourceKey === key) return;
+          memosFor(sourceKey).forEach(function(memo) {
+            var item = memoToItem(memo, sourceKey);
+            if (rangeContains(item, key)) direct.push(item);
+          });
+        });
+        return direct;
+      }
+      function rangeItemsForWeek(monday) {
+        var weekStart = keyOf(monday);
+        var weekEnd = keyOf(new Date(monday.getTime() + 6 * DAY_MS));
+        var ranges = [];
+        Object.keys(data).forEach(function(sourceKey) {
+          itemsFor(sourceKey).forEach(function(item) {
+            if (!isRangeItem(item)) return;
+            if (item.rangeEnd < weekStart || item.rangeStart > weekEnd) return;
+            ranges.push({
+              item: item,
+              start: item.rangeStart,
+              end: item.rangeEnd,
+              weekLabelKey: item.rangeStart < weekStart ? weekStart : item.rangeStart
+            });
+          });
+        });
+        Object.keys(memos).forEach(function(sourceKey) {
+          memosFor(sourceKey).forEach(function(memo) {
+            var item = memoToItem(memo, sourceKey);
+            if (!isRangeItem(item)) return;
+            if (item.rangeEnd < weekStart || item.rangeStart > weekEnd) return;
+            ranges.push({
+              item: item,
+              start: item.rangeStart,
+              end: item.rangeEnd,
+              weekLabelKey: item.rangeStart < weekStart ? weekStart : item.rangeStart
+            });
+          });
+        });
+        ranges.sort(function(a, b) {
+          return a.start.localeCompare(b.start) ||
+            a.end.localeCompare(b.end) ||
+            itemDisplayText(a.item).localeCompare(itemDisplayText(b.item));
+        });
+        return ranges;
+      }
+      function itemSortValue(item) {
+        return (item.allDay === false && item.start) ? item.start : "00:00";
+      }
+      function itemColor(item) {
+        if (item.type === "memo") return MEMO_COLOR;
+        var sch = item.scheduleName;
+        if (sch) {
+          if (schedules[sch] && schedules[sch].colorKey)
+            return colorOption(schedules[sch].colorKey);
+          if (FORCED_COLORS[sch]) return colorOption(FORCED_COLORS[sch]);
+        }
+        if (item.colorKey) return colorOption(item.colorKey);
+        return item.type === "todo"
+          ? { bg: "#e4f3ea", fg: "#1f6b43", solid: "#2f8f5b" }
+          : { bg: "#e9edf2", fg: "#344054", solid: "#667085" };
+      }
+
+      function changeScheduleColor(name, colorKey) {
+        if (!schedules[name]) schedules[name] = {};
+        schedules[name].colorKey = colorKey;
+        saveSchedules();
+        Object.keys(data).forEach(function(k) {
+          if (itemsFor(k).some(function(it){ return it.scheduleName === name; }))
+            refreshDayCell(k);
+        });
+        refreshVisibleDays();
+        renderOverview(); renderScheduleStrip();
+      }
+
+      function hexAlpha(hex, a) {
+        var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+        return "rgba("+r+","+g+","+b+","+a+")";
+      }
+      function applyItemColors(el, item) {
+        var c = itemColor(item);
+        el.style.background      = c.bg;
+        el.style.color           = c.fg;
+        el.style.borderColor     = item.important ? "#dc2626" : hexAlpha(c.solid, 0.2);
+        el.style.borderLeftColor = item.important ? "#dc2626" : c.solid;
+      }
+      function itemTimeLabel(item) {
+        if (item.type === "todo" || item.type === "memo") return "";
+        if (item.allDay === false && item.start)
+          return item.end ? item.start + "–" + item.end : item.start;
+        return "All-day";
+      }
+      function itemDisplayText(item) {
+        if (item.type === "memo") return "Memo : " + item.text;
+        return item.scheduleName ? item.scheduleName + " : " + item.text : item.text;
+      }
+      function itemChipText(item) {
+        var p = (item.type !== "todo" && item.allDay === false && item.start) ? item.start + " " : "";
+        return p + itemDisplayText(item);
+      }
+      function makeTodoToggle(item, key) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "todo-toggle" + (item.done ? " checked" : "");
+        btn.setAttribute("aria-label", item.done ? "Mark to-do as open" : "Mark to-do as done");
+        btn.setAttribute("aria-pressed", item.done ? "true" : "false");
+        btn.title = item.done ? "Mark as open" : "Mark as done";
+        btn.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleTodoDone(key, item.id);
+        });
+        return btn;
+      }
+      function toggleTodoDone(key, id) {
+        var item = itemsFor(key).find(function(it){ return it.id === id; });
+        if (!item) {
+          Object.keys(data).some(function(sourceKey) {
+            item = itemsFor(sourceKey).find(function(it){ return it.id === id; });
+            return !!item;
+          });
+        }
+        if (!item || item.type !== "todo") return;
+        item.done = !item.done;
+        saveData();
+        refreshVisibleDays();
+        renderOverview();
+      }
+
+      // ── Calendar setup ──
+      var weekdaysEl = document.getElementById("weekdays");
+      WEEKDAYS.forEach(function(name, i) {
+        var el = document.createElement("div");
+        el.className = "weekday" + (i===6?" sun":i===5?" sat":"");
+        el.textContent = name;
+        weekdaysEl.appendChild(el);
+      });
+
+      var weeksEl    = document.getElementById("weeks");
+      var viewport   = document.getElementById("viewport");
+      var monthLabel = document.getElementById("month-label");
+
+      var today      = new Date();
+      var todayKey   = keyOf(today);
+      var selectedKey = todayKey;
+      var anchorMonday = mondayOf(today);
+      var loadedStart = 0, loadedEnd = -1;
+
+      function mondayForOffset(offset) {
+        return new Date(anchorMonday.getTime() + offset * 7 * DAY_MS);
+      }
+
+      function buildWeek(offset) {
+        var monday = mondayForOffset(offset);
+        var rangeSlots = rangeItemsForWeek(monday);
+        var row = document.createElement("div");
+        row.className = "week";
+        row.dataset.offset = offset;
+        var thu = new Date(monday.getTime() + 3 * DAY_MS);
+        row.dataset.month = thu.getMonth();
+        row.dataset.year  = thu.getFullYear();
+        for (var i = 0; i < 7; i++) {
+          var d   = new Date(monday.getTime() + i * DAY_MS);
+          var key = keyOf(d);
+          var dow = d.getDay();
+          var cell = document.createElement("div");
+          cell.className =
+            "day" +
+            (dow===0?" sun":dow===6?" sat":"") +
+            (d.getMonth()%2===1?" alt":"") +
+            (key===todayKey?" today":"") +
+            (key===selectedKey?" selected":"");
+          cell.dataset.key  = key;
+          cell.dataset.time = d.getTime();
+          var head = document.createElement("div");
+          head.className = "day-head";
+          var num = document.createElement("span");
+          num.className = "day-num";
+          num.textContent = d.getDate();
+          head.appendChild(num);
+          if (d.getDate()===1) {
+            var ml = document.createElement("span");
+            ml.className = "day-month";
+            ml.textContent = MONTHS_SHORT[d.getMonth()];
+            head.appendChild(ml);
+          }
+          if (key===todayKey) {
+            var badge = document.createElement("span");
+            badge.className = "today-badge";
+            badge.textContent = "TODAY";
+            head.appendChild(badge);
+          }
+          cell.appendChild(head);
+          cell.appendChild(buildChips(key, rangeSlots));
+          row.appendChild(cell);
+        }
+        row.appendChild(buildRangeLayer(monday, rangeSlots));
+        return row;
+      }
+
+      var CHIP_SLOT_H = 20; // chip ~17px + 3px gap
+
+      function makeChip(it, key, opts) {
+        opts = opts || {};
+        var chip = document.createElement("div");
+        chip.className = "chip " + it.type + (it.done ? " done" : "") +
+          (opts.range ? " range" : "") +
+          (opts.rangeStart ? " range-start" : "") +
+          (opts.rangeEnd ? " range-end" : "");
+        applyItemColors(chip, it);
+        var span = document.createElement("span");
+        span.className = "chip-text";
+        if (it.important) {
+          var mark = document.createElement("span");
+          mark.className = "important-mark";
+          mark.textContent = "!";
+          span.appendChild(mark);
+        }
+        span.appendChild(document.createTextNode(opts.range && !opts.showLabel ? "" : itemChipText(it)));
+        chip.appendChild(span);
+        if (it.type === "todo") {
+          chip.appendChild(makeTodoToggle(it, key));
+        }
+        return chip;
+      }
+
+      function checkChipMarquees(container) {
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            container.querySelectorAll(".chip").forEach(function(chip) {
+              var t = chip.querySelector(".chip-text");
+              if (!t) return;
+              // reset
+              t.classList.remove("h-scroll");
+              t.style.removeProperty("--h-travel");
+              t.style.animationDuration = "";
+              // check overflow
+              if (t.scrollWidth > chip.clientWidth + 1) {
+                var dist     = t.scrollWidth - chip.clientWidth + 6;
+                var travel   = -dist;
+                // 60% of duration is scroll, 20% pause each end
+                var duration = Math.max(3.5, dist / 0.6 / 30); // 30px/s scroll speed
+                t.style.setProperty("--h-travel", travel + "px");
+                t.style.animationDuration = duration + "s";
+                t.classList.add("h-scroll");
+              }
+            });
+          });
+        });
+      }
+
+      function makeRangePlaceholder() {
+        var ph = document.createElement("div");
+        ph.className = "range-placeholder";
+        return ph;
+      }
+
+      function dayOffset(from, to) {
+        return Math.round((dateFromKey(to).getTime() - from.getTime()) / DAY_MS);
+      }
+
+      function buildRangeLayer(monday, rangeSlots) {
+        var layer = document.createElement("div");
+        layer.className = "range-layer";
+        var weekStart = keyOf(monday);
+        var weekEnd = keyOf(new Date(monday.getTime() + 6 * DAY_MS));
+        (rangeSlots || []).forEach(function(slot, index) {
+          var startIdx = Math.max(0, dayOffset(monday, slot.start));
+          var endIdx = Math.min(6, dayOffset(monday, slot.end));
+          if (endIdx < 0 || startIdx > 6) return;
+          var band = makeChip(slot.item, slot.weekLabelKey, {
+            range: true,
+            rangeStart: slot.start >= weekStart,
+            rangeEnd: slot.end <= weekEnd,
+            showLabel: true
+          });
+          band.classList.add("range-band");
+          band.style.gridColumn = (startIdx + 1) + " / " + (endIdx + 2);
+          band.style.gridRow = (index + 1) + " / " + (index + 2);
+          layer.appendChild(band);
+        });
+        return layer;
+      }
+
+      function buildChips(key, rangeSlots) {
+        var wrap = document.createElement("div");
+        wrap.className = "chips";
+        var items = itemsFor(key).filter(function(it){ return !isRangeItem(it); });
+        memosFor(key).forEach(function(memo) {
+          var item = memoToItem(memo, key);
+          if (!isRangeItem(item)) items.push(item);
+        });
+        (rangeSlots || []).forEach(function(slot) {
+          wrap.appendChild(makeRangePlaceholder());
+        });
+
+        if (items.length <= 2) {
+          items.forEach(function(it) { wrap.appendChild(makeChip(it, key)); });
           return wrap;
         }
 
-        function refreshDayCell(key) {
-          var cell = weeksEl.querySelector('.day[data-key="' + key + '"]');
-          if (!cell) return;
-          var oldChips = cell.querySelector(".chips");
-          if (oldChips) oldChips.remove();
-          cell.appendChild(buildChips(key));
-        }
+        // Sliding scroll: show all items looping infinitely
+        wrap.classList.add("chips-scroll");
+        var track = document.createElement("div");
+        track.className = "chips-track";
 
-        function appendWeek() {
-          loadedEnd += 1;
-          weeksEl.appendChild(buildWeek(loadedEnd));
-        }
-        function prependWeek() {
-          loadedStart -= 1;
-          var row = buildWeek(loadedStart);
-          var prevH = weeksEl.offsetHeight;
-          var prevScroll = viewport.scrollTop;
-          weeksEl.insertBefore(row, weeksEl.firstChild);
-          var newH = weeksEl.offsetHeight;
-          viewport.scrollTop = prevScroll + (newH - prevH);
-        }
-
-        // initial render: enough weeks to fill + buffers
-        (function initRender() {
-          loadedStart = 0;
-          loadedEnd = -1;
-          for (var i = 0; i < 5; i++) appendWeek(); // offsets 0..4 (this week down)
-          for (var j = 0; j < 4; j++) prependWeek(); // 4 weeks above
-          // place "today" week near the top of the viewport
-          var todayRow = weeksEl.querySelector(
-            '.day.today'
-          );
-          if (todayRow) {
-            var row = todayRow.closest(".week");
-            viewport.scrollTop = row.offsetTop - 2;
-          }
-          updateMonthLabel();
-        })();
-
-        // ---- Month label follows scroll ----
-        function updateMonthLabel() {
-          var rows = weeksEl.children;
-          var top = viewport.scrollTop;
-          var chosen = rows[0];
-          for (var i = 0; i < rows.length; i++) {
-            var r = rows[i];
-            if (r.offsetTop + r.offsetHeight - 4 > top) {
-              chosen = r;
-              break;
-            }
-          }
-          if (!chosen) return;
-          var m = +chosen.dataset.month;
-          var y = +chosen.dataset.year;
-          monthLabel.innerHTML =
-            MONTHS[m] + ' <span class="year-dim">' + y + "</span>";
-        }
-
-        // ---- Lazy-load weeks as the viewport scrolls ----
-        var THRESHOLD = 200;
-        function fillForScroll() {
-          var guard = 0;
-          // grow downward
-          while (
-            viewport.scrollTop + viewport.clientHeight >
-              weeksEl.offsetHeight - THRESHOLD &&
-            guard++ < 12
-          ) {
-            appendWeek();
-          }
-          // grow upward (prependWeek preserves scroll position)
-          guard = 0;
-          while (viewport.scrollTop < THRESHOLD && guard++ < 12) {
-            prependWeek();
-          }
-        }
-
-        viewport.addEventListener("scroll", function () {
-          fillForScroll();
-          updateMonthLabel();
+        // All items + 2 duplicates at the end for seamless loop
+        items.concat(items.slice(0, 2)).forEach(function(it) {
+          track.appendChild(makeChip(it, key));
         });
 
-        // ---- Modal ----
-        var backdrop = document.getElementById("modal-backdrop");
-        var modalDate = document.getElementById("modal-date");
-        var modalWeekday = document.getElementById("modal-weekday");
-        var itemList = document.getElementById("item-list");
-        var emptyNote = document.getElementById("empty-note");
-        var addInput = document.getElementById("add-input");
-        var optEvent = document.getElementById("opt-event");
-        var optTodo = document.getElementById("opt-todo");
-        var activeKey = null;
-        var activeType = "event";
+        // Travel exactly N slots so loop lands on duplicated start
+        var travel = -(items.length * CHIP_SLOT_H);
+        var duration = items.length * 2.8; // ~2.8s per item
+        track.style.setProperty("--chips-travel", travel + "px");
+        track.style.animationDuration = duration + "s";
+        wrap.appendChild(track);
+        return wrap;
+      }
 
-        function openModal(time, key) {
-          activeKey = key;
-          var dt = new Date(time);
-          modalDate.textContent =
-            MONTHS[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
-          modalWeekday.textContent = DAYNAMES[dt.getDay()];
-          renderItems();
-          backdrop.classList.add("open");
-          setTimeout(function () {
-            addInput.focus();
-          }, 30);
-        }
-        function closeModal() {
-          backdrop.classList.remove("open");
-          activeKey = null;
-        }
+      function refreshDayCell(key) {
+        var cell = weeksEl.querySelector('.day[data-key="' + key + '"]');
+        if (!cell) return;
+        var old = cell.querySelector(".chips");
+        if (old) old.remove();
+        var chips = buildChips(key, rangeItemsForWeek(mondayOf(dateFromKey(key))));
+        cell.appendChild(chips);
+        checkChipMarquees(chips);
+      }
 
-        function renderItems() {
-          var items = itemsFor(activeKey);
-          itemList.innerHTML = "";
-          emptyNote.style.display = items.length ? "none" : "block";
-          items.forEach(function (it) {
-            var li = document.createElement("li");
-            li.className = "item" + (it.done ? " done" : "");
-
-            if (it.type === "todo") {
-              var cb = document.createElement("input");
-              cb.type = "checkbox";
-              cb.className = "item-check";
-              cb.checked = !!it.done;
-              cb.addEventListener("change", function () {
-                it.done = cb.checked;
-                saveData();
-                li.classList.toggle("done", it.done);
-                refreshDayCell(activeKey);
-              });
-              li.appendChild(cb);
-            } else {
-              var dot = document.createElement("span");
-              dot.className = "item-type event";
-              li.appendChild(dot);
-            }
-
-            var txt = document.createElement("span");
-            txt.className = "item-text";
-            txt.textContent = it.text;
-            li.appendChild(txt);
-
-            var del = document.createElement("button");
-            del.className = "item-del";
-            del.innerHTML = "&times;";
-            del.setAttribute("aria-label", "Delete");
-            del.addEventListener("click", function () {
-              var arr = data[activeKey] || [];
-              var idx = arr.indexOf(it);
-              if (idx > -1) arr.splice(idx, 1);
-              if (arr.length === 0) delete data[activeKey];
-              saveData();
-              renderItems();
-              refreshDayCell(activeKey);
-            });
-            li.appendChild(del);
-
-            itemList.appendChild(li);
-          });
-        }
-
-        function addItem() {
-          var text = addInput.value.trim();
-          if (!text || !activeKey) return;
-          if (!data[activeKey]) data[activeKey] = [];
-          var item = {
-            id: Date.now() + "-" + Math.random().toString(36).slice(2, 7),
-            text: text,
-            type: activeType
-          };
-          if (activeType === "todo") item.done = false;
-          data[activeKey].push(item);
-          saveData();
-          addInput.value = "";
-          renderItems();
-          refreshDayCell(activeKey);
-          addInput.focus();
-        }
-
-        function setType(t) {
-          activeType = t;
-          optEvent.classList.toggle("active", t === "event");
-          optTodo.classList.toggle("active", t === "todo");
-        }
-
-        function nextDateKey(key) {
-          var parts = key.split("-").map(Number);
-          var d = new Date(parts[0], parts[1] - 1, parts[2] + 1);
-          return keyOf(d).replace(/-/g, "");
-        }
-
-        function icsDate(key) {
-          return key.replace(/-/g, "");
-        }
-
-        function icsStamp(date) {
-          return (
-            date.getUTCFullYear() +
-            pad(date.getUTCMonth() + 1) +
-            pad(date.getUTCDate()) +
-            "T" +
-            pad(date.getUTCHours()) +
-            pad(date.getUTCMinutes()) +
-            pad(date.getUTCSeconds()) +
-            "Z"
-          );
-        }
-
-        function escapeIcs(text) {
-          return String(text)
-            .replace(/\\/g, "\\\\")
-            .replace(/\r?\n/g, "\\n")
-            .replace(/;/g, "\\;")
-            .replace(/,/g, "\\,");
-        }
-
-        function foldIcsLine(line) {
-          var out = [];
-          var rest = line;
-          while (rest.length > 73) {
-            out.push(rest.slice(0, 73));
-            rest = " " + rest.slice(73);
-          }
-          out.push(rest);
-          return out.join("\r\n");
-        }
-
-        function buildIcs() {
-          var lines = [
-            "BEGIN:VCALENDAR",
-            "VERSION:2.0",
-            "PRODID:-//Minje Park//Personal Calendar//EN",
-            "CALSCALE:GREGORIAN",
-            "METHOD:PUBLISH",
-            "X-WR-CALNAME:Minje Park Calendar"
-          ];
-          var stamp = icsStamp(new Date());
-          Object.keys(data)
-            .sort()
-            .forEach(function (key) {
-              itemsFor(key).forEach(function (item) {
-                var isTodo = item.type === "todo";
-                var title = (isTodo ? "To-do: " : "") + item.text;
-                var desc =
-                  "Type: " +
-                  (isTodo ? "To-do" : "Event") +
-                  (isTodo ? "\\nStatus: " + (item.done ? "Done" : "Open") : "");
-                lines.push(
-                  "BEGIN:VEVENT",
-                  "UID:" +
-                    escapeIcs((item.id || key + "-" + item.text) + "@pmj0324.github.io"),
-                  "DTSTAMP:" + stamp,
-                  "DTSTART;VALUE=DATE:" + icsDate(key),
-                  "DTEND;VALUE=DATE:" + nextDateKey(key),
-                  "SUMMARY:" + escapeIcs(title),
-                  "DESCRIPTION:" + desc,
-                  "STATUS:CONFIRMED",
-                  "END:VEVENT"
-                );
-              });
-            });
-          lines.push("END:VCALENDAR");
-          return lines.map(foldIcsLine).join("\r\n") + "\r\n";
-        }
-
-        function downloadText(filename, text, type) {
-          var blob = new Blob([text], { type: type });
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement("a");
-          a.href = url;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          setTimeout(function () {
-            URL.revokeObjectURL(url);
-          }, 0);
-        }
-
-        // ---- Event wiring ----
-        weeksEl.addEventListener("click", function (e) {
-          var cell = e.target.closest(".day");
-          if (!cell) return;
-          openModal(+cell.dataset.time, cell.dataset.key);
+      function refreshVisibleDays() {
+        weeksEl.querySelectorAll(".day[data-key]").forEach(function(cell) {
+          refreshDayCell(cell.dataset.key);
         });
+      }
 
-        document
-          .getElementById("modal-close")
-          .addEventListener("click", closeModal);
-        backdrop.addEventListener("click", function (e) {
-          if (e.target === backdrop) closeModal();
-        });
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && backdrop.classList.contains("open"))
-            closeModal();
-        });
+      function appendWeek() {
+        loadedEnd += 1;
+        var row = buildWeek(loadedEnd);
+        weeksEl.appendChild(row);
+        checkChipMarquees(row);
+      }
+      function prependWeek() {
+        loadedStart -= 1;
+        var row = buildWeek(loadedStart);
+        var prevH = weeksEl.offsetHeight, prevS = viewport.scrollTop;
+        weeksEl.insertBefore(row, weeksEl.firstChild);
+        viewport.scrollTop = prevS + (weeksEl.offsetHeight - prevH);
+        checkChipMarquees(row);
+      }
 
-        document.getElementById("add-btn").addEventListener("click", addItem);
-        addInput.addEventListener("keydown", function (e) {
-          if (e.key === "Enter") addItem();
-        });
-        optEvent.addEventListener("click", function () {
-          setType("event");
-        });
-        optTodo.addEventListener("click", function () {
-          setType("todo");
-        });
-
-        // Today button
-        document
-          .getElementById("btn-today")
-          .addEventListener("click", function () {
-            var todayCell = weeksEl.querySelector(".day.today");
-            if (todayCell) {
-              var row = todayCell.closest(".week");
-              viewport.scrollTo({ top: row.offsetTop - 2, behavior: "smooth" });
-            }
-          });
-
-        // Share / Backup / Import
-        document
-          .getElementById("btn-share")
-          .addEventListener("click", function () {
-            downloadText(
-              "minje-calendar-" + todayKey + ".ics",
-              buildIcs(),
-              "text/calendar;charset=utf-8"
-            );
-          });
-
-        document
-          .getElementById("btn-export")
-          .addEventListener("click", function () {
-            downloadText(
-              "calendar-backup-" + todayKey + ".json",
-              JSON.stringify(data, null, 2),
-              "application/json"
-            );
-          });
-
-        var importFile = document.getElementById("import-file");
-        document
-          .getElementById("btn-import")
-          .addEventListener("click", function () {
-            importFile.click();
-          });
-        importFile.addEventListener("change", function () {
-          var file = importFile.files[0];
-          if (!file) return;
-          var reader = new FileReader();
-          reader.onload = function () {
-            try {
-              var incoming = JSON.parse(reader.result);
-              if (typeof incoming !== "object" || incoming === null)
-                throw new Error("bad");
-              if (
-                confirm("Replace current calendar data with the imported file?")
-              ) {
-                data = incoming;
-                saveData();
-                weeksEl
-                  .querySelectorAll(".day[data-key]")
-                  .forEach(function (cell) {
-                    refreshDayCell(cell.dataset.key);
-                  });
-              }
-            } catch (err) {
-              alert("Could not read that file as calendar JSON.");
-            }
-            importFile.value = "";
-          };
-          reader.readAsText(file);
-        });
+      (function initRender() {
+        loadedStart = 0; loadedEnd = -1;
+        for (var i = 0; i < 5; i++) appendWeek();
+        for (var j = 0; j < 4; j++) prependWeek();
+        var todayRow = weeksEl.querySelector(".day.today");
+        if (todayRow) viewport.scrollTop = todayRow.closest(".week").offsetTop - 2;
+        updateMonthLabel();
+        checkChipMarquees(weeksEl);
       })();
+
+      function updateMonthLabel() {
+        var rows = weeksEl.children, top = viewport.scrollTop, chosen = rows[0];
+        for (var i = 0; i < rows.length; i++) {
+          var r = rows[i];
+          if (r.offsetTop + r.offsetHeight - 4 > top) { chosen = r; break; }
+        }
+        if (!chosen) return;
+        monthLabel.innerHTML = MONTHS[+chosen.dataset.month] +
+          ' <span class="year-dim">' + chosen.dataset.year + "</span>";
+      }
+
+      var THRESHOLD = 200;
+      function fillForScroll() {
+        var g = 0;
+        while (viewport.scrollTop + viewport.clientHeight > weeksEl.offsetHeight - THRESHOLD && g++ < 12)
+          appendWeek();
+        g = 0;
+        while (viewport.scrollTop < THRESHOLD && g++ < 12)
+          prependWeek();
+      }
+      viewport.addEventListener("scroll", function() { fillForScroll(); updateMonthLabel(); });
+
+      // ── Day selection ──
+      var addPanelDate    = document.getElementById("add-panel-date");
+      var addPanelWeekday = document.getElementById("add-panel-weekday");
+      // Todo tab
+      var todoInput         = document.getElementById("todo-input");
+      var todoImportant     = document.getElementById("todo-important");
+      var todoNoteInput     = document.getElementById("todo-note-input");
+      var todoRangeInput    = document.getElementById("todo-range-input");
+      var todoRangeRow      = document.getElementById("todo-range-row");
+      var todoRangeEndInput = document.getElementById("todo-range-end-input");
+      // Schedule tab
+      var addInput          = document.getElementById("add-input");
+      var scheduleNoteInput = document.getElementById("schedule-note-input");
+      var scheduleInput     = document.getElementById("schedule-input");
+      var allDayInput   = document.getElementById("all-day-input");
+      var rangeInput    = document.getElementById("range-input");
+      var rangeRow      = document.getElementById("range-row");
+      var rangeEndInput = document.getElementById("range-end-input");
+      var timeRow       = document.getElementById("time-row");
+      var startInput    = document.getElementById("start-input");
+      var endInput      = document.getElementById("end-input");
+      var importantInput= document.getElementById("important-input");
+      // Note/Memo tab
+      var memoTitleInput = document.getElementById("memo-title");
+      var memoBodyInput  = document.getElementById("memo-body");
+      var memoRangeInput    = document.getElementById("memo-range-input");
+      var memoRangeRow      = document.getElementById("memo-range-row");
+      var memoRangeEndInput = document.getElementById("memo-range-end-input");
+      var memoListEl     = document.getElementById("memo-list");
+      var activeColorKey = "default";
+
+      function displayMemosFor(key) {
+        var list = memosFor(key).map(function(memo) {
+          return Object.assign({ sourceKey: key }, memo);
+        });
+        Object.keys(memos).forEach(function(sourceKey) {
+          if (sourceKey === key) return;
+          memosFor(sourceKey).forEach(function(memo) {
+            var item = memoToItem(memo, sourceKey);
+            if (rangeContains(item, key)) {
+              list.push(Object.assign({ sourceKey: sourceKey }, memo));
+            }
+          });
+        });
+        return list;
+      }
+
+      function renderMemoList(key) {
+        memoListEl.innerHTML = "";
+        var list = displayMemosFor(key);
+        if (!list.length) return;
+        list.forEach(function(m) {
+          var item = document.createElement("div");
+          item.className = "memo-item";
+          if (m.title) {
+            var t = document.createElement("div");
+            t.className = "memo-item-title";
+            t.textContent = m.title;
+            item.appendChild(t);
+          }
+          if (m.body) {
+            var b = document.createElement("div");
+            b.className = "memo-item-body";
+            b.textContent = m.body;
+            item.appendChild(b);
+          }
+          var del = document.createElement("button");
+          del.className = "memo-item-del"; del.textContent = "×";
+          del.title = "Delete memo";
+          del.addEventListener("click", (function(id, sourceKey){ return function() {
+            memos[sourceKey] = (memos[sourceKey]||[]).filter(function(x){ return x.id !== id; });
+            if (!memos[sourceKey].length) delete memos[sourceKey];
+            saveMemos(); renderMemoList(key);
+            refreshVisibleDays(); renderOverview();
+          }; })(m.id, m.sourceKey || key));
+          item.appendChild(del);
+          memoListEl.appendChild(item);
+        });
+      }
+
+      function addMemo() {
+        if (!selectedKey) return;
+        var title = memoTitleInput.value.trim();
+        var body  = memoBodyInput.value.trim();
+        if (!title && !body) return;
+        var isRange = memoRangeInput.checked;
+        var rangeEnd = memoRangeEndInput.value || selectedKey;
+        if (isRange && rangeEnd < selectedKey) {
+          alert("Range end date should be on or after the selected day."); return;
+        }
+        if (!memos[selectedKey]) memos[selectedKey] = [];
+        var memo = {
+          id: Date.now() + "-" + Math.random().toString(36).slice(2,7),
+          title: title, body: body
+        };
+        if (isRange && rangeEnd > selectedKey) {
+          memo.rangeStart = selectedKey;
+          memo.rangeEnd = rangeEnd;
+        }
+        memos[selectedKey].push(memo);
+        saveMemos();
+        memoTitleInput.value = ""; memoBodyInput.value = "";
+        memoRangeInput.checked = false; memoRangeRow.hidden = true; memoRangeEndInput.value = selectedKey;
+        renderMemoList(selectedKey);
+        refreshVisibleDays(); renderOverview();
+        memoTitleInput.focus();
+      }
+      document.getElementById("memo-add-btn").addEventListener("click", addMemo);
+      memoBodyInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) addMemo();
+      });
+
+      function renderColorPicker() {
+        var swatches  = document.getElementById("color-swatches");
+        var lockNote  = document.getElementById("color-lock-note");
+        swatches.innerHTML = "";
+        var schName   = scheduleInput.value.trim();
+        var lockedKey = (schName && schedules[schName]) ? (schedules[schName].colorKey || null) : null;
+
+        COLOR_OPTIONS.filter(function(c){ return c.key !== "default"; }).forEach(function(c) {
+          var sw = document.createElement("span");
+          var isCurrent = lockedKey ? c.key === lockedKey : c.key === activeColorKey;
+          sw.className = "color-swatch" + (isCurrent ? " active" : "") + (lockedKey ? " locked" : "");
+          sw.style.background = c.solid;
+          sw.title = c.name;
+          if (!lockedKey) {
+            sw.addEventListener("click", function() {
+              activeColorKey = c.key;
+              renderColorPicker();
+            });
+          }
+          swatches.appendChild(sw);
+        });
+
+        if (lockedKey) {
+          lockNote.textContent = "색상은 스케줄 " + schName + "의 색을 따릅니다";
+          lockNote.style.display = "block";
+        } else {
+          lockNote.style.display = "none";
+        }
+      }
+
+      function selectDay(key, time, opts) {
+        selectedKey = key;
+        var dt = time ? new Date(+time) : dateFromKey(key);
+        var dateStr = MONTHS[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+        var dayStr  = DAYNAMES[dt.getDay()];
+        addPanelDate.textContent    = dateStr;
+        addPanelWeekday.textContent = dayStr;
+        clearItemNotes();
+        renderMemoList(selectedKey);
+        renderOverview();
+        rangeEndInput.min = selectedKey;
+        if (!rangeEndInput.value || rangeEndInput.value < selectedKey) {
+          rangeEndInput.value = selectedKey;
+        }
+        todoRangeEndInput.min = selectedKey;
+        if (!todoRangeEndInput.value || todoRangeEndInput.value < selectedKey) {
+          todoRangeEndInput.value = selectedKey;
+        }
+        memoRangeEndInput.min = selectedKey;
+        if (!memoRangeEndInput.value || memoRangeEndInput.value < selectedKey) {
+          memoRangeEndInput.value = selectedKey;
+        }
+
+        weeksEl.querySelectorAll(".day.selected").forEach(function(c){ c.classList.remove("selected"); });
+        var sel = weeksEl.querySelector('.day[data-key="' + key + '"]');
+        if (sel) sel.classList.add("selected");
+        if (opts && opts.focusInput) addInput.focus();
+      }
+
+      function formatKeyDate(key) {
+        var d = dateFromKey(key);
+        return MONTHS_SHORT[d.getMonth()] + " " + d.getDate();
+      }
+
+      function makeMiniItem(item, key) {
+        var li = document.createElement("li");
+        li.className = "mini-item";
+        var timeLabel = itemTimeLabel(item);
+        if (key || timeLabel) {
+          var time = document.createElement("span");
+          time.className = "mini-item-time";
+          time.textContent = key && timeLabel ? formatKeyDate(key) + " · " + timeLabel : (key ? formatKeyDate(key) : timeLabel);
+          li.appendChild(time);
+        }
+        var text = document.createElement("span");
+        text.textContent = itemDisplayText(item);
+        li.appendChild(text);
+        return li;
+      }
+
+      function formatShortRange(start, end) {
+        var s = MONTHS_SHORT[start.getMonth()] + " " + start.getDate();
+        var e = MONTHS_SHORT[end.getMonth()] + " " + end.getDate();
+        if (start.getFullYear() !== end.getFullYear()) {
+          s += ", " + start.getFullYear();
+          e += ", " + end.getFullYear();
+        }
+        return s + " to " + e;
+      }
+
+      // ── Overview panel (right) ──
+      function makeOvItem(item, key) {
+        var c = itemColor(item);
+        var el = document.createElement("div");
+        el.className = "ov-item " + item.type + (item.done ? " done" : "");
+        el.style.background      = c.bg;
+        el.style.color           = c.fg;
+        el.style.borderColor     = item.important ? "#dc2626" : hexAlpha(c.solid, 0.2);
+        el.style.borderLeftColor = item.important ? "#dc2626" : c.solid;
+        if (item.important) {
+          var mark = document.createElement("span");
+          mark.className = "important-mark";
+          mark.textContent = "!";
+          el.appendChild(mark);
+        }
+        if (item.type !== "todo" && item.allDay === false && item.start) {
+          var t = document.createElement("span");
+          t.className = "ov-item-time";
+          t.textContent = item.start;
+          el.appendChild(t);
+        }
+        var tx = document.createElement("span");
+        tx.className = "ov-item-text";
+        tx.textContent = itemDisplayText(item);
+        el.appendChild(tx);
+        if (item.type === "todo") {
+          el.appendChild(makeTodoToggle(item, key));
+        }
+        var itemMemo = item.memo || (item.note ? { title: "Item memo", body: item.note } : null);
+        if (itemMemo && (itemMemo.title || itemMemo.body)) {
+          var detail = document.createElement("div");
+          detail.className = "ov-item-note";
+          if (itemMemo.title) {
+            var title = document.createElement("span");
+            title.className = "ov-note-title";
+            title.textContent = itemMemo.title;
+            detail.appendChild(title);
+          }
+          if (itemMemo.body) detail.appendChild(document.createTextNode(itemMemo.body));
+          el.appendChild(detail);
+          el.style.cursor = "pointer";
+          el.addEventListener("click", function() { el.classList.toggle("open"); });
+        }
+        return el;
+      }
+
+      function makeOvDayGroup(key, isToday) {
+        var items = displayItemsFor(key).filter(function(it){ return it.important; }).sort(function(a,b){
+          return itemSortValue(a).localeCompare(itemSortValue(b));
+        });
+        if (!items.length) return null;
+        var d = dateFromKey(key);
+        var wrap = document.createElement("div");
+        wrap.className = "ov-day";
+        var hdr = document.createElement("div");
+        hdr.className = "ov-day-hdr" + (isToday ? " is-today" : "");
+        hdr.textContent = DAYNAMES[d.getDay()].slice(0,3) + " " +
+          MONTHS_SHORT[d.getMonth()] + " " + d.getDate();
+        wrap.appendChild(hdr);
+        items.forEach(function(it){ wrap.appendChild(makeOvItem(it, key)); });
+        return wrap;
+      }
+
+      function renderOverview() {
+        var baseKey = selectedKey || todayKey;
+        var baseDate = dateFromKey(baseKey);
+
+        // ── Selected day ──
+        var ovTodayDate = document.getElementById("ov-today-date");
+        var ovTodayList = document.getElementById("ov-today-list");
+        ovTodayDate.textContent = MONTHS[baseDate.getMonth()] + " " + baseDate.getDate() + ", " + baseDate.getFullYear();
+        ovTodayList.innerHTML = "";
+        var baseItems = displayItemsFor(baseKey).slice().sort(function(a,b){
+          return itemSortValue(a).localeCompare(itemSortValue(b));
+        });
+        if (!baseItems.length) {
+          var emp = document.createElement("div");
+          emp.className = "ov-empty"; emp.textContent = "No items.";
+          ovTodayList.appendChild(emp);
+        } else {
+          baseItems.forEach(function(it){ ovTodayList.appendChild(makeOvItem(it, baseKey)); });
+        }
+
+        // ── This week (Mon–Sun of selected week, excluding selected day) ──
+        var ovWeek = document.getElementById("ov-week");
+        ovWeek.innerHTML = "";
+        var mon = mondayOf(baseDate);
+        var hasWeek = false;
+        for (var d2 = 0; d2 < 7; d2++) {
+          var wDay = new Date(mon.getTime() + d2 * DAY_MS);
+          var wKey = keyOf(wDay);
+          if (wKey === baseKey) continue;
+          var g = makeOvDayGroup(wKey, false);
+          if (g) { ovWeek.appendChild(g); hasWeek = true; }
+        }
+        if (!hasWeek) {
+          var emp3 = document.createElement("div");
+          emp3.className = "ov-empty"; emp3.textContent = "None.";
+          ovWeek.appendChild(emp3);
+        }
+
+        // ── Upcoming 4 weeks (next Mon → +4 weeks) ──
+        var ovUpcoming = document.getElementById("ov-upcoming");
+        var ovUpcomingLabel = document.getElementById("ov-upcoming-label");
+        ovUpcoming.innerHTML = "";
+        var nextMon = new Date(mon.getTime() + 7 * DAY_MS);
+        var upEnd   = new Date(nextMon.getTime() + 27 * DAY_MS);
+        ovUpcomingLabel.textContent = formatShortRange(nextMon, upEnd);
+
+        var curWeekMon = nextMon;
+        var weekNames = ["Next week", "2 weeks out", "3 weeks out", "4 weeks out"];
+        for (var w = 0; w < 4; w++) {
+          var block = document.createElement("div");
+          block.className = "ov-week-block";
+          var label = document.createElement("div");
+          label.className = "ov-week-label";
+          var labelTitle = document.createElement("span");
+          labelTitle.className = "ov-week-label-title";
+          labelTitle.textContent = weekNames[w];
+          var weekEnd = new Date(curWeekMon.getTime() + 6 * DAY_MS);
+          var labelDate = document.createElement("span");
+          labelDate.className = "ov-week-date";
+          labelDate.textContent = formatShortRange(curWeekMon, weekEnd);
+          label.appendChild(labelTitle);
+          label.appendChild(labelDate);
+          var body = document.createElement("div");
+          body.className = "ov-week-body";
+          var weekHasItems = false;
+          for (var wd = 0; wd < 7; wd++) {
+            var uDay = new Date(curWeekMon.getTime() + wd * DAY_MS);
+            var uKey = keyOf(uDay);
+            var ug = makeOvDayGroup(uKey, false);
+            if (ug) { body.appendChild(ug); weekHasItems = true; }
+          }
+          if (!weekHasItems) {
+            var none = document.createElement("div");
+            none.className = "ov-empty";
+            none.textContent = "None.";
+            body.appendChild(none);
+          }
+          block.appendChild(label);
+          block.appendChild(body);
+          ovUpcoming.appendChild(block);
+          curWeekMon = new Date(curWeekMon.getTime() + 7 * DAY_MS);
+        }
+      }
+
+      // ── Schedule strip ──
+      function renderScheduleStrip() {
+        var strip = document.getElementById("schedule-strip");
+        strip.innerHTML = "";
+        var names = Object.keys(schedules).sort();
+        if (!names.length) return;
+        names.forEach(function(name) {
+          var sch = schedules[name];
+          var opt = colorOption(sch.colorKey || "default");
+          var pill = document.createElement("span");
+          pill.className = "schedule-pill";
+          pill.dataset.schedule = name;
+
+          var dot = document.createElement("span");
+          dot.className = "schedule-pill-dot";
+          dot.style.background = opt.solid;
+          dot.title = "색상 변경";
+
+          var popup = document.createElement("div");
+          popup.className = "schedule-color-popup";
+          COLOR_OPTIONS.filter(function(c){ return c.key !== "default"; }).forEach(function(c) {
+            var sw = document.createElement("span");
+            sw.className = "sch-color-opt" + (c.key === (sch.colorKey || "") ? " active" : "");
+            sw.style.background = c.solid;
+            sw.title = c.name;
+            sw.addEventListener("click", function(e) {
+              e.stopPropagation();
+              changeScheduleColor(name, c.key);
+              pill.classList.remove("open");
+            });
+            popup.appendChild(sw);
+          });
+
+          dot.addEventListener("click", function(e) {
+            e.stopPropagation();
+            document.querySelectorAll(".schedule-pill.open").forEach(function(p){
+              if (p !== pill) p.classList.remove("open");
+            });
+            pill.classList.toggle("open");
+          });
+
+          var lbl = document.createElement("span");
+          lbl.textContent = name;
+
+          pill.appendChild(dot);
+          pill.appendChild(lbl);
+          pill.appendChild(popup);
+          strip.appendChild(pill);
+        });
+      }
+
+      document.addEventListener("click", function() {
+        document.querySelectorAll(".schedule-pill.open").forEach(function(p){
+          p.classList.remove("open");
+        });
+      });
+
+      function updateScheduleDatalist() {
+        var dl = document.getElementById("schedule-list");
+        dl.innerHTML = "";
+        Object.keys(schedules).forEach(function(name) {
+          var opt = document.createElement("option");
+          opt.value = name;
+          dl.appendChild(opt);
+        });
+      }
+
+      // ── Tab switching ──
+      document.querySelectorAll(".add-tab").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          var tab = btn.dataset.tab;
+          document.querySelectorAll(".add-tab").forEach(function(b){ b.classList.remove("active"); });
+          document.querySelectorAll(".add-tab-panel").forEach(function(p){ p.classList.remove("active"); });
+          btn.classList.add("active");
+          document.querySelector(".add-tab-panel[data-tab=\"" + tab + "\"]").classList.add("active");
+          if (tab === "todo" && todoInput) todoInput.focus();
+          if (tab === "schedule" && addInput) addInput.focus();
+          if (tab === "note" && memoBodyInput) memoBodyInput.focus();
+        });
+      });
+
+      // ── Add todo ──
+      function addTodo() {
+        var text = todoInput.value.trim();
+        if (!text || !selectedKey) return;
+        var noteText = todoNoteInput.value.trim();
+        var isRange = todoRangeInput.checked;
+        var rangeEnd = todoRangeEndInput.value || selectedKey;
+        if (isRange && rangeEnd < selectedKey) {
+          alert("Range end date should be on or after the selected day."); return;
+        }
+        var item = {
+          id: Date.now() + "-" + Math.random().toString(36).slice(2,7),
+          text: text, type: "todo", allDay: true,
+          important: todoImportant.checked, done: false
+        };
+        if (noteText) item.memo = { title: "To-do memo", body: noteText };
+        if (isRange && rangeEnd > selectedKey) {
+          item.rangeStart = selectedKey;
+          item.rangeEnd = rangeEnd;
+        }
+        if (!data[selectedKey]) data[selectedKey] = [];
+        data[selectedKey].push(item);
+        saveData();
+        todoInput.value = ""; todoImportant.checked = false; todoNoteInput.value = "";
+        todoRangeInput.checked = false; todoRangeRow.hidden = true; todoRangeEndInput.value = selectedKey;
+        renderOverview(); refreshVisibleDays();
+        todoInput.focus();
+      }
+      document.getElementById("todo-add-btn").addEventListener("click", addTodo);
+      todoInput.addEventListener("keydown", function(e){ if(e.key==="Enter") addTodo(); });
+
+      // ── Add schedule item ──
+      function addScheduleItem() {
+        var text = addInput.value.trim();
+        if (!text || !selectedKey) return;
+        var schName = scheduleInput.value.trim();
+        var allDay  = allDayInput.checked || !startInput.value;
+        var isRange = rangeInput.checked;
+        var rangeEnd = rangeEndInput.value || selectedKey;
+        if (isRange && rangeEnd < selectedKey) {
+          alert("Range end date should be on or after the selected day."); return;
+        }
+        if (!allDay && endInput.value && endInput.value <= startInput.value) {
+          alert("End time should be after start time."); return;
+        }
+        var pickedColor = activeColorKey !== "default" ? activeColorKey : null;
+        var noteText = scheduleNoteInput.value.trim();
+        var item = {
+          id: Date.now() + "-" + Math.random().toString(36).slice(2,7),
+          text: text, type: "event", allDay: allDay,
+          important: importantInput.checked
+        };
+        if (noteText) item.memo = { title: "Schedule memo", body: noteText };
+        if (schName) {
+          item.scheduleName = schName;
+          if (!schedules[schName]) {
+            schedules[schName] = { colorKey: pickedColor || "orange" };
+            saveSchedules(); updateScheduleDatalist(); renderScheduleStrip();
+          }
+        } else if (pickedColor) {
+          item.colorKey = pickedColor;
+        }
+        if (!allDay) {
+          item.start = startInput.value;
+          if (endInput.value) item.end = endInput.value;
+        }
+        if (isRange && rangeEnd > selectedKey) {
+          item.rangeStart = selectedKey;
+          item.rangeEnd = rangeEnd;
+        }
+        if (!data[selectedKey]) data[selectedKey] = [];
+        data[selectedKey].push(item);
+        saveData();
+        addInput.value = ""; importantInput.checked = false; scheduleNoteInput.value = "";
+        rangeInput.checked = false; rangeRow.hidden = true; rangeEndInput.value = selectedKey;
+        activeColorKey = "default"; renderColorPicker();
+        renderOverview(); refreshVisibleDays();
+        addInput.focus();
+      }
+      document.getElementById("add-btn").addEventListener("click", addScheduleItem);
+      addInput.addEventListener("keydown", function(e){ if(e.key==="Enter") addScheduleItem(); });
+      scheduleInput.addEventListener("input", renderColorPicker);
+
+      // ── All-day toggle ──
+      allDayInput.addEventListener("change", function(){
+        timeRow.hidden = allDayInput.checked;
+      });
+      rangeInput.addEventListener("change", function(){
+        rangeRow.hidden = !rangeInput.checked;
+        rangeEndInput.min = selectedKey;
+        if (!rangeEndInput.value || rangeEndInput.value < selectedKey) {
+          rangeEndInput.value = selectedKey;
+        }
+      });
+      todoRangeInput.addEventListener("change", function(){
+        todoRangeRow.hidden = !todoRangeInput.checked;
+        todoRangeEndInput.min = selectedKey;
+        if (!todoRangeEndInput.value || todoRangeEndInput.value < selectedKey) {
+          todoRangeEndInput.value = selectedKey;
+        }
+      });
+      memoRangeInput.addEventListener("change", function(){
+        memoRangeRow.hidden = !memoRangeInput.checked;
+        memoRangeEndInput.min = selectedKey;
+        if (!memoRangeEndInput.value || memoRangeEndInput.value < selectedKey) {
+          memoRangeEndInput.value = selectedKey;
+        }
+      });
+
+      // ── Item notes — cleared when day changes (not persisted separately) ──
+      function clearItemNotes() {
+        todoNoteInput.value = "";
+        scheduleNoteInput.value = "";
+      }
+
+      // ── Calendar click ──
+      weeksEl.addEventListener("click", function(e) {
+        var cell = e.target.closest(".day");
+        if (!cell) return;
+        selectDay(cell.dataset.key, +cell.dataset.time, { focusInput: true });
+      });
+
+      // ── Today button ──
+      document.getElementById("btn-today").addEventListener("click", function() {
+        var tc = weeksEl.querySelector(".day.today");
+        if (tc) {
+          viewport.scrollTo({ top: tc.closest(".week").offsetTop - 2, behavior: "smooth" });
+          selectDay(todayKey, today.getTime());
+        }
+      });
+
+      // ── Animate stop/play ──
+      var animPaused = false;
+      document.getElementById("btn-anim").addEventListener("click", function() {
+        animPaused = !animPaused;
+        document.body.classList.toggle("anim-paused", animPaused);
+        this.textContent = animPaused ? "Play" : "Stop";
+      });
+
+      // ── ICS export utils ──
+      function nextDateKey(key) {
+        var p = key.split("-").map(Number);
+        return keyOf(new Date(p[0], p[1]-1, p[2]+1));
+      }
+      function icsDate(key)  { return key.replace(/-/g,""); }
+      function icsDateTime(key, time) { return icsDate(key)+"T"+time.replace(":","")+"00"; }
+      function icsStamp(date) {
+        return date.getUTCFullYear()+pad(date.getUTCMonth()+1)+pad(date.getUTCDate())+
+          "T"+pad(date.getUTCHours())+pad(date.getUTCMinutes())+pad(date.getUTCSeconds())+"Z";
+      }
+      function escapeIcs(t) {
+        return String(t).replace(/\\/g,"\\\\").replace(/\r?\n/g,"\\n")
+          .replace(/;/g,"\\;").replace(/,/g,"\\,");
+      }
+      function foldIcsLine(line) {
+        var out=[], rest=line;
+        while(rest.length>73){ out.push(rest.slice(0,73)); rest=" "+rest.slice(73); }
+        out.push(rest); return out.join("\r\n");
+      }
+      function buildIcs() {
+        var lines = ["BEGIN:VCALENDAR","VERSION:2.0",
+          "PRODID:-//Minje Park//Personal Calendar//EN",
+          "CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:Minje Park Calendar"];
+        var stamp = icsStamp(new Date());
+        Object.keys(data).sort().forEach(function(key) {
+          itemsFor(key).forEach(function(item) {
+            var isTodo = item.type === "todo";
+            var title  = (isTodo?"To-do: ":"") + itemDisplayText(item);
+            var itemMemo = item.memo || (item.note ? { title: "Item memo", body: item.note } : null);
+            var desc   = "Type:"+(isTodo?"To-do":"Event")+
+              (item.important?"\nPriority:Important":"")+
+              (isTodo?"\nStatus:"+(item.done?"Done":"Open"):"")+
+              (itemMemo && itemMemo.body ? "\n\n" + (itemMemo.title ? itemMemo.title + "\n" : "") + itemMemo.body : "");
+            lines.push("BEGIN:VEVENT",
+              "UID:"+escapeIcs((item.id||key+"-"+item.text)+"@pmj0324.github.io"),
+              "DTSTAMP:"+stamp);
+            if (item.allDay===false && item.start) {
+              lines.push("DTSTART:"+icsDateTime(key,item.start));
+              if (item.rangeEnd && item.end)
+                lines.push("DTEND:"+icsDateTime(item.rangeEnd,item.end));
+              else if (item.end && item.end>item.start)
+                lines.push("DTEND:"+icsDateTime(key,item.end));
+              else lines.push("DURATION:PT1H");
+            } else {
+              lines.push("DTSTART;VALUE=DATE:"+icsDate(key),
+                "DTEND;VALUE=DATE:"+icsDate(nextDateKey(item.rangeEnd || key)));
+            }
+            lines.push("SUMMARY:"+escapeIcs(title),"DESCRIPTION:"+escapeIcs(desc),
+              "STATUS:CONFIRMED","END:VEVENT");
+          });
+        });
+        lines.push("END:VCALENDAR");
+        return lines.map(foldIcsLine).join("\r\n")+"\r\n";
+      }
+
+      function downloadText(filename, text, type) {
+        var blob = new Blob([text], {type:type});
+        var url  = URL.createObjectURL(blob);
+        var a    = document.createElement("a");
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 0);
+      }
+
+      document.getElementById("btn-share").addEventListener("click", function(){
+        downloadText("minje-calendar-"+todayKey+".ics", buildIcs(), "text/calendar;charset=utf-8");
+      });
+      document.getElementById("btn-export").addEventListener("click", function(){
+        downloadText("calendar-backup-"+todayKey+".json",
+          JSON.stringify({version:4, entries:data, notes:notes, memos:memos,
+            schedules:schedules, weekNotes:weekNotes, monNotes:monNotes}, null, 2),
+          "application/json");
+      });
+
+      var importFile = document.getElementById("import-file");
+      document.getElementById("btn-import").addEventListener("click", function(){ importFile.click(); });
+      importFile.addEventListener("change", function() {
+        var file = importFile.files[0]; if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function() {
+          try {
+            var inc = JSON.parse(reader.result);
+            if (typeof inc !== "object" || inc === null) throw new Error();
+            var incData  = inc.entries || inc;
+            var incNotes = inc.entries ? (inc.notes || {}) : {};
+            var incSch   = inc.schedules   || {};
+            var incWk    = inc.weekNotes   || {};
+            var incMon   = inc.monNotes    || {};
+            var incMemos = inc.memos       || {};
+            if (confirm("Replace current calendar data with the imported file?")) {
+              data = incData; notes = incNotes; memos = incMemos;
+              schedules = incSch; weekNotes = incWk; monNotes = incMon;
+              saveData(); saveNotes(); saveMemos(); saveSchedules(); saveWeekNotes(); saveMonNotes();
+              weeksEl.querySelectorAll(".day[data-key]").forEach(function(cell){
+                refreshDayCell(cell.dataset.key);
+              });
+              selectDay(selectedKey);
+              renderScheduleStrip();
+              updateScheduleDatalist();
+            }
+          } catch(err) { alert("Could not read that file as calendar JSON."); }
+          importFile.value = "";
+        };
+        reader.readAsText(file);
+      });
+
+      // ── Init ──
+      selectDay(todayKey, today.getTime());
+      renderScheduleStrip();
+      updateScheduleDatalist();
+      renderColorPicker();
+
+    })();
     </script>
   </body>
 </html>
