@@ -1,0 +1,338 @@
+\begin{thebibliography}{44}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ravanbakhsh et~al.(2017)Ravanbakhsh, Oliva, Fromenteau, Price, Ho,
+  Schneider, and P{\'o}czos]{Ravanbakhsh2017}
+Siamak Ravanbakhsh, Junier Oliva, Sebastien Fromenteau, Layne~C. Price, Shirley
+  Ho, Jeff Schneider, and Barnab{\'a}s P{\'o}czos.
+\newblock Estimating cosmological parameters from the dark matter distribution.
+\newblock \emph{ArXiv e-prints}, 2017.
+\newblock URL \url{https://arxiv.org/abs/1711.02033}.
+
+\bibitem[Cranmer et~al.(2020)Cranmer, Brehmer, and Louppe]{Cranmer2020}
+Kyle Cranmer, Johann Brehmer, and Gilles Louppe.
+\newblock The frontier of simulation-based inference.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 117:\penalty0
+  30055, 2020.
+\newblock \doi{10.1073/pnas.1912789117}.
+\newblock URL \url{https://doi.org/10.1073/pnas.1912789117}.
+
+\bibitem[Jo and Kim(2019)]{JoKim2019}
+Yongseok Jo and Ji-hoon Kim.
+\newblock Machine-assisted semi-simulation model ({MSSM}): estimating galactic
+  baryonic properties from their dark matter using a machine trained on
+  hydrodynamic simulations.
+\newblock \emph{MNRAS}, 489:\penalty0 3565--3581, 2019.
+\newblock \doi{10.1093/mnras/stz2304}.
+\newblock URL \url{https://doi.org/10.1093/mnras/stz2304}.
+
+\bibitem[Zhang et~al.(2019)Zhang, Wang, Zhang, Sun, He, Contardo,
+  Villaescusa-Navarro, and Ho]{Zhang2019}
+Xinyue Zhang, Yanfang Wang, Wei Zhang, Yueqiu Sun, Siyu He, Gabriella Contardo,
+  Francisco Villaescusa-Navarro, and Shirley Ho.
+\newblock From dark matter to galaxies with convolutional networks.
+\newblock \emph{ArXiv e-prints}, 2019.
+\newblock URL \url{https://arxiv.org/abs/1902.05965}.
+
+\bibitem[Mustafa et~al.(2019)Mustafa, Bard, Bhimji, Luki{\'c}, Al-Rfou, and
+  Kratochvil]{Mustafa2019}
+Mustafa Mustafa, Deborah Bard, Wahid Bhimji, Zarija Luki{\'c}, Rami Al-Rfou,
+  and Jan~M. Kratochvil.
+\newblock {CosmoGAN}: creating high-fidelity weak lensing convergence maps
+  using generative adversarial networks.
+\newblock \emph{Computational Astrophysics and Cosmology}, 6:\penalty0 1, 2019.
+\newblock \doi{10.1186/s40668-019-0029-9}.
+\newblock URL \url{https://doi.org/10.1186/s40668-019-0029-9}.
+
+\bibitem[He et~al.(2019)He, Li, Feng, Ho, Ravanbakhsh, Chen, and
+  P{\'o}czos]{He2019}
+Siyu He, Yin Li, Yu~Feng, Shirley Ho, Siamak Ravanbakhsh, Wei Chen, and
+  Barnab{\'a}s P{\'o}czos.
+\newblock Learning to predict the cosmological structure formation.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 116:\penalty0
+  13825--13832, 2019.
+\newblock \doi{10.1073/pnas.1821458116}.
+\newblock URL \url{https://doi.org/10.1073/pnas.1821458116}.
+
+\bibitem[Perraudin et~al.(2021)Perraudin, Marcon, Lucchi, and
+  Kacprzak]{Perraudin2021}
+Nathana{\"e}l Perraudin, Sandro Marcon, Aur{\'e}lien Lucchi, and Tomasz
+  Kacprzak.
+\newblock Emulation of cosmological mass maps with conditional generative
+  adversarial networks.
+\newblock \emph{Frontiers in Artificial Intelligence}, 4:\penalty0 673062,
+  2021.
+\newblock \doi{10.3389/frai.2021.673062}.
+\newblock URL \url{https://doi.org/10.3389/frai.2021.673062}.
+
+\bibitem[Villaescusa-Navarro et~al.(2021)Villaescusa-Navarro,
+  Angl{\'e}s-Alc{\'a}zar, Genel, et~al.]{Villaescusa2021}
+Francisco Villaescusa-Navarro, Daniel Angl{\'e}s-Alc{\'a}zar, Shy Genel, et~al.
+\newblock The {CAMELS} project: Cosmology and astrophysics with
+  machine-learning simulations.
+\newblock \emph{ApJ}, 915:\penalty0 71, 2021.
+\newblock \doi{10.3847/1538-4357/abf7ba}.
+\newblock URL \url{https://doi.org/10.3847/1538-4357/abf7ba}.
+
+\bibitem[Villaescusa-Navarro et~al.(2022)Villaescusa-Navarro, Genel,
+  Angl{\'e}s-Alc{\'a}zar, et~al.]{Villaescusa2022}
+Francisco Villaescusa-Navarro, Shy Genel, Daniel Angl{\'e}s-Alc{\'a}zar, et~al.
+\newblock The {CAMELS} multifield data set: Learning the universe's fundamental
+  parameters with artificial intelligence.
+\newblock \emph{ApJS}, 259:\penalty0 61, 2022.
+\newblock \doi{10.3847/1538-4365/ac5ab0}.
+\newblock URL \url{https://doi.org/10.3847/1538-4365/ac5ab0}.
+
+\bibitem[Kingma and Welling(2014)]{Kingma2014}
+Diederik~P. Kingma and Max Welling.
+\newblock Auto-encoding variational {Bayes}.
+\newblock \emph{ArXiv e-prints}, 2014.
+\newblock URL \url{https://arxiv.org/abs/1312.6114}.
+
+\bibitem[Goodfellow et~al.(2014)Goodfellow, Pouget-Abadie, Mirza,
+  et~al.]{Goodfellow2014}
+Ian~J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, et~al.
+\newblock Generative adversarial nets.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~27, 2014.
+
+\bibitem[Rezende and Mohamed(2015)]{RezendeMohamed2015}
+Danilo~Jimenez Rezende and Shakir Mohamed.
+\newblock Variational inference with normalizing flows.
+\newblock In \emph{International Conference on Machine Learning}, 2015.
+
+\bibitem[Ho et~al.(2020)Ho, Jain, and Abbeel]{Ho2020}
+Jonathan Ho, Ajay Jain, and Pieter Abbeel.
+\newblock Denoising diffusion probabilistic models.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~33, page 6840, 2020.
+
+\bibitem[Song et~al.(2021)Song, Sohl-Dickstein, Kingma, et~al.]{Song2021}
+Yang Song, Jascha Sohl-Dickstein, Diederik~P. Kingma, et~al.
+\newblock Score-based generative modeling through stochastic differential
+  equations.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+
+\bibitem[Lipman et~al.(2023)Lipman, Chen, Ben-Hamu, Nickel, and Le]{Lipman2023}
+Yaron Lipman, Ricky T.~Q. Chen, Heli Ben-Hamu, Maximilian Nickel, and Matthew
+  Le.
+\newblock Flow matching for generative modeling.
+\newblock In \emph{International Conference on Learning Representations}, 2023.
+
+\bibitem[Chen et~al.(2018)Chen, Rubanova, Bettencourt, and Duvenaud]{Chen2018}
+Ricky T.~Q. Chen, Yulia Rubanova, Jesse Bettencourt, and David Duvenaud.
+\newblock Neural ordinary differential equations.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~31, 2018.
+
+\bibitem[Andrianomena et~al.(2022)Andrianomena, Villaescusa-Navarro, and
+  Hassan]{Andrianomena2022}
+Sambatra Andrianomena, Francisco Villaescusa-Navarro, and Sultan Hassan.
+\newblock Emulating cosmological multifields with generative adversarial
+  networks.
+\newblock \emph{ArXiv e-prints}, 2022.
+\newblock \doi{10.48550/arXiv.2211.05000}.
+\newblock URL \url{https://arxiv.org/abs/2211.05000}.
+
+\bibitem[Andrianomena et~al.(2025)Andrianomena, Hassan, and
+  Villaescusa-Navarro]{Andrianomena2024}
+Sambatra Andrianomena, Sultan Hassan, and Francisco Villaescusa-Navarro.
+\newblock Cosmological multifield emulator.
+\newblock \emph{Astrophysics and Space Science}, 370:\penalty0 44, 2025.
+\newblock \doi{10.1007/s10509-025-04440-9}.
+\newblock URL \url{https://doi.org/10.1007/s10509-025-04440-9}.
+
+\bibitem[Hassan et~al.(2021)Hassan, Villaescusa-Navarro, Wandelt,
+  et~al.]{Hassan2021HIFlow}
+Sultan Hassan, Francisco Villaescusa-Navarro, Benjamin Wandelt, et~al.
+\newblock {HIFlow}: Generating diverse {HI} maps and inferring cosmology while
+  marginalizing over astrophysics using normalizing flows.
+\newblock \emph{ArXiv e-prints}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2110.02983}.
+
+\bibitem[Friedman and Hassan(2022)]{Friedman2022HIGlow}
+Roy Friedman and Sultan Hassan.
+\newblock {HIGlow}: Conditional normalizing flows for high-fidelity {HI} map
+  modeling.
+\newblock \emph{ArXiv e-prints}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2211.12724}.
+
+\bibitem[Park et~al.(2023)Park, Ono, Mudur, Ni, and
+  Cuesta-Lazaro]{Park2023Diffusion}
+Core~Francisco Park, Victoria Ono, Nayantara Mudur, Yueying Ni, and Carolina
+  Cuesta-Lazaro.
+\newblock Probabilistic reconstruction of dark matter fields from biased
+  tracers using diffusion models.
+\newblock \emph{ArXiv e-prints}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2311.08558}.
+
+\bibitem[Ono et~al.(2024)Ono, Park, Mudur, Ni, Cuesta-Lazaro, and
+  Villaescusa-Navarro]{Ono2024Debiasing}
+Victoria Ono, Core~Francisco Park, Nayantara Mudur, Yueying Ni, Carolina
+  Cuesta-Lazaro, and Francisco Villaescusa-Navarro.
+\newblock Debiasing with diffusion: Probabilistic reconstruction of dark matter
+  fields from galaxies with {CAMELS}.
+\newblock \emph{ArXiv e-prints}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2403.10648}.
+
+\bibitem[Hassan and Andrianomena(2023)]{Hassan2023HIDM}
+Sultan Hassan and Sambatra Andrianomena.
+\newblock {HIDM}: Emulating large scale {HI} maps using score-based diffusion
+  models.
+\newblock \emph{ArXiv e-prints}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2311.00833}.
+
+\bibitem[Mudur et~al.(2024{\natexlab{a}})Mudur, Cuesta-Lazaro, and
+  Finkbeiner]{Mudur2024}
+Nayantara Mudur, Carolina Cuesta-Lazaro, and Douglas~P. Finkbeiner.
+\newblock Cosmological field emulation and parameter inference with diffusion
+  models.
+\newblock \emph{ArXiv e-prints}, 2024{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2312.07534}.
+
+\bibitem[Mudur et~al.(2024{\natexlab{b}})Mudur, Cuesta-Lazaro, and
+  Finkbeiner]{Mudur2024DiffHMC}
+Nayantara Mudur, Carolina Cuesta-Lazaro, and Douglas~P. Finkbeiner.
+\newblock Diffusion-{HMC}: Parameter inference with diffusion model driven
+  {Hamiltonian Monte Carlo}.
+\newblock \emph{ArXiv e-prints}, 2024{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2405.05255}.
+
+\bibitem[Mishra et~al.(2026)Mishra, Trotta, and Viel]{Mishra2026}
+Satvik Mishra, Roberto Trotta, and Matteo Viel.
+\newblock {Cosmo-FOLD}: Fast generation and upscaling of field-level
+  cosmological maps with overlap latent diffusion.
+\newblock \emph{ArXiv e-prints}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2601.14377}.
+
+\bibitem[Horowitz et~al.(2025)Horowitz, Cuesta-Lazaro, and Yehia]{Horowitz2025}
+Benjamin Horowitz, Carolina Cuesta-Lazaro, and Omar Yehia.
+\newblock {BaryonBridge}: Stochastic interpolant model for fast hydrodynamical
+  simulations.
+\newblock \emph{ArXiv e-prints}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.19224}.
+
+\bibitem[Kannan et~al.(2025)Kannan, Qiu, Cuesta-Lazaro, and Jeong]{Kannan2025}
+Sidharth Kannan, Tian Qiu, Carolina Cuesta-Lazaro, and Haewon Jeong.
+\newblock {CosmoFlow}: Scale-aware representation learning for cosmology with
+  flow matching.
+\newblock \emph{ArXiv e-prints}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2507.11842}.
+
+\bibitem[Mudur and Finkbeiner(2022)]{Mudur2022DDPM}
+Nayantara Mudur and Douglas~P. Finkbeiner.
+\newblock Can denoising diffusion probabilistic models generate realistic
+  astrophysical fields?
+\newblock \emph{ArXiv e-prints}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2211.12444}.
+
+\bibitem[Weinberger et~al.(2017)Weinberger, Springel, Hernquist,
+  et~al.]{Weinberger2017}
+Rainer Weinberger, Volker Springel, Lars Hernquist, et~al.
+\newblock Simulating galaxy formation with black hole driven thermal and
+  kinetic feedback.
+\newblock \emph{MNRAS}, 465:\penalty0 3291, 2017.
+\newblock \doi{10.1093/mnras/stw2944}.
+
+\bibitem[Pillepich et~al.(2018)Pillepich, Springel, Nelson,
+  et~al.]{Pillepich2018IllustrisTNG}
+Annalisa Pillepich, Volker Springel, Dylan Nelson, et~al.
+\newblock Simulating galaxy formation with the {IllustrisTNG} model.
+\newblock \emph{MNRAS}, 473:\penalty0 4077, 2018.
+\newblock \doi{10.1093/mnras/stx2656}.
+
+\bibitem[Ho and Salimans(2022)]{Ho2022}
+Jonathan Ho and Tim Salimans.
+\newblock Classifier-free diffusion guidance.
+\newblock \emph{arXiv e-prints}, 2022.
+
+\bibitem[Ronneberger et~al.(2015)Ronneberger, Fischer, and
+  Brox]{Ronneberger2015}
+Olaf Ronneberger, Philipp Fischer, and Thomas Brox.
+\newblock U-net: Convolutional networks for biomedical image segmentation.
+\newblock In \emph{Medical Image Computing and Computer-Assisted Intervention},
+  pages 234--241, 2015.
+\newblock \doi{10.1007/978-3-319-24574-4_28}.
+
+\bibitem[Wu and He(2018)]{Wu2018}
+Yuxin Wu and Kaiming He.
+\newblock Group normalization.
+\newblock In \emph{European Conference on Computer Vision}, pages 3--19, 2018.
+\newblock \doi{10.1007/978-3-030-01261-8_1}.
+
+\bibitem[Perez et~al.(2018)Perez, Strub, {de Vries}, Dumoulin, and
+  Courville]{Perez2018}
+Ethan Perez, Florian Strub, Harm {de Vries}, Vincent Dumoulin, and Aaron
+  Courville.
+\newblock {FiLM}: Visual reasoning with a general conditioning layer.
+\newblock In \emph{Proceedings of the Thirty-Second AAAI Conference on
+  Artificial Intelligence}, pages 3942--3951, 2018.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{Vaswani2017}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~30, 2017.
+
+\bibitem[Loshchilov and Hutter(2019)]{Loshchilov2019}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization.
+\newblock In \emph{International Conference on Learning Representations}, 2019.
+
+\bibitem[Grathwohl et~al.(2019)Grathwohl, Chen, Bettencourt, Sutskever, and
+  Duvenaud]{Grathwohl2019}
+Will Grathwohl, Ricky T.~Q. Chen, Jesse Bettencourt, Ilya Sutskever, and David
+  Duvenaud.
+\newblock {FFJORD}: Free-form continuous dynamics for scalable reversible
+  generative models.
+\newblock In \emph{International Conference on Learning Representations}, 2019.
+
+\bibitem[Hutchinson(1989)]{Hutchinson1989}
+M.~F. Hutchinson.
+\newblock A stochastic estimator of the trace of the influence matrix for
+  laplacian smoothing splines.
+\newblock \emph{Communications in Statistics -- Simulation and Computation},
+  18\penalty0 (3):\penalty0 1059--1076, 1989.
+\newblock \doi{10.1080/03610918908812806}.
+
+\bibitem[Harris et~al.(2020)Harris, Millman, van~der Walt, et~al.]{Harris2020}
+Charles~R. Harris, K.~Jarrod Millman, St{\'e}fan~J. van~der Walt, et~al.
+\newblock Array programming with {NumPy}.
+\newblock \emph{Nature}, 585:\penalty0 357, 2020.
+\newblock \doi{10.1038/s41586-020-2649-2}.
+
+\bibitem[Virtanen et~al.(2020)Virtanen, Gommers, Oliphant,
+  et~al.]{Virtanen2020}
+Pauli Virtanen, Ralf Gommers, Travis~E. Oliphant, et~al.
+\newblock {SciPy} 1.0: fundamental algorithms for scientific computing in
+  {Python}.
+\newblock \emph{Nature Methods}, 17:\penalty0 261, 2020.
+\newblock \doi{10.1038/s41592-019-0686-2}.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, et~al.]{Paszke2019}
+Adam Paszke, Sam Gross, Francisco Massa, et~al.
+\newblock {PyTorch}: An imperative style, high-performance deep learning
+  library.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32, 2019.
+
+\bibitem[Villaescusa-Navarro(2018)]{Villaescusa2018Pylians}
+Francisco Villaescusa-Navarro.
+\newblock Pylians: {Python} libraries for the analysis of numerical
+  simulations.
+\newblock Astrophysics Source Code Library, ascl:1811.008, 2018.
+\newblock URL \url{https://github.com/franciscovillaescusa/Pylians3}.
+
+\bibitem[Hunter(2007)]{Hunter2007}
+John~D. Hunter.
+\newblock {Matplotlib}: A {2D} graphics environment.
+\newblock \emph{Computing in Science \& Engineering}, 9:\penalty0 90, 2007.
+\newblock \doi{10.1109/MCSE.2007.55}.
+
+\end{thebibliography}

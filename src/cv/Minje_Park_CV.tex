@@ -75,7 +75,9 @@
         top=5pt,
         bottom=5pt
     ]
-    \textbf{\large #1} \hfill {\color{primary}#2}
+    \begin{minipage}[t]{0.74\linewidth}\raggedright\textbf{#1}\end{minipage}%
+    \hfill%
+    \begin{minipage}[t]{0.25\linewidth}\raggedleft\mbox{\color{primary}\small #2}\end{minipage}
 
     \textit{#3}
 
