@@ -44,7 +44,7 @@
             rgba(3, 7, 18, 0.70),
             rgba(15, 23, 42, 0.60)
           ),
-          url("nasa.jpg");
+          url("assets/images/nasa.jpg");
         background-size: cover;
         background-position: center;
         filter: blur(2px);
@@ -741,7 +741,7 @@
         answered = false;
 
         const variant = IMAGE_VARIANTS[Math.floor(Math.random() * IMAGE_VARIANTS.length)];
-        const base = "genesis_game/" + currentSim + "/";
+        const base = "assets/game/genesis/" + currentSim + "/";
         const camelsSrc = base + "camels_" + variant + ".png";
         const genesisSrc = base + "genesis_" + variant + ".png";
         document.getElementById("img-top").src = camelsOnTop ? camelsSrc : genesisSrc;

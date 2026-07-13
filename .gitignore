@@ -1,8 +1,12 @@
-.claude/worktrees/
+.DS_Store
+.claude/
 
 # LaTeX build artifacts
 *.aux
 *.log
 *.out
 *.toc
-cv/*.pdf
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk
