@@ -1,9 +1,6 @@
 ---
 title: Starting the notebook
 description: A small beginning for a place where unfinished questions can remain visible.
-tags:
-  - meta
-  - research practice
 ---
 
 This is the first entry in a new notebook.
