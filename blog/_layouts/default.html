@@ -5,29 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
-    <meta name="theme-color" content="#f2efe8">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}">
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
+    <header class="masthead">
+      <div class="masthead-inner">
+        <a class="site-title" href="{{ '/blog/' | relative_url }}">Minje Park's Research Notes</a>
+        <nav aria-label="Primary navigation">
+          <a href="{{ '/blog/' | relative_url }}">Posts</a>
+          <a href="{{ '/' | relative_url }}">Main site</a>
+        </nav>
+      </div>
+    </header>
+
     <div class="site-shell">
-      <aside class="site-intro">
-        <a class="home-mark" href="{{ '/blog/' | relative_url }}" aria-label="Minje Park notes home">MP</a>
-        <div class="intro-copy">
-          <p class="eyebrow">Research notebook</p>
-          <p class="author">Minje Park</p>
-          <p class="description">Notes on physics, simulation, machine learning, and the questions between them.</p>
-        </div>
-        <nav class="side-links" aria-label="Blog links">
-          <a href="{{ '/blog/' | relative_url }}">All notes</a>
-          <a href="{{ '/' | relative_url }}">Main website</a>
-          <a href="https://github.com/pmj0324">GitHub</a>
+      <aside class="site-intro" aria-label="Author profile and categories">
+        <section class="author-profile">
+          <h2>Minje Park</h2>
+          <p class="description">Physics, simulation, and machine learning.</p>
+          <ul class="profile-links">
+            <li><span aria-hidden="true">●</span> Seoul, Korea</li>
+            <li><a href="https://github.com/pmj0324"><span aria-hidden="true">↗</span> GitHub</a></li>
+            <li><a href="mailto:pmj032400@naver.com"><span aria-hidden="true">✉</span> Email</a></li>
+          </ul>
+        </section>
+
+        <nav class="category-nav" aria-label="Blog categories">
+          <a class="category-main" href="{{ '/blog/' | relative_url }}">📂 All posts <strong>({{ site.posts | size }})</strong></a>
+          {% assign sorted_tags = site.tags | sort %}
+          {% if sorted_tags.size > 0 %}
+            <p class="category-label">Tags</p>
+            <ul>
+              {% for tag in sorted_tags %}
+                <li><span>{{ tag[0] }}</span> <small>({{ tag[1] | size }})</small></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </nav>
       </aside>
 
-      <main class="site-content" id="content">
-        {{ content }}
-      </main>
+      <main class="site-content" id="content">{{ content }}</main>
     </div>
   </body>
 </html>
