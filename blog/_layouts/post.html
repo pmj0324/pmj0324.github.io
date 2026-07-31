@@ -2,13 +2,15 @@
 layout: default
 ---
 <article class="post">
+  {% assign current_lang = page.lang | default: "en" %}
+  {% if current_lang == "ko" %}{% assign blog_home_url = "/blog/ko/" %}{% else %}{% assign blog_home_url = "/blog/" %}{% endif %}
   <header class="post-header">
-    <a class="back-link" href="{{ '/blog/' | relative_url }}">← All notes</a>
+    <a class="back-link" href="{{ blog_home_url | relative_url }}">← {% if current_lang == "ko" %}모든 글{% else %}All notes{% endif %}</a>
     <h1>{{ page.title }}</h1>
-    <p class="post-date"><span aria-hidden="true">▣</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+    <p class="post-date"><span aria-hidden="true">▣</span> <time datetime="{{ page.date | date_to_xmlschema }}">{% if current_lang == "ko" %}{{ page.date | date: "%Y년 %m월 %d일" }}{% else %}{{ page.date | date: "%B %-d, %Y" }}{% endif %}</time></p>
     {% if page.description %}<p class="post-deck">{{ page.description }}</p>{% endif %}
     {% if page.categories.size > 0 %}
-      <div class="post-tags"><span class="tag-caption">📁 Folder:</span>
+      <div class="post-tags"><span class="tag-caption">📁 {% if current_lang == "ko" %}폴더:{% else %}Folder:{% endif %}</span>
         <ul class="tag-list" aria-label="Folders">
           {% for category in page.categories %}<li>{{ category }}</li>{% endfor %}
         </ul>
@@ -21,6 +23,6 @@ layout: default
   </div>
 
   <footer class="post-footer">
-    <a href="{{ '/blog/' | relative_url }}">Return to all notes</a>
+    <a href="{{ blog_home_url | relative_url }}">{% if current_lang == "ko" %}모든 글로 돌아가기{% else %}Return to all notes{% endif %}</a>
   </footer>
 </article>
