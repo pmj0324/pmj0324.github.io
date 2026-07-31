@@ -1,9 +1,14 @@
 ---
 layout: default
 ---
-<header class="page-heading">
-  <h1>{{ page.heading | default: "Recent posts" }}</h1>
+<section class="blog-hero" aria-labelledby="blog-title">
+  <p class="blog-kicker">{% if page.lang == "ko" %}MINJE PARK의 개인 기록{% else %}PERSONAL NOTES BY MINJE PARK{% endif %}</p>
+  <h1 id="blog-title">{{ page.hero_title | default: "Personal Blog" }}</h1>
   {% if page.intro %}<p>{{ page.intro }}</p>{% endif %}
+</section>
+
+<header class="page-heading">
+  <h2>{{ page.heading | default: "Recent posts" }}</h2>
 </header>
 
 <section class="post-list" aria-label="Blog posts">
