@@ -24,5 +24,10 @@ exclude:
   - Gemfile.lock
   - NOTICE.md
   - README.md
+  - requirements-blog.txt
+  - scripts
+  - .vscode
   - blog/README.md
+  - blog/NOTEBOOKS.md
+  - blog/notebooks
   - vendor

@@ -45,6 +45,9 @@ Use one of these folder names in `categories`: `Cosmology`, `Machine Learning`,
 Set `lang: en` for an English post or `lang: ko` for a Korean post. English
 posts appear at `/blog/`; Korean posts appear at `/blog/ko/`.
 
+Jupyter notebooks can be used as the editable source for a post. See
+`blog/NOTEBOOKS.md` for the VS Code workflow.
+
 ## Preview locally
 
 Jekyll needs a current Ruby installation. After Ruby is ready, run these from
