@@ -15,7 +15,7 @@
     <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=6">
+    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=7">
   </head>
   <body>
     <a class="skip-link" href="#content">{% if current_lang == "ko" %}본문으로 건너뛰기{% else %}Skip to content{% endif %}</a>
@@ -23,7 +23,8 @@
       <div class="masthead-inner">
         <a class="site-title" href="{{ blog_home_url | relative_url }}">Personal Blog</a>
         <nav class="primary-nav" aria-label="Primary navigation">
-          <a href="{{ blog_home_url | relative_url }}">📝 {% if current_lang == "ko" %}글{% else %}Posts{% endif %}</a>
+          <a href="{{ blog_home_url | relative_url }}">🏡 Home</a>
+          <a href="{{ blog_home_url | append: '#recent-posts' | relative_url }}">📝 {% if current_lang == "ko" %}글{% else %}Posts{% endif %}</a>
           <a href="{{ '/' | relative_url }}">🏠 {% if current_lang == "ko" %}개인 페이지{% else %}Personal{% endif %}</a>
           <span class="language-switch" aria-label="Language">
             <a href="{{ '/blog/' | relative_url }}"{% if current_lang == "en" %} aria-current="page"{% endif %}>ENG</a>
@@ -38,15 +39,16 @@
       <aside class="site-intro" aria-label="Author profile and categories">
         <section class="author-profile">
           <h2>Minje Park</h2>
-          <p class="description">{% if current_lang == "ko" %}연구와 코드, 그리고 기억해 두고 싶은 것들.{% else %}Research, code, and things worth remembering.{% endif %}</p>
+          <p class="description">{% if current_lang == "ko" %}논문 리뷰와 학습 과정, 연구 및 코드 노트를 정리합니다.{% else %}Paper reviews, learning courses, research notes, and code.{% endif %}</p>
           <ul class="profile-links">
-            <li><a href="https://github.com/pmj0324"><span aria-hidden="true">↗</span> github.com/pmj0324</a></li>
+            <li><a href="https://github.com/pmj0324"><img class="github-icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt=""> github.com/pmj0324</a></li>
             <li><a href="mailto:pmj032400@naver.com"><span aria-hidden="true">✉️</span> pmj032400@naver.com</a></li>
           </ul>
         </section>
 
         <nav class="category-nav" aria-label="Blog categories">
-          <a class="category-main" href="{{ blog_home_url | relative_url }}">📝 {% if current_lang == "ko" %}모든 글{% else %}All posts{% endif %} <strong>({{ language_posts | size }})</strong></a>
+          <a class="category-main" href="{{ blog_home_url | relative_url }}">🏡 Home</a>
+          <a class="category-main" href="{{ blog_home_url | append: '#recent-posts' | relative_url }}">📝 {% if current_lang == "ko" %}모든 글{% else %}All posts{% endif %} <strong>({{ language_posts | size }})</strong></a>
           <p class="category-label">🗂️ {% if current_lang == "ko" %}폴더{% else %}Folders{% endif %}</p>
           {% assign cosmology_posts = site.categories["Cosmology"] | where: "lang", current_lang %}
           {% assign ml_posts = site.categories["Machine Learning"] | where: "lang", current_lang %}
