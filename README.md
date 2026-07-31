@@ -52,3 +52,10 @@ python3 -m http.server 8000
 ```
 
 Calendar entries are stored in the visitor's browser with `localStorage`. Seed calendar data embedded in the page source is public when this repository is public.
+
+## Copyright and credits
+
+Written content and original media are © Minje Park and all rights are reserved
+unless a file states otherwise. No general license has been granted for the
+original website source code yet. See `NOTICE.md` for design references and
+third-party acknowledgements.

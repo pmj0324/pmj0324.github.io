@@ -22,6 +22,7 @@ defaults:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - NOTICE.md
   - README.md
   - blog/README.md
   - vendor
