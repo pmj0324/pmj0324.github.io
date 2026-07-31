@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <meta name="theme-color" content="#f2efe8">
+    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <div class="site-shell">
+      <aside class="site-intro">
+        <a class="home-mark" href="{{ '/blog/' | relative_url }}" aria-label="Minje Park notes home">MP</a>
+        <div class="intro-copy">
+          <p class="eyebrow">Research notebook</p>
+          <p class="author">Minje Park</p>
+          <p class="description">Notes on physics, simulation, machine learning, and the questions between them.</p>
+        </div>
+        <nav class="side-links" aria-label="Blog links">
+          <a href="{{ '/blog/' | relative_url }}">All notes</a>
+          <a href="{{ '/' | relative_url }}">Main website</a>
+          <a href="https://github.com/pmj0324">GitHub</a>
+        </nav>
+      </aside>
+
+      <main class="site-content" id="content">
+        {{ content }}
+      </main>
+    </div>
+  </body>
+</html>
