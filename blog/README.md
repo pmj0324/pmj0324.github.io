@@ -27,9 +27,8 @@ Example:
 ---
 title: My new note
 description: One sentence shown on the archive page.
-tags:
-  - physics
-  - simulation
+categories:
+  - Cosmology
 ---
 
 Write the post here.
@@ -37,6 +36,9 @@ Write the post here.
 
 Do not manually add the post to `blog/index.html`; its list is generated from
 the files in `_posts/`.
+
+Use one of these folder names in `categories`: `Cosmology`, `Machine Learning`,
+`Generative Model`, or `Python`.
 
 ## Preview locally
 

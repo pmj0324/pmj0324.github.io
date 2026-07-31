@@ -1,0 +1,30 @@
+---
+layout: default
+title: Folders
+permalink: /blog/categories/
+---
+<header class="page-heading">
+  <h1>🗂️ Folders</h1>
+</header>
+
+{% assign folder_names = "Cosmology|Machine Learning|Generative Model|Python" | split: "|" %}
+<div class="folder-archive">
+  {% for folder in folder_names %}
+    {% assign folder_posts = site.categories[folder] %}
+    <section class="folder-section" id="{{ folder | slugify }}">
+      <h2>📁 {{ folder }}</h2>
+      {% if folder_posts.size > 0 %}
+        <ul>
+          {% for post in folder_posts %}
+            <li>
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No posts yet.</p>
+      {% endif %}
+    </section>
+  {% endfor %}
+</div>

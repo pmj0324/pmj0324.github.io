@@ -6,16 +6,16 @@
     <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=3">
+    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=4">
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
     <header class="masthead">
       <div class="masthead-inner">
-        <a class="site-title" href="{{ '/blog/' | relative_url }}">Minje Park's Research Notes</a>
+        <a class="site-title" href="{{ '/blog/' | relative_url }}">Minje Park's Personal Blog</a>
         <nav aria-label="Primary navigation">
-          <a href="{{ '/blog/' | relative_url }}">Posts</a>
-          <a href="{{ '/' | relative_url }}">Main site</a>
+          <a href="{{ '/blog/' | relative_url }}">📝 Posts</a>
+          <a href="{{ '/' | relative_url }}">🏠 Personal</a>
         </nav>
       </div>
     </header>
@@ -26,34 +26,34 @@
           <h2>Minje Park</h2>
           <p class="description">Physics, simulation, and machine learning.</p>
           <ul class="profile-links">
-            <li><span aria-hidden="true">●</span> Seoul, Korea</li>
-            <li><a href="https://github.com/pmj0324"><span aria-hidden="true">↗</span> GitHub</a></li>
-            <li><a href="mailto:pmj032400@naver.com"><span aria-hidden="true">✉</span> Email</a></li>
+            <li><a href="https://github.com/pmj0324"><span aria-hidden="true">🐙</span> github.com/pmj0324</a></li>
+            <li><a href="mailto:pmj032400@naver.com"><span aria-hidden="true">✉️</span> pmj032400@naver.com</a></li>
           </ul>
         </section>
 
         <nav class="category-nav" aria-label="Blog categories">
-          <a class="category-main" href="{{ '/blog/' | relative_url }}">📂 All posts <strong>({{ site.posts | size }})</strong></a>
-          {% assign sorted_tags = site.tags | sort %}
-          {% if sorted_tags.size > 0 %}
-            <p class="category-label">Tags</p>
-            <ul>
-              {% for tag in sorted_tags %}
-                <li><span>{{ tag[0] }}</span> <small>({{ tag[1] | size }})</small></li>
-              {% endfor %}
-            </ul>
-          {% endif %}
+          <a class="category-main" href="{{ '/blog/' | relative_url }}">📝 All posts <strong>({{ site.posts | size }})</strong></a>
+          <p class="category-label">🗂️ Folders</p>
+          {% assign cosmology_posts = site.categories["Cosmology"] %}
+          {% assign ml_posts = site.categories["Machine Learning"] %}
+          {% assign generative_posts = site.categories["Generative Model"] %}
+          {% assign python_posts = site.categories["Python"] %}
+          <ul>
+            <li><a href="{{ '/blog/categories/' | relative_url }}#cosmology"><span>📁 Cosmology</span> <small>({{ cosmology_posts | size }})</small></a></li>
+            <li><a href="{{ '/blog/categories/' | relative_url }}#machine-learning"><span>📁 Machine Learning</span> <small>({{ ml_posts | size }})</small></a></li>
+            <li><a href="{{ '/blog/categories/' | relative_url }}#generative-model"><span>📁 Generative Model</span> <small>({{ generative_posts | size }})</small></a></li>
+            <li><a href="{{ '/blog/categories/' | relative_url }}#python"><span>📁 Python</span> <small>({{ python_posts | size }})</small></a></li>
+          </ul>
         </nav>
+
+        <div class="sidebar-legal">
+          <p>© {{ site.time | date: "%Y" }} Minje Park</p>
+          <p>Built with <a href="https://jekyllrb.com/">Jekyll</a> · <a href="https://kimjy99.github.io/">Layout reference</a></p>
+        </div>
       </aside>
 
       <main class="site-content" id="content">{{ content }}</main>
     </div>
 
-    <footer class="site-footer">
-      <div class="site-footer-inner">
-        <p>© {{ site.time | date: "%Y" }} Minje Park. Written content and original media are all rights reserved unless otherwise noted.</p>
-        <p>Built with <a href="https://jekyllrb.com/">Jekyll</a>. Layout reference: <a href="https://kimjy99.github.io/">JiYeop Kim's blog</a> and <a href="https://github.com/mmistakes/minimal-mistakes">Minimal Mistakes</a>.</p>
-      </div>
-    </footer>
   </body>
 </html>

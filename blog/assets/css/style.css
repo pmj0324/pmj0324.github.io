@@ -87,6 +87,7 @@ a:hover {
   grid-template-columns: 230px minmax(0, 1fr);
   margin: 0 auto;
   max-width: 1280px;
+  min-height: calc(100vh - 65px);
   padding: 1rem 16px 5rem;
 }
 
@@ -128,13 +129,14 @@ a:hover {
 
 .profile-links span {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   margin-right: 0.35rem;
   text-align: center;
   width: 1rem;
 }
 
 .profile-links a {
+  overflow-wrap: anywhere;
   text-decoration: none;
 }
 
@@ -166,11 +168,34 @@ a:hover {
 
 .category-nav li {
   color: var(--muted);
-  padding: 0.16rem 0 0.16rem 0.75rem;
+  padding: 0;
 }
 
 .category-nav small {
   font-size: inherit;
+}
+
+.category-nav li a {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.22rem 0 0.22rem 0.55rem;
+  text-decoration: none;
+}
+
+.sidebar-legal {
+  border-top: 1px solid var(--line);
+  color: #92979a;
+  font-size: 0.68rem;
+  margin-top: 1.2rem;
+  padding-top: 0.8rem;
+}
+
+.sidebar-legal p {
+  margin: 0.2rem 0;
+}
+
+.sidebar-legal a {
+  color: inherit;
 }
 
 .site-content {
@@ -333,24 +358,47 @@ a:hover {
   padding: 1.5rem 0;
 }
 
-.site-footer {
-  border-top: 1px solid var(--line);
+.folder-section {
+  border-bottom: 1px solid var(--line);
+  padding: 1.4rem 2rem 1.6rem;
+  scroll-margin-top: 1rem;
+}
+
+.folder-section h2 {
+  color: #4a5053;
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.folder-section p {
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
+  margin: 0;
 }
 
-.site-footer-inner {
-  margin: 0 auto;
-  max-width: 1280px;
-  padding: 1.25rem 16px 2rem 280px;
+.folder-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.site-footer p {
-  margin: 0.25rem 0;
+.folder-section li {
+  align-items: baseline;
+  display: flex;
+  gap: 1rem;
+  padding: 0.3rem 0;
 }
 
-.site-footer a {
-  color: #5f666a;
+.folder-section time {
+  color: var(--muted);
+  font-size: 0.75rem;
+  min-width: 5.5rem;
+}
+
+.folder-section li a {
+  color: var(--heading);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 @media (max-width: 760px) {
@@ -384,17 +432,20 @@ a:hover {
     padding-left: 0;
   }
 
+  .category-nav li a {
+    gap: 0.4rem;
+    padding-left: 0;
+  }
+
   .site-content {
     padding-top: 0.5rem;
   }
 
   .post-row,
-  .post {
+  .post,
+  .folder-section {
     padding-left: 0;
     padding-right: 0;
   }
 
-  .site-footer-inner {
-    padding-left: 16px;
-  }
 }
