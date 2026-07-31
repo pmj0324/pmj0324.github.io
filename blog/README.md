@@ -5,6 +5,7 @@ This directory contains the blog-specific source files.
 ```text
 blog/
 ├── index.html                    # blog archive page
+├── ko/                           # Korean archive and folder pages
 ├── _layouts/                    # shared HTML frames
 ├── _posts/                      # Markdown posts
 └── assets/css/style.css         # blog-only design
@@ -27,6 +28,7 @@ Example:
 ---
 title: My new note
 description: One sentence shown on the archive page.
+lang: en
 categories:
   - Cosmology
 ---
@@ -39,6 +41,9 @@ the files in `_posts/`.
 
 Use one of these folder names in `categories`: `Cosmology`, `Machine Learning`,
 `Generative Model`, or `Python`.
+
+Set `lang: en` for an English post or `lang: ko` for a Korean post. English
+posts appear at `/blog/`; Korean posts appear at `/blog/ko/`.
 
 ## Preview locally
 

@@ -7,14 +7,16 @@ layout: default
 </header>
 
 <section class="post-list" aria-label="Blog posts">
-  {% if site.posts.size > 0 %}
-    {% for post in site.posts %}
+  {% assign current_lang = page.lang | default: "en" %}
+  {% assign language_posts = site.posts | where: "lang", current_lang %}
+  {% if language_posts.size > 0 %}
+    {% for post in language_posts %}
       <article class="post-row">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-        <p class="post-date"><span aria-hidden="true">▣</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></p>
+        <p class="post-date"><span aria-hidden="true">▣</span> <time datetime="{{ post.date | date_to_xmlschema }}">{% if current_lang == "ko" %}{{ post.date | date: "%Y년 %m월 %d일" }}{% else %}{{ post.date | date: "%B %-d, %Y" }}{% endif %}</time></p>
         {% if post.description %}<p class="post-excerpt">{{ post.description }}</p>{% endif %}
         {% if post.categories.size > 0 %}
-          <div class="post-tags"><span class="tag-caption">📁 Folder:</span>
+          <div class="post-tags"><span class="tag-caption">📁 {% if current_lang == "ko" %}폴더:{% else %}Folder:{% endif %}</span>
             <ul class="tag-list" aria-label="Folders">
               {% for category in post.categories %}<li>{{ category }}</li>{% endfor %}
             </ul>
@@ -23,6 +25,6 @@ layout: default
       </article>
     {% endfor %}
   {% else %}
-    <p class="empty-state">The first note is still being written.</p>
+    <p class="empty-state">{% if current_lang == "ko" %}아직 작성된 한국어 글이 없습니다.{% else %}The first note is still being written.{% endif %}</p>
   {% endif %}
 </section>
