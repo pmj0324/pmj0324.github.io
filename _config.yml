@@ -1,0 +1,27 @@
+title: Minje Park — Notes
+description: Notes on physics, simulation, and machine learning.
+url: https://pmj0324.github.io
+baseurl: ""
+
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+timezone: Asia/Seoul
+
+# Keep Jekyll's blog machinery inside the blog directory.
+collections_dir: blog
+layouts_dir: blog/_layouts
+includes_dir: blog/_includes
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - blog/README.md
+  - vendor

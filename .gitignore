@@ -1,6 +1,13 @@
 .DS_Store
 .claude/
 
+# Jekyll build output
+_site/
+.jekyll-cache/
+.sass-cache/
+Gemfile.lock
+vendor/
+
 # LaTeX build artifacts
 *.aux
 *.log
