@@ -108,6 +108,16 @@ categories:
 
 어떤 폴더에도 넣지 않으려면 `categories` 부분을 생략해도 됩니다.
 
+## Personal 페이지
+
+영어 페이지는 `blog/personal/index.html`, 한국어 페이지는
+`blog/ko/personal/index.html`에서 수정합니다. 접힌 카드를 누르면 가려진
+내용이 펼쳐지는 형태입니다.
+
+이 기능은 디자인 효과이며 비밀번호 보호 기능이 아닙니다. GitHub Pages에 올린
+내용과 소스 코드는 모두 공개되므로 실제 비밀번호, 개인정보나 비공개 기록을
+넣으면 안 됩니다.
+
 ## 5. Markdown 문법
 
 ````markdown
