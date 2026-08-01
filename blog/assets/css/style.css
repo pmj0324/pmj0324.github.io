@@ -96,7 +96,7 @@ a:hover {
   font: inherit;
   height: 1.8rem;
   justify-content: center;
-  left: 230px;
+  left: calc(230px - 0.9rem);
   padding: 0;
   position: absolute;
   transition: border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
@@ -143,7 +143,7 @@ a:hover {
   margin: 0 auto;
   max-width: 1280px;
   min-height: calc(100vh - 65px);
-  padding: 1rem 16px 5rem;
+  padding: 1rem 16px 5rem 0;
   width: 100%;
 }
 
@@ -286,14 +286,6 @@ a:hover {
 .blog-hero {
   border-bottom: 1px solid var(--line);
   padding: 1.1rem 0 2.5rem;
-}
-
-.blog-kicker {
-  color: var(--heading-dark);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  margin: 0 0 0.75rem;
 }
 
 .blog-hero h1 {
@@ -655,6 +647,7 @@ a:hover {
 
   .site-shell {
     display: block;
+    padding-left: 16px;
     padding-top: 1.4rem;
   }
 

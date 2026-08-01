@@ -2,7 +2,6 @@
 layout: default
 ---
 <section class="blog-hero" aria-labelledby="blog-title">
-  <p class="blog-kicker">{{ page.kicker }}</p>
   <h1 id="blog-title">{{ page.hero_title | default: "Personal Blog" }}</h1>
   {% if page.intro %}<p>{{ page.intro }}</p>{% endif %}
 </section>
