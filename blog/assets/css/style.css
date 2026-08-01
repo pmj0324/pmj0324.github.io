@@ -292,7 +292,7 @@ a:hover {
 }
 
 .sidebar-collapsed .site-shell {
-  grid-template-columns: 0 minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .sidebar-collapsed .site-intro {
