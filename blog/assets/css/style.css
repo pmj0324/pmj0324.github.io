@@ -95,7 +95,7 @@ a:hover {
   font: inherit;
   height: 1.8rem;
   justify-content: center;
-  left: calc(230px - 0.9rem);
+  left: calc(246px - 0.9rem);
   padding: 0;
   position: absolute;
   transition: border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
@@ -141,7 +141,7 @@ a:hover {
   grid-template-columns: 230px minmax(0, 1fr);
   margin: 0;
   min-height: calc(100vh - 65px);
-  padding: 1rem 16px 5rem 0;
+  padding: 1rem 16px 5rem;
   width: 100%;
 }
 
