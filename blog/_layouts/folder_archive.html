@@ -1,15 +1,14 @@
 ---
 layout: default
 ---
-{% assign current_lang = page.lang | default: "en" %}
 <header class="page-heading">
-  <h1>🗂️ {% if current_lang == "ko" %}폴더{% else %}Folders{% endif %}</h1>
+  <h1>🗂️ 폴더</h1>
 </header>
 
 {% assign folder_names = "Cosmology|Machine Learning|Generative Model|Python" | split: "|" %}
 <div class="folder-archive">
   {% for folder in folder_names %}
-    {% assign folder_posts = site.categories[folder] | where: "lang", current_lang %}
+    {% assign folder_posts = site.categories[folder] %}
     <section class="folder-section" id="{{ folder | slugify }}">
       <h2>📁 {{ folder }}</h2>
       {% if folder_posts.size > 0 %}
@@ -22,7 +21,7 @@ layout: default
           {% endfor %}
         </ul>
       {% else %}
-        <p>{% if current_lang == "ko" %}아직 글이 없습니다.{% else %}No posts yet.{% endif %}</p>
+        <p>아직 글이 없습니다.</p>
       {% endif %}
     </section>
   {% endfor %}
