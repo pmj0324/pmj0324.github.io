@@ -22,7 +22,7 @@
         }
       } catch (error) {}
     </script>
-    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=12">
+    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=13">
   </head>
   <body>
     <a class="skip-link" href="#content">{% if current_lang == "ko" %}본문으로 건너뛰기{% else %}Skip to content{% endif %}</a>
@@ -58,8 +58,11 @@
     <div class="site-shell">
       <aside class="site-intro" id="blog-sidebar" aria-label="Author profile and categories">
         <section class="author-profile">
+          <div class="profile-photo">
+            <img src="{{ '/blog/assets/images/memes/thinking-again.jpeg' | relative_url }}" alt="{% if current_lang == 'ko' %}생각하다가 다시 까먹는 고양이{% else %}A cat thinking and forgetting again{% endif %}">
+          </div>
           <h2>Minje Park</h2>
-          <p class="description">{% if current_lang == "ko" %}논문 리뷰와 학습 과정, 연구 및 코드 노트를 정리합니다.{% else %}Paper reviews, learning courses, research notes, and code.{% endif %}</p>
+          <p class="description">{% if current_lang == "ko" %}까묵기 싫다.{% else %}I do not want to forget.{% endif %}</p>
           <ul class="profile-links">
             <li><a href="https://github.com/pmj0324"><img class="github-icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt=""> github.com/pmj0324</a></li>
             <li><a href="mailto:pmj032400@naver.com"><span aria-hidden="true">✉️</span> pmj032400@naver.com</a></li>
