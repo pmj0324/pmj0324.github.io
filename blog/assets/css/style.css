@@ -69,11 +69,46 @@ a:hover {
   padding: 0 16px;
 }
 
+.masthead-brand {
+  align-items: center;
+  display: flex;
+  gap: 0.7rem;
+}
+
 .site-title {
   color: #42474a;
   font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
+}
+
+.sidebar-toggle {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #dfe1e2;
+  border-radius: 4px;
+  color: #686e72;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.74rem;
+  gap: 0.35rem;
+  padding: 0.32rem 0.52rem;
+}
+
+.sidebar-toggle:hover {
+  border-color: #aeb3b6;
+  color: var(--heading-dark);
+}
+
+.sidebar-toggle:focus-visible {
+  outline: 2px solid var(--heading);
+  outline-offset: 2px;
+}
+
+.sidebar-toggle-icon {
+  font-size: 0.9rem;
+  line-height: 1;
 }
 
 .primary-nav {
@@ -224,6 +259,19 @@ a:hover {
   border-left: 1px solid var(--line);
   min-width: 0;
   padding: 1.55rem 0 0 2.1rem;
+}
+
+.sidebar-collapsed .site-shell {
+  grid-template-columns: 0 minmax(0, 1fr);
+}
+
+.sidebar-collapsed .site-intro {
+  display: none;
+}
+
+.sidebar-collapsed .site-content {
+  border-left: 0;
+  padding-left: 0;
 }
 
 .blog-hero {
@@ -595,6 +643,10 @@ a:hover {
     padding-top: 1.4rem;
   }
 
+  .sidebar-toggle-label {
+    display: none;
+  }
+
   .site-intro {
     border-bottom: 1px solid var(--line);
     margin-bottom: 1rem;
@@ -632,6 +684,10 @@ a:hover {
   .site-content {
     border-left: 0;
     padding: 0.5rem 0 0;
+  }
+
+  .sidebar-collapsed .site-content {
+    padding-top: 0.5rem;
   }
 
   .blog-hero,
