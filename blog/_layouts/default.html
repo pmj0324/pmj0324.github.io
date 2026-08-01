@@ -22,7 +22,7 @@
         }
       } catch (error) {}
     </script>
-    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=13">
+    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=14">
   </head>
   <body>
     <a class="skip-link" href="#content">{% if current_lang == "ko" %}본문으로 건너뛰기{% else %}Skip to content{% endif %}</a>
@@ -38,8 +38,7 @@
             data-open-label="{% if current_lang == 'ko' %}사이드바 열기{% else %}Open sidebar{% endif %}"
             data-close-label="{% if current_lang == 'ko' %}사이드바 닫기{% else %}Close sidebar{% endif %}"
           >
-            <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
-            <span class="sidebar-toggle-label">{% if current_lang == "ko" %}사이드바{% else %}Sidebar{% endif %}</span>
+            <span class="sidebar-toggle-icon" aria-hidden="true">‹</span>
           </button>
         </div>
         <nav class="primary-nav" aria-label="Primary navigation">
@@ -106,9 +105,11 @@
         function updateButton() {
           var isCollapsed = root.classList.contains("sidebar-collapsed");
           var label = isCollapsed ? button.dataset.openLabel : button.dataset.closeLabel;
+          var icon = button.querySelector(".sidebar-toggle-icon");
           button.setAttribute("aria-expanded", String(!isCollapsed));
           button.setAttribute("aria-label", label);
           button.setAttribute("title", label);
+          if (icon) icon.textContent = isCollapsed ? "›" : "‹";
         }
 
         button.addEventListener("click", function () {
