@@ -160,10 +160,7 @@ a:hover {
 }
 
 .profile-photo {
-  aspect-ratio: 1;
-  background: #fff;
   border: 1px solid var(--line);
-  border-radius: 4px;
   margin: 0 0 0.9rem;
   overflow: hidden;
   width: min(100%, 12rem);
@@ -171,8 +168,7 @@ a:hover {
 
 .profile-photo img {
   display: block;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
   width: 100%;
 }
 
