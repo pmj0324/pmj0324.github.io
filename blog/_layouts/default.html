@@ -15,13 +15,33 @@
     <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=11">
+    <script>
+      try {
+        if (localStorage.getItem("blog-sidebar") === "closed") {
+          document.documentElement.classList.add("sidebar-collapsed");
+        }
+      } catch (error) {}
+    </script>
+    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=12">
   </head>
   <body>
     <a class="skip-link" href="#content">{% if current_lang == "ko" %}본문으로 건너뛰기{% else %}Skip to content{% endif %}</a>
     <header class="masthead">
       <div class="masthead-inner">
-        <a class="site-title" href="{{ blog_home_url | relative_url }}">Personal Blog</a>
+        <div class="masthead-brand">
+          <a class="site-title" href="{{ blog_home_url | relative_url }}">Personal Blog</a>
+          <button
+            class="sidebar-toggle"
+            type="button"
+            aria-controls="blog-sidebar"
+            aria-expanded="true"
+            data-open-label="{% if current_lang == 'ko' %}사이드바 열기{% else %}Open sidebar{% endif %}"
+            data-close-label="{% if current_lang == 'ko' %}사이드바 닫기{% else %}Close sidebar{% endif %}"
+          >
+            <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
+            <span class="sidebar-toggle-label">{% if current_lang == "ko" %}사이드바{% else %}Sidebar{% endif %}</span>
+          </button>
+        </div>
         <nav class="primary-nav" aria-label="Primary navigation">
           <a href="{{ blog_home_url | relative_url }}">🏡 Home</a>
           <a href="{{ blog_home_url | append: '#recent-posts' | relative_url }}">📝 {% if current_lang == "ko" %}글{% else %}Posts{% endif %}</a>
@@ -36,7 +56,7 @@
     </header>
 
     <div class="site-shell">
-      <aside class="site-intro" aria-label="Author profile and categories">
+      <aside class="site-intro" id="blog-sidebar" aria-label="Author profile and categories">
         <section class="author-profile">
           <h2>Minje Park</h2>
           <p class="description">{% if current_lang == "ko" %}논문 리뷰와 학습 과정, 연구 및 코드 노트를 정리합니다.{% else %}Paper reviews, learning courses, research notes, and code.{% endif %}</p>
@@ -73,6 +93,35 @@
         <p>Built with <a href="https://jekyllrb.com/">Jekyll</a> · <a href="https://kimjy99.github.io/">Layout reference</a></p>
       </div>
     </footer>
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var button = document.querySelector(".sidebar-toggle");
+        if (!button) return;
+
+        function updateButton() {
+          var isCollapsed = root.classList.contains("sidebar-collapsed");
+          var label = isCollapsed ? button.dataset.openLabel : button.dataset.closeLabel;
+          button.setAttribute("aria-expanded", String(!isCollapsed));
+          button.setAttribute("aria-label", label);
+          button.setAttribute("title", label);
+        }
+
+        button.addEventListener("click", function () {
+          root.classList.toggle("sidebar-collapsed");
+          try {
+            localStorage.setItem(
+              "blog-sidebar",
+              root.classList.contains("sidebar-collapsed") ? "closed" : "open"
+            );
+          } catch (error) {}
+          updateButton();
+        });
+
+        updateButton();
+      })();
+    </script>
 
   </body>
 </html>
