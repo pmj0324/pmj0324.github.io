@@ -1,7 +1,6 @@
 ---
 title: "Conda, Miniconda, Micromamba: 스치기"
 description: 10분만에 끝내는 Conda 기본 개념 이해와 설치
-lang: ko
 categories:
   - Python
 ---

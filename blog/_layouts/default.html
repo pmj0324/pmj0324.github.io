@@ -1,14 +1,7 @@
-{% assign current_lang = page.lang | default: "en" %}
-{% assign language_posts = site.posts | where: "lang", current_lang %}
-{% if current_lang == "ko" %}
-  {% assign blog_home_url = "/blog/ko/" %}
-  {% assign folder_home_url = "/blog/ko/categories/" %}
-{% else %}
-  {% assign blog_home_url = "/blog/" %}
-  {% assign folder_home_url = "/blog/categories/" %}
-{% endif %}
+{% assign blog_home_url = "/blog/" %}
+{% assign folder_home_url = "/blog/categories/" %}
 <!doctype html>
-<html lang="{{ current_lang }}">
+<html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,10 +15,10 @@
         }
       } catch (error) {}
     </script>
-    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=15">
+    <link rel="stylesheet" href="{{ '/blog/assets/css/style.css' | relative_url }}?v=16">
   </head>
   <body>
-    <a class="skip-link" href="#content">{% if current_lang == "ko" %}본문으로 건너뛰기{% else %}Skip to content{% endif %}</a>
+    <a class="skip-link" href="#content">본문으로 건너뛰기</a>
     <header class="masthead">
       <div class="masthead-inner">
         <div class="masthead-brand">
@@ -35,47 +28,42 @@
             type="button"
             aria-controls="blog-sidebar"
             aria-expanded="true"
-            data-open-label="{% if current_lang == 'ko' %}사이드바 열기{% else %}Open sidebar{% endif %}"
-            data-close-label="{% if current_lang == 'ko' %}사이드바 닫기{% else %}Close sidebar{% endif %}"
+            data-open-label="사이드바 열기"
+            data-close-label="사이드바 닫기"
           >
             <span class="sidebar-toggle-icon" aria-hidden="true">‹</span>
           </button>
         </div>
-        <nav class="primary-nav" aria-label="Primary navigation">
+        <nav class="primary-nav" aria-label="주요 메뉴">
           <a href="{{ blog_home_url | relative_url }}">🏡 Home</a>
-          <a href="{{ blog_home_url | append: '#recent-posts' | relative_url }}">📝 {% if current_lang == "ko" %}글{% else %}Posts{% endif %}</a>
+          <a href="{{ blog_home_url | append: '#recent-posts' | relative_url }}">📝 글</a>
           <a href="{{ '/' | relative_url }}">👤 About Me</a>
-          <span class="language-switch" aria-label="Language">
-            <a href="{{ '/blog/' | relative_url }}"{% if current_lang == "en" %} aria-current="page"{% endif %}>ENG</a>
-            <span aria-hidden="true">/</span>
-            <a href="{{ '/blog/ko/' | relative_url }}"{% if current_lang == "ko" %} aria-current="page"{% endif %}>한국어</a>
-          </span>
         </nav>
       </div>
     </header>
 
     <div class="site-shell">
-      <aside class="site-intro" id="blog-sidebar" aria-label="Author profile and categories">
+      <aside class="site-intro" id="blog-sidebar" aria-label="프로필과 폴더">
         <section class="author-profile">
           <div class="profile-photo">
-            <img src="{{ '/blog/assets/images/memes/thinking-again.jpeg' | relative_url }}" alt="{% if current_lang == 'ko' %}생각하다가 다시 까먹는 고양이{% else %}A cat thinking and forgetting again{% endif %}">
+            <img src="{{ '/blog/assets/images/memes/thinking-again.jpeg' | relative_url }}" alt="생각하다가 다시 까먹는 고양이">
           </div>
           <h2>Minje Park</h2>
-          <p class="description">{% if current_lang == "ko" %}까묵기 싫다.{% else %}I do not want to forget.{% endif %}</p>
+          <p class="description">까묵기 싫다.</p>
           <ul class="profile-links">
             <li><a href="https://github.com/pmj0324"><img class="github-icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt=""> github.com/pmj0324</a></li>
             <li><a href="mailto:pmj032400@naver.com"><span aria-hidden="true">✉️</span> pmj032400@naver.com</a></li>
           </ul>
         </section>
 
-        <nav class="category-nav" aria-label="Blog categories">
+        <nav class="category-nav" aria-label="블로그 폴더">
           <a class="category-main" href="{{ blog_home_url | relative_url }}">🏡 Home</a>
-          <a class="category-main" href="{{ blog_home_url | append: '#recent-posts' | relative_url }}">📝 {% if current_lang == "ko" %}모든 글{% else %}All posts{% endif %} <strong>({{ language_posts | size }})</strong></a>
-          <p class="category-label">🗂️ {% if current_lang == "ko" %}폴더{% else %}Folders{% endif %}</p>
-          {% assign cosmology_posts = site.categories["Cosmology"] | where: "lang", current_lang %}
-          {% assign ml_posts = site.categories["Machine Learning"] | where: "lang", current_lang %}
-          {% assign generative_posts = site.categories["Generative Model"] | where: "lang", current_lang %}
-          {% assign python_posts = site.categories["Python"] | where: "lang", current_lang %}
+          <a class="category-main" href="{{ blog_home_url | append: '#recent-posts' | relative_url }}">📝 모든 글 <strong>({{ site.posts | size }})</strong></a>
+          <p class="category-label">🗂️ 폴더</p>
+          {% assign cosmology_posts = site.categories["Cosmology"] %}
+          {% assign ml_posts = site.categories["Machine Learning"] %}
+          {% assign generative_posts = site.categories["Generative Model"] %}
+          {% assign python_posts = site.categories["Python"] %}
           <ul>
             <li><a href="{{ folder_home_url | relative_url }}#cosmology"><span>📁 Cosmology</span> <small>({{ cosmology_posts | size }})</small></a></li>
             <li><a href="{{ folder_home_url | relative_url }}#machine-learning"><span>📁 Machine Learning</span> <small>({{ ml_posts | size }})</small></a></li>
@@ -92,7 +80,7 @@
     <footer class="site-footer">
       <div class="site-footer-inner">
         <p>© {{ site.time | date: "%Y" }} Minje Park</p>
-        <p>Built with <a href="https://jekyllrb.com/">Jekyll</a> · <a href="https://kimjy99.github.io/">Layout reference</a></p>
+        <p><a href="https://jekyllrb.com/">Jekyll</a>로 제작 · <a href="https://kimjy99.github.io/">레이아웃 참고</a></p>
       </div>
     </footer>
 

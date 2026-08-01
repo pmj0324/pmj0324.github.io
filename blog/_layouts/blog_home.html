@@ -9,26 +9,26 @@ layout: default
 
 <section class="blog-sections" aria-labelledby="sections-title">
   <header class="page-heading section-heading">
-    <h2 id="sections-title">{% if page.lang == "ko" %}이 블로그에서 다룰 내용{% else %}What you will find here{% endif %}</h2>
+    <h2 id="sections-title">이 블로그에서 다룰 내용</h2>
   </header>
   <div class="topic-grid">
     <article class="topic-card">
       <span class="topic-icon" aria-hidden="true">📄</span>
-      <h3>{% if page.lang == "ko" %}논문 리뷰{% else %}Paper Reviews{% endif %}</h3>
-      <p>{% if page.lang == "ko" %}읽은 논문의 핵심 아이디어와 배경, 다시 살펴볼 질문을 정리합니다.{% else %}Key ideas, context, and questions from papers worth revisiting.{% endif %}</p>
-      <span class="topic-status">{% if page.lang == "ko" %}글 준비 중{% else %}Posts coming soon{% endif %}</span>
+      <h3>논문 리뷰</h3>
+      <p>읽은 논문의 핵심 아이디어와 배경, 다시 살펴볼 질문을 정리합니다.</p>
+      <span class="topic-status">글 준비 중</span>
     </article>
     <article class="topic-card">
       <span class="topic-icon" aria-hidden="true">🧭</span>
-      <h3>{% if page.lang == "ko" %}학습 코스{% else %}Learning Courses{% endif %}</h3>
-      <p>{% if page.lang == "ko" %}주제별 학습 순서와 참고 자료, 직접 공부하며 얻은 설명을 모읍니다.{% else %}Structured learning paths, references, and explanations gathered along the way.{% endif %}</p>
-      <span class="topic-status">{% if page.lang == "ko" %}코스 준비 중{% else %}Courses coming soon{% endif %}</span>
+      <h3>학습 코스</h3>
+      <p>주제별 학습 순서와 참고 자료, 직접 공부하며 얻은 설명을 모읍니다.</p>
+      <span class="topic-status">코스 준비 중</span>
     </article>
     <article class="topic-card">
       <span class="topic-icon" aria-hidden="true">⌨️</span>
-      <h3>{% if page.lang == "ko" %}연구와 코드 노트{% else %}Research &amp; Code Notes{% endif %}</h3>
-      <p>{% if page.lang == "ko" %}연구 과정의 계산, 구현 방법과 다시 사용하고 싶은 코드 조각을 기록합니다.{% else %}Calculations, implementations, and reusable notes from research work.{% endif %}</p>
-      <span class="topic-status">{% if page.lang == "ko" %}노트 준비 중{% else %}Notes coming soon{% endif %}</span>
+      <h3>연구와 코드 노트</h3>
+      <p>연구 과정의 계산, 구현 방법과 다시 사용하고 싶은 코드 조각을 기록합니다.</p>
+      <span class="topic-status">노트 준비 중</span>
     </article>
   </div>
 </section>
@@ -37,18 +37,16 @@ layout: default
   <h2>{{ page.heading | default: "Recent posts" }}</h2>
 </header>
 
-<section class="post-list" aria-label="Blog posts">
-  {% assign current_lang = page.lang | default: "en" %}
-  {% assign language_posts = site.posts | where: "lang", current_lang %}
-  {% if language_posts.size > 0 %}
-    {% for post in language_posts %}
+<section class="post-list" aria-label="블로그 글">
+  {% if site.posts.size > 0 %}
+    {% for post in site.posts %}
       <article class="post-row">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-        <p class="post-date"><span aria-hidden="true">▣</span> <time datetime="{{ post.date | date_to_xmlschema }}">{% if current_lang == "ko" %}{{ post.date | date: "%Y년 %m월 %d일" }}{% else %}{{ post.date | date: "%B %-d, %Y" }}{% endif %}</time></p>
+        <p class="post-date"><span aria-hidden="true">▣</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y년 %m월 %d일" }}</time></p>
         {% if post.description %}<p class="post-excerpt">{{ post.description }}</p>{% endif %}
         {% if post.categories.size > 0 %}
-          <div class="post-tags"><span class="tag-caption">📁 {% if current_lang == "ko" %}폴더:{% else %}Folder:{% endif %}</span>
-            <ul class="tag-list" aria-label="Folders">
+          <div class="post-tags"><span class="tag-caption">📁 폴더:</span>
+            <ul class="tag-list" aria-label="폴더">
               {% for category in post.categories %}<li>{{ category }}</li>{% endfor %}
             </ul>
           </div>
@@ -56,6 +54,6 @@ layout: default
       </article>
     {% endfor %}
   {% else %}
-    <p class="empty-state">{% if current_lang == "ko" %}아직 작성된 한국어 글이 없습니다.{% else %}The first note is still being written.{% endif %}</p>
+    <p class="empty-state">아직 작성된 글이 없습니다.</p>
   {% endif %}
 </section>

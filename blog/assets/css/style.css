@@ -135,25 +135,6 @@ a:hover {
   text-decoration: none;
 }
 
-.language-switch {
-  align-items: center;
-  border-left: 1px solid var(--line);
-  display: inline-flex;
-  font-size: 0.72rem;
-  gap: 0.35rem;
-  padding-left: 1rem;
-}
-
-.language-switch a {
-  color: #8a8f92;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.language-switch a[aria-current="page"] {
-  color: var(--heading-dark);
-}
-
 .site-shell {
   display: grid;
   flex: 1;
@@ -179,21 +160,19 @@ a:hover {
 }
 
 .profile-photo {
-  background: #f4f4f4;
+  aspect-ratio: 1;
+  background: #fff;
   border: 1px solid var(--line);
-  border-radius: 50%;
-  height: 5.5rem;
+  border-radius: 4px;
   margin: 0 0 0.9rem;
   overflow: hidden;
-  width: 5.5rem;
+  width: min(100%, 12rem);
 }
 
 .profile-photo img {
   display: block;
   height: 100%;
-  object-fit: cover;
-  object-position: center 48%;
-  transform: scale(1.65);
+  object-fit: contain;
   width: 100%;
 }
 
@@ -672,11 +651,6 @@ a:hover {
 
   .primary-nav > a {
     font-size: 0.78rem;
-  }
-
-  .language-switch {
-    margin-left: auto;
-    padding-left: 0.6rem;
   }
 
   .site-shell {
