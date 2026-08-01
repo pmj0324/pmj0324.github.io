@@ -67,6 +67,7 @@ a:hover {
   max-width: 1280px;
   min-height: 64px;
   padding: 0 16px;
+  position: relative;
 }
 
 .masthead-brand {
@@ -85,19 +86,27 @@ a:hover {
 .sidebar-toggle {
   align-items: center;
   background: #fff;
-  border: 1px solid #dfe1e2;
-  border-radius: 4px;
-  color: #686e72;
+  border: 1px solid #d9dcde;
+  border-radius: 50%;
+  bottom: -31px;
+  box-shadow: 0 1px 4px rgb(30 38 42 / 10%);
+  color: #747a7e;
   cursor: pointer;
   display: inline-flex;
   font: inherit;
-  font-size: 0.74rem;
-  gap: 0.35rem;
-  padding: 0.32rem 0.52rem;
+  height: 1.8rem;
+  justify-content: center;
+  left: 230px;
+  padding: 0;
+  position: absolute;
+  transition: border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  width: 1.8rem;
+  z-index: 2;
 }
 
 .sidebar-toggle:hover {
   border-color: #aeb3b6;
+  box-shadow: 0 2px 7px rgb(30 38 42 / 16%);
   color: var(--heading-dark);
 }
 
@@ -107,8 +116,10 @@ a:hover {
 }
 
 .sidebar-toggle-icon {
-  font-size: 0.9rem;
+  font-family: Arial, sans-serif;
+  font-size: 1.35rem;
   line-height: 1;
+  margin-top: -0.08rem;
 }
 
 .primary-nav {
@@ -642,6 +653,17 @@ a:hover {
     padding-top: 0.65rem;
   }
 
+  .masthead-brand {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .sidebar-toggle {
+    bottom: auto;
+    left: auto;
+    position: static;
+  }
+
   .primary-nav {
     gap: 0.6rem;
     justify-content: space-between;
@@ -660,10 +682,6 @@ a:hover {
   .site-shell {
     display: block;
     padding-top: 1.4rem;
-  }
-
-  .sidebar-toggle-label {
-    display: none;
   }
 
   .site-intro {
