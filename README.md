@@ -26,7 +26,6 @@ Static personal website published with GitHub Pages.
 - `publications.html` — publications, talks, and posters
 - `blog/` — Jekyll-generated notes archive
 - `calendar.html` — browser-local calendar
-- `links.html` — external links
 - `game.html` — GENESIS image comparison game
 
 ## Document workflow
