@@ -1,12 +1,22 @@
 {% assign blog_home_url = "/blog/" %}
 {% assign folder_home_url = "/blog/categories/" %}
+{% assign page_description = page.description | default: site.description %}
+{% assign canonical_url = page.url | absolute_url %}
 <!doctype html>
 <html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <title>{% if page.title and page.title != site.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page_description | escape }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{% if page.title and page.title != site.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}">
+    <meta property="og:description" content="{{ page_description | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ site.title | escape }}">
     <meta name="theme-color" content="#ffffff">
     <script>
       try {
@@ -22,7 +32,7 @@
     <header class="masthead">
       <div class="masthead-inner">
         <div class="masthead-brand">
-          <a class="site-title" href="{{ blog_home_url | relative_url }}">Personal Blog</a>
+          <a class="site-title" href="{{ blog_home_url | relative_url }}">까묵기 싫어서 하는 블로그</a>
           <button
             class="sidebar-toggle"
             type="button"
