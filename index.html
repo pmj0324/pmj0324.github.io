@@ -1,901 +1,313 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Minje Park</title>
-    <meta
-      name="description"
-      content="Personal homepage of Minje Park."
-    />
-        <link rel="stylesheet" href="shared-theme.css" />
-    <link rel="stylesheet" href="shared-nav-mobile.css" />
-    <style>
-      :root {
-        --bg: #0b1020;
-        --bg-soft: #151a2b;
-        --bg-softer: #1d2336;
-        --fg: #ffffff;
-        --fg-muted: #f4f6ff;
-        --accent: #8d9bff;
-        --accent-soft: rgba(141, 155, 255, 0.18);
-        --border-subtle: rgba(220, 226, 255, 0.24);
-        --shadow-soft: 0 22px 58px rgba(0, 0, 0, 0.62);
-        --radius-lg: 18px;
-        --radius-pill: 999px;
-        --nav-height: 64px;
-        --content-width: 960px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: Helvetica, Arial, sans-serif;
-        position: relative;
-        background: #0b1020;
-        overflow-x: hidden;
-        color: var(--fg);
-        -webkit-font-smoothing: antialiased;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: -8px;
-        z-index: 0;
-        pointer-events: none;
-        background-image: linear-gradient(
-            135deg,
-            rgba(3, 7, 18, 0.70),
-            rgba(15, 23, 42, 0.60)
-          ),
-          url("assets/images/nasa.jpg");
-        background-size: cover;
-        background-position: center;
-        filter: blur(2px);
-        transform: scale(1.015);
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        z-index: 1;
-      }
-
-      .page-inner {
-        width: 100%;
-        max-width: var(--content-width);
-        margin: 0 auto;
-        padding: 24px 20px 40px;
-      }
-
-      /* Navbar */
-      .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        backdrop-filter: blur(16px);
-        background: linear-gradient(
-          to bottom,
-          rgba(5, 7, 18, 0.9),
-          rgba(5, 7, 18, 0.6),
-          transparent
-        );
-      }
-
-      .navbar-inner {
-        height: var(--nav-height);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .brand-avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 20%, #f7f7ff, #8d9bff);
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
-          0 10px 24px rgba(0, 0, 0, 0.7);
-      }
-
-      .brand-text-main {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0;
-      }
-
-      .brand-text-sub {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        color: var(--fg-muted);
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        font-size: 14px;
-      }
-
-      .nav-link {
-        padding: 6px 12px;
-        border-radius: 999px;
-        color: var(--fg-muted);
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: background 0.16s ease, color 0.16s ease;
-      }
-
-      .nav-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--fg);
-        text-decoration: none;
-      }
-
-      .nav-link-active {
-        background: var(--accent-soft);
-        color: var(--accent);
-      }
-
-      /* Layout */
-      .layout {
-        display: grid;
-        grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
-        gap: 24px;
-        margin-top: 20px;
-      }
-
-      @media (max-width: 880px) {
-        .layout {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-
-      @media (max-width: 640px) {
-        .page-inner {
-          padding-inline: 16px;
-        }
-      }
-
-      /* Cards */
-      .card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.78),
-          rgba(7, 11, 25, 0.84)
-        );
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-subtle);
-        box-shadow: var(--shadow-soft);
-        backdrop-filter: blur(12px);
-        padding: 22px 22px 20px;
-      }
-
-      .intro-card {
-        background: linear-gradient(
-          145deg,
-          rgba(27, 36, 58, 0.78),
-          rgba(11, 18, 36, 0.84)
-        );
-        border-color: rgba(220, 226, 255, 0.32);
-      }
-
-      .card + .card {
-        margin-top: 18px;
-      }
-
-      .card-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      }
-
-      .card-title-link {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .card-title-link:hover {
-        color: var(--accent);
-        text-decoration: underline;
-      }
-
-      .card-title {
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.88);
-      }
-
-      .card-subtitle {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.84);
-      }
-
-      /* Hero */
-      .hero-name {
-        font-size: clamp(26px, 2.8vw, 32px);
-        font-weight: 700;
-        letter-spacing: 0;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        margin-top: 0;
-        margin-bottom: 12px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .hero-name-mark {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        flex-shrink: 0;
-      }
-
-      .hero-name-dot {
-        height: 8px;
-        border-radius: 999px;
-        background: var(--accent);
-        box-shadow: 0 0 10px rgba(141, 155, 255, 0.45);
-      }
-
-      .hero-name-dot-first {
-        width: 8px;
-      }
-
-      .hero-name-dot-second {
-        width: 13px;
-      }
-
-      .hero-role {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 4px 12px;
-        border-radius: var(--radius-pill);
-        background: rgba(141, 155, 255, 0.08);
-        border: 1px solid rgba(141, 155, 255, 0.22);
-        color: rgba(255, 255, 255, 0.86);
-        font-size: 12px;
-        margin-bottom: 16px;
-      }
-
-      .hero-role-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 999px;
-        background: var(--accent);
-        box-shadow: 0 0 6px rgba(141, 155, 255, 0.5);
-      }
-
-      .hero-text {
-        font-size: 13.5px;
-        line-height: 1.75;
-        color: rgba(255, 255, 255, 0.94);
-        margin-bottom: 18px;
-      }
-
-      .hero-text-list {
-        font-size: 13.5px;
-        line-height: 1.75;
-        color: rgba(255, 255, 255, 0.94);
-        margin: 0 0 18px 1.2em;
-        padding-left: 0.4em;
-      }
-
-      .hero-text-list li {
-        margin-bottom: 4px;
-      }
-
-      .hero-meta {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px 18px;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.84);
-        margin-bottom: 20px;
-        padding: 14px 16px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 12px;
-      }
-
-      .hero-meta-label {
-        text-transform: uppercase;
-        letter-spacing: 0;
-        font-size: 10px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.62);
-        margin-bottom: 3px;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 7px 14px;
-        border-radius: var(--radius-pill);
-        font-size: 13px;
-        font-weight: 500;
-        border: 1px solid transparent;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background 0.15s ease, border-color 0.15s ease,
-          transform 0.1s ease, box-shadow 0.1s ease;
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, #8d9bff, #b892ff);
-        color: #050712;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
-        text-decoration: none;
-      }
-
-      .btn-ghost {
-        background: rgba(8, 12, 28, 0.85);
-        color: var(--fg-muted);
-        border-color: rgba(143, 148, 183, 0.6);
-      }
-
-      .btn-ghost:hover {
-        background: rgba(17, 23, 42, 0.95);
-        border-color: rgba(199, 203, 233, 0.9);
-        color: var(--fg);
-        text-decoration: none;
-      }
-
-      /* Right column (profile) */
-      .profile-card {
-        display: grid;
-        grid-template-columns: auto minmax(0, 1fr);
-        gap: 16px;
-        align-items: center;
-      }
-
-      .profile-avatar {
-        width: 80px;
-        height: 80px;
-        border-radius: 24px;
-        object-fit: cover;
-        display: block;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
-        border: 2px solid rgba(255, 255, 255, 0.18);
-      }
-
-      .profile-name {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 2px;
-      }
-
-      .profile-title {
-        font-size: 13px;
-        color: var(--fg-muted);
-        margin-bottom: 6px;
-      }
-
-      .profile-location {
-        font-size: 12px;
-        color: var(--fg-muted);
-      }
-
-      .profile-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 10px;
-      }
-
-      .chip {
-        padding: 3px 9px;
-        border-radius: var(--radius-pill);
-        border: 1px solid rgba(143, 148, 183, 0.5);
-        font-size: 11px;
-        color: var(--fg-muted);
-      }
-
-      .chip a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .chip a:hover {
-        text-decoration: underline;
-      }
-
-      .section-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .section-item {
-        padding: 0;
-        border-top: none;
-      }
-
-      /* item mini-card (pub, blog, research) */
-      .item-card {
-        display: block;
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.76),
-          rgba(7, 11, 25, 0.82)
-        );
-        border: 1px solid rgba(220, 226, 255, 0.20);
-        border-radius: 12px;
-        backdrop-filter: blur(8px);
-        padding: 12px 14px;
-        text-decoration: none;
-        color: inherit;
-        transition: border-color 0.20s ease, background 0.20s ease,
-          transform 0.20s ease;
-      }
-
-      .item-card:hover {
-        border-color: rgba(141, 155, 255, 0.45);
-        background: linear-gradient(
-          145deg,
-          rgba(31, 40, 64, 0.82),
-          rgba(12, 17, 35, 0.88)
-        );
-        transform: translateY(-1px);
-        text-decoration: none;
-      }
-
-      .pub-title {
-        font-size: 13.5px;
-        font-weight: 600;
-        color: #ffffff;
-        margin-bottom: 5px;
-        line-height: 1.4;
-      }
-
-      .pub-meta {
-        font-size: 11.5px;
-        color: rgba(255, 255, 255, 0.88);
-        margin-bottom: 3px;
-        line-height: 1.5;
-      }
-
-      .pub-links {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.80);
-        line-height: 1.5;
-      }
-
-      /* blog post row */
-      .post-card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.76),
-          rgba(7, 11, 25, 0.82)
-        );
-        border: 1px solid rgba(220, 226, 255, 0.20);
-        border-radius: 12px;
-        backdrop-filter: blur(8px);
-        padding: 12px 14px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        text-decoration: none;
-        color: inherit;
-        transition: border-color 0.20s ease, background 0.20s ease,
-          transform 0.20s ease;
-      }
-
-      .post-card:hover {
-        border-color: rgba(141, 155, 255, 0.28);
-        background: linear-gradient(
-          145deg,
-          rgba(28, 34, 58, 0.58),
-          rgba(14, 18, 40, 0.63)
-        );
-        transform: translateY(-1px);
-        text-decoration: none;
-      }
-
-      .post-date {
-        flex-shrink: 0;
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--accent);
-        letter-spacing: 0;
-        line-height: 1.4;
-        min-width: 68px;
-      }
-
-      .post-title {
-        font-size: 13px;
-        font-weight: 600;
-        color: #ffffff;
-        flex: 1;
-      }
-
-      .post-arrow {
-        flex-shrink: 0;
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.55);
-        transition: color 0.18s ease, transform 0.18s ease;
-      }
-
-      .post-card:hover .post-arrow {
-        color: var(--accent);
-        transform: translate(2px, -2px);
-      }
-
-      .card-footer-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 11.5px;
-        color: rgba(141, 155, 255, 0.65);
-        margin-top: 12px;
-        transition: color 0.15s ease;
-        text-decoration: none;
-      }
-
-      .card-footer-link:hover {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      /* Footer */
-      .footer {
-        margin-top: auto;
-        padding: 20px;
-        border-top: 1px solid rgba(24, 30, 46, 0.9);
-        color: #7a7f98;
-        font-size: 12px;
-      }
-
-      .footer-inner {
-        max-width: var(--content-width);
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <header class="navbar">
-        <div class="page-inner navbar-inner">
-          <div class="brand">
-            <div>
-              <div class="brand-text-main">Minje&nbsp;Park</div>
-              <div class="brand-text-sub">Personal&nbsp;homepage</div>
-            </div>
-          </div>
-          <nav class="nav-links" aria-label="Main navigation">
-            <a class="nav-link nav-link-active" href="index.html">home</a>
-            <a class="nav-link" href="about.html">about</a>
-            <a class="nav-link" href="research.html">research</a>
-            <a class="nav-link" href="blog/">blog</a>
-            <a class="nav-link" href="calendar.html">calendar</a>
-            <a class="nav-link" href="publications.html">publications</a>
-            <a class="nav-link" href="game.html">game</a>
-          </nav>
-        </div>
-      </header>
-
-      <main class="page-inner">
-        <div class="layout">
-          <!-- Left column: hero, selected publications, posts -->
-          <section aria-label="Main content">
-            <article class="card intro-card" aria-labelledby="hero-heading">
-              <header>
-                <h1 id="hero-heading" class="hero-name">
-                  <span>Minje Park</span>
-                  <span class="hero-name-mark" aria-hidden="true">
-                    <span class="hero-name-dot hero-name-dot-first"></span>
-                    <span class="hero-name-dot hero-name-dot-second"></span>
-                  </span>
-                </h1>
-              </header>
-              <p class="hero-text">
-                I am an undergraduate student at Sungkyunkwan University, interested in applying neural networks and generative AI to cosmology and astroparticle physics.
-              </p>
-              <ul class="hero-text-list">
-                <li>In <strong style="color:rgba(255,255,255,0.98);">cosmology</strong>, I develop <strong style="color:rgba(255,255,255,0.98);">GENESIS</strong> (GENerative Emulator for Simulation and parameter Inference from cosmological fields), an optimal-transport flow-matching emulator designed to support astrophysical and cosmological parameter inference.</li>
-                <li>In <strong style="color:rgba(255,255,255,0.98);">astroparticle physics</strong>, I develop <strong style="color:rgba(255,255,255,0.98);">JANUS</strong>, a flow-matching model for neutrino event generation and reconstruction for the IceCube Neutrino Observatory. I also worked on <strong style="color:rgba(255,255,255,0.98);">OPTICUS</strong>, a Vision Transformer model for optical property measurement in the IceCube Upgrade camera system, and contributed to developing a Transformer-based reconstruction model for the next-generation gamma-ray detector SWGO.</li>
-              </ul>
-              <p class="hero-text" style="margin-bottom:0;">
-                Further details are available on the <a href="research.html">Research</a> and <a href="publications.html">Publications</a> pages.
-              </p>
-            </article>
-
-            <section
-              class="card"
-              id="publications"
-              aria-labelledby="pub-heading"
-            >
-              <div class="card-header">
-                <h2 id="pub-heading" class="card-title"><a href="publications.html" class="card-title-link">selected highlights</a></h2>
-                <span class="card-subtitle">publications &amp; presentations</span>
-              </div>
-              <ul class="section-list">
-                <li class="section-item">
-                  <a class="item-card" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer">
-                    <div class="pub-title">
-                      Performance Study of the IceCube Upgrade Camera System
-                    </div>
-                    <div class="pub-meta">
-                      C. Rott, <strong style="color:rgba(255,255,255,0.75);">M. Park</strong>,
-                      M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)
-                    </div>
-                    <div class="pub-meta">arXiv:2507.18525 &mdash; ICRC 2025</div>
-                    <div class="pub-links" style="margin-top:5px;color:var(--accent);font-size:11px;">📄 View on arXiv →</div>
-                  </a>
-                </li>
-                <li class="section-item">
-                  <a class="item-card" href="documents/presentations/2025-06-janus-slides.pdf" target="_blank" rel="noopener noreferrer">
-                    <div class="pub-title">
-                      Diffusion and Flow Matching Model for IceCube Neutrino Event
-                      Simulation and Reconstruction
-                    </div>
-                    <div class="pub-meta">
-                      <strong style="color:rgba(255,255,255,0.75);">M. Park</strong>
-                      &mdash; K-Neutrino Symposium, 2025
-                    </div>
-                    <div class="pub-meta">
-                      <span style="color:#f0c850;font-size:10px;font-weight:600;">★ Best Presentation Award</span>
-                      &nbsp;· Conference poster
-                    </div>
-                  </a>
-                </li>
-                <li class="section-item">
-                  <a class="item-card" href="documents/presentations/2026-01-igzo-pinn-poster.pdf" target="_blank" rel="noopener noreferrer">
-                    <div class="pub-title">
-                      Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM
-                    </div>
-                    <div class="pub-meta">
-                      <strong style="color:rgba(255,255,255,0.75);">M. Park</strong>
-                      &mdash; Korean Conference on Semiconductors, 2026
-                    </div>
-                    <div class="pub-meta">
-                      <span style="color:#f0c850;font-size:10px;font-weight:600;">★ Best Presentation Award</span>
-                      &nbsp;· Conference poster
-                    </div>
-                  </a>
-                </li>
-                <li class="section-item">
-                  <a class="item-card" href="documents/presentations/2024-10-icecube-optical-properties-poster.pdf" target="_blank" rel="noopener noreferrer">
-                    <div class="pub-title">
-                      Development of a Deep Learning Model for Analyzing Antarctic Ice Optical Properties
-                    </div>
-                    <div class="pub-meta">
-                      <strong style="color:rgba(255,255,255,0.75);">M. Park</strong>
-                      &mdash; KPS Undergraduate Physics Research Competition, 2024
-                    </div>
-                    <div class="pub-meta">
-                      <span style="color:#f0c850;font-size:10px;font-weight:600;">★ Merit Award</span>
-                      &nbsp;· Conference poster
-                    </div>
-                  </a>
-                </li>
-                <li class="section-item">
-                  <a class="item-card" href="documents/presentations/2025-10-genesis-poster.pdf" target="_blank" rel="noopener noreferrer">
-                    <div class="pub-title">
-                      Generative AI for Cosmological Simulation and Manifold Representation
-                    </div>
-                    <div class="pub-meta">
-                      <strong style="color:rgba(255,255,255,0.75);">M. Park</strong>
-                      &mdash; KPS Undergraduate Physics Research Competition, 2025
-                    </div>
-                    <div class="pub-meta">
-                      Conference poster
-                    </div>
-                  </a>
-                </li>
-              </ul>
-              <a class="card-footer-link" href="publications.html">View all publications →</a>
-            </section>
-
-          </section>
-
-          <!-- Right column: profile & details -->
-          <aside aria-label="Profile and contact information">
-            <section class="card profile-card" id="about">
-              <img
-                class="profile-avatar"
-                src="assets/images/profile.jpg"
-                alt="Portrait of Minje Park"
-              />
-              <div>
-                <div class="profile-name">Minje&nbsp;Park</div>
-                <div class="profile-title">
-                  Undergraduate student, Sungkyunkwan University
-                </div>
-                <div class="profile-location">Seoul, South Korea</div>
-                <div class="profile-links">
-                  <span class="chip">
-                    <a href="mailto:&#112;&#109;&#106;&#48;&#51;&#50;&#52;&#48;&#48;&#64;&#110;&#97;&#118;&#101;&#114;&#46;&#99;&#111;&#109;">Email</a>
-                  </span>
-                  <span class="chip">
-                    <a href="https://github.com/pmj0324" target="_blank"
-                      >GitHub</a
-                    >
-                  </span>
-                  <span class="chip">
-                    <a
-                      href="https://www.linkedin.com/in/minje-park-81b722365/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >LinkedIn</a
-                    >
-                  </span>
-                  <span class="chip">
-                    <a
-                      href="https://scholar.google.com/citations?user=oC5mE0AAAAAJ&hl=en"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >Scholar</a
-                    >
-                  </span>
-                </div>
-              </div>
-            </section>
-
-            <section
-              class="card"
-              id="research-experience"
-              aria-labelledby="research-heading"
-            >
-              <div class="card-header">
-                <h2 id="research-heading" class="card-title">
-                  <a href="research.html" class="card-title-link">research experience</a>
-                </h2>
-              </div>
-              <ul class="section-list">
-                <li class="section-item">
-                  <a class="item-card" href="research.html">
-                    <div class="pub-title">Undergraduate Researcher</div>
-                    <div class="pub-meta">
-                      Prof. Carsten Rott &mdash; University of Utah
-                      <span style="color:var(--accent);margin-left:6px;font-size:10px;font-weight:600;">Aug 2023 – Feb 2025</span>
-                    </div>
-                    <div class="pub-links">
-                      OPTICUS: Vision Transformer for IceCube optical-property measurement.
-                    </div>
-                  </a>
-                </li>
-                <li class="section-item">
-                  <a class="item-card" href="research.html">
-                    <div class="pub-title">Undergraduate Researcher</div>
-                    <div class="pub-meta">
-                      Prof. Chang Dong Rho &mdash; Sungkyunkwan University
-                      <span style="color:var(--accent);margin-left:6px;font-size:10px;font-weight:600;">May 2024 – Feb 2026</span>
-                    </div>
-                    <div class="pub-links">
-                      JANUS: diffusion and flow-matching models for realistic IceCube event generation and inference.
-                    </div>
-                  </a>
-                </li>
-                <li class="section-item">
-                  <a class="item-card" href="research.html">
-                    <div class="pub-title">Undergraduate Researcher</div>
-                    <div class="pub-meta">
-                      Dr. Ian Watson &mdash; University of Seoul
-                      <span style="color:var(--accent);margin-left:6px;font-size:10px;font-weight:600;">Jun 2024 – Feb 2026</span>
-                    </div>
-                    <div class="pub-links">
-                      Transformer-based models for SWGO primary-particle reconstruction.
-                    </div>
-                  </a>
-                </li>
-                <li class="section-item">
-                  <a class="item-card" href="research.html">
-                    <div class="pub-title">Undergraduate Researcher</div>
-                    <div class="pub-meta">
-                      Prof. Ji-Hoon Kim &mdash; Seoul National University
-                      <span style="color:var(--accent);margin-left:6px;font-size:10px;font-weight:600;">Jun 2026 – Present</span>
-                    </div>
-                    <div class="pub-links">
-                      Generative AI for cosmological simulation and super-resolution.
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </section>
-            <section
-              class="card"
-              id="recent-notes"
-              aria-labelledby="recent-notes-heading"
-            >
-              <div class="card-header">
-                <h2 id="recent-notes-heading" class="card-title">
-                  <a href="blog/" class="card-title-link">recent notes</a>
-                </h2>
-                <span class="card-subtitle">blog</span>
-              </div>
-              <ul class="section-list">
-                <li class="section-item">
-                  <a class="post-card" href="blog/2026/08/01/starting-the-notebook/">
-                    <div class="post-date">Aug 01,<br>2026</div>
-                    <div class="post-body">
-                      <div class="post-title">Starting the notebook</div>
-                      <div class="pub-links">
-                        A small beginning for a place where unfinished questions
-                        can remain visible.
-                      </div>
-                    </div>
-                    <span class="post-arrow">&#8599;</span>
-                  </a>
-                </li>
-              </ul>
-              <a class="card-footer-link" href="blog/">View all notes →</a>
-            </section>
-          </aside>
-        </div>
-      </main>
-
-      <footer class="footer">
-        <div class="footer-inner">
-          <span>
-            © <span id="year"></span> Minje Park. All rights reserved.
-          </span>
-          <span>Portfolio in static HTML; notes built with Jekyll.</span>
-          <span>Background: <a href="https://science.nasa.gov/asset/webb/cosmic-cliffs-in-the-carina-nebula-nircam-image/" target="_blank" rel="noopener noreferrer">Cosmic Cliffs in the Carina Nebula</a>; image credit: NASA, ESA, CSA, STScI. Image cropped and blurred for background display.</span>
-        </div>
-      </footer>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Minje Park — generative AI for cosmology and astroparticle physics.">
+  <meta name="theme-color" content="#f7f9fa">
+  <title>Minje Park</title>
+  <script>document.documentElement.classList.add("has-motion");</script>
+  <link rel="stylesheet" href="assets/css/homepage.css?v=54">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="index.html"><span>Minje Park</span></a>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="about.html">About</a><a href="research.html">Research</a>
+        <a href="publications.html">Publications</a><a href="blog/">Notes</a>
+        <a href="documents/cv/Minje_Park_CV.pdf">CV</a>
+        <details class="more-menu"><summary>More</summary><div><a href="calendar.html">Calendar</a><a href="game.html">Game</a></div></details>
+      </nav>
     </div>
+  </header>
 
-    <script>
-      document.getElementById("year").textContent =
-        new Date().getFullYear().toString();
-    </script>
-  </body>
+  <main id="main">
+    <section class="shell hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">Minje Park</h1>
+        <p class="hero-role">B.S. student in Physics and Electrical Engineering, Sungkyunkwan University</p>
+        <p class="hero-body">Interested in <strong>cosmology</strong>, <strong>astrophysics</strong>, and <strong>machine learning</strong>.<br>Currently focusing on diffusion, flow matching, and Transformer models for cosmological simulations.</p>
+        <div class="hero-links" aria-label="Contact and academic profiles">
+          <a href="mailto:pmj032400@naver.com">Email</a>
+          <a href="documents/cv/Minje_Park_CV.pdf">CV</a>
+          <a href="https://scholar.google.com/citations?user=oC5mE0AAAAAJ&amp;hl=en">Scholar</a>
+          <a href="https://github.com/pmj0324">GitHub</a>
+          <a href="https://www.linkedin.com/in/minje-park-81b722365/">LinkedIn</a>
+        </div>
+      </div>
+      <figure class="profile-figure">
+        <div class="portrait-frame"><img src="assets/images/profile-professional.jpg" width="709" height="992" alt="Portrait of Minje Park"></div>
+      </figure>
+    </section>
+
+    <section class="experience-band" aria-labelledby="experience-title">
+      <div class="shell experience-card motion-reveal">
+        <div class="section-heading">
+          <div><h2 id="experience-title">Research experience</h2></div>
+          <button class="experience-expand-all" type="button" aria-pressed="false">Expand all</button>
+        </div>
+        <ol class="timeline experience-list">
+          <li class="experience-item experience-snu">
+            <button class="experience-trigger" id="experience-snu-toggle" type="button" aria-expanded="false" aria-controls="experience-snu-detail">
+              <span class="experience-summary">
+                <strong class="experience-role">Research Intern</strong>
+                <span class="experience-period"><span class="period-dates"><time datetime="2026-06">Jun 2026</time><span class="period-end"><span aria-hidden="true">— </span><span class="period-present">Present</span></span></span><span class="period-track" aria-hidden="true"><span class="period-fill"></span></span></span>
+                <span class="experience-meta"><span class="experience-institution">Seoul National University</span><span class="experience-advisor"><span class="advisor-label">Advisor</span> Prof. Ji-Hoon Kim<span class="advisor-dept">Department of Physics and Astronomy</span></span></span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </span>
+            </button>
+            <div class="experience-detail" id="experience-snu-detail" aria-hidden="true">
+              <div><div class="detail-body"><p class="detail-title">Generative AI for Cosmological Simulation and Super-Resolution</p><ul><li>Developing generative AI models for cosmological simulation and super-resolution.</li></ul></div></div>
+            </div>
+          </li>
+          <li class="experience-item experience-uos">
+            <button class="experience-trigger" id="experience-uos-toggle" type="button" aria-expanded="false" aria-controls="experience-uos-detail">
+              <span class="experience-summary">
+                <strong class="experience-role">Research Intern</strong>
+                <span class="experience-period"><span class="period-dates"><time datetime="2024-07">Jul 2024</time><span class="period-end"><span aria-hidden="true">— </span><time datetime="2026-02">Feb 2026</time></span></span><span class="period-track" aria-hidden="true"><span class="period-fill"></span></span></span>
+                <span class="experience-meta"><span class="experience-institution">University of Seoul</span><span class="experience-advisor"><span class="advisor-label">Advisor</span> Prof. Ian James Watson<span class="advisor-dept">Department of Physics</span></span></span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </span>
+            </button>
+            <div class="experience-detail" id="experience-uos-detail" aria-hidden="true">
+              <div><div class="detail-body"><p class="detail-title">Transformer-Based Reconstruction Model for SWGO</p><ul><li>Investigated position embedding strategies for a Transformer-based primary-particle reconstruction model in SWGO.</li><li>Developed flow matching models to synthesize SWGO detector signals from simulation data.</li></ul></div></div>
+            </div>
+          </li>
+          <li class="experience-item experience-skku">
+            <button class="experience-trigger" id="experience-skku-toggle" type="button" aria-expanded="false" aria-controls="experience-skku-detail">
+              <span class="experience-summary">
+                <strong class="experience-role">Research Intern</strong>
+                <span class="experience-period"><span class="period-dates"><time datetime="2024-05">May 2024</time><span class="period-end"><span aria-hidden="true">— </span><time datetime="2026-02">Feb 2026</time></span></span><span class="period-track" aria-hidden="true"><span class="period-fill"></span></span></span>
+                <span class="experience-meta"><span class="experience-institution">Sungkyunkwan University</span><span class="experience-advisor"><span class="advisor-label">Advisor</span> Prof. Chang Dong Rho<span class="advisor-dept">Department of Physics</span></span></span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </span>
+            </button>
+            <div class="experience-detail" id="experience-skku-detail" aria-hidden="true">
+              <div><div class="detail-body"><p class="detail-title">Generative AI for IceCube and SWGO</p><ul><li>Developed diffusion models and Mixture Density Networks to synthesize PMT signals for the SWGO tank simulation.</li><li>Built flow and diffusion models to generate neutrino events in the IceCube Observatory.</li></ul></div></div>
+            </div>
+          </li>
+          <li class="experience-item experience-rott">
+            <button class="experience-trigger" id="experience-rott-toggle" type="button" aria-expanded="false" aria-controls="experience-rott-detail">
+              <span class="experience-summary">
+                <strong class="experience-role">Research Intern</strong>
+                <span class="experience-period"><span class="period-dates"><time datetime="2023-08">Aug 2023</time><span class="period-end"><span aria-hidden="true">— </span><time datetime="2025-09">Sep 2025</time></span></span><span class="period-track" aria-hidden="true"><span class="period-fill"></span></span></span>
+                <span class="experience-meta"><span class="experience-institution">Sungkyunkwan University &amp; University of Utah</span><span class="experience-advisor"><span class="advisor-label">Advisor</span> Prof. Carsten Rott<span class="advisor-dept">Department of Physics</span></span></span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </span>
+            </button>
+            <div class="experience-detail" id="experience-rott-detail" aria-hidden="true">
+              <div><div class="detail-body"><p class="detail-title">CNN and Vision Transformer for IceCube Camera Analysis</p><ul><li>Developed CNN and Vision Transformer models for the IceCube Upgrade Camera System.</li><li>Results presented as a poster and proceedings paper at ICRC 2025 (<a href="https://arxiv.org/abs/2507.18525">arXiv:2507.18525</a>).</li></ul></div></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="research-band" aria-labelledby="research-title">
+      <div class="shell">
+        <div class="section-heading section-heading-light">
+          <div><h2 id="research-title">Selected research</h2></div>
+          <a href="research.html">View all research ↗</a>
+        </div>
+        <div class="work-grid">
+          <article class="work-card work-ind">
+            <a class="work-thumb" href="research.html#project-cosmo-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/cv_tiles_camels_vs_genesis_6.png" alt="" loading="lazy"></a>
+            <div class="work-body">
+              <p class="work-field">Independent research</p>
+              <h3><a href="research.html#project-cosmo-heading">GENESIS</a></h3>
+              <p class="work-desc">Flow matching for cosmological field simulation and physical parameter inference.</p>
+              <div class="work-links"><a href="documents/papers/genesis/genesis.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>Paper</a><a href="https://github.com/pmj0324/GENESIS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="game.html"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm-1.7 4.6v6.8L11.8 8Z" fill-rule="evenodd"/></svg></span>Demo</a></div>
+            </div>
+          </article>
+          <article class="work-card work-skku">
+            <a class="work-thumb" href="research.html#project-skku-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/janus.jpg" alt="" loading="lazy"></a>
+            <div class="work-body">
+              <p class="work-field">Sungkyunkwan University</p>
+              <h3><a href="research.html#project-skku-heading">JANUS</a></h3>
+              <p class="work-desc">Diffusion and flow matching for IceCube neutrino event generation and reconstruction.</p>
+              <div class="work-links"><a href="documents/presentations/2025-06-janus-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a><a href="https://github.com/pmj0324/JANUS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a></div>
+            </div>
+          </article>
+          <article class="work-card work-rott">
+            <a class="work-thumb" href="research.html#project-utah-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/opticus.jpg" alt="" loading="lazy"></a>
+            <div class="work-body">
+              <p class="work-field">University of Utah · SKKU</p>
+              <h3><a href="research.html#project-utah-heading">OPTICUS</a></h3>
+              <p class="work-desc">Vision Transformers for Antarctic ice optical-property measurement.</p>
+              <div class="work-links"><a href="https://arxiv.org/abs/2507.18525"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>Paper</a><a href="https://github.com/pmj0324/OPTICUS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a></div>
+            </div>
+          </article>
+          <article class="work-card work-uos">
+            <a class="work-thumb work-thumb-poster" href="research.html#project-skku-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/swgo.jpg" alt="" loading="lazy"></a>
+            <div class="work-body">
+              <p class="work-field">University of Seoul · SKKU</p>
+              <h3><a href="research.html#project-skku-heading">SWGO</a></h3>
+              <p class="work-desc">Generative detector simulation and Transformer-based particle reconstruction.</p>
+              <div class="work-links"><a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a><a href="https://github.com/pmj0324/fm-swgo"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell lower-grid">
+      <section aria-labelledby="publications-title">
+        <div class="section-heading"><div><h2 id="publications-title">Publications &amp; presentations</h2></div><a href="publications.html">Full list ↗</a></div>
+        <ol class="pub-list">
+          <li class="pub-item">
+            <span class="pub-year">2026</span>
+            <div class="pub-main">
+              <h3><a href="documents/presentations/2026-01-igzo-pinn-poster.pdf">Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM</a></h3>
+              <p class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>33rd Korean Conference on Semiconductors</p>
+              <p class="pub-award">Best Presentation Award</p>
+            </div>
+          </li>
+          <li class="pub-item">
+            <span class="pub-year">2025</span>
+            <div class="pub-main">
+              <h3><a href="https://arxiv.org/abs/2507.18525">Performance Study of the IceCube Upgrade Camera System</a></h3>
+              <p class="pub-authors">C. Rott, <strong>M. Park</strong>, M. Jansson, G. Iverson, S. Choi</p><p class="pub-venue"><span class="pub-kind pub-kind-proceedings">Proceedings</span>ICRC 2025 · <a class="pub-link" href="https://arxiv.org/abs/2507.18525">arXiv:2507.18525</a></p>
+              
+            </div>
+          </li>
+          <li class="pub-item">
+            <span class="pub-year">2025</span>
+            <div class="pub-main">
+              <h3><a href="documents/presentations/2025-10-genesis-poster.pdf">Generative AI for Cosmological Simulation and Manifold Representation</a></h3>
+              <p class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>KPS Undergraduate Physics Research Competition</p>
+              
+            </div>
+          </li>
+          <li class="pub-item">
+            <span class="pub-year">2025</span>
+            <div class="pub-main">
+              <h3><a href="documents/presentations/2025-06-janus-slides.pdf">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</a></h3>
+              <p class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>4th K-Neutrino Symposium</p>
+              <p class="pub-award">Best Presentation Award</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+    </div>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><p>© <span id="year">2026</span> Minje Park</p></div></footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const monthIndex = (value) => {
+      const [year, month] = value.split("-").map(Number);
+      return year * 12 + month - 1;
+    };
+    const today = new Date();
+    // Ongoing roles are drawn through at least Dec 2026 (the internship runs through December).
+    const currentMonth = Math.max(today.getFullYear() * 12 + today.getMonth(), 2026 * 12 + 11);
+    const periods = [...document.querySelectorAll(".experience-period")].map((element) => {
+      const dates = element.querySelectorAll("time");
+      return { element, start: monthIndex(dates[0].dateTime),
+        end: dates[1] ? monthIndex(dates[1].dateTime) : currentMonth, current: !dates[1] };
+    });
+    const earliest = Math.min(...periods.map((period) => period.start));
+    const firstYear = Math.floor(earliest / 12);
+    const timelineStart = earliest - 2;
+    const lastMonth = Math.max(currentMonth, ...periods.map((period) => period.end));
+    const timelineEnd = (Math.floor(lastMonth / 12) + 1) * 12;
+    const timelineSpan = Math.max(1, timelineEnd - timelineStart);
+    const pct = (month) => `${100 * (month - timelineStart) / timelineSpan}%`;
+    const years = [];
+    for (let y = firstYear; y * 12 < timelineEnd; y++) years.push(y);
+    periods.forEach(({ element, start, end, current }) => {
+      element.style.setProperty("--period-start", pct(start));
+      element.style.setProperty("--period-length", `${100 * (end - start + 1) / timelineSpan}%`);
+      element.style.setProperty("--period-end", pct(end + 1));
+      element.closest(".experience-item").classList.toggle("is-current", current);
+      const grid = document.createElement("span");
+      grid.className = "period-grid"; grid.setAttribute("aria-hidden", "true");
+      years.filter((y) => y * 12 > timelineStart).forEach((y) => { const tick = document.createElement("i"); tick.style.left = pct(y * 12); grid.append(tick); });
+      element.prepend(grid);
+    });
+    // Duration label above each bar (ongoing roles count up to today, not to the drawn end).
+    const realMonth = today.getFullYear() * 12 + today.getMonth();
+    periods.forEach(({ element, start, end, current }) => {
+      const months = (current ? Math.max(start, realMonth) : end) - start + 1;
+      const label = document.createElement("span");
+      label.className = "period-duration";
+      label.textContent = months < 12 ? `${months} mo` : `${(months / 12).toFixed(1)} y`;
+      element.querySelector(".period-track").append(label);
+    });
+    const axis = document.createElement("div");
+    axis.className = "period-axis"; axis.setAttribute("aria-hidden", "true");
+    years.forEach((y) => { const label = document.createElement("span"); label.textContent = y; label.style.left = pct((Math.max(y * 12, timelineStart) + Math.min((y + 1) * 12, timelineEnd)) / 2); axis.append(label); });
+    document.querySelector(".experience-list").after(axis);
+    // Place the tilted date labels: each ends at its pin, both on one baseline,
+    // nudged apart when they would collide and kept inside the timeline column.
+    const COS = Math.cos(25 * Math.PI / 180), SIN = Math.sin(25 * Math.PI / 180);
+    const layoutDates = () => periods.forEach(({ element, start, end }) => {
+      const track = element.querySelector(".period-track");
+      const width = track.offsetWidth;
+      const startLabel = element.querySelector(".period-dates > time");
+      const endLabel = element.querySelector(".period-end");
+      const startReach = startLabel.offsetWidth * COS + 2;
+      const endReach = endLabel.offsetWidth * COS + 2;
+      const overhang = endLabel.offsetHeight * SIN + 2;
+      const toX = (month) => width * (month - timelineStart) / timelineSpan;
+      let endX = Math.min(width - overhang, toX(end + 1));
+      let startX = Math.min(toX(start), endX - endReach - 8);
+      if (startX < startReach) {
+        startX = startReach;
+        endX = Math.min(width - overhang, Math.max(endX, startX + endReach + 8));
+      }
+      startLabel.style.right = `${width - startX + 2}px`;
+      const duration = element.querySelector(".period-duration");
+      const half = duration.offsetWidth / 2;
+      const mid = (toX(start) + Math.min(width, toX(end + 1))) / 2;
+      duration.style.left = `${Math.min(width - half, Math.max(half, mid))}px`;
+      endLabel.style.right = `${width - endX + 2}px`;
+    });
+    layoutDates();
+    window.addEventListener("resize", layoutDates);
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealItems = document.querySelectorAll(".motion-reveal");
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    } else {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14, rootMargin: "0px 0px -5%" });
+      revealItems.forEach((item) => revealObserver.observe(item));
+    }
+
+    const setOpen = (card, open) => {
+      card.classList.toggle("is-open", open);
+      card.querySelector(".experience-trigger").setAttribute("aria-expanded", String(open));
+      card.querySelector(".experience-detail").setAttribute("aria-hidden", String(!open));
+    };
+    const experienceCards = [...document.querySelectorAll(".experience-item")];
+    const expandAll = document.querySelector(".experience-expand-all");
+    const syncExpandAll = () => {
+      const allOpen = experienceCards.every((card) => card.classList.contains("is-open"));
+      expandAll.textContent = allOpen ? "Collapse all" : "Expand all";
+      expandAll.setAttribute("aria-pressed", String(allOpen));
+    };
+    experienceCards.forEach((card) => {
+      card.querySelector(".experience-trigger").addEventListener("click", () => {
+        setOpen(card, !card.classList.contains("is-open"));
+        syncExpandAll();
+      });
+    });
+    expandAll.addEventListener("click", () => {
+      const open = !experienceCards.every((card) => card.classList.contains("is-open"));
+      experienceCards.forEach((card) => setOpen(card, open));
+      syncExpandAll();
+    });
+  </script>
+</body>
 </html>
