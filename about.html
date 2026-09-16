@@ -1,661 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>About · Minje Park</title>
-    <meta
-      name="description"
-      content="About page for Minje Park with profile, research focus, and CV access."
-    />
-        <link rel="stylesheet" href="shared-theme.css" />
-    <link rel="stylesheet" href="shared-nav-mobile.css" />
-    <style>
-      :root {
-        --bg: #0b1020;
-        --bg-soft: #151a2b;
-        --bg-softer: #1d2336;
-        --fg: #ffffff;
-        --fg-muted: #f4f6ff;
-        --accent: #8d9bff;
-        --accent-soft: rgba(141, 155, 255, 0.18);
-        --border-subtle: rgba(220, 226, 255, 0.24);
-        --shadow-soft: 0 22px 58px rgba(0, 0, 0, 0.62);
-        --radius-lg: 18px;
-        --radius-pill: 999px;
-        --nav-height: 64px;
-        --content-width: 960px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: Helvetica, Arial, sans-serif;
-        position: relative;
-        background: #0b1020;
-        overflow-x: hidden;
-        color: var(--fg);
-        -webkit-font-smoothing: antialiased;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: -8px;
-        z-index: 0;
-        pointer-events: none;
-        background-image: linear-gradient(
-            135deg,
-            rgba(3, 7, 18, 0.70),
-            rgba(15, 23, 42, 0.60)
-          ),
-          url("assets/images/nasa.jpg");
-        background-size: cover;
-        background-position: center;
-        filter: blur(2px);
-        transform: scale(1.015);
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        z-index: 1;
-      }
-
-      .page-inner {
-        width: 100%;
-        max-width: var(--content-width);
-        margin: 0 auto;
-        padding: 24px 20px 40px;
-      }
-
-      .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        backdrop-filter: blur(16px);
-        background: linear-gradient(
-          to bottom,
-          rgba(5, 7, 18, 0.9),
-          rgba(5, 7, 18, 0.6),
-          transparent
-        );
-      }
-
-      .navbar-inner {
-        height: var(--nav-height);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .brand-avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 20%, #f7f7ff, #8d9bff);
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
-          0 10px 24px rgba(0, 0, 0, 0.7);
-      }
-
-      .brand-text-main {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0;
-      }
-
-      .brand-text-sub {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        color: var(--fg-muted);
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        font-size: 14px;
-      }
-
-      .nav-link {
-        padding: 6px 12px;
-        border-radius: 999px;
-        color: var(--fg-muted);
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: background 0.16s ease, color 0.16s ease;
-      }
-
-      .nav-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--fg);
-        text-decoration: none;
-      }
-
-      .nav-link-active {
-        background: var(--accent-soft);
-        color: var(--accent);
-      }
-
-      .card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.78),
-          rgba(7, 11, 25, 0.84)
-        );
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-subtle);
-        box-shadow: var(--shadow-soft);
-        backdrop-filter: blur(12px);
-        padding: 22px 22px 20px;
-        margin-top: 24px;
-      }
-
-      .intro-card {
-        background: linear-gradient(
-          145deg,
-          rgba(27, 36, 58, 0.78),
-          rgba(11, 18, 36, 0.84)
-        );
-        border-color: rgba(220, 226, 255, 0.32);
-      }
-
-      .card-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      }
-
-      .card-title {
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.88);
-      }
-
-      .card-subtitle {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.84);
-      }
-
-      .about-layout {
-        display: grid;
-        grid-template-columns: 300px 1fr;
-        gap: 28px;
-        align-items: start;
-      }
-
-      @media (max-width: 880px) {
-        .about-layout {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-
-      /* ── Profile card ── */
-      .about-profile {
-        background: rgba(7, 11, 25, 0.78);
-        border: 1px solid rgba(220, 226, 255, 0.28);
-        border-radius: 16px;
-        padding: 20px 16px;
-        backdrop-filter: blur(10px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .profile-photo {
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 20% 10%, #f4f4ff, #8d9bff);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
-          0 0 0 3px rgba(141, 155, 255, 0.22);
-        margin-bottom: 14px;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      .profile-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .about-name {
-        font-size: 19px;
-        font-weight: 700;
-        color: #ffffff;
-        margin-bottom: 3px;
-        letter-spacing: 0;
-      }
-
-      .about-affiliation {
-        font-size: 11.5px;
-        color: rgba(255, 255, 255, 0.86);
-        margin-bottom: 14px;
-        line-height: 1.4;
-      }
-
-      .about-divider {
-        width: 100%;
-        height: 1px;
-        background: rgba(255, 255, 255, 0.08);
-        margin: 12px 0;
-      }
-
-      .about-meta {
-        width: 100%;
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
-        font-size: 12.5px;
-        color: rgba(255, 255, 255, 0.84);
-        margin-bottom: 7px;
-        line-height: 1.5;
-        text-align: left;
-      }
-
-      .about-meta-label {
-        flex-shrink: 0;
-        width: 54px;
-        font-size: 9px;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        color: rgba(158, 164, 198, 0.7);
-      }
-
-      /* ── Right column ── */
-      .about-right {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .about-section {
-        padding: 18px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.07);
-      }
-
-      .about-section:first-child {
-        padding-top: 0;
-        border-top: none;
-      }
-
-      .about-section-title {
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        color: #ffffff;
-        margin-bottom: 10px;
-        padding-bottom: 6px;
-        border-bottom: 1px solid rgba(141, 155, 255, 0.25);
-        display: inline-block;
-      }
-
-      .about-text {
-        font-size: 13.5px;
-        line-height: 1.75;
-        color: rgba(255, 255, 255, 0.94);
-        margin: 0;
-      }
-
-      /* Education mini-card */
-      .edu-card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.76),
-          rgba(7, 11, 25, 0.82)
-        );
-        border: 1px solid rgba(220, 226, 255, 0.20);
-        border-radius: 14px;
-        padding: 14px 16px;
-        backdrop-filter: blur(8px);
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 16px;
-        align-items: baseline;
-        flex-direction: column;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .edu-card:hover {
-        border-color: rgba(141, 155, 255, 0.25);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-      }
-
-      .edu-header {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 10px 12px;
-      }
-
-      .edu-badge {
-        display: inline-flex;
-        padding: 3px 10px;
-        border-radius: 6px;
-        background: rgba(141, 155, 255, 0.15);
-        border: 1px solid rgba(141, 155, 255, 0.4);
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--accent);
-        letter-spacing: 0;
-      }
-
-      .edu-university {
-        font-size: 15px;
-        font-weight: 600;
-        color: #ffffff;
-      }
-
-      .edu-major {
-        font-size: 13.5px;
-        color: rgba(255, 255, 255, 0.88);
-        line-height: 1.65;
-        font-weight: 500;
-      }
-
-      .edu-period {
-        display: inline-flex;
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--accent);
-        letter-spacing: 0;
-      }
-
-      /* Research focus chips */
-      .focus-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 4px;
-      }
-
-      .focus-tag {
-        padding: 5px 13px;
-        border-radius: var(--radius-pill);
-        background: rgba(141, 155, 255, 0.08);
-        border: 1px solid rgba(141, 155, 255, 0.32);
-        font-size: 12px;
-        color: rgba(220, 222, 238, 0.9);
-        transition: background 0.2s ease, border-color 0.2s ease;
-      }
-
-      .focus-tag:hover {
-        background: rgba(141, 155, 255, 0.16);
-        border-color: rgba(141, 155, 255, 0.45);
-      }
-
-      .tech-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 8px;
-      }
-
-      .tech-tag {
-        padding: 3px 9px;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(193, 196, 214, 0.18);
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.82);
-        letter-spacing: 0;
-      }
-
-      /* ── Interest list ── */
-      .interest-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 4px;
-      }
-
-      .interest-row-title {
-        font-size: 13px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.88);
-        margin-bottom: 2px;
-      }
-
-      .interest-row-items {
-        font-size: 12.5px;
-        color: rgba(255, 255, 255, 0.74);
-        line-height: 1.6;
-      }
-
-      .cv-viewer-wrap {
-        margin-top: 22px;
-      }
-
-      .cv-viewer-frame {
-        width: 100%;
-        height: min(78vh, 980px);
-        min-height: 560px;
-        border: 1px solid var(--border-subtle);
-        border-radius: 12px;
-        background: #0e1426;
-      }
-
-      .footer {
-        margin-top: auto;
-        padding: 20px;
-        border-top: 1px solid rgba(24, 30, 46, 0.9);
-        color: #7a7f98;
-        font-size: 12px;
-      }
-
-      .footer-inner {
-        max-width: var(--content-width);
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <header class="navbar">
-        <div class="page-inner navbar-inner">
-          <div class="brand">
-            <div>
-              <div class="brand-text-main">Minje&nbsp;Park</div>
-              <div class="brand-text-sub">About</div>
-            </div>
-          </div>
-          <nav class="nav-links" aria-label="Main navigation">
-            <a class="nav-link" href="index.html">home</a>
-            <a class="nav-link nav-link-active" href="about.html">about</a>
-            <a class="nav-link" href="research.html">research</a>
-            <a class="nav-link" href="blog/">blog</a>
-            <a class="nav-link" href="calendar.html">calendar</a>
-            <a class="nav-link" href="publications.html">publications</a>
-            <a class="nav-link" href="game.html">game</a>
-          </nav>
-        </div>
-      </header>
-
-      <main class="page-inner">
-        <section class="card intro-card" aria-labelledby="about-heading">
-          <div class="card-header">
-            <h1 id="about-heading" class="card-title">About</h1>
-            <span class="card-subtitle">Profile, research focus, and CV</span>
-          </div>
-
-          <div class="about-layout">
-            <div class="about-profile">
-              <div class="profile-photo">
-                <img src="assets/images/profile.jpg" alt="Portrait of Minje Park" />
-              </div>
-              <div class="about-name">Minje&nbsp;Park</div>
-              <div class="about-affiliation">Sungkyunkwan University</div>
-              <div class="about-divider"></div>
-              <div class="about-meta">
-                <span class="about-meta-label">Location</span>
-                <span><strong>Seoul</strong>, South Korea</span>
-              </div>
-              <div class="about-meta">
-                <span class="about-meta-label">Email</span>
-                <a href="mailto:&#112;&#109;&#106;&#48;&#51;&#50;&#52;&#48;&#48;&#64;&#110;&#97;&#118;&#101;&#114;&#46;&#99;&#111;&#109;" style="word-break:break-all;">&#112;&#109;&#106;&#48;&#51;&#50;&#52;&#48;&#48;&#64;&#110;&#97;&#118;&#101;&#114;&#46;&#99;&#111;&#109;</a>
-              </div>
-              <div class="about-meta">
-                <span class="about-meta-label">Resume</span>
-                <span>
-                  <a href="documents/cv/Minje_Park_CV.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
-                  &nbsp;·&nbsp;
-                  <a href="documents/cv/Minje_Park_CV.pdf" download="Minje_Park_CV.pdf">Download</a>
-                </span>
-              </div>
-              <div class="about-meta">
-                <span class="about-meta-label">Scholar</span>
-                <a href="https://scholar.google.com/citations?user=oC5mE0AAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-              </div>
-            </div>
-
-            <div class="about-right">
-              <div class="about-section">
-                <div class="about-section-title">Bio</div>
-                <p class="about-text">
-                  I am an undergraduate student at Sungkyunkwan University, majoring in physics and electrical engineering, interested in applying neural networks and generative AI to cosmology and astroparticle physics.
-                </p>
-                <p class="about-text" style="margin-top:10px;">
-                  I began my research in Prof. Carsten Rott's group at Sungkyunkwan University and the University of Utah, developing CNN and Vision Transformer models to predict optical properties of Antarctic ice from simulated IceCube Upgrade camera images. This work resulted in a <a href="publications.html">proceedings paper at ICRC 2025</a>.
-                </p>
-                <p class="about-text" style="margin-top:10px;">
-                  I then joined Prof. Chang Dong Rho's group, where I develop flow matching and diffusion models for IceCube neutrino event simulation and reconstruction, and diffusion models and Mixture Density Networks for SWGO tank simulation — work recognized with a Best Presentation Award at the 4th K-Neutrino Symposium (2025).
-                </p>
-                <p class="about-text" style="margin-top:10px;">
-                  For SWGO, I also work with Prof. Ian Watson's group at the University of Seoul on a transformer-based primary-particle reconstruction model, investigating position embedding strategies for detector arrays.
-                </p>
-                <p class="about-text" style="margin-top:10px;">
-                  Most recently, I joined Prof. Ji-Hoon Kim's group at Seoul National University, working on generative AI for cosmological simulation and super-resolution.
-                </p>
-                <p class="about-text" style="margin-top:10px;">
-                  In parallel, I independently develop <a href="research.html#project-cosmo-heading">GENESIS</a> — an optimal-transport flow matching framework for cosmological multifield simulation and parameter inference.
-                </p>
-              </div>
-
-              <div class="about-section">
-                <div class="about-section-title">Research interests</div>
-                <div class="interest-list">
-                  <div>
-                    <div class="interest-row-title">Cosmology</div>
-                    <div class="interest-row-items">Large-Scale Structure &middot; General Relativity &middot; Black Hole &middot; Galaxy</div>
-                  </div>
-                  <div>
-                    <div class="interest-row-title">Generative AI</div>
-                    <div class="interest-row-items">Flow Matching &middot; Diffusion Models &middot; Simulation-Based Inference &middot; Data Manifold</div>
-                  </div>
-                  <div>
-                    <div class="interest-row-title">Astroparticle Physics</div>
-                    <div class="interest-row-items">Neutrino Sources &middot; AGN &middot; Supernova</div>
-                  </div>
-                  <div>
-                    <div class="interest-row-title">Artificial Intelligence</div>
-                    <div class="interest-row-items">Transformer &middot; Foundation Model &middot; Representation Learning &middot; Inverse Problem &middot; Posterior Estimation</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="about-section">
-                <div class="about-section-title">Honors &amp; Awards</div>
-                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
-                  <li class="about-text" style="line-height:1.6;">
-                    <strong style="color:rgba(255,255,255,0.98);">Best Presentation Award</strong>
-                    <br><span style="color:rgba(255,255,255,0.84);">33rd Korean Conference on Semiconductors, Jan 2026</span>
-                    <br><span style="color:rgba(255,255,255,0.80);font-size:0.85em;">Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM</span>
-                  </li>
-                  <li class="about-text" style="line-height:1.6;">
-                    <strong style="color:rgba(255,255,255,0.98);">Best Presentation Award</strong>
-                    <br><span style="color:rgba(255,255,255,0.84);">4th K-Neutrino Symposium, Jun 2025</span>
-                    <br><span style="color:rgba(255,255,255,0.80);font-size:0.85em;">JANUS: Diffusion and Flow-Matching Models for IceCube Event Simulation and Reconstruction</span>
-                  </li>
-                  <li class="about-text" style="line-height:1.6;">
-                    <strong style="color:rgba(255,255,255,0.98);">Merit Award</strong>
-                    <br><span style="color:rgba(255,255,255,0.84);">Korean Physical Society Undergraduate Physics Research Competition, Apr 2024</span>
-                    <br><span style="color:rgba(255,255,255,0.80);font-size:0.85em;">Recognized for research on CNN and Vision Transformer models for the IceCube Upgrade Camera System.</span>
-                  </li>
-                </ul>
-              </div>
-
-            </div>
-          </div>
-
-            <div class="cv-viewer-wrap">
-              <div class="about-section-title">CV (PDF)</div>
-              <object
-              class="cv-viewer-frame"
-              data="documents/cv/Minje_Park_CV.pdf#view=FitH"
-              type="application/pdf"
-            >
-              <p class="about-text">
-                Your browser cannot display embedded PDFs.
-                <a
-                  href="documents/cv/Minje_Park_CV.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Open CV in a new tab</a
-                >
-                or
-                <a href="documents/cv/Minje_Park_CV.pdf" download="Minje_Park_CV.pdf"
-                  >download it</a
-                >.
-              </p>
-            </object>
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <div class="footer-inner">
-          <span>
-            © <span id="year"></span> Minje Park. All rights reserved.
-          </span>
-          <span>Built with a simple static site &amp; custom CSS.</span>
-          <span>Background: <a href="https://science.nasa.gov/asset/webb/cosmic-cliffs-in-the-carina-nebula-nircam-image/" target="_blank" rel="noopener noreferrer">Cosmic Cliffs in the Carina Nebula</a>; image credit: NASA, ESA, CSA, STScI. Image cropped and blurred for background display.</span>
-        </div>
-      </footer>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="About Minje Park — physics and electrical engineering student at Sungkyunkwan University.">
+  <meta name="theme-color" content="#f7f9fa">
+  <title>About · Minje Park</title>
+  <link rel="stylesheet" href="assets/css/homepage.css?v=56">
+  <link rel="stylesheet" href="assets/css/pages.css?v=13">
+</head>
+<body class="subpage">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="index.html"><span>Minje Park</span></a>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html" aria-current="page">About</a><a href="research.html">Research</a>
+        <a href="publications.html">Publications</a><a href="blog/">Notes</a>
+        <a href="documents/cv/Minje_Park_CV.pdf">CV</a>
+        <details class="more-menu"><summary>More</summary><div><a href="calendar.html">Calendar</a><a href="game.html">Game</a></div></details>
+      </nav>
     </div>
+  </header>
 
-    <script>
-      document.getElementById("year").textContent =
-        new Date().getFullYear().toString();
-    </script>
-  </body>
+  <main id="main" class="subpage-main">
+    <header class="shell page-title">
+      <h1>About</h1>
+    </header>
+
+    <section class="shell panel about-intro" aria-labelledby="bio-title">
+      <aside class="about-card">
+        <img class="about-photo" src="assets/images/profile-professional.jpg" width="709" height="992" alt="Portrait of Minje Park">
+        <dl class="about-meta">
+          <div><dt>Education</dt><dd><a href="https://physics.skku.edu/eng_skkuphysics/greetings.do" target="_blank" rel="noopener">Sungkyunkwan University</a><span class="meta-sub">B.S. Physics &amp; Electronic and Electrical Engineering, Expected 2027</span></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:&#112;&#109;&#106;&#48;&#51;&#50;&#52;&#48;&#48;&#64;&#110;&#97;&#118;&#101;&#114;&#46;&#99;&#111;&#109;">&#112;&#109;&#106;&#48;&#51;&#50;&#52;&#48;&#48;&#64;&#110;&#97;&#118;&#101;&#114;&#46;&#99;&#111;&#109;</a></dd></div>
+          <div><dt>CV</dt><dd><a href="documents/cv/Minje_Park_CV.pdf">View</a> · <a href="documents/cv/Minje_Park_CV.pdf" download="Minje_Park_CV.pdf">Download</a></dd></div>
+          <div><dt>Profiles</dt><dd><a href="https://scholar.google.com/citations?user=oC5mE0AAAAAJ&amp;hl=en">Scholar</a> · <a href="https://github.com/pmj0324">GitHub</a> · <a href="https://www.linkedin.com/in/minje-park-81b722365/">LinkedIn</a></dd></div>
+        </dl>
+      </aside>
+      <div class="about-bio">
+        <div class="section-heading"><div><h2 id="bio-title">Bio</h2></div></div>
+        <div class="about-text">
+          <p>I am an undergraduate student at <a href="https://physics.skku.edu/eng_skkuphysics/greetings.do" target="_blank" rel="noopener">Sungkyunkwan University</a>, majoring in physics and electrical engineering, interested in applying neural networks and generative AI to cosmology and astroparticle physics.</p>
+          <p>I began my research in Prof. Carsten Rott's group at Sungkyunkwan University and the University of Utah, developing CNN and Vision Transformer models to predict optical properties of Antarctic ice from simulated <a href="https://icecube.wisc.edu/" target="_blank" rel="noopener">IceCube</a> Upgrade camera images. This work resulted in a <a href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener">proceedings paper at ICRC 2025</a>.</p>
+          <p>I then joined Prof. Chang Dong Rho's group, where I develop flow matching and diffusion models for IceCube neutrino event simulation and reconstruction, and diffusion models and Mixture Density Networks for <a href="https://www.swgo.org/" target="_blank" rel="noopener">SWGO</a> tank simulation — work recognized with a Best Presentation Award at the 4th K-Neutrino Symposium (2025).</p>
+          <p>For SWGO, I also work with Prof. Ian Watson's group at the University of Seoul on a transformer-based primary-particle reconstruction model, investigating position embedding strategies for detector arrays.</p>
+          <p>Most recently, I joined <a class="person" href="http://physics.snu.ac.kr/cosmo/" target="_blank" rel="noopener">Prof. Ji-Hoon Kim</a>'s group at Seoul National University, working on generative AI for cosmological simulation and super-resolution.</p>
+          <p>In parallel, I independently develop <a href="research.html#project-cosmo-heading">GENESIS</a> — an optimal-transport flow matching framework for cosmological multifield simulation and parameter inference.</p>
+        </div>
+      </div>
+    </section>
+
+    
+
+
+    <section class="shell panel" aria-labelledby="interests-title">
+      <div class="section-heading"><div><h2 id="interests-title">Research interests</h2></div></div>
+      <ul class="interest-list">
+        <li class="interest-row work-ind"><h3 class="work-field">Cosmology</h3><ul class="chip-list"><li>Large-Scale Structure</li><li>General Relativity</li><li>Black Hole</li><li>Galaxy</li></ul></li>
+        <li class="interest-row work-uos"><h3 class="work-field">Generative AI</h3><ul class="chip-list"><li>Flow Matching</li><li>Diffusion Models</li><li>Simulation-Based Inference</li><li>Data Manifold</li></ul></li>
+        <li class="interest-row work-rott"><h3 class="work-field">Astroparticle Physics</h3><ul class="chip-list"><li>Neutrino Sources</li><li>AGN</li><li>Supernova</li></ul></li>
+        <li class="interest-row work-skku"><h3 class="work-field">Artificial Intelligence</h3><ul class="chip-list"><li>Transformer</li><li>Foundation Model</li><li>Representation Learning</li><li>Inverse Problem</li><li>Posterior Estimation</li></ul></li>
+      </ul>
+    </section>
+
+    <section class="shell panel" aria-labelledby="awards-title">
+      <div class="section-heading"><div><h2 id="awards-title">Honors &amp; awards</h2></div><a href="publications.html">Presentations ↗</a></div>
+      <ol class="pub-list awards-list">
+        <li class="pub-item"><span class="pub-year">2026</span><div class="pub-main"><h3 class="award-title">Best Presentation Award</h3><p class="pub-venue">33rd Korean Conference on Semiconductors</p><p class="pub-authors">Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM</p></div></li>
+        <li class="pub-item"><span class="pub-year">2025</span><div class="pub-main"><h3 class="award-title">Best Presentation Award</h3><p class="pub-venue">4th K-Neutrino Symposium</p><p class="pub-authors">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</p></div></li>
+        <li class="pub-item"><span class="pub-year">2024</span><div class="pub-main"><h3 class="award-title">Merit Award</h3><p class="pub-venue">KPS Undergraduate Physics Research Competition</p><p class="pub-authors">CNN and Vision Transformer models for the IceCube Upgrade Camera System</p></div></li>
+      </ol>
+    </section>
+
+    <section class="shell panel" aria-labelledby="cv-title">
+      <div class="section-heading"><div><h2 id="cv-title">CV</h2></div><a href="documents/cv/Minje_Park_CV.pdf" download="Minje_Park_CV.pdf">Download PDF ↓</a></div>
+      <details class="preview">
+        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview CV</summary>
+        <div class="preview-frame preview-frame-tall"><object data="documents/cv/Minje_Park_CV.pdf#view=FitH" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/cv/Minje_Park_CV.pdf">Open the CV</a>.</p></object></div>
+      </details>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><p>© <span id="year">2026</span> Minje Park</p></div></footer>
+  <script src="assets/js/pages.js?v=2"></script>
+</body>
 </html>

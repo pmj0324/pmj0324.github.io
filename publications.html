@@ -1,1131 +1,261 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Publications · Minje Park</title>
-    <meta
-      name="description"
-      content="Publications and selected presentations by Minje Park."
-    />
-        <link rel="stylesheet" href="shared-theme.css" />
-    <link rel="stylesheet" href="shared-nav-mobile.css" />
-    <style>
-      :root {
-        --bg: #0b1020;
-        --bg-soft: #151a2b;
-        --bg-softer: #1d2336;
-        --fg: #ffffff;
-        --fg-muted: #f4f6ff;
-        --accent: #8d9bff;
-        --accent-soft: rgba(141, 155, 255, 0.18);
-        --border-subtle: rgba(220, 226, 255, 0.24);
-        --shadow-soft: 0 22px 58px rgba(0, 0, 0, 0.62);
-        --radius-lg: 18px;
-        --radius-pill: 999px;
-        --nav-height: 64px;
-        --content-width: 960px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: Helvetica, Arial, sans-serif;
-        position: relative;
-        background: #0b1020;
-        overflow-x: hidden;
-        color: var(--fg);
-        -webkit-font-smoothing: antialiased;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: -8px;
-        z-index: 0;
-        pointer-events: none;
-        background-image: linear-gradient(
-            135deg,
-            rgba(3, 7, 18, 0.70),
-            rgba(15, 23, 42, 0.60)
-          ),
-          url("assets/images/nasa.jpg");
-        background-size: cover;
-        background-position: center;
-        filter: blur(2px);
-        transform: scale(1.015);
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        z-index: 1;
-      }
-
-      .page-inner {
-        width: 100%;
-        max-width: var(--content-width);
-        margin: 0 auto;
-        padding: 24px 20px 40px;
-      }
-
-      .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        backdrop-filter: blur(16px);
-        background: linear-gradient(
-          to bottom,
-          rgba(5, 7, 18, 0.9),
-          rgba(5, 7, 18, 0.6),
-          transparent
-        );
-      }
-
-      .navbar-inner {
-        height: var(--nav-height);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .brand-avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 20%, #f7f7ff, #8d9bff);
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
-          0 10px 24px rgba(0, 0, 0, 0.7);
-      }
-
-      .brand-text-main {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0;
-      }
-
-      .brand-text-sub {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        color: rgba(255, 255, 255, 0.92);
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        font-size: 14px;
-      }
-
-      .nav-link {
-        padding: 6px 12px;
-        border-radius: 999px;
-        color: rgba(255, 255, 255, 0.90);
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: background 0.16s ease, color 0.16s ease;
-      }
-
-      .nav-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--fg);
-        text-decoration: none;
-      }
-
-      .nav-link-active {
-        background: var(--accent-soft);
-        color: var(--accent);
-      }
-
-      .card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.78),
-          rgba(7, 11, 25, 0.84)
-        );
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-subtle);
-        box-shadow: var(--shadow-soft);
-        backdrop-filter: blur(12px);
-        padding: 22px 22px 20px;
-        margin-top: 24px;
-      }
-
-      .intro-card {
-        background: linear-gradient(
-          145deg,
-          rgba(27, 36, 58, 0.78),
-          rgba(11, 18, 36, 0.84)
-        );
-        border-color: rgba(220, 226, 255, 0.32);
-      }
-
-      .card-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .card-title {
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.88);
-      }
-
-      .card-subtitle {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.84);
-      }
-
-      /* ── Publications section ── */
-      .section-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .section-item {
-        padding: 14px 0;
-        border-top: 1px solid rgba(37, 42, 70, 0.9);
-      }
-
-      .section-item:first-child {
-        border-top: none;
-      }
-
-      .pub-title {
-        font-size: 13.5px;
-        font-weight: 600;
-        line-height: 1.45;
-        margin-bottom: 6px;
-        color: #ffffff;
-      }
-
-      .pub-meta {
-        font-size: 11.5px;
-        color: rgba(255, 255, 255, 0.88);
-        margin-bottom: 5px;
-        line-height: 1.5;
-      }
-
-      .pub-links {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.80);
-        line-height: 1.5;
-      }
-
-      .tag {
-        display: inline-block;
-        padding: 2px 10px;
-        border-radius: var(--radius-pill);
-        font-size: 10px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        margin-right: 6px;
-        vertical-align: middle;
-      }
-
-      .tag-talk {
-        background: rgba(141, 155, 255, 0.15);
-        color: var(--accent);
-        border: 1px solid rgba(141, 155, 255, 0.35);
-      }
-
-      .tag-poster {
-        background: rgba(120, 200, 180, 0.1);
-        color: #7ec8b4;
-        border: 1px solid rgba(120, 200, 180, 0.3);
-      }
-
-      .award-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 2px 10px;
-        border-radius: var(--radius-pill);
-        background: rgba(255, 200, 60, 0.1);
-        border: 1px solid rgba(255, 200, 60, 0.3);
-        font-size: 10px;
-        font-weight: 600;
-        color: #f0c850;
-        letter-spacing: 0;
-      }
-
-      /* ── Publication item card ── */
-      .pub-item-card {
-        border-top: none;
-        padding: 0;
-      }
-
-      .pub-card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.76),
-          rgba(7, 11, 25, 0.82)
-        );
-        border: 1px solid rgba(220, 226, 255, 0.20);
-        border-radius: 14px;
-        backdrop-filter: blur(10px);
-        transition: border-color 0.22s ease, background 0.22s ease,
-          box-shadow 0.22s ease;
-      }
-
-      .pub-card:hover {
-        border-color: rgba(141, 155, 255, 0.45);
-        background: linear-gradient(
-          145deg,
-          rgba(31, 40, 64, 0.82),
-          rgba(12, 17, 35, 0.88)
-        );
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-      }
-
-      .pub-card[open] {
-        border-color: rgba(141, 155, 255, 0.38);
-        background: linear-gradient(
-          145deg,
-          rgba(28, 35, 62, 0.65),
-          rgba(15, 20, 44, 0.70)
-        );
-      }
-
-      .pub-summary {
-        list-style: none;
-        cursor: pointer;
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 15px 16px;
-        border-radius: 14px;
-        user-select: none;
-      }
-
-      .pub-summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .pub-chevron {
-        flex-shrink: 0;
-        font-size: 9px;
-        color: rgba(255, 255, 255, 0.74);
-        margin-top: 5px;
-        transition: transform 0.22s ease, color 0.22s ease;
-      }
-
-      .pub-card[open] .pub-chevron {
-        transform: rotate(90deg);
-        color: var(--accent);
-      }
-
-      .pub-summary-body {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .pub-abstract-section {
-        padding: 0 16px 16px;
-        border-top: 1px solid rgba(143, 148, 183, 0.08);
-      }
-
-      .pub-abstract-label {
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.82);
-        margin: 13px 0 7px;
-      }
-
-      .pub-abstract-text {
-        font-size: 12.5px;
-        color: rgba(255, 255, 255, 0.92);
-        line-height: 1.7;
-        margin: 0 0 14px;
-      }
-
-      .pub-action-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .pub-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 14px;
-        border-radius: var(--radius-pill);
-        font-size: 12px;
-        font-weight: 500;
-        text-decoration: none;
-        border: 1px solid rgba(141, 155, 255, 0.35);
-        background: rgba(141, 155, 255, 0.12);
-        color: var(--accent);
-        transition: background 0.18s ease, border-color 0.18s ease;
-      }
-
-      .pub-btn:hover {
-        background: rgba(141, 155, 255, 0.22);
-        border-color: rgba(141, 155, 255, 0.55);
-        text-decoration: none;
-      }
-
-      /* ── Timeline layout (date-left · line · content-right) ── */
-      .timeline {
-        list-style: none;
-        margin: 8px 0 0;
-        padding: 0;
-        position: relative;
-      }
-
-      /* single continuous vertical line through all items */
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: calc(72px + 14px); /* center of the 28px dot column */
-        top: 10px;
-        bottom: 10px;
-        width: 1px;
-        background: linear-gradient(
-          to bottom,
-          rgba(141, 155, 255, 0.5) 0%,
-          rgba(141, 155, 255, 0.25) 60%,
-          rgba(141, 155, 255, 0.04) 100%
-        );
-        transform: translateX(-50%);
-      }
-
-      .tl-item {
-        display: grid;
-        grid-template-columns: 72px 28px 1fr;
-        position: relative;
-        padding-bottom: 20px;
-      }
-
-      .tl-item:last-child {
-        padding-bottom: 0;
-      }
-
-      /* left column: date */
-      .tl-left {
-        padding-top: 5px;
-        text-align: right;
-        padding-right: 0;
-      }
-
-      .tl-date {
-        font-size: 11.5px;
-        font-weight: 700;
-        color: var(--accent);
-        letter-spacing: 0;
-        line-height: 1.3;
-      }
-
-      /* center column: dot only (line is drawn by .timeline::before) */
-      .tl-center {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 5px;
-      }
-
-      .tl-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background: #0b1020;
-        border: 2px solid rgba(141, 155, 255, 0.55);
-        box-shadow: 0 0 0 3px rgba(141, 155, 255, 0.07);
-        flex-shrink: 0;
-        position: relative;
-        z-index: 1;
-        transition: background 0.2s ease, border-color 0.2s ease,
-          box-shadow 0.2s ease;
-      }
-
-      .tl-item.is-open .tl-dot {
-        background: var(--accent);
-        border-color: var(--accent);
-        box-shadow: 0 0 0 4px rgba(141, 155, 255, 0.18),
-          0 0 14px rgba(141, 155, 255, 0.3);
-      }
-
-      /* right column: card */
-      .tl-right {
-        padding-left: 14px;
-        min-width: 0;
-      }
-
-      .tl-card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.76),
-          rgba(7, 11, 25, 0.82)
-        );
-        border: 1px solid rgba(220, 226, 255, 0.20);
-        border-radius: 14px;
-        backdrop-filter: blur(10px);
-        transition: border-color 0.22s ease, background 0.22s ease,
-          box-shadow 0.22s ease;
-      }
-
-      .tl-card:hover {
-        border-color: rgba(141, 155, 255, 0.45);
-        background: linear-gradient(
-          145deg,
-          rgba(31, 40, 64, 0.82),
-          rgba(12, 17, 35, 0.88)
-        );
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-      }
-
-      .tl-card[open] {
-        border-color: rgba(141, 155, 255, 0.40);
-        background: linear-gradient(
-          145deg,
-          rgba(28, 35, 62, 0.68),
-          rgba(15, 20, 44, 0.72)
-        );
-        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.28);
-      }
-
-      .tl-summary {
-        list-style: none;
-        cursor: pointer;
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        padding: 12px 15px;
-        border-radius: 14px;
-        user-select: none;
-      }
-
-      .tl-summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .tl-chevron {
-        flex-shrink: 0;
-        font-size: 9px;
-        color: rgba(255, 255, 255, 0.74);
-        margin-top: 5px;
-        transition: transform 0.22s ease, color 0.22s ease;
-      }
-
-      .tl-card[open] .tl-chevron {
-        transform: rotate(90deg);
-        color: var(--accent);
-      }
-
-      .tl-text {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .tl-title {
-        font-size: 13.5px;
-        font-weight: 600;
-        color: #ffffff;
-        line-height: 1.45;
-        margin-bottom: 6px;
-      }
-
-      .tl-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        align-items: center;
-        margin-bottom: 5px;
-      }
-
-      .tl-venue {
-        font-size: 11.5px;
-        color: rgba(255, 255, 255, 0.86);
-        line-height: 1.5;
-      }
-
-      /* ── Expanded content ── */
-      .tl-content {
-        padding: 0 15px 15px;
-        border-top: 1px solid rgba(143, 148, 183, 0.08);
-        margin-top: 0;
-      }
-
-      .tl-abstract {
-        padding-top: 13px;
-        margin-bottom: 14px;
-      }
-
-      .tl-abstract-label {
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.82);
-        margin-bottom: 6px;
-      }
-
-      .tl-abstract-text {
-        font-size: 12.5px;
-        color: rgba(255, 255, 255, 0.92);
-        line-height: 1.65;
-        margin: 0;
-      }
-
-      .tl-materials {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        padding-top: 2px;
-      }
-
-      .tl-mat-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 14px;
-        border-radius: var(--radius-pill);
-        font-size: 12px;
-        font-weight: 500;
-        text-decoration: none;
-        transition: background 0.18s ease, border-color 0.18s ease,
-          color 0.18s ease, opacity 0.18s ease;
-        border: 1px solid transparent;
-      }
-
-      .tl-mat-btn.available {
-        background: rgba(141, 155, 255, 0.12);
-        border-color: rgba(141, 155, 255, 0.35);
-        color: var(--accent);
-      }
-
-      .tl-mat-btn.available:hover {
-        background: rgba(141, 155, 255, 0.22);
-        border-color: rgba(141, 155, 255, 0.55);
-        text-decoration: none;
-      }
-
-      .tl-mat-btn.unavailable {
-        background: rgba(255, 255, 255, 0.03);
-        border-color: rgba(143, 148, 183, 0.18);
-        color: rgba(255, 255, 255, 0.76);
-        cursor: default;
-        pointer-events: none;
-      }
-
-      .tl-mat-icon {
-        font-size: 13px;
-        line-height: 1;
-      }
-
-      .footer {
-        margin-top: auto;
-        padding: 20px;
-        border-top: 1px solid rgba(24, 30, 46, 0.9);
-        color: #7a7f98;
-        font-size: 12px;
-      }
-
-      .footer-inner {
-        max-width: var(--content-width);
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <header class="navbar">
-        <div class="page-inner navbar-inner">
-          <div class="brand">
-            <div>
-              <div class="brand-text-main">Minje&nbsp;Park</div>
-              <div class="brand-text-sub">Publications</div>
-            </div>
-          </div>
-          <nav class="nav-links" aria-label="Main navigation">
-            <a class="nav-link" href="index.html">home</a>
-            <a class="nav-link" href="about.html">about</a>
-            <a class="nav-link" href="research.html">research</a>
-            <a class="nav-link" href="blog/">blog</a>
-            <a class="nav-link" href="calendar.html">calendar</a>
-            <a class="nav-link nav-link-active" href="publications.html"
-              >publications</a
-            >
-            <a class="nav-link" href="game.html">game</a>
-          </nav>
-        </div>
-      </header>
-
-      <main class="page-inner">
-        <section class="card intro-card" aria-labelledby="pub-main-heading">
-          <div class="card-header">
-            <h1 id="pub-main-heading" class="card-title">Publications</h1>
-          </div>
-          <p class="pub-meta" style="margin-bottom: 12px;">
-            <a class="pub-btn" href="https://scholar.google.com/citations?user=oC5mE0AAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
-              🎓 Google Scholar Profile
-            </a>
-          </p>
-          <ul class="section-list">
-            <li class="section-item pub-item-card">
-              <details class="pub-card">
-                <summary class="pub-summary">
-                  <span class="pub-chevron">&#9656;</span>
-                  <div class="pub-summary-body">
-                    <div class="pub-title">
-                      Performance Study of the IceCube Upgrade Camera System
-                    </div>
-                    <div class="pub-meta">
-                      <span class="tag tag-talk" style="font-size:10px;">ICRC 2025</span>
-                      C. Rott, <strong>M. Park</strong>, M. Jansson, G. Iverson, S. Choi
-                      <span style="color:rgba(255,255,255,0.80);">(for the IceCube Collaboration)</span>
-                    </div>
-                    <div class="pub-meta" style="color:rgba(255,255,255,0.88);">
-                      arXiv:2507.18525 &mdash; Instrumentation and Methods for Astrophysics
-                    </div>
-                  </div>
-                </summary>
-                <div class="pub-abstract-section">
-                  <div class="pub-abstract-label">Abstract</div>
-                  <p class="pub-abstract-text">
-                    The IceCube Upgrade Camera System is a calibration
-                    framework for measuring the optical properties of
-                    Antarctic ice with cameras and LEDs deployed on D-Egg and
-                    mDOM modules. These images can be used to study both local
-                    refrozen ice and bulk ice between strings, while also
-                    helping constrain module positions. This work compares
-                    classical maximum-likelihood and neural-network-based image
-                    analysis methods using a dedicated simulation pipeline.
-                  </p>
-                  <div class="pub-action-row">
-                    <a class="pub-btn" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer">
-                      📄 arXiv:2507.18525
-                    </a>
-                    <a class="pub-btn" href="https://arxiv.org/pdf/2507.18525" target="_blank" rel="noopener noreferrer">
-                      ⬇ PDF
-                    </a>
-                  </div>
-                </div>
-              </details>
-            </li>
-          </ul>
-        </section>
-
-        <section class="card" aria-labelledby="talks-heading">
-          <div class="card-header">
-            <h2 id="talks-heading" class="card-title">Conference presentations</h2>
-            <span class="card-subtitle">Click to expand details</span>
-          </div>
-          <ul class="timeline">
-
-            <!-- Apr 2026 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Apr<br>2026</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Generative AI for IceCube Observatory</div>
-                      <div class="tl-tags">
-                        <span class="tag tag-talk">Talk</span>
-                      </div>
-                      <div class="tl-venue">103rd Spring Meeting of the Korean Physical Society &mdash; Daejeon</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This talk presents JANUS, a framework based on conditional diffusion and flow-matching models for IceCube neutrino event simulation and reconstruction. The model learns to generate realistic Cherenkov photon hit patterns conditioned on particle-level quantities, and to reconstruct event properties such as energy and direction from observed detector signals. Both tasks are unified within a single generative modeling framework trained on simulated IceCube data.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">📄</span> To be updated</span>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Apr 2026 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Apr<br>2026</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Mixture Density Networks for Fast Detector Response Simulation in SWGO</div>
-                      <div class="tl-tags">
-                        <span class="tag tag-poster">Poster</span>
-                      </div>
-                      <div class="tl-venue">103rd Spring Meeting of the Korean Physical Society &mdash; Daejeon</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster presents a Mixture Density Network (MDN) approach for fast simulation of SWGO detector responses. The model is trained on simulated PMT signals from air-shower events and learns the conditional distribution of detector outputs given shower parameters, enabling rapid sampling without full Monte Carlo simulation. Results on signal fidelity and inference speed are compared against baseline methods.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> To be updated</span>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Jan 2026 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Jan<br>2026</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM</div>
-                      <div class="tl-tags">
-                        <span class="tag tag-poster">Poster</span>
-                        <span class="award-badge">&#9733; Best Presentation</span>
-                      </div>
-                      <div class="tl-venue">33rd Korean Conference on Semiconductors &mdash; Jeongseon</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster investigates the electrical characteristics of IGZO-based 3D vertical-channel transistors proposed for next-generation DRAM architectures. A physics-informed neural network (PINN) is developed to model device behavior by incorporating semiconductor physics equations as constraints in the loss function. The approach enables accurate and efficient extraction of device parameters compared to conventional simulation methods.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2026-01-igzo-pinn-poster.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">🖼</span> Poster PDF</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Oct 2025 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Oct<br>2025</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Generative AI for Cosmological Simulation and Manifold Representation</div>
-                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
-                      <div class="tl-venue">102nd Fall Meeting of the Korean Physical Society &mdash; Gwangju</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster presents an early version of GENESIS, an optimal-transport flow-matching model trained on the CAMELS dataset for dark matter density field emulation. The model conditions on cosmological parameters and its outputs are evaluated by comparing power spectra and halo mass distributions against reference simulations. Manifold-level representations of the generated fields are also examined to probe the structure learned by the model.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2025-10-genesis-poster.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">🖼</span> Poster PDF</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Jul 2025 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Jul<br>2025</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Performance Study of the IceCube Upgrade Camera System</div>
-                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
-                      <div class="tl-venue">39th International Cosmic Ray Conference (ICRC 2025) &mdash; Geneva, Switzerland</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster presents OPTICUS, a hybrid CNN–Vision Transformer model for analyzing simulated images from the IceCube Upgrade camera system. The model is trained to estimate scattering lengths of bulk ice and refrozen hole ice from calibration images, achieving percent-level accuracy on both targets. Results are compared with classical maximum-likelihood methods across a range of ice conditions.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">📄</span> arXiv:2507.18525</a>
-                      <a class="tl-mat-btn available" href="documents/presentations/2025-07-opticus-slides.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">📄</span> Slides</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Oct 2025 (Gwangju) -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Oct<br>2025</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</div>
-                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
-                      <div class="tl-venue">K-Neutrino Symposium &mdash; Gwangju</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster presents diffusion and flow-matching models for IceCube neutrino event simulation and reconstruction. The framework generates realistic Cherenkov photon hit patterns conditioned on particle-level quantities, and reconstructs event properties such as energy, direction, and interaction vertex from observed detector signals. Both generation and reconstruction are framed within a unified conditional generative modeling approach.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2025-06-janus-slides.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">📄</span> Slides</a>
-                      <a class="tl-mat-btn available" href="documents/presentations/2025-06-janus-kps-poster.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">🖼</span> Poster PDF</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Jun 2025 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Jun<br>2025</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</div>
-                      <div class="tl-tags">
-                        <span class="tag tag-poster">Poster</span>
-                        <span class="award-badge">&#9733; Best Presentation</span>
-                      </div>
-                      <div class="tl-venue">K-Neutrino Symposium &mdash; Seoul</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster presents JANUS, a conditional generative framework using diffusion and flow-matching models for IceCube neutrino event simulation and reconstruction. The model is trained on simulated detector data and learns to generate realistic photon hit patterns from particle parameters, as well as to infer event-level properties from detector signals. The unified generation-and-inference design removes the need for separate simulation and reconstruction networks.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2025-06-janus-slides.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">📄</span> Slides</a>
-                      <a class="tl-mat-btn available" href="documents/presentations/2025-06-janus-kps-poster.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">🖼</span> Poster PDF</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Apr 2025 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Apr<br>2025</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Modeling the Relationship between PMT Response and Air-Shower Particles for SWGO</div>
-                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
-                      <div class="tl-venue">101st Spring Meeting of the Korean Physical Society &mdash; Daejeon</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster investigates the relationship between PMT response signals and air-shower particle properties in the SWGO detector using simulation data. A generative model is developed to learn the conditional distribution of PMT outputs given shower parameters such as energy, arrival direction, and core position. The approach is intended to support fast and accurate detector-response emulation for SWGO analysis pipelines.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2025-04-swgo-diffusion-poster.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">🖼</span> Poster PDF</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Oct 2024 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Oct<br>2024</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Development of a Deep Learning Model for Analyzing Antarctic Ice Optical Properties</div>
-                      <div class="tl-tags">
-                        <span class="tag tag-poster">Poster</span>
-                        <span class="award-badge">Merit Award</span>
-                      </div>
-                      <div class="tl-venue">101st Fall Meeting of the Korean Physical Society &mdash; Yeosu</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster presents a deep-learning approach for measuring the optical properties of Antarctic ice from simulated images produced by the IceCube Upgrade camera system. CNN and Vision Transformer models are trained to estimate scattering and absorption lengths from simulated camera exposures of both bulk and refrozen hole ice. The work demonstrates that neural-network-based methods can automate and accelerate optical calibration of the IceCube detector.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2024-10-icecube-optical-properties-poster.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">🖼</span> Poster PDF</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Sep 2024 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Sep<br>2024</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Deep Learning for Ice-Property Measurement Using Simulation Images</div>
-                      <div class="tl-tags"><span class="tag tag-talk">Talk</span></div>
-                      <div class="tl-venue">IceCube Collaboration Meeting &mdash; Madison, Wisconsin, USA</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This talk presents CNN and Vision Transformer models developed for measuring Antarctic ice optical properties using simulated images from the IceCube Upgrade camera system. The models are trained to extract scattering and absorption parameters from calibration images, and performance on both bulk ice and refrozen hole ice is evaluated and compared with classical maximum-likelihood methods.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2024-09-icecube-camera-slides.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">📄</span> Slides</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Jul 2024 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Jul<br>2024</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Ice-Property Measurement Using a Camera System in the IceCube Upgrade</div>
-                      <div class="tl-tags"><span class="tag tag-talk">Talk</span></div>
-                      <div class="tl-venue">K-Neutrino Symposium &mdash; Gwangju</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This talk introduces the camera system deployed in the IceCube Upgrade and presents deep-learning methods for measuring the optical properties of Antarctic ice from simulated camera images. CNN-based models are developed to estimate scattering lengths for both bulk ice and refrozen hole ice, demonstrating improved accuracy over classical calibration approaches. The work is motivated by the need for precise optical modeling to support IceCube physics analyses.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <a class="tl-mat-btn available" href="documents/presentations/2024-07-icecube-camera-slides.pdf" target="_blank" rel="noopener noreferrer"><span class="tl-mat-icon">📄</span> Slides</a>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-            <!-- Apr 2024 -->
-            <li class="tl-item">
-              <div class="tl-left"><div class="tl-date">Apr<br>2024</div></div>
-              <div class="tl-center"><div class="tl-dot"></div></div>
-              <div class="tl-right">
-                <details class="tl-card">
-                  <summary class="tl-summary">
-                    <span class="tl-chevron">&#9656;</span>
-                    <div class="tl-text">
-                      <div class="tl-title">Study of Optical Properties in Antarctic Ice Using Simulated Images</div>
-                      <div class="tl-tags"><span class="tag tag-poster">Poster</span></div>
-                      <div class="tl-venue">100th Spring Meeting of the Korean Physical Society &mdash; Daejeon</div>
-                    </div>
-                  </summary>
-                  <div class="tl-content">
-                    <div class="tl-abstract">
-                      <div class="tl-abstract-label">Abstract</div>
-                      <p class="tl-abstract-text">This poster presents an early study of Antarctic ice optical-property estimation using simulated images from the IceCube Upgrade camera system. A CNN model is developed to predict ice scattering and absorption parameters from camera exposures, with training and evaluation conducted on a dedicated Monte Carlo simulation pipeline. The results demonstrate the feasibility of data-driven optical calibration for the IceCube Upgrade.</p>
-                    </div>
-                    <div class="tl-materials">
-                      <span class="tl-mat-btn unavailable"><span class="tl-mat-icon">🖼</span> To be updated</span>
-                    </div>
-                  </div>
-                </details>
-              </div>
-            </li>
-
-          </ul>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <div class="footer-inner">
-          <span>
-            © <span id="year"></span> Minje Park. All rights reserved.
-          </span>
-          <span>Built with a simple static site &amp; custom CSS.</span>
-          <span>Background: <a href="https://science.nasa.gov/asset/webb/cosmic-cliffs-in-the-carina-nebula-nircam-image/" target="_blank" rel="noopener noreferrer">Cosmic Cliffs in the Carina Nebula</a>; image credit: NASA, ESA, CSA, STScI. Image cropped and blurred for background display.</span>
-        </div>
-      </footer>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Publications, conference presentations, and awards by Minje Park.">
+  <meta name="theme-color" content="#f7f9fa">
+  <title>Publications · Minje Park</title>
+  <link rel="stylesheet" href="assets/css/homepage.css?v=56">
+  <link rel="stylesheet" href="assets/css/pages.css?v=13">
+</head>
+<body class="subpage">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="index.html"><span>Minje Park</span></a>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="research.html">Research</a>
+        <a href="publications.html" aria-current="page">Publications</a><a href="blog/">Notes</a>
+        <a href="documents/cv/Minje_Park_CV.pdf">CV</a>
+        <details class="more-menu"><summary>More</summary><div><a href="calendar.html">Calendar</a><a href="game.html">Game</a></div></details>
+      </nav>
     </div>
+  </header>
 
-    <script>
-      document.getElementById("year").textContent =
-        new Date().getFullYear().toString();
+  <main id="main" class="subpage-main">
+    <header class="shell page-title">
+      <h1>Publications</h1>
+      <p>Proceedings, conference presentations, and awards.</p>
+    </header>
 
-      document.querySelectorAll(".tl-card").forEach((details) => {
-        const item = details.closest(".tl-item");
-        details.addEventListener("toggle", () => {
-          item.classList.toggle("is-open", details.open);
-        });
-      });
+    <section class="shell panel" aria-labelledby="pubs-title">
+      <div class="section-heading">
+        <div><h2 id="pubs-title">Publications</h2></div>
+        <a href="https://scholar.google.com/citations?user=oC5mE0AAAAAJ&amp;hl=en">Google Scholar ↗</a>
+      </div>
+      <ol class="pub-list">
+          <li class="pub-item row-item">
+            <details class="row-details">
+              <summary class="row-summary">
+                <span class="pub-year">Jul 2025</span>
+                <span class="pub-main">
+                  <span class="pub-title">Performance Study of the IceCube Upgrade Camera System</span>
+                  <span class="pub-authors">C. Rott, <strong>M. Park</strong>, M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)</span><span class="pub-venue"><span class="pub-kind pub-kind-proceedings">Proceedings</span>Proceedings of Science (PoS), ICRC 2025 · arXiv:2507.18525</span>
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="row-body"><p>The IceCube Upgrade Camera System is a calibration framework for measuring the optical properties of Antarctic ice with cameras and LEDs deployed on D-Egg and mDOM modules. These images can be used to study both local refrozen ice and bulk ice between strings, while also helping constrain module positions. This work compares classical maximum-likelihood and neural-network-based image analysis methods using a dedicated simulation pipeline.</p><div class="work-links"><a href="https://arxiv.org/abs/2507.18525"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>arXiv</a><a href="https://arxiv.org/pdf/2507.18525"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1v8.2l2.6-2.6.9.9L8 11 4.5 7.5l.9-.9L7.4 9.2V1ZM2 12h12v3H2Z"/></svg></span>PDF</a></div></div>
+            </details>
+          </li>
+      </ol>
+    </section>
 
-      document.querySelectorAll(".pub-card").forEach((details) => {
-        details.addEventListener("toggle", () => {
-          if (details.open) details.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        });
-      });
-    </script>
-  </body>
+    <section class="shell panel" aria-labelledby="talks-title">
+      <div class="section-heading">
+        <div><h2 id="talks-title">Conference presentations</h2></div>
+        <button class="row-expand-all" type="button" data-target="#talks-list">Expand all</button>
+      </div>
+      <div class="talk-toolbar" role="group" aria-label="Filter presentations">
+        <button type="button" class="talk-filter" data-filter="all" aria-pressed="true">All <span>12</span></button>
+        <button type="button" class="talk-filter" data-filter="talk" aria-pressed="false">Talks <span>3</span></button>
+        <button type="button" class="talk-filter" data-filter="poster" aria-pressed="false">Posters <span>9</span></button>
+        <button type="button" class="talk-filter" data-filter="award" aria-pressed="false">Awarded <span>3</span></button>
+      </div>
+      <ol class="tl" id="talks-list">
+          <li class="tl-item kind-talk" data-kind="talk" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2026</span> Apr</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Generative AI for IceCube Observatory</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-talk">Talk</span>103rd Spring Meeting of the Korean Physical Society, Daejeon</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This talk presents JANUS, a framework based on conditional diffusion and flow-matching models for IceCube neutrino event simulation and reconstruction. The model learns to generate realistic Cherenkov photon hit patterns conditioned on particle-level quantities, and to reconstruct event properties such as energy and direction from observed detector signals. Both tasks are unified within a single generative modeling framework trained on simulated IceCube data.</p><p class="row-note">Materials to be updated</p></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster" data-kind="poster" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2026</span> Apr</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Mixture Density Networks for Fast Detector Response Simulation in SWGO</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>103rd Spring Meeting of the Korean Physical Society, Daejeon</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster presents a Mixture Density Network (MDN) approach for fast simulation of SWGO detector responses. The model is trained on simulated PMT signals from air-shower events and learns the conditional distribution of detector outputs given shower parameters, enabling rapid sampling without full Monte Carlo simulation. Results on signal fidelity and inference speed are compared against baseline methods.</p><p class="row-note">Materials to be updated</p></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster is-awarded" data-kind="poster" data-award="1">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2026</span> Feb</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>33rd Korean Conference on Semiconductors, Jeongseon</span>
+                  <span class="pub-award">Best Presentation Award</span>
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster investigates the electrical characteristics of IGZO-based 3D vertical-channel transistors proposed for next-generation DRAM architectures. A physics-informed neural network (PINN) is developed to model device behavior by incorporating semiconductor physics equations as constraints in the loss function. The approach enables accurate and efficient extraction of device parameters compared to conventional simulation methods.</p><div class="work-links"><a href="documents/presentations/2026-01-igzo-pinn-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster" data-kind="poster" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2025</span> Oct</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Generative AI for Cosmological Simulation and Manifold Representation</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>KPS Undergraduate Physics Research Competition, 102nd Fall Meeting of the Korean Physical Society, Gwangju</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster presents an early version of GENESIS, an optimal-transport flow-matching model trained on the CAMELS dataset for dark matter density field emulation. The model conditions on cosmological parameters and its outputs are evaluated by comparing power spectra and halo mass distributions against reference simulations. Manifold-level representations of the generated fields are also examined to probe the structure learned by the model.</p><div class="work-links"><a href="documents/presentations/2025-10-genesis-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster" data-kind="poster" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2025</span> Oct</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>102nd Fall Meeting of the Korean Physical Society, Gwangju</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster presents diffusion and flow-matching models for IceCube neutrino event simulation and reconstruction. The framework generates realistic Cherenkov photon hit patterns conditioned on particle-level quantities, and reconstructs event properties such as energy, direction, and interaction vertex from observed detector signals. Both generation and reconstruction are framed within a unified conditional generative modeling approach.</p><div class="work-links"><a href="documents/presentations/2025-06-janus-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a><a href="documents/presentations/2025-06-janus-kps-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster" data-kind="poster" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2025</span> Jul</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Performance Study of the IceCube Upgrade Camera System</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>39th International Cosmic Ray Conference (ICRC 2025), Geneva, Switzerland</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster presents OPTICUS, a hybrid CNN–Vision Transformer model for analyzing simulated images from the IceCube Upgrade camera system. The model is trained to estimate scattering lengths of bulk ice and refrozen hole ice from calibration images, achieving percent-level accuracy on both targets. Results are compared with classical maximum-likelihood methods across a range of ice conditions.</p><div class="work-links"><a href="https://arxiv.org/abs/2507.18525"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>arXiv</a><a href="documents/presentations/2025-07-opticus-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster is-awarded" data-kind="poster" data-award="1">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2025</span> Jun</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>4th K-Neutrino Symposium, Seoul</span>
+                  <span class="pub-award">Best Presentation Award</span>
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster presents JANUS, a conditional generative framework using diffusion and flow-matching models for IceCube neutrino event simulation and reconstruction. The model is trained on simulated detector data and learns to generate realistic photon hit patterns from particle parameters, as well as to infer event-level properties from detector signals. The unified generation-and-inference design removes the need for separate simulation and reconstruction networks.</p><div class="work-links"><a href="documents/presentations/2025-06-janus-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a><a href="documents/presentations/2025-06-janus-kps-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster" data-kind="poster" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2025</span> Apr</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Modeling the Relationship between PMT Response and Air-Shower Particles for SWGO</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>101st Spring Meeting of the Korean Physical Society, Daejeon</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster investigates the relationship between PMT response signals and air-shower particle properties in the SWGO detector using simulation data. A generative model is developed to learn the conditional distribution of PMT outputs given shower parameters such as energy, arrival direction, and core position. The approach is intended to support fast and accurate detector-response emulation for SWGO analysis pipelines.</p><div class="work-links"><a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster is-awarded" data-kind="poster" data-award="1">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2024</span> Oct</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Development of a Deep Learning Model for Analyzing Antarctic Ice Optical Properties</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>KPS Undergraduate Physics Research Competition, 101st Fall Meeting of the Korean Physical Society, Yeosu</span>
+                  <span class="pub-award">Merit Award</span>
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster presents a deep-learning approach for measuring the optical properties of Antarctic ice from simulated images produced by the IceCube Upgrade camera system. CNN and Vision Transformer models are trained to estimate scattering and absorption lengths from simulated camera exposures of both bulk and refrozen hole ice. The work demonstrates that neural-network-based methods can automate and accelerate optical calibration of the IceCube detector.</p><div class="work-links"><a href="documents/presentations/2024-10-icecube-optical-properties-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-talk" data-kind="talk" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2024</span> Sep</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Deep Learning for Ice-Property Measurement Using Simulation Images</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-talk">Talk</span>IceCube Collaboration Meeting, Madison, Wisconsin, USA</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This talk presents CNN and Vision Transformer models developed for measuring Antarctic ice optical properties using simulated images from the IceCube Upgrade camera system. The models are trained to extract scattering and absorption parameters from calibration images, and performance on both bulk ice and refrozen hole ice is evaluated and compared with classical maximum-likelihood methods.</p><div class="work-links"><a href="documents/presentations/2024-09-icecube-camera-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-talk" data-kind="talk" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2024</span> Jul</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Ice-Property Measurement Using a Camera System in the IceCube Upgrade</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-talk">Talk</span>3rd K-Neutrino Symposium, Gwangju</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This talk introduces the camera system deployed in the IceCube Upgrade and presents deep-learning methods for measuring the optical properties of Antarctic ice from simulated camera images. CNN-based models are developed to estimate scattering lengths for both bulk ice and refrozen hole ice, demonstrating improved accuracy over classical calibration approaches. The work is motivated by the need for precise optical modeling to support IceCube physics analyses.</p><div class="work-links"><a href="documents/presentations/2024-07-icecube-camera-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a></div></div>
+            </details>
+          </li>
+          <li class="tl-item kind-poster" data-kind="poster" data-award="0">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-date"><span class="tl-yr">2024</span> Apr</span>
+                <span class="tl-node" aria-hidden="true"></span>
+                <span class="tl-main">
+                  <span class="pub-title">Study of Optical Properties in Antarctic Ice Using Simulated Images</span>
+                  <span class="pub-venue"><span class="pub-kind pub-kind-poster">Poster</span>100th Spring Meeting of the Korean Physical Society, Daejeon</span>
+                  
+                </span>
+                <span class="experience-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tl-body"><p>This poster presents an early study of Antarctic ice optical-property estimation using simulated images from the IceCube Upgrade camera system. A CNN model is developed to predict ice scattering and absorption parameters from camera exposures, with training and evaluation conducted on a dedicated Monte Carlo simulation pipeline. The results demonstrate the feasibility of data-driven optical calibration for the IceCube Upgrade.</p><p class="row-note">Materials to be updated</p></div>
+            </details>
+          </li>
+      </ol>
+    </section>
+
+    <section class="shell panel" aria-labelledby="awards-title">
+      <div class="section-heading"><div><h2 id="awards-title">Awards</h2></div></div>
+      <ol class="pub-list awards-list">
+        <li class="pub-item"><span class="pub-year">2026</span><div class="pub-main"><h3 class="award-title">Best Presentation Award</h3><p class="pub-venue">33rd Korean Conference on Semiconductors</p><p class="pub-authors">Investigation of IGZO-Based 3D Vertical Channel Transistors and Physics-Informed Neural Network Modeling for Next-Generation DRAM</p></div></li>
+        <li class="pub-item"><span class="pub-year">2025</span><div class="pub-main"><h3 class="award-title">Best Presentation Award</h3><p class="pub-venue">4th K-Neutrino Symposium</p><p class="pub-authors">Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction</p></div></li>
+        <li class="pub-item"><span class="pub-year">2024</span><div class="pub-main"><h3 class="award-title">Merit Award</h3><p class="pub-venue">KPS Undergraduate Physics Research Competition</p><p class="pub-authors">CNN and Vision Transformer models for the IceCube Upgrade Camera System</p></div></li>
+      </ol>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><p>© <span id="year">2026</span> Minje Park</p></div></footer>
+  <script src="assets/js/pages.js?v=5"></script>
+</body>
 </html>

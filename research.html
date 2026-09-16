@@ -1,807 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Research · Minje Park</title>
-    <meta
-      name="description"
-      content="Research projects by Minje Park in astro-particle physics and machine learning."
-    />
-        <link rel="stylesheet" href="shared-theme.css" />
-    <link rel="stylesheet" href="shared-nav-mobile.css" />
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [["\\(", "\\)"]],
-          displayMath: [["\\[", "\\]"]],
-        },
-        chtml: {
-          scale: 0.9,
-        },
-      };
-    </script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-    ></script>
-    <style>
-      :root {
-        --bg: #0b1020;
-        --bg-soft: #151a2b;
-        --bg-softer: #1d2336;
-        --fg: #ffffff;
-        --fg-muted: #f4f6ff;
-        --accent: #8d9bff;
-        --accent-soft: rgba(141, 155, 255, 0.18);
-        --border-subtle: rgba(220, 226, 255, 0.24);
-        --shadow-soft: 0 22px 58px rgba(0, 0, 0, 0.62);
-        --radius-lg: 18px;
-        --radius-pill: 999px;
-        --nav-height: 64px;
-        --content-width: 960px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: Helvetica, Arial, sans-serif;
-        position: relative;
-        background: #0b1020;
-        overflow-x: hidden;
-        color: var(--fg);
-        -webkit-font-smoothing: antialiased;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: -8px;
-        z-index: 0;
-        pointer-events: none;
-        background-image: linear-gradient(
-            135deg,
-            rgba(3, 7, 18, 0.70),
-            rgba(15, 23, 42, 0.60)
-          ),
-          url("assets/images/nasa.jpg");
-        background-size: cover;
-        background-position: center;
-        filter: blur(2px);
-        transform: scale(1.015);
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        z-index: 1;
-      }
-
-      .page-inner {
-        width: 100%;
-        max-width: var(--content-width);
-        margin: 0 auto;
-        padding: 24px 20px 40px;
-      }
-
-      .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        backdrop-filter: blur(16px);
-        background: linear-gradient(
-          to bottom,
-          rgba(5, 7, 18, 0.9),
-          rgba(5, 7, 18, 0.6),
-          transparent
-        );
-      }
-
-      .navbar-inner {
-        height: var(--nav-height);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .brand-avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 20%, #f7f7ff, #8d9bff);
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
-          0 10px 24px rgba(0, 0, 0, 0.7);
-      }
-
-      .brand-text-main {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0;
-      }
-
-      .brand-text-sub {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        color: var(--fg-muted);
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        font-size: 14px;
-      }
-
-      .nav-link {
-        padding: 6px 12px;
-        border-radius: 999px;
-        color: var(--fg-muted);
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: background 0.16s ease, color 0.16s ease;
-      }
-
-      .nav-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--fg);
-        text-decoration: none;
-      }
-
-      .nav-link-active {
-        background: var(--accent-soft);
-        color: var(--accent);
-      }
-
-      .card {
-        background: linear-gradient(
-          145deg,
-          rgba(18, 24, 42, 0.86),
-          rgba(7, 11, 25, 0.90)
-        );
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-subtle);
-        box-shadow: var(--shadow-soft);
-        padding: 22px 22px 20px;
-        margin-top: 24px;
-      }
-
-      .intro-card {
-        background: linear-gradient(
-          145deg,
-          rgba(27, 36, 58, 0.86),
-          rgba(11, 18, 36, 0.90)
-        );
-        border-color: rgba(220, 226, 255, 0.32);
-      }
-
-      .card-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .project-card-header {
-        align-items: stretch;
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: 8px;
-      }
-
-      .project-card-header .card-title {
-        margin: 0;
-      }
-
-      .card-title {
-        font-size: 18px;
-        font-weight: 600;
-        letter-spacing: 0;
-        text-transform: none;
-      }
-
-      .project-title-main {
-        font-size: 18px;
-        font-weight: 600;
-        color: #ffffff;
-      }
-
-      .project-title-expansion {
-        font-size: 15px;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 0.84);
-      }
-
-      .project-action-row {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 0;
-      }
-
-      .card-subtitle {
-        font-size: 12px;
-        color: var(--fg-muted);
-      }
-
-      .lead-text {
-        font-size: 15px;
-        line-height: 1.65;
-        color: rgba(255, 255, 255, 0.94);
-        margin: 0;
-      }
-
-      .project-tag {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: var(--radius-pill);
-        border: 1px solid rgba(143, 148, 183, 0.6);
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0;
-        color: rgba(255, 255, 255, 0.86);
-      }
-
-      .project-tag.ongoing {
-        border-color: rgba(112, 214, 163, 0.72);
-        background: rgba(112, 214, 163, 0.1);
-        color: #99e3bf;
-      }
-
-      .project-tag.completed {
-        border-color: rgba(143, 148, 183, 0.52);
-        background: rgba(143, 148, 183, 0.08);
-        color: rgba(255, 255, 255, 0.86);
-      }
-
-      .project-expand {
-        margin-top: 10px;
-        border-top: 1px solid rgba(37, 42, 70, 0.9);
-        padding-top: 10px;
-      }
-
-      .project-expand summary {
-        cursor: pointer;
-        color: var(--accent);
-        font-size: 12px;
-      }
-
-      .project-expand-content {
-        margin-top: 10px;
-      }
-
-      .asset-row {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 0;
-      }
-
-      .asset-chip {
-        display: inline-flex;
-        align-items: center;
-        border: 1px dashed rgba(143, 148, 183, 0.65);
-        border-radius: var(--radius-pill);
-        background: rgba(8, 12, 28, 0.9);
-        padding: 4px 10px;
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.86);
-      }
-
-      /* ── Project figure ── */
-      .project-figure {
-        margin: 14px 0 10px;
-        border-radius: 10px;
-        overflow: hidden;
-        border: 1px dashed rgba(141, 155, 255, 0.22);
-      }
-
-      .project-figure-light {
-        background: #ffffff;
-      }
-
-      .project-fig-img {
-        width: 100%;
-        display: block;
-        border-radius: 10px;
-      }
-
-      .project-fig-pdf {
-        width: 100%;
-        height: 540px;
-        display: block;
-        border: 0;
-        background: #fff;
-      }
-
-      .slide-viewer {
-        margin-top: 14px;
-        border-radius: 10px;
-        overflow: hidden;
-        border: 1px solid rgba(141, 155, 255, 0.22);
-        background: #fff;
-      }
-
-      .slide-viewer object,
-      .slide-viewer iframe {
-        width: 100%;
-        height: 520px;
-        display: block;
-        border: 0;
-      }
-
-      .slide-viewer-fallback {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80px;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.90);
-        background: rgba(141, 155, 255, 0.04);
-      }
-
-      .project-fig-placeholder {
-        width: 100%;
-        min-height: 180px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        background: rgba(141, 155, 255, 0.03);
-        color: rgba(255, 255, 255, 0.78);
-        font-size: 12px;
-        letter-spacing: 0;
-      }
-
-      .project-fig-icon {
-        font-size: 28px;
-        opacity: 0.35;
-        line-height: 1;
-      }
-
-      .project-fig-caption {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.76);
-        margin-top: 4px;
-        font-style: italic;
-      }
-
-      .section-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .section-item {
-        padding: 8px 0;
-        border-top: 1px solid rgba(37, 42, 70, 0.9);
-      }
-
-      .section-item:first-child {
-        border-top: none;
-      }
-
-      .pub-title {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 4px;
-      }
-
-      .pub-meta {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.92);
-        margin-bottom: 8px;
-      }
-
-      .pub-links {
-        font-size: 14px;
-        line-height: 1.7;
-        color: rgba(255, 255, 255, 0.90);
-      }
-
-      .project-summary {
-        font-size: 14px;
-        line-height: 1.8;
-        color: rgba(238, 241, 255, 0.92);
-        margin: 0 0 12px;
-      }
-
-      .project-dual {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 16px;
-      }
-
-      .project-pane {
-        min-width: 0;
-        background: rgba(141, 155, 255, 0.04);
-        border: 1px solid rgba(141, 155, 255, 0.13);
-        border-top: 2px solid rgba(141, 155, 255, 0.45);
-        border-radius: 12px;
-        padding: 16px 18px 14px;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .project-point-label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        color: var(--accent);
-      }
-
-      .project-point-text {
-        display: block;
-        font-size: 12px;
-        line-height: 1.8;
-        color: rgba(255, 255, 255, 0.94);
-      }
-
-      .project-equation {
-        margin-top: 12px;
-        padding: 8px 10px;
-        border-radius: 8px;
-        border: 1px solid rgba(141, 155, 255, 0.1);
-        background: rgba(8, 11, 24, 0.6);
-        overflow-x: auto;
-        font-size: 0.82em;
-      }
-
-      .project-equation .mjx-container {
-        margin: 0 !important;
-        color: rgba(244, 247, 255, 0.94);
-      }
-
-      .eq-intro {
-        font-size: 12px;
-        line-height: 1.78;
-        color: rgba(255, 255, 255, 0.94);
-        margin: 0 0 10px;
-        flex: 1;
-      }
-
-      .eq-block {
-        margin-top: 10px;
-      }
-
-      .eq-label {
-        display: block;
-        font-size: 11px;
-        font-style: italic;
-        color: rgba(220, 224, 240, 0.72);
-        margin-bottom: 4px;
-      }
-
-      .eq-math {
-        padding: 5px 10px;
-        border-radius: 6px;
-        background: rgba(8, 11, 24, 0.62);
-        border: 1px solid rgba(141, 155, 255, 0.09);
-        overflow-x: auto;
-        font-size: 0.8em;
-        min-height: 62px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .eq-math .mjx-container {
-        margin: 0 !important;
-        color: rgba(244, 247, 255, 0.92);
-      }
-
-      .project-inline-figure {
-        margin-top: 18px;
-      }
-
-      .project-inline-figure .project-figure {
-        max-width: 100%;
-      }
-
-      @media (max-width: 820px) {
-        .project-dual {
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-      }
-
-      .footer {
-        margin-top: auto;
-        padding: 20px;
-        border-top: 1px solid rgba(24, 30, 46, 0.9);
-        color: #7a7f98;
-        font-size: 12px;
-      }
-
-      .footer-inner {
-        max-width: var(--content-width);
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <header class="navbar">
-        <div class="page-inner navbar-inner">
-          <div class="brand">
-            <div>
-              <div class="brand-text-main">Minje&nbsp;Park</div>
-              <div class="brand-text-sub">Research</div>
-            </div>
-          </div>
-          <nav class="nav-links" aria-label="Main navigation">
-            <a class="nav-link" href="index.html">home</a>
-            <a class="nav-link" href="about.html">about</a>
-            <a class="nav-link nav-link-active" href="research.html">research</a>
-            <a class="nav-link" href="blog/">blog</a>
-            <a class="nav-link" href="calendar.html">calendar</a>
-            <a class="nav-link" href="publications.html">publications</a>
-            <a class="nav-link" href="game.html">game</a>
-          </nav>
-        </div>
-      </header>
-
-      <main class="page-inner">
-        <section class="card intro-card" aria-labelledby="research-heading">
-          <div class="card-header">
-            <h1 id="research-heading" class="card-title">Research</h1>
-          </div>
-          <p class="lead-text">
-            My research projects in cosmology and astroparticle physics.
-          </p>
-        </section>
-
-        <section class="card" aria-labelledby="project-cosmo-heading">
-          <div class="card-header project-card-header">
-            <h2 id="project-cosmo-heading" class="card-title">
-              <span class="project-title-main">GENESIS</span>
-              <span class="project-title-expansion">&mdash; GENerative Emulator for Simulation and parameter Inference from cosmological fields</span>
-            </h2>
-            <div class="project-action-row">
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/GENESIS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: Code</a>
-                <a class="asset-chip" href="documents/papers/genesis/genesis.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Paper</a>
-                <a class="asset-chip" href="documents/presentations/2025-10-genesis-poster.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 Poster</a>
-                <a class="asset-chip" href="game.html" style="border-style:solid;color:var(--accent);text-decoration:none;">🎮 Game</a>
-              </div>
-              <span class="project-tag ongoing">Ongoing</span>
-            </div>
-          </div>
-          <p class="project-summary">
-            GENESIS is a conditional generative model trained on the CAMELS
-            Multifield Dataset. It jointly emulates three correlated 2D
-            projected fields &mdash; dark matter density
-            \(M_\mathrm{cdm}\), gas density \(M_\mathrm{gas}\), and gas
-            temperature \(T\) &mdash; conditioned on the full
-            six-dimensional parameter vector
-            \(\boldsymbol{\theta} = (\Omega_m,\,\sigma_8,\,A_\mathrm{SN1},\,A_\mathrm{SN2},\,A_\mathrm{AGN1},\,A_\mathrm{AGN2})\),
-            using optimal-transport flow matching (OT-FM) with a U-Net
-            backbone incorporating periodic-boundary convolutions.
-          </p>
-          <p class="project-summary">
-            GENESIS is proposed as a unified model for both generation and
-            inference: the same trained vector field \(\mathbf{v}^\phi\)
-            that produces field samples can also evaluate the likelihood
-            of \(\boldsymbol{\theta}\) given an observed field, enabling
-            parameter estimation without any additional training.
-          </p>
-          <div class="project-dual">
-            <section class="project-pane" aria-label="GENESIS generation">
-              <span class="project-point-label"><strong>Generation</strong></span>
-              <p class="eq-intro">
-                The model learns a vector field
-                \(\mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\)
-                — a direction at every point in field space at time \(t\)
-                — that transports Gaussian noise \(\mathbf{x}_0 \sim \mathcal{N}(\mathbf{0},\mathbf{I})\)
-                toward the data distribution \(p_1\), producing
-                realistic cosmological maps conditioned on
-                \(\boldsymbol{\theta}\). Here \(\phi\) are the network
-                weights and \(\boldsymbol{\theta}\) the six CAMELS
-                parameters \((\Omega_m, \sigma_8, A_\mathrm{SN1},
-                A_\mathrm{SN2}, A_\mathrm{AGN1}, A_\mathrm{AGN2})\).
-              </p>
-              <div class="eq-block">
-                <span class="eq-label">the vector field drives the probability-flow ODE:</span>
-                <div class="eq-math">\[\dot{\mathbf{x}}_t = \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\]</div>
-              </div>
-              <div class="eq-block">
-                <span class="eq-label">integrate from noise to field to draw a sample:</span>
-                <div class="eq-math">\[\mathbf{x}_1 = \mathbf{x}_0 + \int_0^1 \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt\]</div>
-              </div>
-            </section>
-            <section class="project-pane" aria-label="GENESIS inference">
-              <span class="project-point-label"><strong>Inference</strong></span>
-              <p class="eq-intro">
-                Because GENESIS is a continuous normalizing flow (CNF),
-                the same \(\mathbf{v}^\phi\) can also evaluate the exact
-                likelihood of any observed field \(\mathbf{x}_1\) under a
-                given \(\boldsymbol{\theta}\). The divergence
-                \(\nabla\cdot\mathbf{v}^\phi\) measures how the flow
-                compresses or expands volume along the trajectory; integrating
-                it yields the log-likelihood with no extra inference
-                network — enabling training-free parameter estimation.
-              </p>
-              <div class="eq-block">
-                <span class="eq-label">continuity equation along the flow:</span>
-                <div class="eq-math">\[\frac{d}{dt}\log p_t(\phi_t(x)) + \nabla \cdot \mathbf{v}^\phi_t(\phi_t(x)) = 0\]</div>
-              </div>
-              <div class="eq-block">
-                <span class="eq-label">exact log-likelihood via change-of-variables:</span>
-                <div class="eq-math">\[\log p(\mathbf{x}_1 \mid \boldsymbol{\theta}) = \log p(\mathbf{x}_0) - \int_0^1 \nabla \cdot \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt\]</div>
-              </div>
-            </section>
-          </div>
-          <div class="project-inline-figure">
-            <div class="project-figure project-figure-light">
-              <img
-                class="project-fig-img"
-                src="assets/images/cv_tiles_camels_vs_genesis_6.png"
-                alt="GENESIS vs CAMELS CV tiles"
-              />
-            </div>
-            <p class="pub-links" style="margin-top:8px;">
-              CAMELS CV simulations vs. GENESIS generated samples at the fiducial parameter point
-              \((\Omega_m,\,\sigma_8,\,A_\mathrm{SN1},\,A_\mathrm{SN2},\,A_\mathrm{AGN1},\,A_\mathrm{AGN2}) = (0.30,\,0.80,\,1,\,1,\,1,\,1)\).
-              Each column shows a dark matter density, gas density, and gas temperature field (top to bottom).
-            </p>
-          </div>
-          <div class="project-inline-figure">
-            <div class="slide-viewer">
-              <iframe
-                src="documents/papers/genesis/genesis.pdf"
-                type="application/pdf"
-              >
-                <p class="pub-links">
-                  PDF viewer not supported. <a href="documents/papers/genesis/genesis.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
-                </p>
-              </iframe>
-            </div>
-            <p class="pub-links" style="margin-top:8px;">
-              GENESIS paper PDF
-            </p>
-          </div>
-        </section>
-
-        <section class="card" aria-labelledby="project-skku-heading">
-          <div class="card-header project-card-header">
-            <h2 id="project-skku-heading" class="card-title">
-              JANUS &mdash; Generative AI for IceCube neutrino events
-            </h2>
-            <div class="project-action-row">
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/JANUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: JANUS</a>
-                <a class="asset-chip" href="documents/presentations/2025-06-janus-kps-poster.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 KPS Poster</a>
-              </div>
-              <span class="project-tag ongoing">Ongoing</span>
-            </div>
-          </div>
-          <p class="project-summary">
-            The IceCube Neutrino Observatory is a cubic-kilometer-scale
-            neutrino detector embedded deep in the Antarctic ice, designed to
-            observe Cherenkov photons emitted by charged secondary particles
-            produced in neutrino interactions. Reconstructing the physical
-            properties of these events such as energy, direction, and
-            interaction vertex from sparse and noisy photon signals is a
-            central challenge in IceCube data analysis and is essential for
-            identifying and studying astrophysical neutrino sources.
-          </p>
-          <p class="project-summary">
-            To address this problem, JANUS investigates conditional diffusion
-            and flow-matching models trained on simulated IceCube data. These
-            models are designed to operate in both directions: generating
-            realistic detector responses from particle-level conditions, and
-            reconstructing event properties from observed detector signals. By
-            framing both simulation and reconstruction within a unified
-            generative modeling framework, JANUS aims to provide a flexible
-            and scalable approach to neutrino event analysis in IceCube.
-          </p>
-          <div class="slide-viewer">
-            <object data="documents/presentations/2025-06-janus-kps-poster.pdf" type="application/pdf">
-              <div class="slide-viewer-fallback">
-                PDF viewer not supported. <a href="documents/presentations/2025-06-janus-kps-poster.pdf" target="_blank" rel="noopener noreferrer" style="margin-left:6px;">Open PDF</a>
-              </div>
-            </object>
-          </div>
-        </section>
-
-        <section class="card" aria-labelledby="project-utah-heading">
-          <div class="card-header project-card-header">
-            <h2 id="project-utah-heading" class="card-title">
-              OPTICUS &mdash; Vision Transformer for IceCube optical-property measurement
-            </h2>
-            <div class="project-action-row">
-              <div class="asset-row">
-                <a class="asset-chip" href="https://github.com/pmj0324/OPTICUS" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">🔗 GitHub: OPTICUS</a>
-                <a class="asset-chip" href="https://arxiv.org/abs/2507.18525" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">📄 arXiv:2507.18525</a>
-                <a class="asset-chip" href="documents/presentations/2025-07-opticus-slides.pdf" target="_blank" rel="noopener noreferrer" style="border-style:solid;color:var(--accent);text-decoration:none;">↗ Open PDF</a>
-              </div>
-              <span class="project-tag completed">Completed</span>
-            </div>
-          </div>
-          <p class="project-summary">
-            To improve detector calibration in IceCube, the Upgrade introduced
-            a camera system that images light propagation through Antarctic ice.
-            These images contain information about the optical properties of
-            both the bulk ice and the refrozen drill-hole ice, but extracting
-            that information requires modeling complex, non-linear image
-            patterns.
-          </p>
-          <p class="project-summary">
-            OPTICUS is a hybrid CNN&ndash;Vision Transformer model developed
-            for this task, combining convolutional feature extraction with
-            global attention over image patches. Trained on simulated camera
-            images, it achieved percent-level accuracy in estimating scattering
-            lengths for both bulk ice and hole ice. In particular, the
-            OPTICUS-Bulk model achieved an overall 68% containment of about
-            0.42%, while the OPTICUS-Hole model achieved about 0.18%,
-            demonstrating high-precision optical-property estimation in both
-            regimes.
-          </p>
-          <div class="slide-viewer">
-            <object data="documents/presentations/2025-07-opticus-slides.pdf" type="application/pdf">
-              <div class="slide-viewer-fallback">
-                PDF viewer not supported. <a href="documents/presentations/2025-07-opticus-slides.pdf" target="_blank" rel="noopener noreferrer" style="margin-left:6px;">Open slides</a>
-              </div>
-            </object>
-          </div>
-        </section>
-
-      </main>
-
-      <footer class="footer">
-        <div class="footer-inner">
-          <span>
-            © <span id="year"></span> Minje Park. All rights reserved.
-          </span>
-          <span>Built with a simple static website and custom CSS.</span>
-          <span>Background: <a href="https://science.nasa.gov/asset/webb/cosmic-cliffs-in-the-carina-nebula-nircam-image/" target="_blank" rel="noopener noreferrer">Cosmic Cliffs in the Carina Nebula</a>; image credit: NASA, ESA, CSA, STScI. Image cropped and blurred for background display.</span>
-        </div>
-      </footer>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Research projects by Minje Park in cosmology, astroparticle physics, and machine learning.">
+  <meta name="theme-color" content="#f7f9fa">
+  <title>Research · Minje Park</title>
+  <link rel="stylesheet" href="assets/css/homepage.css?v=56">
+  <link rel="stylesheet" href="assets/css/pages.css?v=13">
+  <script>window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] }, chtml: { scale: 0.92 } };</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body class="subpage">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="index.html"><span>Minje Park</span></a>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="research.html" aria-current="page">Research</a>
+        <a href="publications.html">Publications</a><a href="blog/">Notes</a>
+        <a href="documents/cv/Minje_Park_CV.pdf">CV</a>
+        <details class="more-menu"><summary>More</summary><div><a href="calendar.html">Calendar</a><a href="game.html">Game</a></div></details>
+      </nav>
     </div>
+  </header>
 
-    <script>
-      document.getElementById("year").textContent =
-        new Date().getFullYear().toString();
-    </script>
-  </body>
+  <main id="main" class="subpage-main">
+    <header class="shell page-title">
+      <h1>Research</h1>
+      <p>Machine learning projects in cosmology and astroparticle physics.</p>
+    </header>
+
+    <section class="shell panel" aria-labelledby="overview-title">
+      <div class="section-heading"><div><h2 id="overview-title">Projects</h2></div></div>
+      <div class="work-grid">
+        <article class="work-card work-ind">
+          <a class="work-thumb" href="#project-cosmo-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/cv_tiles_camels_vs_genesis_6.png" alt="" loading="lazy"></a>
+          <div class="work-body">
+            <p class="work-field">Independent research</p>
+            <h3><a href="#project-cosmo-heading">GENESIS</a></h3>
+            <p class="work-desc">Flow matching for cosmological field simulation and physical parameter inference.</p>
+            <p class="work-jump"><a href="#project-cosmo-heading">Read more ↓</a></p>
+          </div>
+        </article>
+        <article class="work-card work-skku">
+          <a class="work-thumb" href="#project-skku-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/janus.jpg" alt="" loading="lazy"></a>
+          <div class="work-body">
+            <p class="work-field">Sungkyunkwan University</p>
+            <h3><a href="#project-skku-heading">JANUS</a></h3>
+            <p class="work-desc">Diffusion and flow matching for IceCube neutrino event generation and reconstruction.</p>
+            <p class="work-jump"><a href="#project-skku-heading">Read more ↓</a></p>
+          </div>
+        </article>
+        <article class="work-card work-rott">
+          <a class="work-thumb" href="#project-utah-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/opticus.jpg" alt="" loading="lazy"></a>
+          <div class="work-body">
+            <p class="work-field">University of Utah · SKKU</p>
+            <h3><a href="#project-utah-heading">OPTICUS</a></h3>
+            <p class="work-desc">Vision Transformers for Antarctic ice optical-property measurement.</p>
+            <p class="work-jump"><a href="#project-utah-heading">Read more ↓</a></p>
+          </div>
+        </article>
+        <article class="work-card work-uos">
+          <a class="work-thumb work-thumb-poster" href="#project-swgo-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/swgo.jpg" alt="" loading="lazy"></a>
+          <div class="work-body">
+            <p class="work-field">University of Seoul · SKKU</p>
+            <h3><a href="#project-swgo-heading">SWGO</a></h3>
+            <p class="work-desc">Generative detector simulation and Transformer-based particle reconstruction.</p>
+            <p class="work-jump"><a href="#project-swgo-heading">Read more ↓</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell panel project work-ind" aria-labelledby="project-cosmo-heading">
+      <header class="project-head">
+        <p class="work-field">Independent research<span class="project-status project-status-ongoing">Ongoing</span></p>
+        <h2 id="project-cosmo-heading">GENESIS</h2>
+        <p class="project-expansion">GENerative Emulator for Simulation and parameter Inference from cosmological fields</p>
+        <div class="work-links"><a href="documents/papers/genesis/genesis.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>Paper</a><a href="https://github.com/pmj0324/GENESIS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="documents/presentations/2025-10-genesis-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a><a href="game.html"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm-1.7 4.6v6.8L11.8 8Z" fill-rule="evenodd"/></svg></span>Demo</a></div>
+      </header>
+      <div class="project-body">
+        <p>GENESIS is a conditional generative model trained on the CAMELS Multifield Dataset. It jointly emulates three correlated 2D projected fields &mdash; dark matter density \(M_\mathrm{cdm}\), gas density \(M_\mathrm{gas}\), and gas temperature \(T\) &mdash; conditioned on the full six-dimensional parameter vector \(\boldsymbol{\theta} = (\Omega_m,\,\sigma_8,\,A_\mathrm{SN1},\,A_\mathrm{SN2},\,A_\mathrm{AGN1},\,A_\mathrm{AGN2})\), using optimal-transport flow matching (OT-FM) with a U-Net backbone incorporating periodic-boundary convolutions.</p>
+        <p>GENESIS is proposed as a unified model for both generation and inference: the same trained vector field \(\mathbf{v}^\phi\) that produces field samples can also evaluate the likelihood of \(\boldsymbol{\theta}\) given an observed field, enabling parameter estimation without any additional training.</p>
+        <div class="project-dual">
+          <section class="project-pane" aria-label="GENESIS generation">
+            <h3>Generation</h3>
+            <p>The model learns a vector field \(\mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\) &mdash; a direction at every point in field space at time \(t\) &mdash; that transports Gaussian noise \(\mathbf{x}_0 \sim \mathcal{N}(\mathbf{0},\mathbf{I})\) toward the data distribution \(p_1\), producing realistic cosmological maps conditioned on \(\boldsymbol{\theta}\).</p>
+            <p class="eq-label">The vector field drives the probability-flow ODE</p>
+            <div class="eq">\[\dot{\mathbf{x}}_t = \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\]</div>
+            <p class="eq-label">Integrate from noise to field to draw a sample</p>
+            <div class="eq">\[\mathbf{x}_1 = \mathbf{x}_0 + \int_0^1 \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt\]</div>
+          </section>
+          <section class="project-pane" aria-label="GENESIS inference">
+            <h3>Inference</h3>
+            <p>Because GENESIS is a continuous normalizing flow (CNF), the same \(\mathbf{v}^\phi\) can also evaluate the exact likelihood of any observed field \(\mathbf{x}_1\) under a given \(\boldsymbol{\theta}\). Integrating the divergence \(\nabla\cdot\mathbf{v}^\phi\) along the trajectory yields the log-likelihood with no extra inference network.</p>
+            <p class="eq-label">Continuity equation along the flow</p>
+            <div class="eq">\[\frac{d}{dt}\log p_t(\phi_t(x)) + \nabla \cdot \mathbf{v}^\phi_t(\phi_t(x)) = 0\]</div>
+            <p class="eq-label">Exact log-likelihood via change of variables</p>
+            <div class="eq">\[\log p(\mathbf{x}_1 \mid \boldsymbol{\theta}) = \log p(\mathbf{x}_0) - \int_0^1 \nabla \cdot \mathbf{v}^\phi(\mathbf{x}_t,\,t,\,\boldsymbol{\theta})\,dt\]</div>
+          </section>
+        </div>
+        <figure class="project-figure">
+          <img src="assets/images/cv_tiles_camels_vs_genesis_6.png" alt="CAMELS simulations compared with GENESIS samples" loading="lazy">
+          <figcaption>CAMELS CV simulations vs. GENESIS generated samples at the fiducial parameter point \((\Omega_m,\,\sigma_8,\,A_\mathrm{SN1},\,A_\mathrm{SN2},\,A_\mathrm{AGN1},\,A_\mathrm{AGN2}) = (0.30,\,0.80,\,1,\,1,\,1,\,1)\). Each column shows a dark matter density, gas density, and gas temperature field (top to bottom).</figcaption>
+        </figure>
+      </div>
+      <details class="preview">
+        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview paper</summary>
+        <div class="preview-frame"><object data="documents/papers/genesis/genesis.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/papers/genesis/genesis.pdf">Open the PDF</a>.</p></object></div>
+      </details>
+    </section>
+    <section class="shell panel project work-skku" aria-labelledby="project-skku-heading">
+      <header class="project-head">
+        <p class="work-field">Sungkyunkwan University<span class="project-status project-status-ongoing">Ongoing</span></p>
+        <h2 id="project-skku-heading">JANUS</h2>
+        <p class="project-expansion">Generative AI for IceCube neutrino events</p>
+        <div class="work-links"><a href="https://github.com/pmj0324/JANUS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="documents/presentations/2025-06-janus-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a><a href="documents/presentations/2025-06-janus-kps-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div>
+      </header>
+      <div class="project-body">
+        <p>The IceCube Neutrino Observatory is a cubic-kilometer-scale neutrino detector embedded deep in the Antarctic ice, designed to observe Cherenkov photons emitted by charged secondary particles produced in neutrino interactions. Reconstructing the physical properties of these events such as energy, direction, and interaction vertex from sparse and noisy photon signals is a central challenge in IceCube data analysis and is essential for identifying and studying astrophysical neutrino sources.</p>
+        <p>To address this problem, JANUS investigates conditional diffusion and flow-matching models trained on simulated IceCube data. These models are designed to operate in both directions: generating realistic detector responses from particle-level conditions, and reconstructing event properties from observed detector signals. By framing both simulation and reconstruction within a unified generative modeling framework, JANUS aims to provide a flexible and scalable approach to neutrino event analysis in IceCube.</p>
+      </div>
+      <details class="preview">
+        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview poster</summary>
+        <div class="preview-frame"><object data="documents/presentations/2025-06-janus-kps-poster.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-06-janus-kps-poster.pdf">Open the PDF</a>.</p></object></div>
+      </details>
+    </section>
+    <section class="shell panel project work-rott" aria-labelledby="project-utah-heading">
+      <header class="project-head">
+        <p class="work-field">University of Utah · SKKU<span class="project-status project-status-completed">Completed</span></p>
+        <h2 id="project-utah-heading">OPTICUS</h2>
+        <p class="project-expansion">Vision Transformer for IceCube optical-property measurement</p>
+        <div class="work-links"><a href="https://arxiv.org/abs/2507.18525"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>arXiv</a><a href="https://github.com/pmj0324/OPTICUS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="documents/presentations/2025-07-opticus-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a></div>
+      </header>
+      <div class="project-body">
+        <p>To improve detector calibration in IceCube, the Upgrade introduced a camera system that images light propagation through Antarctic ice. These images contain information about the optical properties of both the bulk ice and the refrozen drill-hole ice, but extracting that information requires modeling complex, non-linear image patterns.</p>
+        <p>OPTICUS is a hybrid CNN&ndash;Vision Transformer model developed for this task, combining convolutional feature extraction with global attention over image patches. Trained on simulated camera images, it achieved percent-level accuracy in estimating scattering lengths for both bulk ice and hole ice. In particular, the OPTICUS-Bulk model achieved an overall 68% containment of about 0.42%, while the OPTICUS-Hole model achieved about 0.18%, demonstrating high-precision optical-property estimation in both regimes.</p>
+      </div>
+      <details class="preview">
+        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview slides</summary>
+        <div class="preview-frame"><object data="documents/presentations/2025-07-opticus-slides.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-07-opticus-slides.pdf">Open the PDF</a>.</p></object></div>
+      </details>
+    </section>
+    <section class="shell panel project work-uos" aria-labelledby="project-swgo-heading">
+      <header class="project-head">
+        <p class="work-field">University of Seoul · SKKU<span class="project-status project-status-completed">Completed</span></p>
+        <h2 id="project-swgo-heading">SWGO</h2>
+        <p class="project-expansion">Generative detector simulation and Transformer-based reconstruction</p>
+        <div class="work-links"><a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a><a href="https://github.com/pmj0324/fm-swgo"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a></div>
+      </header>
+      <div class="project-body">
+        <p>The Southern Wide-field Gamma-ray Observatory (SWGO) is a next-generation ground-based gamma-ray observatory planned for the high-altitude Andes. This work develops machine-learning tools for its detector simulation and event reconstruction.</p>
+        <ul class="project-points">
+          <li>Investigated position embedding strategies for a Transformer-based primary-particle reconstruction model (with Prof. Ian James Watson, University of Seoul).</li>
+          <li>Developed flow matching models to synthesize SWGO detector signals from simulation data.</li>
+          <li>Developed diffusion models and Mixture Density Networks to synthesize PMT signals for the SWGO tank simulation (with Prof. Chang Dong Rho, Sungkyunkwan University).</li>
+        </ul>
+      </div>
+      <details class="preview">
+        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview poster</summary>
+        <div class="preview-frame"><object data="documents/presentations/2025-04-swgo-diffusion-poster.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf">Open the PDF</a>.</p></object></div>
+      </details>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><p>© <span id="year">2026</span> Minje Park</p></div></footer>
+  <script src="assets/js/pages.js?v=2"></script>
+</body>
 </html>

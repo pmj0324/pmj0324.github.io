@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#f7f9fa">
   <title>Minje Park</title>
   <script>document.documentElement.classList.add("has-motion");</script>
-  <link rel="stylesheet" href="assets/css/homepage.css?v=54">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=56">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -15,7 +15,7 @@
     <div class="shell header-inner">
       <a class="wordmark" href="index.html"><span>Minje Park</span></a>
       <nav class="navigation" aria-label="Main navigation">
-        <a href="about.html">About</a><a href="research.html">Research</a>
+        <a href="index.html" aria-current="page">Home</a><a href="about.html">About</a><a href="research.html">Research</a>
         <a href="publications.html">Publications</a><a href="blog/">Notes</a>
         <a href="documents/cv/Minje_Park_CV.pdf">CV</a>
         <details class="more-menu"><summary>More</summary><div><a href="calendar.html">Calendar</a><a href="game.html">Game</a></div></details>
@@ -140,10 +140,10 @@
             </div>
           </article>
           <article class="work-card work-uos">
-            <a class="work-thumb work-thumb-poster" href="research.html#project-skku-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/swgo.jpg" alt="" loading="lazy"></a>
+            <a class="work-thumb work-thumb-poster" href="research.html#project-swgo-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/swgo.jpg" alt="" loading="lazy"></a>
             <div class="work-body">
               <p class="work-field">University of Seoul · SKKU</p>
-              <h3><a href="research.html#project-skku-heading">SWGO</a></h3>
+              <h3><a href="research.html#project-swgo-heading">SWGO</a></h3>
               <p class="work-desc">Generative detector simulation and Transformer-based particle reconstruction.</p>
               <div class="work-links"><a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a><a href="https://github.com/pmj0324/fm-swgo"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a></div>
             </div>
@@ -194,120 +194,6 @@
     </div>
   </main>
   <footer class="site-footer"><div class="shell footer-inner"><p>© <span id="year">2026</span> Minje Park</p></div></footer>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const monthIndex = (value) => {
-      const [year, month] = value.split("-").map(Number);
-      return year * 12 + month - 1;
-    };
-    const today = new Date();
-    // Ongoing roles are drawn through at least Dec 2026 (the internship runs through December).
-    const currentMonth = Math.max(today.getFullYear() * 12 + today.getMonth(), 2026 * 12 + 11);
-    const periods = [...document.querySelectorAll(".experience-period")].map((element) => {
-      const dates = element.querySelectorAll("time");
-      return { element, start: monthIndex(dates[0].dateTime),
-        end: dates[1] ? monthIndex(dates[1].dateTime) : currentMonth, current: !dates[1] };
-    });
-    const earliest = Math.min(...periods.map((period) => period.start));
-    const firstYear = Math.floor(earliest / 12);
-    const timelineStart = earliest - 2;
-    const lastMonth = Math.max(currentMonth, ...periods.map((period) => period.end));
-    const timelineEnd = (Math.floor(lastMonth / 12) + 1) * 12;
-    const timelineSpan = Math.max(1, timelineEnd - timelineStart);
-    const pct = (month) => `${100 * (month - timelineStart) / timelineSpan}%`;
-    const years = [];
-    for (let y = firstYear; y * 12 < timelineEnd; y++) years.push(y);
-    periods.forEach(({ element, start, end, current }) => {
-      element.style.setProperty("--period-start", pct(start));
-      element.style.setProperty("--period-length", `${100 * (end - start + 1) / timelineSpan}%`);
-      element.style.setProperty("--period-end", pct(end + 1));
-      element.closest(".experience-item").classList.toggle("is-current", current);
-      const grid = document.createElement("span");
-      grid.className = "period-grid"; grid.setAttribute("aria-hidden", "true");
-      years.filter((y) => y * 12 > timelineStart).forEach((y) => { const tick = document.createElement("i"); tick.style.left = pct(y * 12); grid.append(tick); });
-      element.prepend(grid);
-    });
-    // Duration label above each bar (ongoing roles count up to today, not to the drawn end).
-    const realMonth = today.getFullYear() * 12 + today.getMonth();
-    periods.forEach(({ element, start, end, current }) => {
-      const months = (current ? Math.max(start, realMonth) : end) - start + 1;
-      const label = document.createElement("span");
-      label.className = "period-duration";
-      label.textContent = months < 12 ? `${months} mo` : `${(months / 12).toFixed(1)} y`;
-      element.querySelector(".period-track").append(label);
-    });
-    const axis = document.createElement("div");
-    axis.className = "period-axis"; axis.setAttribute("aria-hidden", "true");
-    years.forEach((y) => { const label = document.createElement("span"); label.textContent = y; label.style.left = pct((Math.max(y * 12, timelineStart) + Math.min((y + 1) * 12, timelineEnd)) / 2); axis.append(label); });
-    document.querySelector(".experience-list").after(axis);
-    // Place the tilted date labels: each ends at its pin, both on one baseline,
-    // nudged apart when they would collide and kept inside the timeline column.
-    const COS = Math.cos(25 * Math.PI / 180), SIN = Math.sin(25 * Math.PI / 180);
-    const layoutDates = () => periods.forEach(({ element, start, end }) => {
-      const track = element.querySelector(".period-track");
-      const width = track.offsetWidth;
-      const startLabel = element.querySelector(".period-dates > time");
-      const endLabel = element.querySelector(".period-end");
-      const startReach = startLabel.offsetWidth * COS + 2;
-      const endReach = endLabel.offsetWidth * COS + 2;
-      const overhang = endLabel.offsetHeight * SIN + 2;
-      const toX = (month) => width * (month - timelineStart) / timelineSpan;
-      let endX = Math.min(width - overhang, toX(end + 1));
-      let startX = Math.min(toX(start), endX - endReach - 8);
-      if (startX < startReach) {
-        startX = startReach;
-        endX = Math.min(width - overhang, Math.max(endX, startX + endReach + 8));
-      }
-      startLabel.style.right = `${width - startX + 2}px`;
-      const duration = element.querySelector(".period-duration");
-      const half = duration.offsetWidth / 2;
-      const mid = (toX(start) + Math.min(width, toX(end + 1))) / 2;
-      duration.style.left = `${Math.min(width - half, Math.max(half, mid))}px`;
-      endLabel.style.right = `${width - endX + 2}px`;
-    });
-    layoutDates();
-    window.addEventListener("resize", layoutDates);
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const revealItems = document.querySelectorAll(".motion-reveal");
-
-    if (reduceMotion || !("IntersectionObserver" in window)) {
-      revealItems.forEach((item) => item.classList.add("is-visible"));
-    } else {
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.14, rootMargin: "0px 0px -5%" });
-      revealItems.forEach((item) => revealObserver.observe(item));
-    }
-
-    const setOpen = (card, open) => {
-      card.classList.toggle("is-open", open);
-      card.querySelector(".experience-trigger").setAttribute("aria-expanded", String(open));
-      card.querySelector(".experience-detail").setAttribute("aria-hidden", String(!open));
-    };
-    const experienceCards = [...document.querySelectorAll(".experience-item")];
-    const expandAll = document.querySelector(".experience-expand-all");
-    const syncExpandAll = () => {
-      const allOpen = experienceCards.every((card) => card.classList.contains("is-open"));
-      expandAll.textContent = allOpen ? "Collapse all" : "Expand all";
-      expandAll.setAttribute("aria-pressed", String(allOpen));
-    };
-    experienceCards.forEach((card) => {
-      card.querySelector(".experience-trigger").addEventListener("click", () => {
-        setOpen(card, !card.classList.contains("is-open"));
-        syncExpandAll();
-      });
-    });
-    expandAll.addEventListener("click", () => {
-      const open = !experienceCards.every((card) => card.classList.contains("is-open"));
-      experienceCards.forEach((card) => setOpen(card, open));
-      syncExpandAll();
-    });
-  </script>
+  <script src="assets/js/experience.js?v=1"></script>
 </body>
 </html>

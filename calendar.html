@@ -1,40 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Calendar · Minje Park</title>
-    <link rel="stylesheet" href="assets/css/calendar.css" />
-  </head>
-  <body>
-    <div class="page">
-      <header class="navbar">
-        <div class="page-inner navbar-inner">
-          <div class="brand">
-            <div>
-              <div class="brand-text-main">Minje&nbsp;Park</div>
-              <div class="brand-text-sub">Calendar</div>
-            </div>
-          </div>
-          <nav class="nav-links" aria-label="Main navigation">
-            <a class="nav-link" href="index.html">home</a>
-            <a class="nav-link" href="about.html">about</a>
-            <a class="nav-link" href="research.html">research</a>
-            <a class="nav-link" href="blog/">blog</a>
-            <a class="nav-link nav-link-active" href="calendar.html">calendar</a>
-            <a class="nav-link" href="publications.html">publications</a>
-            <a class="nav-link" href="game.html">game</a>
-          </nav>
-        </div>
-      </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f9fa">
+  <title>Calendar · Minje Park</title>
+  <link rel="stylesheet" href="assets/css/calendar.css?v=2">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=56">
+  <link rel="stylesheet" href="assets/css/pages.css?v=13">
+</head>
+<body class="subpage calendar-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="index.html"><span>Minje Park</span></a>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="research.html">Research</a>
+        <a href="publications.html">Publications</a><a href="blog/">Notes</a>
+        <a href="documents/cv/Minje_Park_CV.pdf">CV</a>
+        <details class="more-menu"><summary>More</summary><div><a href="calendar.html">Calendar</a><a href="game.html">Game</a></div></details>
+      </nav>
+    </div>
+  </header>
 
-      <main class="page-inner">
-        <section class="card" aria-labelledby="cal-heading">
-          <div class="card-header">
-            <h1 id="cal-heading" class="card-title">Calendar</h1>
-            <span class="card-subtitle">Asia/Seoul</span>
-          </div>
+  <main id="main" class="subpage-main">
+    <header class="shell shell-wide page-title">
+      <h1>Calendar</h1>
+      <p>Asia/Seoul</p>
+    </header>
 
+    <section class="shell shell-wide panel calendar-panel" aria-label="Calendar">
           <div class="calendar-shell">
 
             <!-- ── Left: Add panel ── -->
@@ -184,17 +179,10 @@
             </aside>
 
           </div>
-        </section>
-      </main>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell shell-wide footer-inner"><p>© <span id="year">2026</span> Minje Park</p></div></footer>
 
-      <footer class="footer">
-        <div class="footer-inner">
-          <span>© <span id="year"></span> Minje Park. All rights reserved.</span>
-          <span>Local calendar</span>
-        </div>
-      </footer>
-    </div>
-
-    <script src="assets/js/calendar.js"></script>
-  </body>
+  <script src="assets/js/calendar.js"></script>
+</body>
 </html>

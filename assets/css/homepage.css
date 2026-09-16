@@ -1016,3 +1016,5 @@ strong { font-weight: 620; }
 .pub-kind-proceedings { background: rgba(107,82,163,.12); color: #5b4390; }
 .pub-kind-talk { background: rgba(176,102,42,.13); color: #8f5020; }
 .site-footer { border-top: 0; }
+
+.navigation > a[aria-current="page"] { color: #fff; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1.5px; }
