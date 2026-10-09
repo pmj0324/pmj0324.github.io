@@ -1048,12 +1048,13 @@ main { view-transition-name: page; }
   left: calc(var(--bgp-rank, 0) * var(--bgp-step, 60px) * -1);
   width: calc(100% + (var(--bgp-pages, 7) - 1) * var(--bgp-step, 60px));
   z-index: -2; pointer-events: none;
-  background-image: url("../images/space-background.jpg");
+  /* the dark tint is baked into this layer so it travels with it during a
+     view transition (a separate fixed overlay would be painted underneath
+     the transition snapshot and the page would flash bright mid-slide) */
+  background-image:
+    linear-gradient(90deg, rgba(6,18,29,.400) 0%, rgba(8,22,34,.344) 55%, rgba(8,22,34,.296) 100%),
+    url("../images/space-background.jpg");
   background-size: cover; background-position: center;
   view-transition-name: page-bg;
 }
-.page-tint {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(90deg, rgba(6,18,29,.400) 0%, rgba(8,22,34,.344) 55%, rgba(8,22,34,.296) 100%);
-}
-@media print { .page-bg, .page-tint { display: none; } }
+@media print { .page-bg { display: none; } }
