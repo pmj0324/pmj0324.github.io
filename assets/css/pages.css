@@ -293,3 +293,62 @@
   .talk-toolbar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
   .talk-filter { flex: none; }
 }
+
+/* v14: research PDFs shown inline by default */
+.preview-embed { margin: 22px 0 0; }
+.preview-embed .preview-frame { margin-top: 0; height: 640px; }
+.preview-embed figcaption { margin-top: 8px; color: #4b5a63; font-size: 12px; }
+.preview-embed figcaption a { color: #2f6db5; font-weight: 560; }
+@media (max-width: 680px) { .preview-embed .preview-frame { height: 460px; } }
+
+/* v15: higher text contrast on subpages */
+.subpage .project-body > p,
+.subpage .project-pane p,
+.subpage .project-points li,
+.subpage .about-text p,
+.subpage .row-body p,
+.subpage .tl-body p { color: #141d23; }
+.subpage .project-expansion,
+.subpage .project-figure figcaption,
+.subpage .preview-embed figcaption,
+.subpage .pub-venue,
+.subpage .pub-authors,
+.subpage .tl-main .pub-venue { color: #323e46; }
+.subpage .project-head h2,
+.subpage .pub-title,
+.subpage .tl-main .pub-title { color: #0e161b; }
+.subpage .project-pane .eq-label { color: #46525a; }
+.subpage .about-meta dd { color: #0e161b; }
+
+/* v16: crisper, darker body text; neutral Generation/Inference panes */
+.subpage .project-body > p,
+.subpage .project-pane p,
+.subpage .project-points li,
+.subpage .about-text p,
+.subpage .row-body p,
+.subpage .tl-body p {
+  color: #0b1216; font-size: 14px; font-weight: 450; line-height: 1.75;
+  -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto;
+}
+.subpage .project-pane p { font-size: 13.25px; }
+.subpage .project-body mjx-container { color: #0b1216; }
+.project-pane {
+  background: rgba(255,255,255,.72); border: 1px solid rgba(53,70,77,.14); box-shadow: none;
+}
+.project-pane h3 { color: #172129; letter-spacing: .06em; }
+
+/* v17: one text scale across the site; Research panels fully opaque */
+.subpage .project-body > p,
+.subpage .project-pane p,
+.subpage .project-points li,
+.subpage .about-text p,
+.subpage .row-body p,
+.subpage .tl-body p { font-size: 13.75px; font-weight: 400; line-height: 1.75; }
+.subpage .project-pane p { font-size: 13.75px; }
+.subpage .project-expansion { font-size: 13.75px; }
+.subpage .project-pane .eq-label,
+.subpage .project-figure figcaption,
+.subpage .preview-embed figcaption { font-size: 12.5px; }
+.subpage .project-head h2 { font-size: 24px; }
+.panel.project { background: #fafbfc; backdrop-filter: none; }
+.panel.project .project-pane { background: #fff; }

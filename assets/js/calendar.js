@@ -19,6 +19,8 @@
   var ISP_PERSONAL_SEED_KEY = "minje-calendar-isp-personal-2026-v1";
   var ISP_DEADLINE_SEED_KEY = "minje-calendar-isp-deadlines-2026-v3";
   var SKKU_LECTURE_SEED_KEY = "minje-calendar-skku-lecture-2026-v4";
+  var GRAD_ADMISSION_SEED_KEY = "minje-calendar-snu-grad-admission-2027-v3";
+  var GRAD_SCHEDULE = "대학원 입시";
   var SNU_MEETING_SCHEDULE = "SNU";
   var ISP_MEETING_SCHEDULE = "ISP";
   var SKKU_OFFICIAL_SCHEDULE = "SKKU";
@@ -496,6 +498,56 @@
   }
   seedSkkuLecture();
 
+  function seedGradAdmission() {
+    if (localStorage.getItem(GRAD_ADMISSION_SEED_KEY)) return;
+    if (!schedules[GRAD_SCHEDULE]) schedules[GRAD_SCHEDULE] = {};
+    schedules[GRAD_SCHEDULE].colorKey = "violet";
+    saveSchedules();
+
+    // Remove preparation to-dos seeded by v1; keep only official dates.
+    Object.keys(data).forEach(function(key) {
+      if (!Array.isArray(data[key])) return;
+      data[key] = data[key].filter(function(it){
+        return !(it.id && (it.id.indexOf("grad-prep-") === 0 || it.id === "grad-apply-open" || it.id === "grad-apply-close"));
+      });
+      if (!data[key].length) delete data[key];
+    });
+
+    var SRC = "Source: SNU Graduate Admissions (admission.snu.ac.kr/graduate/general/spring/guide)";
+    [
+      // Official SNU 2027 spring (전기) schedule
+      { key: "2026-09-28", id: "grad-apply-period", rangeEnd: "2026-10-02", text: "[서울대] 대학원 원서접수 기간",
+        memo: "온라인 원서접수: 2026.9.28(월) 10:00 ~ 10.2(금) 17:00. 전형료 결제까지 완료해야 접수 완료.\n" + SRC },
+      { key: "2026-10-06", id: "grad-docs-due", text: "[서울대] 서류 제출 마감 (17:00, 학과 행정실)",
+        memo: "제출서류(지원서·자기소개서·수학계획서 제외)를 학과 행정실에 17:00까지 도착.\n" + SRC },
+      { key: "2026-10-06", id: "grad-interview-window", rangeEnd: "2026-10-20", text: "[서울대] 면접·구술고사 기간",
+        memo: "2026.10.6(화) ~ 10.20(화) 사이 학과별 실시. 물리천문학부 공지로 정확한 날짜 확인.\n" + SRC },
+      { key: "2026-10-20", id: "grad-first-result", text: "[서울대] 1단계 합격자 발표 (이후)",
+        memo: "2026.10.20(화) 이후 학과 홈페이지 공지.\n" + SRC },
+      { key: "2026-11-19", id: "grad-final-result", text: "[서울대] 최종 합격 발표 (18:00 이후)",
+        memo: "2026.11.19(목) 18:00 이후 입학본부 홈페이지.\n" + SRC },
+      { key: "2027-02-01", id: "grad-registration", rangeEnd: "2027-02-05", text: "[서울대] 대학원 등록 기간",
+        memo: "2027.2.1(월) 10:00 ~ 2.5(금) 16:00. 합격자 홈페이지에서 등록금 고지서 출력 후 납부.\n" + SRC }
+    ].forEach(function(entry) {
+      if (!data[entry.key]) data[entry.key] = [];
+      var item = data[entry.key].find(function(it){ return it.id === entry.id; });
+      var attrs = {
+        text: entry.text, type: "todo", allDay: true, important: true,
+        scheduleName: GRAD_SCHEDULE, memo: { title: entry.text, body: entry.memo }
+      };
+      if (entry.rangeEnd) { attrs.rangeStart = entry.key; attrs.rangeEnd = entry.rangeEnd; }
+      if (item) {
+        Object.keys(attrs).forEach(function(name){ item[name] = attrs[name]; });
+      } else {
+        data[entry.key].push(Object.assign({ id: entry.id, done: false }, attrs));
+      }
+    });
+
+    localStorage.setItem(GRAD_ADMISSION_SEED_KEY, "1");
+    saveData();
+  }
+  seedGradAdmission();
+
   function normalizeSkkuSchedule() {
     var changed = false;
     Object.keys(data).forEach(function(key) {
@@ -869,7 +921,8 @@
     "SNU":                       "snu",
     "ISP":                       "red",
     "SKKU":                      "forest",
-    "성균논어":                  "forest"
+    "성균논어":                  "forest",
+    "대학원 입시":               "violet"
   };
 
   function itemsFor(key) { return Array.isArray(data[key]) ? data[key] : []; }

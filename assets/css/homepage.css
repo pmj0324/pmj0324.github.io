@@ -15,13 +15,8 @@
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body {
   margin: 0;
-  background-color: #102536;
-  background-image:
-    linear-gradient(90deg, rgba(6,18,29,.72) 0%, rgba(8,22,34,.60) 55%, rgba(8,22,34,.52) 100%),
-    url("../images/archive/mountains.jpg");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: #0d1b26;
+  isolation: isolate;
   color: var(--body);
   font: 14px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -1018,3 +1013,47 @@ strong { font-weight: 620; }
 .site-footer { border-top: 0; }
 
 .navigation > a[aria-current="page"] { color: #fff; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1.5px; }
+
+/* ===== Page transitions (cross-document View Transitions; ignored where unsupported) =====
+   Cards: one continuous carousel push — the new page pushes the old one out, no gap.
+   Background: a wider-than-viewport image; each page shows a slightly different slice,
+   and the transition pans from the previous page's slice to the next one. */
+@view-transition { navigation: auto; }
+:root { --vt-ease: cubic-bezier(.65,0,.35,1); --vt-dur: 1.15s; }
+.site-header { view-transition-name: site-header; }
+main { view-transition-name: page; }
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-group(*) { animation: none; }
+
+::view-transition-old(page) { animation: var(--vt-dur) var(--vt-ease) both vt-page-out; }
+::view-transition-new(page) { animation: var(--vt-dur) var(--vt-ease) both vt-page-in; }
+@keyframes vt-page-out { to { transform: translateX(calc(-1 * var(--vt-dist, 100vw))); } }
+@keyframes vt-page-in { from { transform: translateX(var(--vt-dist, 100vw)); } }
+
+::view-transition-image-pair(page-bg) { isolation: auto; }
+::view-transition-old(page-bg) { animation: none; opacity: 1; }
+::view-transition-new(page-bg) { animation: var(--vt-dur) var(--vt-ease) both vt-bg-pan; mix-blend-mode: normal; }
+@keyframes vt-bg-pan { from { transform: translateX(var(--vt-bg-from, 0px)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+
+/* ===== Site background (fixed photo + dark tint; the photo layer is wider than the
+   viewport so each page shows a slightly different slice and transitions can pan it) ===== */
+.page-bg {
+  position: fixed; top: 0; bottom: 0;
+  left: calc(var(--bgp-rank, 0) * var(--bgp-step, 60px) * -1);
+  width: calc(100% + (var(--bgp-pages, 7) - 1) * var(--bgp-step, 60px));
+  z-index: -2; pointer-events: none;
+  background-image: url("../images/space-background.jpg");
+  background-size: cover; background-position: center;
+  view-transition-name: page-bg;
+}
+.page-tint {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(6,18,29,.400) 0%, rgba(8,22,34,.344) 55%, rgba(8,22,34,.296) 100%);
+}
+@media print { .page-bg, .page-tint { display: none; } }

@@ -6,12 +6,15 @@
   <meta name="description" content="Research projects by Minje Park in cosmology, astroparticle physics, and machine learning.">
   <meta name="theme-color" content="#f7f9fa">
   <title>Research · Minje Park</title>
-  <link rel="stylesheet" href="assets/css/homepage.css?v=56">
-  <link rel="stylesheet" href="assets/css/pages.css?v=13">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=63">
+  <link rel="stylesheet" href="assets/css/pages.css?v=17">
   <script>window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] }, chtml: { scale: 0.92 } };</script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="assets/js/transition.js?v=4"></script>
 </head>
 <body class="subpage">
+<div class="page-bg" aria-hidden="true"></div>
+<div class="page-tint" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="shell header-inner">
@@ -28,57 +31,14 @@
   <main id="main" class="subpage-main">
     <header class="shell page-title">
       <h1>Research</h1>
-      <p>Machine learning projects in cosmology and astroparticle physics.</p>
     </header>
-
-    <section class="shell panel" aria-labelledby="overview-title">
-      <div class="section-heading"><div><h2 id="overview-title">Projects</h2></div></div>
-      <div class="work-grid">
-        <article class="work-card work-ind">
-          <a class="work-thumb" href="#project-cosmo-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/cv_tiles_camels_vs_genesis_6.png" alt="" loading="lazy"></a>
-          <div class="work-body">
-            <p class="work-field">Independent research</p>
-            <h3><a href="#project-cosmo-heading">GENESIS</a></h3>
-            <p class="work-desc">Flow matching for cosmological field simulation and physical parameter inference.</p>
-            <p class="work-jump"><a href="#project-cosmo-heading">Read more ↓</a></p>
-          </div>
-        </article>
-        <article class="work-card work-skku">
-          <a class="work-thumb" href="#project-skku-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/janus.jpg" alt="" loading="lazy"></a>
-          <div class="work-body">
-            <p class="work-field">Sungkyunkwan University</p>
-            <h3><a href="#project-skku-heading">JANUS</a></h3>
-            <p class="work-desc">Diffusion and flow matching for IceCube neutrino event generation and reconstruction.</p>
-            <p class="work-jump"><a href="#project-skku-heading">Read more ↓</a></p>
-          </div>
-        </article>
-        <article class="work-card work-rott">
-          <a class="work-thumb" href="#project-utah-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/opticus.jpg" alt="" loading="lazy"></a>
-          <div class="work-body">
-            <p class="work-field">University of Utah · SKKU</p>
-            <h3><a href="#project-utah-heading">OPTICUS</a></h3>
-            <p class="work-desc">Vision Transformers for Antarctic ice optical-property measurement.</p>
-            <p class="work-jump"><a href="#project-utah-heading">Read more ↓</a></p>
-          </div>
-        </article>
-        <article class="work-card work-uos">
-          <a class="work-thumb work-thumb-poster" href="#project-swgo-heading" tabindex="-1" aria-hidden="true"><img src="assets/images/projects/swgo.jpg" alt="" loading="lazy"></a>
-          <div class="work-body">
-            <p class="work-field">University of Seoul · SKKU</p>
-            <h3><a href="#project-swgo-heading">SWGO</a></h3>
-            <p class="work-desc">Generative detector simulation and Transformer-based particle reconstruction.</p>
-            <p class="work-jump"><a href="#project-swgo-heading">Read more ↓</a></p>
-          </div>
-        </article>
-      </div>
-    </section>
 
     <section class="shell panel project work-ind" aria-labelledby="project-cosmo-heading">
       <header class="project-head">
         <p class="work-field">Independent research<span class="project-status project-status-ongoing">Ongoing</span></p>
         <h2 id="project-cosmo-heading">GENESIS</h2>
         <p class="project-expansion">GENerative Emulator for Simulation and parameter Inference from cosmological fields</p>
-        <div class="work-links"><a href="documents/papers/genesis/genesis.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>Paper</a><a href="https://github.com/pmj0324/GENESIS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="documents/presentations/2025-10-genesis-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a><a href="game.html"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm-1.7 4.6v6.8L11.8 8Z" fill-rule="evenodd"/></svg></span>Demo</a></div>
+        <div class="work-links"><a href="documents/papers/genesis/genesis.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>Paper</a><a href="https://github.com/pmj0324/GENESIS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="documents/presentations/2025-10-genesis-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a><a href="game.html"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 4h7A3.5 3.5 0 0 1 15 7.5v1.2a2.8 2.8 0 0 1-5 1.8l-.4-.5H6.4l-.4.5a2.8 2.8 0 0 1-5-1.8V7.5A3.5 3.5 0 0 1 4.5 4Zm-.2 2v1.1H3.2v1.1h1.1v1.1h1.1V8.2h1.1V7.1H5.4V6Zm6.9.4a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm1.5 1.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z" fill-rule="evenodd"/></svg></span>Game</a></div>
       </header>
       <div class="project-body">
         <p>GENESIS is a conditional generative model trained on the CAMELS Multifield Dataset. It jointly emulates three correlated 2D projected fields &mdash; dark matter density \(M_\mathrm{cdm}\), gas density \(M_\mathrm{gas}\), and gas temperature \(T\) &mdash; conditioned on the full six-dimensional parameter vector \(\boldsymbol{\theta} = (\Omega_m,\,\sigma_8,\,A_\mathrm{SN1},\,A_\mathrm{SN2},\,A_\mathrm{AGN1},\,A_\mathrm{AGN2})\), using optimal-transport flow matching (OT-FM) with a U-Net backbone incorporating periodic-boundary convolutions.</p>
@@ -106,14 +66,14 @@
           <figcaption>CAMELS CV simulations vs. GENESIS generated samples at the fiducial parameter point \((\Omega_m,\,\sigma_8,\,A_\mathrm{SN1},\,A_\mathrm{SN2},\,A_\mathrm{AGN1},\,A_\mathrm{AGN2}) = (0.30,\,0.80,\,1,\,1,\,1,\,1)\). Each column shows a dark matter density, gas density, and gas temperature field (top to bottom).</figcaption>
         </figure>
       </div>
-      <details class="preview">
-        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview paper</summary>
-        <div class="preview-frame"><object data="documents/papers/genesis/genesis.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/papers/genesis/genesis.pdf">Open the PDF</a>.</p></object></div>
-      </details>
+      <figure class="preview-embed">
+        <div class="preview-frame"><object data="documents/papers/genesis/genesis.pdf#navpanes=0&amp;view=FitH" type="application/pdf" aria-label="GENESIS paper"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/papers/genesis/genesis.pdf">Open the PDF</a>.</p></object></div>
+        <figcaption>GENESIS paper · <a href="documents/papers/genesis/genesis.pdf" target="_blank" rel="noopener">Open in new tab ↗</a></figcaption>
+      </figure>
     </section>
     <section class="shell panel project work-skku" aria-labelledby="project-skku-heading">
       <header class="project-head">
-        <p class="work-field">Sungkyunkwan University<span class="project-status project-status-ongoing">Ongoing</span></p>
+        <p class="work-field">Sungkyunkwan University<span class="project-status project-status-completed">Completed</span></p>
         <h2 id="project-skku-heading">JANUS</h2>
         <p class="project-expansion">Generative AI for IceCube neutrino events</p>
         <div class="work-links"><a href="https://github.com/pmj0324/JANUS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="documents/presentations/2025-06-janus-slides.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M1 2h14v1.5h-1V11a1 1 0 0 1-1 1H9v1.3l2.2 1.2-.5.9L8 14.9l-2.7 1.5-.5-.9L7 13.3V12H3a1 1 0 0 1-1-1V3.5H1Zm4 7.5h1.5V7H5Zm2.5 0H9V5H7.5Zm2.5 0h1.5V6H10Z" fill-rule="evenodd"/></svg></span>Slides</a><a href="documents/presentations/2025-06-janus-kps-poster.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm1.5 2.5v4h7v-4Zm0 5.5v1h7V9Zm0 2.5v1h4.5v-1Z" fill-rule="evenodd"/></svg></span>Poster</a></div>
@@ -122,10 +82,10 @@
         <p>The IceCube Neutrino Observatory is a cubic-kilometer-scale neutrino detector embedded deep in the Antarctic ice, designed to observe Cherenkov photons emitted by charged secondary particles produced in neutrino interactions. Reconstructing the physical properties of these events such as energy, direction, and interaction vertex from sparse and noisy photon signals is a central challenge in IceCube data analysis and is essential for identifying and studying astrophysical neutrino sources.</p>
         <p>To address this problem, JANUS investigates conditional diffusion and flow-matching models trained on simulated IceCube data. These models are designed to operate in both directions: generating realistic detector responses from particle-level conditions, and reconstructing event properties from observed detector signals. By framing both simulation and reconstruction within a unified generative modeling framework, JANUS aims to provide a flexible and scalable approach to neutrino event analysis in IceCube.</p>
       </div>
-      <details class="preview">
-        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview poster</summary>
-        <div class="preview-frame"><object data="documents/presentations/2025-06-janus-kps-poster.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-06-janus-kps-poster.pdf">Open the PDF</a>.</p></object></div>
-      </details>
+      <figure class="preview-embed">
+        <div class="preview-frame"><object data="documents/presentations/2025-06-janus-kps-poster.pdf#navpanes=0&amp;view=FitH" type="application/pdf" aria-label="JANUS poster"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-06-janus-kps-poster.pdf">Open the PDF</a>.</p></object></div>
+        <figcaption>JANUS poster · <a href="documents/presentations/2025-06-janus-kps-poster.pdf" target="_blank" rel="noopener">Open in new tab ↗</a></figcaption>
+      </figure>
     </section>
     <section class="shell panel project work-rott" aria-labelledby="project-utah-heading">
       <header class="project-head">
@@ -138,10 +98,10 @@
         <p>To improve detector calibration in IceCube, the Upgrade introduced a camera system that images light propagation through Antarctic ice. These images contain information about the optical properties of both the bulk ice and the refrozen drill-hole ice, but extracting that information requires modeling complex, non-linear image patterns.</p>
         <p>OPTICUS is a hybrid CNN&ndash;Vision Transformer model developed for this task, combining convolutional feature extraction with global attention over image patches. Trained on simulated camera images, it achieved percent-level accuracy in estimating scattering lengths for both bulk ice and hole ice. In particular, the OPTICUS-Bulk model achieved an overall 68% containment of about 0.42%, while the OPTICUS-Hole model achieved about 0.18%, demonstrating high-precision optical-property estimation in both regimes.</p>
       </div>
-      <details class="preview">
-        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview slides</summary>
-        <div class="preview-frame"><object data="documents/presentations/2025-07-opticus-slides.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-07-opticus-slides.pdf">Open the PDF</a>.</p></object></div>
-      </details>
+      <figure class="preview-embed">
+        <div class="preview-frame"><object data="documents/presentations/2025-07-opticus-slides.pdf#navpanes=0&amp;view=FitH" type="application/pdf" aria-label="OPTICUS slides"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-07-opticus-slides.pdf">Open the PDF</a>.</p></object></div>
+        <figcaption>OPTICUS slides · <a href="documents/presentations/2025-07-opticus-slides.pdf" target="_blank" rel="noopener">Open in new tab ↗</a></figcaption>
+      </figure>
     </section>
     <section class="shell panel project work-uos" aria-labelledby="project-swgo-heading">
       <header class="project-head">
@@ -158,10 +118,10 @@
           <li>Developed diffusion models and Mixture Density Networks to synthesize PMT signals for the SWGO tank simulation (with Prof. Chang Dong Rho, Sungkyunkwan University).</li>
         </ul>
       </div>
-      <details class="preview">
-        <summary><span class="experience-toggle" aria-hidden="true"></span>Preview poster</summary>
-        <div class="preview-frame"><object data="documents/presentations/2025-04-swgo-diffusion-poster.pdf" type="application/pdf"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf">Open the PDF</a>.</p></object></div>
-      </details>
+      <figure class="preview-embed">
+        <div class="preview-frame"><object data="documents/presentations/2025-04-swgo-diffusion-poster.pdf#navpanes=0&amp;view=FitH" type="application/pdf" aria-label="SWGO poster"><p class="row-note">PDF preview is not supported in this browser. <a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf">Open the PDF</a>.</p></object></div>
+        <figcaption>SWGO poster · <a href="documents/presentations/2025-04-swgo-diffusion-poster.pdf" target="_blank" rel="noopener">Open in new tab ↗</a></figcaption>
+      </figure>
     </section>
   </main>
   <footer class="site-footer"><div class="shell footer-inner"><p>© <span id="year">2026</span> Minje Park</p></div></footer>

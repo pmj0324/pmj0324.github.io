@@ -7,9 +7,12 @@
   <meta name="theme-color" content="#f7f9fa">
   <title>Minje Park</title>
   <script>document.documentElement.classList.add("has-motion");</script>
-  <link rel="stylesheet" href="assets/css/homepage.css?v=56">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=63">
+  <script src="assets/js/transition.js?v=4"></script>
 </head>
 <body>
+<div class="page-bg" aria-hidden="true"></div>
+<div class="page-tint" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="shell header-inner">
@@ -65,7 +68,7 @@
           <li class="experience-item experience-uos">
             <button class="experience-trigger" id="experience-uos-toggle" type="button" aria-expanded="false" aria-controls="experience-uos-detail">
               <span class="experience-summary">
-                <strong class="experience-role">Research Intern</strong>
+                <strong class="experience-role">Visiting Research Intern</strong>
                 <span class="experience-period"><span class="period-dates"><time datetime="2024-07">Jul 2024</time><span class="period-end"><span aria-hidden="true">— </span><time datetime="2026-02">Feb 2026</time></span></span><span class="period-track" aria-hidden="true"><span class="period-fill"></span></span></span>
                 <span class="experience-meta"><span class="experience-institution">University of Seoul</span><span class="experience-advisor"><span class="advisor-label">Advisor</span> Prof. Ian James Watson<span class="advisor-dept">Department of Physics</span></span></span>
                 <span class="experience-toggle" aria-hidden="true"></span>
@@ -118,7 +121,7 @@
               <p class="work-field">Independent research</p>
               <h3><a href="research.html#project-cosmo-heading">GENESIS</a></h3>
               <p class="work-desc">Flow matching for cosmological field simulation and physical parameter inference.</p>
-              <div class="work-links"><a href="documents/papers/genesis/genesis.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>Paper</a><a href="https://github.com/pmj0324/GENESIS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="game.html"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm-1.7 4.6v6.8L11.8 8Z" fill-rule="evenodd"/></svg></span>Demo</a></div>
+              <div class="work-links"><a href="documents/papers/genesis/genesis.pdf"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 1h5.2L13 4.8V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1v3.5h3.5M5.5 8.5h5v1h-5zm0 2.5h5v1h-5z" fill-rule="evenodd"/></svg></span>Paper</a><a href="https://github.com/pmj0324/GENESIS"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>Code</a><a href="game.html"><span class="work-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 4h7A3.5 3.5 0 0 1 15 7.5v1.2a2.8 2.8 0 0 1-5 1.8l-.4-.5H6.4l-.4.5a2.8 2.8 0 0 1-5-1.8V7.5A3.5 3.5 0 0 1 4.5 4Zm-.2 2v1.1H3.2v1.1h1.1v1.1h1.1V8.2h1.1V7.1H5.4V6Zm6.9.4a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm1.5 1.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z" fill-rule="evenodd"/></svg></span>Game</a></div>
             </div>
           </article>
           <article class="work-card work-skku">
