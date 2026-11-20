@@ -40,7 +40,7 @@
     {}
     [\color{primary}\titlerule]
 
-\titlespacing{\section}{0pt}{20pt}{8pt}
+\titlespacing{\section}{0pt}{11pt}{5pt}
 
 % Subsection formatting
 \titleformat{\subsection}
@@ -70,20 +70,18 @@
         boxrule=0pt,
         leftrule=3pt,
         arc=0pt,
-        left=5pt,
-        right=5pt,
-        top=5pt,
-        bottom=5pt
+        left=8pt,
+        right=8pt,
+        top=6pt,
+        bottom=6pt
     ]
-    \begin{minipage}[t]{0.74\linewidth}\raggedright\textbf{#1}\end{minipage}%
-    \hfill%
-    \begin{minipage}[t]{0.25\linewidth}\raggedleft\mbox{\color{primary}\small #2}\end{minipage}
-
-    \textit{#3}
-
+    \textbf{#1}\hfill{\color{primary}\small #2}\par
+    \vspace{1pt}
+    {\small\itshape\color{secondary}#3}\par
+    \vspace{4pt}
     #4
     \end{tcolorbox}
-    \vspace{3pt}
+    \vspace{4pt}
 }
 
 \newcommand{\conferenceitem}[3]{%
@@ -124,7 +122,7 @@
 \noindent
 \begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.16\textwidth}X@{}}
 Email &
-\href{mailto:pmj032400@naver.com}{pmj032400@naver.com} \\
+\href{mailto:pmj0324@snu.ac.kr}{pmj0324@snu.ac.kr} \\
 Homepage &
 \href{https://pmj0324.github.io/}{https://pmj0324.github.io/} \\
 GitHub &
@@ -135,9 +133,18 @@ Scholar &
 
 \vspace{2pt}
 
+% === Research Interests ===
+\section{Research Interests}
+Generative models (flow matching, diffusion) for cosmological simulation and astroparticle physics; Transformer architectures for scientific data.
+
 % === Education ===
 \section{Education}
 
+\noindent
+\textbf{Seoul National University} \hfill \textit{Mar 2027 -- (Admitted)} \\[2pt]
+Graduate Program in Physics, Department of Physics and Astronomy
+
+\vspace{2pt}
 \noindent
 \textbf{Sungkyunkwan University} \hfill \textit{Feb 2021 -- Feb 2027 (Expected)} \\[2pt]
 B.S. in Physics, Double Major in Electronic \& Electrical Engineering
@@ -145,37 +152,33 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 % === Research Experience ===
 \section{Research Experience}
 
-\experienceitem{Generative AI for Cosmological Simulation and Super-Resolution}{Jun 2026 -- Present}{Supervisor: Ji-Hoon Kim, Department of Physics and Astronomy, Seoul National University}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
+\newenvironment{expbullets}{\begin{itemize}[leftmargin=1.2em, itemsep=3pt, topsep=0pt, parsep=0pt]}{\end{itemize}}
+
+\experienceitem{Research Intern, Seoul National University}{Jun 2026 -- Present}{Advisor: Prof.\ Ji-Hoon Kim, Department of Physics and Astronomy}{
+    \begin{expbullets}
         \item Developing generative AI models for cosmological simulation and super-resolution.
-    \end{itemize}
+    \end{expbullets}
 }
 
-\experienceitem{Generative Modeling for Multifield Cosmological Simulation}{May 2025 -- Present}{Independent Research}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developed GENESIS, a flow-matching emulator for multifield cosmological generation using CAMELS simulation data.
-        \item Investigating training-free astrophysical and cosmological parameter inference via maximum-likelihood estimation using GENESIS.
-    \end{itemize}
-}
-
-\experienceitem{Transformer-Based Reconstruction Model for SWGO}{Jun 2024 -- Feb 2026}{Supervisor: Ian Watson, Department of Physics, University of Seoul}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Investigated position embedding strategies for transformer-based primary-particle reconstruction model in SWGO.
+\experienceitem{Research Intern, University of Seoul}{Jun 2024 -- Feb 2026}{Advisor: Prof.\ Ian James Watson, Department of Physics}{
+    \begin{expbullets}
+        \item Investigated position embedding strategies for a Transformer-based primary-particle reconstruction model in SWGO.
         \item Developed flow matching models to synthesize SWGO detector signals from simulation data.
-    \end{itemize}
+    \end{expbullets}
 }
 
-\experienceitem{Generative AI for IceCube and SWGO}{May 2024 -- Feb 2026}{Supervisor: Chang Dong Rho, Department of Physics, Sungkyunkwan University}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developed diffusion models and Mixture Density Networks for synthesizing PMT signals for SWGO Tank Simulation.
-        \item Built flow \& diffusion models to generate neutrino event in IceCube Observatory.
-    \end{itemize}
+\experienceitem{Research Intern, Sungkyunkwan University}{May 2024 -- Feb 2026}{Advisor: Prof.\ Chang Dong Rho, Department of Physics}{
+    \begin{expbullets}
+        \item Built flow and diffusion models to generate neutrino events in the IceCube Observatory.
+        \item Developed diffusion models and Mixture Density Networks to synthesize PMT signals for the SWGO tank simulation.
+    \end{expbullets}
 }
 
-\experienceitem{CNN and Vision Transformer for IceCube Camera Analysis}{Aug 2023 -- Sep 2025}{Supervisor: Carsten Rott (University of Utah \& Sungkyunkwan University)}{
-    \begin{itemize}[leftmargin=*, itemsep=2pt]
-        \item Developed CNN and Vision Transformer models for the IceCube Upgrade Camera System; results published as a poster and proceedings paper at ICRC 2025 (arXiv:2507.18525).
-    \end{itemize}
+\experienceitem{Research Intern, Sungkyunkwan University}{Aug 2023 -- Sep 2025}{Advisor: Prof.\ Carsten Rott (University of Utah \& Sungkyunkwan University)}{
+    \begin{expbullets}
+        \item Developed CNN and Vision Transformer models for the IceCube Upgrade Camera System.
+        \item Results presented as a poster and proceedings paper at ICRC 2025 (arXiv:2507.18525).
+    \end{expbullets}
 }
 
 % === Publications ===
@@ -206,6 +209,8 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 \conferenceitem{Oct 2025}{[Poster] Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction}{102nd Fall Meeting of the Korean Physical Society, Gwangju, Republic of Korea}
 
 \conferenceitem{Oct 2025}{[Poster] Generative AI for Cosmological Simulation and Manifold Representation}{KPS Undergraduate Physics Research Competition, 102nd Fall Meeting of the Korean Physical Society, Gwangju, Republic of Korea}
+
+\conferenceitem{Jul 2025}{[Poster] Performance Study of the IceCube Upgrade Camera System}{39th International Cosmic Ray Conference (ICRC 2025), Geneva, Switzerland}
 
 \conferenceitem{Jun 2025}{[Poster] Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction}{4th K-Neutrino Symposium, Seoul, Republic of Korea}
 
@@ -242,16 +247,16 @@ Methods        & Optimal Transport Flow Matching, Rotary Positional Embedding (R
 \end{tabularx}
 
 % === Collaboration Memberships ===
-\section{Collaboration Memberships}
+\section{Past Collaboration Memberships}
 
 \noindent
-\textbf{IceCube Collaboration} \hfill \textit{Aug 2023 -- Present} \\
+\textbf{IceCube Collaboration} \hfill \textit{Aug 2023 -- Feb 2026} \\
 {\small A neutrino detector embedded in Antarctic ice at the South Pole}
 
 \vspace{8pt}
 
 \noindent
-\textbf{SWGO Collaboration} \hfill \textit{Jun 2024 -- Present} \\
+\textbf{SWGO Collaboration} \hfill \textit{Jun 2024 -- Feb 2026} \\
 {\small A next-generation ground-based gamma-ray observatory planned for the high-altitude Andes}
 
 % === Languages ===
