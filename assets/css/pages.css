@@ -354,3 +354,4 @@
 .panel.project .project-pane { background: #fff; }
 .about-meta .meta-list { margin: 2px 0 0; padding-left: 1.1em; list-style: disc; }
 .about-meta .meta-list li + li { margin-top: 6px; }
+.about-meta dt { color: #12171b; }
