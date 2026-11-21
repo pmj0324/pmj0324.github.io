@@ -16,6 +16,7 @@
 \usepackage{array}
 \usepackage{parskip}
 \usepackage{fancyhdr}
+\usepackage{changepage}
 
 % === Grayscale Color Scheme ===
 \definecolor{primary}{RGB}{60, 60, 60}
@@ -111,6 +112,9 @@
     \vspace{3pt}
 }
 
+% Section bodies sit slightly inside their headings
+\newenvironment{secbody}{\begin{adjustwidth}{1em}{0pt}}{\end{adjustwidth}}
+
 \begin{document}
 
 % === Header ===
@@ -136,14 +140,17 @@ Scholar &
 % === Research Interests ===
 \section{Research Interests}
 Computational cosmology and machine learning, with a focus on:
+\begin{secbody}
 \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=2pt]
     \item Generative models (flow matching and diffusion) for cosmological simulations.
     \item Simulation-based inference (SBI) of cosmological parameters.
     \item Machine learning algorithms for scientific data, including new training objectives and architectures.
 \end{itemize}
+\end{secbody}
 
 % === Education ===
 \section{Education}
+\begin{secbody}
 
 \noindent
 \textbf{Seoul National University} \hfill \textit{Mar 2027 -- (Admitted)} \\[2pt]
@@ -153,9 +160,11 @@ Integrated M.S./Ph.D. Program in Physics, Department of Physics and Astronomy
 \noindent
 \textbf{Sungkyunkwan University} \hfill \textit{Feb 2021 -- Feb 2027 (Expected)} \\[2pt]
 B.S. in Physics, Double Major in Electronic \& Electrical Engineering
+\end{secbody}
 
 % === Research Experience ===
 \section{Research Experience}
+\begin{secbody}
 
 \newenvironment{expbullets}{\begin{itemize}[leftmargin=1.2em, itemsep=1.5pt, topsep=0pt, parsep=0pt]}{\end{itemize}}
 
@@ -185,9 +194,11 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
         \item Results presented as a poster and proceedings paper at ICRC 2025 (arXiv:2507.18525).
     \end{expbullets}
 }
+\end{secbody}
 
 % === Publications ===
 \section{Publications}
+\begin{secbody}
 
 \newcommand{\publication}[3]{
     \vspace{4pt}
@@ -201,6 +212,7 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 \publication{Performance Study of the IceCube Upgrade Camera System}
 {C. Rott, \textbf{\textit{M. Park}}, M. Jansson, G. Iverson, S. Choi (for the IceCube Collaboration)}
 {Proceedings of Science (PoS), ICRC2025; \href{https://arxiv.org/abs/2507.18525}{arXiv:2507.18525}}
+\end{secbody}
 
 \newpage
 % === Conference Presentations ===
@@ -232,17 +244,20 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 \newpage
 % === Honors & Awards ===
 \section{Honors \& Awards}
+\begin{secbody}
 \awarditem{Best Presentation Award}{The 33rd Korean Conference on Semiconductors, 2026}{Awarded for poster presentation: ``Investigation of IGZO-Based 3D Vertical Channel Transistors and
 Physics-Informed Neural Network Modeling for Next-Generation DRAM''}
 
 \awarditem{Best Presentation Award}{4th K-Neutrino Symposium, 2025}{Awarded for poster presentation: ``Diffusion and Flow Matching Model for IceCube Neutrino Event Simulation and Reconstruction''}
 
 \awarditem{Merit Award}{Korean Physical Society Undergraduate Physics Research Competition, 2024}{Recognized for research on CNN and Vision Transformer models for the IceCube Upgrade Camera System}
+\end{secbody}
 
 % === Skills ===
 \section{Skills}
+\begin{secbody}
 
-\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.18\textwidth}X@{}}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}p{0.18\linewidth}X@{}}
 Programming    & Python, NumPy, SciPy, Matplotlib \\[6pt]
 Tools          & Linux, HTCondor, Git, Bash/Shell, HDF5 \\[6pt]
 Frameworks     & PyTorch, MATLAB, JAX \\[6pt]
@@ -250,9 +265,11 @@ Architectures  & Transformer, Diffusion Transformer (DiT), Linformer, Vision Tra
 Models         & VAE, Diffusion Models, Flow Models, Mixture Density Networks, Physics-Informed Neural Networks, Masked Autoencoder (MAE) \\[6pt]
 Methods        & Optimal Transport Flow Matching, Rotary Positional Embedding (RoPE), Transformer Scaling Laws \\[6pt]
 \end{tabularx}
+\end{secbody}
 
 % === Collaboration Memberships ===
 \section{Past Collaboration Memberships}
+\begin{secbody}
 
 \noindent
 \textbf{IceCube Collaboration} \hfill \textit{Aug 2023 -- Feb 2026} \\
@@ -263,12 +280,15 @@ Methods        & Optimal Transport Flow Matching, Rotary Positional Embedding (R
 \noindent
 \textbf{SWGO Collaboration} \hfill \textit{Jun 2024 -- Feb 2026} \\
 {\small A next-generation ground-based gamma-ray observatory planned for the high-altitude Andes}
+\end{secbody}
 
 % === Languages ===
 \section{Languages}
+\begin{secbody}
 
 \noindent
 \textbf{Korean} -- Native \\
 \textbf{English} -- Professional working proficiency (OPIc AL)
+\end{secbody}
 
 \end{document}
