@@ -72,16 +72,16 @@
         arc=0pt,
         left=8pt,
         right=8pt,
-        top=6pt,
-        bottom=6pt
+        top=5pt,
+        bottom=5pt
     ]
     \textbf{#1}\hfill{\color{primary}\small #2}\par
     \vspace{1pt}
     {\small\itshape\color{secondary}#3}\par
-    \vspace{4pt}
+    \vspace{3pt}
     #4
     \end{tcolorbox}
-    \vspace{4pt}
+    \vspace{1pt}
 }
 
 \newcommand{\conferenceitem}[3]{%
@@ -135,7 +135,12 @@ Scholar &
 
 % === Research Interests ===
 \section{Research Interests}
-Generative models (flow matching, diffusion) for cosmological simulation and astroparticle physics; Transformer architectures for scientific data.
+Computational cosmology and machine learning, with a focus on:
+\begin{itemize}[leftmargin=*, itemsep=0pt, topsep=2pt]
+    \item Generative models (flow matching and diffusion) for cosmological simulations.
+    \item Simulation-based inference (SBI) of cosmological parameters.
+    \item Machine learning algorithms for scientific data, including new training objectives and architectures.
+\end{itemize}
 
 % === Education ===
 \section{Education}
@@ -152,7 +157,7 @@ B.S. in Physics, Double Major in Electronic \& Electrical Engineering
 % === Research Experience ===
 \section{Research Experience}
 
-\newenvironment{expbullets}{\begin{itemize}[leftmargin=1.2em, itemsep=3pt, topsep=0pt, parsep=0pt]}{\end{itemize}}
+\newenvironment{expbullets}{\begin{itemize}[leftmargin=1.2em, itemsep=1.5pt, topsep=0pt, parsep=0pt]}{\end{itemize}}
 
 \experienceitem{Research Intern, Seoul National University}{Jun 2026 -- Present}{Advisor: Prof.\ Ji-Hoon Kim, Department of Physics and Astronomy}{
     \begin{expbullets}
