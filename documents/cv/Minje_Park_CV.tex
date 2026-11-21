@@ -41,7 +41,7 @@
     {}
     [\color{primary}\titlerule]
 
-\titlespacing{\section}{0pt}{11pt}{5pt}
+\titlespacing{\section}{0pt}{8pt}{7pt}
 
 % Subsection formatting
 \titleformat{\subsection}
@@ -112,6 +112,9 @@
     \vspace{3pt}
 }
 
+% Compact bullets right under a line of text (cancels the parskip gap)
+\newenvironment{tightbullets}{\vspace{-\parskip}\begin{itemize}[leftmargin=1.2em, itemsep=2.5pt, parsep=0pt, topsep=2pt, partopsep=0pt]}{\end{itemize}}
+
 % Section bodies sit slightly inside their headings
 \newenvironment{secbody}{\begin{adjustwidth}{1em}{0pt}}{\end{adjustwidth}}
 
@@ -122,9 +125,11 @@
 
 {\Huge\bfseries\color{primary} MINJE PARK}
 
-\vspace{4pt}
+\vspace{6pt}
 \noindent
-\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{0.16\textwidth}X@{}}
+{\small
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{@{}p{0.13\textwidth}X@{}}
 Email &
 \href{mailto:pmj0324@snu.ac.kr}{pmj0324@snu.ac.kr} \\
 Homepage &
@@ -133,33 +138,35 @@ GitHub &
 \href{https://github.com/pmj0324}{github.com/pmj0324} \\
 Scholar &
 \href{https://scholar.google.com/citations?user=oC5mE0AAAAAJ}{Google Scholar (Minje Park)} \\
-\end{tabularx}
+\end{tabularx}}
 
 \vspace{2pt}
 
 % === Research Interests ===
 \section{Research Interests}
 Computational cosmology and machine learning, with a focus on:
-\begin{secbody}
-\begin{itemize}[leftmargin=*, itemsep=0pt, topsep=2pt]
+\begin{tightbullets}
     \item Generative models (flow matching and diffusion) for cosmological simulations.
     \item Simulation-based inference (SBI) of cosmological parameters.
     \item Machine learning algorithms for scientific data, including new training objectives and architectures.
-\end{itemize}
-\end{secbody}
+\end{tightbullets}
 
 % === Education ===
 \section{Education}
 \begin{secbody}
 
 \noindent
-\textbf{Seoul National University} \hfill \textit{Mar 2027 -- (Admitted)} \\[2pt]
-Integrated M.S./Ph.D. Program in Physics, Department of Physics and Astronomy
+{\large\textbf{Seoul National University}} \hfill \textit{Mar 2027 -- (Admitted)}
+\begin{tightbullets}
+    \item Integrated M.S./Ph.D. Program in Physics, Department of Physics and Astronomy
+\end{tightbullets}
 
 \vspace{2pt}
 \noindent
-\textbf{Sungkyunkwan University} \hfill \textit{Feb 2021 -- Feb 2027 (Expected)} \\[2pt]
-B.S. in Physics, Double Major in Electronic \& Electrical Engineering
+{\large\textbf{Sungkyunkwan University}} \hfill \textit{Feb 2021 -- Feb 2027 (Expected)}
+\begin{tightbullets}
+    \item B.S. in Physics, Double Major in Electronic \& Electrical Engineering
+\end{tightbullets}
 \end{secbody}
 
 % === Research Experience ===
