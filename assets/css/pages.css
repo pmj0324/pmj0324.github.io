@@ -352,3 +352,5 @@
 .subpage .project-head h2 { font-size: 24px; }
 .panel.project { background: #fafbfc; backdrop-filter: none; }
 .panel.project .project-pane { background: #fff; }
+.about-meta .meta-list { margin: 2px 0 0; padding-left: 1.1em; list-style: disc; }
+.about-meta .meta-list li + li { margin-top: 6px; }
