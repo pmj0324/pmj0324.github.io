@@ -1058,3 +1058,4 @@ main { view-transition-name: page; }
   view-transition-name: page-bg;
 }
 @media print { .page-bg { display: none; } }
+.lower-grid > section + section { margin-top: 44px; }
